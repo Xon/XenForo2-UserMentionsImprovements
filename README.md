@@ -18,8 +18,6 @@ Improvements to XenForo's tagging system.
  - configurable default for users on account creation.
  - permission to receive tagged emails.
 - Editor integration. Copying & pasting a user group tag link is transformed into @usergroup
- - Redactor support
- - TinyMCE Quattro and its wysiwyg bbcodes support.
 - user mentions can be disabled per forum per user group
 
 
