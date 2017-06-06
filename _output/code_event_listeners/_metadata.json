@@ -1,0 +1,14 @@
+{
+    "entity_post_delete_SV-UserMentionsImprovements-Listener_usergroupEntityPostDelete.json": {
+        "hash": "a298168fc5be0cda9d0d64ef91839fb8"
+    },
+    "entity_pre_save_SV-UserMentionsImprovements-Listener_usergroupEntityPreSave.json": {
+        "hash": "21a2f35cdc4c84f27b1333a1403dea74"
+    },
+    "entity_structure_SV-UserMentionsImprovements-Listener_usergroupEntityStructure.json": {
+        "hash": "f9e62abd2f33c8023b6bdf4fd81a6621"
+    },
+    "entity_structure_SV-UserMentionsImprovements-Listener_useroptionEntityStructure.json": {
+        "hash": "364e89653ac279ee5167052e05e7882a"
+    }
+}
