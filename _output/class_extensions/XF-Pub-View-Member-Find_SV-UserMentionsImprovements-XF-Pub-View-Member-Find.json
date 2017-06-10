@@ -1,0 +1,6 @@
+{
+    "from_class": "XF\\Pub\\View\\Member\\Find",
+    "to_class": "SV\\UserMentionsImprovements\\XF\\Pub\\View\\Member\\Find",
+    "execute_order": 10,
+    "active": true
+}

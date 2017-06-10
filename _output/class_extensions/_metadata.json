@@ -2,7 +2,22 @@
     "XF-Admin-Controller-UserGroup_SV-UserMentionsImprovements-XF-Admin-Controller-UserGroup.json": {
         "hash": "5cfaad8f310ba62bab8c1af7b679b10a"
     },
+    "XF-BbCode-ProcessorAction-MentionUsers_SV-UserMentionsImprovements-XF-BbCode-ProcessorAction-MentionUsers.json": {
+        "hash": "f59612781a1ec6373a5600d8057246b8"
+    },
+    "XF-Entity-UserGroup_SV-UserMentionsImprovements-XF-Entity-UserGroup.json": {
+        "hash": "2b031535f89805d893505129de526c94"
+    },
     "XF-Pub-Controller-Account_SV-UserMentionsImprovements-XF-Pub-Controller-Account.json": {
         "hash": "c93974e16810400db064f8b5faf25549"
+    },
+    "XF-Pub-Controller-Member_SV-UserMentionsImprovements-XF-Pub-Controller-Member.json": {
+        "hash": "8eefc7621cad8e1db58783f612c835fb"
+    },
+    "XF-Pub-View-Member-Find_SV-UserMentionsImprovements-XF-Pub-View-Member-Find.json": {
+        "hash": "924ff34141e556f6d7d6a32d8613a494"
+    },
+    "XF-Str-Formatter_SV-UserMentionsImprovements-XF-Str-Formatter.json": {
+        "hash": "985962f36fd5f416b59083f609881e88"
     }
 }
