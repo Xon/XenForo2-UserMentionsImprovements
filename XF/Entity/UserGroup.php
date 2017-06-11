@@ -4,6 +4,34 @@ namespace SV\UserMentionsImprovements\XF\Entity;
 
 class UserGroup extends XFCP_UserGroup
 {
+	public function getSvAvatarS()
+	{
+		if ($this->getValue('sv_avatar_s'))
+		{
+			$val = $this->getValue('sv_avatar_s') . '?c=' . $this->sv_avatar_edit_date;
+		}
+		else
+		{
+			$val = \XF::options()->sv_default_group_avatar_s;
+		}
+
+		return $this->app()->templater()->fn('base_url', [$val]);
+	}
+
+	public function getSvAvatarL()
+	{
+		if ($this->getValue('sv_avatar_l'))
+		{
+			$val = $this->getValue('sv_avatar_l') . '?c=' . $this->sv_avatar_edit_date;
+		}
+		else
+		{
+			$val = \XF::options()->sv_default_group_avatar_l;
+		}
+
+		return $this->app()->templater()->fn('base_url', [$val]);
+	}
+
 	public function getIconHtml()
 	{
 		$innerContent = '<img src="' . $this->sv_avatar_s . '" '

@@ -1,0 +1,1 @@
+Allows this user group to be mentioned. <b>Note: Not recommended for large groups!</b>

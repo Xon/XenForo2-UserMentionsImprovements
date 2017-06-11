@@ -153,7 +153,7 @@ class UserGroupMentionFormatter
 		}
 
 		$userGroupResults = $db->query("
-			SELECT usergroup.user_group_id, usergroup.title,
+			SELECT usergroup.user_group_id, usergroup.title, usergroup.sv_private, usergroup.sv_mentionable,
 				" . implode(', ', $matchParts) . "
 			FROM xf_user_group AS usergroup
 			WHERE (" . implode(' OR ', $whereParts) . ")
@@ -161,6 +161,16 @@ class UserGroupMentionFormatter
 		");
 		while ($userGroup = $userGroupResults->fetch())
 		{
+			if (!$userGroup['sv_mentionable'])
+			{
+				continue;
+			}
+
+			if ($userGroup['sv_private'] && !\XF::visitor()->isMemberOf($userGroup['user_group_id']))
+			{
+				continue;
+			}
+
 			$userGroupInfo = [
 				'user_group_id' => $userGroup['user_group_id'],
 				'title' => $userGroup['title'],

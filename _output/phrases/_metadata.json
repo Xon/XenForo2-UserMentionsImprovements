@@ -1,0 +1,110 @@
+{
+    "option.sv_default_group_avatar_l.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "41625cbd129058b11a44b9aaba60139c"
+    },
+    "option.sv_default_group_avatar_s.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "9c01cd12894305df1382c2c70ee741e4"
+    },
+    "option.sv_send_email_on_tagging.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "b5b5fe9f5582f5ff4a1a023d78d47033"
+    },
+    "option_explain.sv_default_group_avatar_l.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "3e75ed545c3529e9b5b540868e66cfe6"
+    },
+    "option_explain.sv_default_group_avatar_s.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "3e75ed545c3529e9b5b540868e66cfe6"
+    },
+    "option_explain.sv_send_email_on_tagging.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "f9fc315f2f7a9be46761f13ff8ab0825"
+    },
+    "option_group.sv_usermentionsimprovements.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "08938e8ac0e0692d1b7b5506762fb106"
+    },
+    "option_group_description.sv_usermentionsimprovements.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "sv_usermentionsimprovements_email_on_mention.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "98a37253e2dd7773d19c4cabdbe94e1d"
+    },
+    "sv_usermentionsimprovements_email_on_quote.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "ef260ce248eb59896ba23201df81f2e3"
+    },
+    "sv_usermentionsimprovements_is_mentionable.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "1bbf502d8a9bb239115d57670c759ec4"
+    },
+    "sv_usermentionsimprovements_is_mentionable_explain.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "11ed0bc3ea046d73db72c4adde35c749"
+    },
+    "sv_usermentionsimprovements_is_private.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "634865bf320e78b521132a258838258e"
+    },
+    "sv_usermentionsimprovements_is_private_explain.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "b08563ea24ced082a5f8d310993fdda2"
+    },
+    "sv_usermentionsimprovements_usergroup_avatar_image_large.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "99bb2ffcf3e9dbb0620d879414d1f5e1"
+    },
+    "sv_usermentionsimprovements_usergroup_avatar_image_large_explain.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "c07c3fdffaa8387abced7c46f9f47404"
+    },
+    "sv_usermentionsimprovements_usergroup_avatar_image_small.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "40c4d5515b718cb8055af11a1f322277"
+    },
+    "sv_usermentionsimprovements_usergroup_avatar_image_small_explain.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "2614c2c1d48888fc754a9d60a525b3f6"
+    }
+}

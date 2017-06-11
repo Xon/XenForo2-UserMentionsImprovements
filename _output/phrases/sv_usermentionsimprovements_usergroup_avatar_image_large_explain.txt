@@ -1,0 +1,1 @@
+Image to display on the user group membership list.

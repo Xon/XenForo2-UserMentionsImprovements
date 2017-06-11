@@ -21,7 +21,7 @@ class Member extends XFCP_Member
 				/** @var \XF\Mvc\Entity\AbstractCollection $userGroups */
 				$userGroups = $userGroupFinder
 					->where('title', 'like', $userGroupFinder->escapeLike($q, '?%'))
-					->where('sv_mentionable', 0)
+					->where('sv_mentionable', 1)
 					->fetch();
 
 				// TODO: Put this into the finder query if possible

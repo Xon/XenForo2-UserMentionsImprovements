@@ -1,0 +1,1 @@
+Image to display when the user group is being mentioned.

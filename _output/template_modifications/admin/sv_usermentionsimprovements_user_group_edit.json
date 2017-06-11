@@ -1,0 +1,9 @@
+{
+    "template": "user_group_edit",
+    "description": "",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<xf:js src=\"xf/permission.js\" min=\"1\" />",
+    "replace": "<xf:checkboxrow label=\"\" explain=\"{{ phrase('sv_usermentionsimprovements_is_mentionable_explain') }}\">\n\t<xf:option name=\"sv_mentionable\" label=\"{{ phrase('sv_usermentionsimprovements_is_mentionable') }}\" checked=\"{$usergroup.sv_mentionable}\" />\n</xf:checkboxrow>\n\n<xf:checkboxrow label=\"\" explain=\"{{ phrase('sv_usermentionsimprovements_is_private_explain') }}\">\n\t<xf:option name=\"sv_private\" label=\"{{ phrase('sv_usermentionsimprovements_is_private') }}\" checked=\"{$usergroup.sv_private}\" />\n</xf:checkboxrow>\n\n<xf:textboxrow label=\"{{ phrase('sv_usermentionsimprovements_usergroup_avatar_image_small') }}\" name=\"sv_avatar_s\" value=\"{$usergroup.sv_avatar_s}\" explain=\"{{ phrase('sv_usermentionsimprovements_usergroup_avatar_image_small_explain') }}\" />\n<xf:textboxrow label=\"{{ phrase('sv_usermentionsimprovements_usergroup_avatar_image_large') }}\" name=\"sv_avatar_l\" value=\"{$usergroup.sv_avatar_l}\" explain=\"{{ phrase('sv_usermentionsimprovements_usergroup_avatar_image_large_explain') }}\" />\n\n$0"
+}

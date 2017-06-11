@@ -1,0 +1,1 @@
+Path to the default usergroup avatar. Used when a usergroup-specific avatar isn't set.

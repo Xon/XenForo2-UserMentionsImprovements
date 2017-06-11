@@ -1,0 +1,1 @@
+Only members of the user group, or administrators with the relevant permission, can mention and view this user group.

@@ -23,8 +23,34 @@ class MentionUsers extends XFCP_MentionUsers
 		return $this->mentionedUserGroups;
 	}
 
-	public static function factory(\XF\App $app)
+	public function getMentionedUsers()
 	{
-		return new static($app->stringFormatter());
+		$users = parent::getMentionedUsers();
+
+		$mentionedUsergroupIds = array_keys($this->getMentionedUserGroups());
+
+		if (!$mentionedUsergroupIds)
+		{
+			return $users;
+		}
+
+		$additionalUsers = \XF::db()->fetchAllKeyed('
+			SELECT DISTINCT user.user_id, user.username
+			FROM xf_user AS user
+			LEFT JOIN xf_user_group_relation AS relation ON relation.user_id = user.user_id
+            WHERE relation.user_group_id IN (' . \XF::db()->quote($mentionedUsergroupIds) . ')
+		', 'user_id');
+
+		if (!$additionalUsers)
+		{
+			return $users;
+		}
+
+		foreach ($additionalUsers AS $userId => $additionalUser)
+		{
+			$additionalUsers[$userId]['lower'] = strtolower($additionalUser['username']);
+		}
+		
+		return $users + $additionalUsers;
 	}
 }

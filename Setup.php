@@ -22,7 +22,7 @@ class Setup extends AbstractSetup
 			$table->addColumn('sv_private', 'bool')->setDefault(0);
 			$table->addColumn('sv_avatar_s', 'text')->nullable()->setDefault(null);
 			$table->addColumn('sv_avatar_l', 'text')->nullable()->setDefault(null);
-			$table->addColumn('sv_avatar_edit_date', 'bool')->setDefault(0);
+			$table->addColumn('sv_avatar_edit_date', 'int')->setDefault(0);
 		});
 
 		$this->schemaManager()->alterTable('xf_user_option', function (Alter $table)

@@ -15,6 +15,9 @@ class Listener
 		$structure->columns['sv_avatar_s'] = ['type' => Entity::STR, 'default' => null, 'nullable' => true];
 		$structure->columns['sv_avatar_l'] = ['type' => Entity::STR, 'default' => null, 'nullable' => true];
 		$structure->columns['sv_avatar_edit_date'] = ['type' => Entity::UINT, 'default' => \XF::$time];
+
+		$structure->getters['sv_avatar_s'] = true;
+		$structure->getters['sv_avatar_l'] = true;
 	}
 
 	public static function usergroupEntityPreSave(\XF\Mvc\Entity\Entity $entity)
@@ -25,11 +28,6 @@ class Listener
 		{
 			$entity->set('sv_avatar_edit_date', \XF::$time);
 		}
-	}
-
-	public static function usergroupEntityPostDelete(\XF\Mvc\Entity\Entity $entity)
-	{
-		//TODO: Cache invalidation
 	}
 
 	public static function useroptionEntityStructure(Manager $em, Structure &$structure)

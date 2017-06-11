@@ -1,7 +1,4 @@
 {
-    "entity_post_delete_SV-UserMentionsImprovements-Listener_usergroupEntityPostDelete.json": {
-        "hash": "a298168fc5be0cda9d0d64ef91839fb8"
-    },
     "entity_pre_save_SV-UserMentionsImprovements-Listener_usergroupEntityPreSave.json": {
         "hash": "21a2f35cdc4c84f27b1333a1403dea74"
     },
