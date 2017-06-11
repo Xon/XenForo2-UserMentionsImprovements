@@ -1,0 +1,1 @@
+<p>{quoter} quoted you in a post at {board}.</p>

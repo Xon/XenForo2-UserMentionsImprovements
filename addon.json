@@ -1,5 +1,14 @@
 {
+    "legacy_addon_id": "SV_UserTaggingImprovement",
     "title": "User Mentions Improvements",
+    "description": "Improvements to the XenForo Mentions system.",
+    "version_id": 2000070,
     "version_string": "2.0.0",
-    "version_id": 2000070
+    "dev": "Xon",
+    "dev_url": "",
+    "faq_url": "",
+    "support_url": "",
+    "extra_urls": [],
+    "require": [],
+    "icon": ""
 }

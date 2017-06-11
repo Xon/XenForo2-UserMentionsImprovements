@@ -5,5 +5,5 @@
     "enabled": true,
     "action": "str_replace",
     "find": "<xf:option name=\"option[email_on_conversation]\"\n\t\t\t\t\tlabel=\"{{ phrase('receive_email_when_new_conversation_message_is_received') }}\"\n\t\t\t\t\tchecked=\"{$xf.visitor.Option.email_on_conversation}\"\n\t\t\t\t/>",
-    "replace": "$0\n<xf:if is=\"{$xf.options.sv_send_email_on_tagging}\">\n\t<xf:option name=\"option[sv_email_on_mention]\" label=\"{{ phrase('sv_usermentionsimprovements_email_on_mention') }}\" checked=\"{$xf.visitor.Option.sv_email_on_mention}\" />\n\t<xf:option name=\"option[sv_email_on_quote]\" label=\"{{ phrase('sv_usermentionsimprovements_email_on_quote') }}\" checked=\"{$xf.visitor.Option.sv_email_on_quote}\" />\n</xf:if>"
+    "replace": "$0\n<xf:if is=\"$xf.visitor.canReceiveMentionEmails()\"><xf:option name=\"option[sv_email_on_mention]\" label=\"{{ phrase('sv_usermentionsimprovements_email_on_mention') }}\" checked=\"{$xf.visitor.Option.sv_email_on_mention}\" /></xf:if>\n<xf:if is=\"$xf.visitor.canReceiveQuoteEmails()\"><xf:option name=\"option[sv_email_on_quote]\" label=\"{{ phrase('sv_usermentionsimprovements_email_on_quote') }}\" checked=\"{$xf.visitor.Option.sv_email_on_quote}\" /></xf:if>"
 }

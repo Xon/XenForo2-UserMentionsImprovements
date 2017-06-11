@@ -1,0 +1,17 @@
+{
+    "email/sv_usermentionsimprovements_mention.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "adf24183232d7c1c9c4f2884159ef0ad"
+    },
+    "email/sv_usermentionsimprovements_quote.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "ac8fd6db7eb1deb9f63bdf02f7697092"
+    },
+    "public/sv_usermentionsimprovements_usergroup_view.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "7241c6c00e9c21d993c3401502da2070"
+    }
+}

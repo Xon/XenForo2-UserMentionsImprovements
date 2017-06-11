@@ -1,0 +1,11 @@
+{
+    "route_type": "public",
+    "route_prefix": "members",
+    "sub_name": "usergroup",
+    "format": "usergroup/:int<user_group_id,title>/",
+    "build_class": "",
+    "build_method": "",
+    "controller": "XF:Member",
+    "context": "members",
+    "action_prefix": "usergroup"
+}

@@ -15,7 +15,7 @@ class UserGroupMentionFormatter
 	{
 		// TODO: this regex needs to respect tags that disable parsing or tags that disable autolink
 		$message = $this->setupPlaceholders($message,
-			'#\[(code|php|html|plain|media|url|img|user|quote)(=[^\]]*)?](.*)\[/\\1]#siU'
+			'#\[(code|php|html|plain|media|url|img|user|usergroup|quote)(=[^\]]*)?](.*)\[/\\1]#siU'
 		);
 
 		$matches = $this->getPossibleMentionMatches($message);
@@ -27,6 +27,8 @@ class UserGroupMentionFormatter
 			$message, $matches, $usersByMatch,
 			function ($userGroup) use ($prefix)
 			{
+
+
 				return '[USERGROUP=' . $userGroup['user_group_id'] . ']' . $prefix . $userGroup['title'] . '[/USERGROUP]';
 			}
 		);
@@ -55,19 +57,19 @@ class UserGroupMentionFormatter
 				{
 					if (strpos($userGroup['title'], "'") !== false)
 					{
-						$username = '"' . $prefix . $userGroup['title'] . '"';
+						$title = '"' . $prefix . $userGroup['title'] . '"';
 					}
 					else
 					{
-						$username = "'" . $prefix . $userGroup['title'] . "'";
+						$title = "'" . $prefix . $userGroup['title'] . "'";
 					}
 				}
 				else
 				{
-					$username = $prefix . $userGroup['title'];
+					$title = $prefix . $userGroup['title'];
 				}
 
-				return '@[' . $userGroup['user_group_id'] . ':' . $username . ']';
+				return '@UG[' . $userGroup['user_group_id'] . ':' . $title . ']';
 			}
 		);
 

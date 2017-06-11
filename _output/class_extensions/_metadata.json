@@ -14,6 +14,9 @@
     "XF-Entity-UserGroup_SV-UserMentionsImprovements-XF-Entity-UserGroup.json": {
         "hash": "2b031535f89805d893505129de526c94"
     },
+    "XF-Entity-User_SV-UserMentionsImprovements-XF-Entity-User.json": {
+        "hash": "ca07045a6f31ba21abff4da7e9ed53f8"
+    },
     "XF-Pub-Controller-Account_SV-UserMentionsImprovements-XF-Pub-Controller-Account.json": {
         "hash": "c93974e16810400db064f8b5faf25549"
     },
@@ -22,6 +25,12 @@
     },
     "XF-Pub-View-Member-Find_SV-UserMentionsImprovements-XF-Pub-View-Member-Find.json": {
         "hash": "924ff34141e556f6d7d6a32d8613a494"
+    },
+    "XF-Service-Post-Notifier_SV-UserMentionsImprovements-XF-Service-Post-Notifier.json": {
+        "hash": "5764f1580404bfc65944b9d2825b683e"
+    },
+    "XF-Service-StructuredText-Preparer_SV-UserMentionsImprovements-XF-Service-StructuredText-Preparer.json": {
+        "hash": "a13721c3f99e6cf1c910f2a16513b675"
     },
     "XF-Str-Formatter_SV-UserMentionsImprovements-XF-Str-Formatter.json": {
         "hash": "985962f36fd5f416b59083f609881e88"

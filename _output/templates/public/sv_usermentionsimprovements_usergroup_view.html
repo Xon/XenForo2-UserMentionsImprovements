@@ -1,0 +1,25 @@
+<xf:title>{{ phrase('sv_usermentionsimprovements_usergroup:') }} {$userGroup.title}</xf:title>
+
+<xf:description>
+    <xf:if is="{$userGroup.sv_private}">{{ phrase('sv_usermentionsimprovements_private') }}</xf:if>
+</xf:description>
+
+<div class="block">
+    <div class="block-container">
+        <xf:if is="$userGroup.sv_avatar_l">
+            <div class="block-header">
+                <img src="{$userGroup.sv_avatar_l}"/>
+            </div>
+        </xf:if>
+        <ol class="block-body">
+            <xf:foreach loop="$users" key="$userId" value="$user">
+                <li class="block-row block-row--separated">
+                    <xf:macro template="member_list_macros" name="item" arg-user="{$user}"/>
+                </li>
+            </xf:foreach>
+        </ol>
+    </div>
+    <div class="block-outer block-outer--after">
+        <xf:pagenav link="account/likes" page="{$page}" perpage="{$perPage}" total="{$total}"/>
+    </div>
+</div>

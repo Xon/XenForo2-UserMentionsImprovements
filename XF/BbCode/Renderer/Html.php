@@ -27,7 +27,7 @@ class Html extends XFCP_Html
 			return $content;
 		}
 
-		$link = \XF::app()->router('public')->buildLink('full:members', [], ['ug' => $userGroupId]);
+		$link = \XF::app()->router('public')->buildLink('full:members/usergroup', ['user_group_id' => $userGroupId]);
 
 		return $this->wrapHtml(
 			'<a href="' . htmlspecialchars($link) . '" class="usergroup">',

@@ -2,15 +2,37 @@
 
 namespace SV\UserMentionsImprovements\XF\Pub\Controller;
 
+use XF\Mvc\ParameterBag;
 use XF\Mvc\Reply\View;
 
 class Member extends XFCP_Member
 {
+	public function actionUsergroup(ParameterBag $params)
+	{
+		$userGroupId = $params['user_group_id'];
+
+		$userGroup = $this->assertRecordExists('XF:UserGroup', $userGroupId);
+
+		if (!$userGroup->canView())
+		{
+			return $this->noPermission();
+		}
+
+		$users = $this->repository('SV\UserMentionsImprovements:UserMentions')->getMembersOfUserGroup($userGroup);
+
+		$viewParams = [
+			'users' => $users,
+			'userGroup' => $userGroup
+		];
+
+		return $this->view('SV\UserMentionsImprovements:Member\UserGroup', 'sv_usermentionsimprovements_usergroup_view', $viewParams);
+	}
+
 	public function actionFind()
 	{
 		$response = parent::actionFind();
 
-		if ($response instanceof View)
+		if ($response instanceof View && \XF::visitor()->canMentionUserGroup())
 		{
 			$q = ltrim($this->filter('q', 'str', ['no-trim']));
 
@@ -36,6 +58,10 @@ class Member extends XFCP_Member
 			}
 
 			$response->setParam('usergroups', $userGroups);
+		}
+		else if ($response instanceof View)
+		{
+			$response->setParam('usergroups', []);
 		}
 
 		return $response;

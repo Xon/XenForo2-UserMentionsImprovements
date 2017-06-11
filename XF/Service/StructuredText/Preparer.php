@@ -1,19 +1,20 @@
 <?php
 
-namespace SV\UserMentionsImprovements\XF\BbCode\ProcessorAction;
+namespace SV\UserMentionsImprovements\XF\Service\StructuredText;
 
-class MentionUsers extends XFCP_MentionUsers
+class Preparer extends XFCP_Preparer
 {
 	protected $mentionedUserGroups = [];
 
-	public function filterFinal($string)
+	protected function filterFinalUserMentions($null, $string)
 	{
-		$string = parent::filterFinal($string);
+		$string = parent::filterFinalUserMentions($null, $string);
 
-		$userGroupMentions = $this->formatter->getUserGroupMentionFormatter();
+		/** @var \SV\UserMentionsImprovements\Str\UserGroupMentionFormatter $mentions */
+		$mentions = $this->app->stringFormatter()->getUserGroupMentionFormatter();
 
-		$string = $userGroupMentions->getMentionsBbCode($string);
-		$this->mentionedUserGroups = $userGroupMentions->getMentionedUserGroups();
+		$string = $mentions->getMentionsStructuredText($string);
+		$this->mentionedUserGroups = $mentions->getMentionedUserGroups();
 
 		return $string;
 	}

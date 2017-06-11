@@ -25,6 +25,7 @@ namespace SV\UserMentionsImprovements\XF\BbCode
 
 namespace SV\UserMentionsImprovements\XF\Entity
 {
+	class XFCP_User extends \XF\Entity\User {}
 	class XFCP_UserGroup extends \XF\Entity\UserGroup {}
 }
 
@@ -37,6 +38,16 @@ namespace SV\UserMentionsImprovements\XF\Pub\Controller
 namespace SV\UserMentionsImprovements\XF\Pub\View\Member
 {
 	class XFCP_Find extends \XF\Pub\View\Member\Find {}
+}
+
+namespace SV\UserMentionsImprovements\XF\Service\Post
+{
+	class XFCP_Notifier extends \XF\Service\Post\Notifier {}
+}
+
+namespace SV\UserMentionsImprovements\XF\Service\StructuredText
+{
+	class XFCP_Preparer extends \XF\Service\StructuredText\Preparer {}
 }
 
 namespace SV\UserMentionsImprovements\XF\Str

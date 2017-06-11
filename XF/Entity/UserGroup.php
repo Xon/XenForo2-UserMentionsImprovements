@@ -15,6 +15,11 @@ class UserGroup extends XFCP_UserGroup
 			$val = \XF::options()->sv_default_group_avatar_s;
 		}
 
+		if (!$val)
+		{
+			return false;
+		}
+
 		return $this->app()->templater()->fn('base_url', [$val]);
 	}
 
@@ -29,6 +34,11 @@ class UserGroup extends XFCP_UserGroup
 			$val = \XF::options()->sv_default_group_avatar_l;
 		}
 
+		if (!$val)
+		{
+			return false;
+		}
+
 		return $this->app()->templater()->fn('base_url', [$val]);
 	}
 
@@ -39,5 +49,12 @@ class UserGroup extends XFCP_UserGroup
 			. ' />';
 
 		return "<span class=\"avatar avatar--xxs\">$innerContent</span>";
+	}
+
+	public function canView()
+	{
+		return \XF::visitor()
+				->hasPermission('general', 'sv_ViewPrivateGroups') || ($this->sv_mentionable && (!$this->sv_private || \XF::visitor()
+						->isMemberOf($this->user_group_id)));
 	}
 }
