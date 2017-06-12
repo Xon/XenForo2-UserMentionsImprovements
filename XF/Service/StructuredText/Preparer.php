@@ -41,7 +41,7 @@ class Preparer extends XFCP_Preparer
 		}
 
 		$additionalUsers = \XF::db()->fetchAllKeyed('
-			SELECT DISTINCT user.user_id, user.username
+			SELECT DISTINCT user.user_id, user.username, relation.user_group_id
 			FROM xf_user AS user
 			LEFT JOIN xf_user_group_relation AS relation ON relation.user_id = user.user_id
             WHERE relation.user_group_id IN (' . \XF::db()->quote($mentionedUsergroupIds) . ')
@@ -52,14 +52,27 @@ class Preparer extends XFCP_Preparer
 			return $users;
 		}
 
+		$mentionedUgUsers = [];
+
+		$userGroups = $this->getMentionedUserGroups();
+
 		foreach ($additionalUsers AS $userId => $additionalUser)
 		{
+			if (isset($users[$userId]))
+			{
+				continue;
+			}
+
 			$users[$userId] = [
 				'user_id' => $additionalUser['user_id'],
 				'username' => $additionalUser['username'],
 				'lower' => strtolower($additionalUser['username'])
 			];
+
+			$mentionedUgUsers[$userId] = $userGroups[$additionalUser['user_group_id']]['title'];
 		}
+
+		\XF::app()->sv_userGroupMentionedIds = $mentionedUgUsers;
 
 		return $users;
 	}

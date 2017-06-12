@@ -2,6 +2,9 @@
     "XF-Admin-Controller-UserGroup_SV-UserMentionsImprovements-XF-Admin-Controller-UserGroup.json": {
         "hash": "5cfaad8f310ba62bab8c1af7b679b10a"
     },
+    "XF-Alert-Post_SV-UserMentionsImprovements-XF-Alert-Post.json": {
+        "hash": "426912b26bc76b8651f79f581196162c"
+    },
     "XF-BbCode-ProcessorAction-MentionUsers_SV-UserMentionsImprovements-XF-BbCode-ProcessorAction-MentionUsers.json": {
         "hash": "f59612781a1ec6373a5600d8057246b8"
     },
@@ -25,6 +28,9 @@
     },
     "XF-Pub-View-Member-Find_SV-UserMentionsImprovements-XF-Pub-View-Member-Find.json": {
         "hash": "924ff34141e556f6d7d6a32d8613a494"
+    },
+    "XF-Repository-UserAlert_SV-UserMentionsImprovements-XF-Repository-UserAlert.json": {
+        "hash": "db91803f68171024647dab78c55d7fcd"
     },
     "XF-Service-Post-Notifier_SV-UserMentionsImprovements-XF-Service-Post-Notifier.json": {
         "hash": "5764f1580404bfc65944b9d2825b683e"

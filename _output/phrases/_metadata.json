@@ -71,6 +71,12 @@
         "version_string": "2.0.0",
         "hash": "e612b1ca9f122e2f91dfc5f223c0041c"
     },
+    "sv_usermentionimprovements_you_were_mentioned_because_you_are_a_member_of_x_usergroup.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "863ccbf58d05825aa01e386ce5999e9c"
+    },
     "sv_usermentionsimprovements_email_on_mention.txt": {
         "global_cache": false,
         "version_id": 2000070,
