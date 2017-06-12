@@ -2,6 +2,9 @@
     "entity_pre_save_SV-UserMentionsImprovements-Listener_usergroupEntityPreSave.json": {
         "hash": "21a2f35cdc4c84f27b1333a1403dea74"
     },
+    "entity_structure_SV-UserMentionsImprovements-Listener_userEntityStructure.json": {
+        "hash": "75abe2c187d47a0350476fb3b24a914e"
+    },
     "entity_structure_SV-UserMentionsImprovements-Listener_usergroupEntityStructure.json": {
         "hash": "f9e62abd2f33c8023b6bdf4fd81a6621"
     },
