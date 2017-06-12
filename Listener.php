@@ -35,4 +35,13 @@ class Listener
 		$structure->columns['sv_email_on_mention'] = ['type' => Entity::BOOL, 'default' => 0];
 		$structure->columns['sv_email_on_quote'] = ['type' => Entity::BOOL, 'default' => 0];
 	}
+
+	public static function userEntityStructure(Manager $em, Structure &$structure)
+	{
+		$structure->relations['UserGroupRelations'] = [
+			'entity' => 'SV\UserMentionsImprovements:UserGroupRelation',
+			'type' => Entity::TO_MANY,
+			'conditions' => 'user_id'
+		];
+	}
 }
