@@ -8,6 +8,9 @@
     "public/sv_usermentionimprovements_alert_prof_post_mention.json": {
         "hash": "5df2b5d27277443b78ffa1b185df4658"
     },
+    "public/sv_usermentionimprovements_alert_report_mention.json": {
+        "hash": "a1a6623487d43901c003933005c653b5"
+    },
     "public/sv_usermentionsimprovements_account_preferences.json": {
         "hash": "3162faba0648de2e323a61c28c61e514"
     }
