@@ -54,9 +54,13 @@ class Preparer extends XFCP_Preparer
 
 		foreach ($additionalUsers AS $userId => $additionalUser)
 		{
-			$additionalUsers[$userId]['lower'] = strtolower($additionalUser['username']);
+			$users[$userId] = [
+				'user_id' => $additionalUser['user_id'],
+				'username' => $additionalUser['username'],
+				'lower' => strtolower($additionalUser['username'])
+			];
 		}
 
-		return $users + $additionalUsers;
+		return $users;
 	}
 }
