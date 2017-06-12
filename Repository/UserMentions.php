@@ -3,8 +3,6 @@
 namespace SV\UserMentionsImprovements\Repository;
 
 use XF\Entity\UserGroup;
-use XF\Error;
-use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Repository;
 
 class UserMentions extends Repository
