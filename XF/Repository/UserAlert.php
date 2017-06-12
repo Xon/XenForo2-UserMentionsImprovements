@@ -10,7 +10,7 @@ class UserAlert extends XFCP_UserAlert
 	)
 	{
 		if ($this->app()
-				->offsetExists('sv_userGroupMentionedIds') && ($contentType == 'post' || $contentType == 'profile_post') && $action == 'mention' && array_key_exists($receiver->user_id, $this->app()->sv_userGroupMentionedIds)
+				->offsetExists('sv_userGroupMentionedIds') && $action == 'mention' && array_key_exists($receiver->user_id, $this->app()->sv_userGroupMentionedIds)
 		)
 		{
 			$extra['fromUserGroupMention'] = $this->app()->sv_userGroupMentionedIds[$receiver->user_id];
