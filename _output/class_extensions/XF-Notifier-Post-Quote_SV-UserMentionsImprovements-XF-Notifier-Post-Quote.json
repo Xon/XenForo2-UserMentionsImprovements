@@ -1,0 +1,6 @@
+{
+    "from_class": "XF\\Notifier\\Post\\Quote",
+    "to_class": "SV\\UserMentionsImprovements\\XF\\Notifier\\Post\\Quote",
+    "execute_order": 10,
+    "active": true
+}

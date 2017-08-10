@@ -1,1 +1,1 @@
-Allow tag alert emails
+Allow mention alert emails
