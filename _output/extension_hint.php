@@ -34,6 +34,12 @@ namespace SV\UserMentionsImprovements\XF\Entity
 	class XFCP_UserGroup extends \XF\Entity\UserGroup {}
 }
 
+namespace SV\UserMentionsImprovements\XF\Notifier\Post
+{
+	class XFCP_Mention extends \XF\Notifier\Post\Mention {}
+	class XFCP_Quote extends \XF\Notifier\Post\Quote {}
+}
+
 namespace SV\UserMentionsImprovements\XF\Pub\Controller
 {
 	class XFCP_Account extends \XF\Pub\Controller\Account {}

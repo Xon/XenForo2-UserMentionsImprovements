@@ -20,6 +20,12 @@
     "XF-Entity-User_SV-UserMentionsImprovements-XF-Entity-User.json": {
         "hash": "ca07045a6f31ba21abff4da7e9ed53f8"
     },
+    "XF-Notifier-Post-Mention_SV-UserMentionsImprovements-XF-Notifier-Post-Mention.json": {
+        "hash": "10bc4fe5878329b9536f39a33bcee091"
+    },
+    "XF-Notifier-Post-Quote_SV-UserMentionsImprovements-XF-Notifier-Post-Quote.json": {
+        "hash": "dec75fde8f30ac1eaccef333790ac88e"
+    },
     "XF-Pub-Controller-Account_SV-UserMentionsImprovements-XF-Pub-Controller-Account.json": {
         "hash": "c93974e16810400db064f8b5faf25549"
     },

@@ -4,63 +4,57 @@ namespace SV\UserMentionsImprovements\XF\Service\Post;
 
 class Notifier extends XFCP_Notifier
 {
-	protected function sendQuoteNotification(\XF\Entity\User $user)
+	public function addNotification($type, $userId, $alert = true, $email = false)
 	{
-		$response = parent::sendQuoteNotification($user);
+		$user = $this->app->find('XF:User', $userId);
 
-		if ($user->receivesQuoteEmails())
+		switch ($type)
 		{
-			if (empty($this->usersEmailed[$user->user_id]) && $user->email && $user->user_state == 'valid')
-			{
-				$post = $this->post;
-
-				$params = [
-					'post' => $post,
-					'thread' => $post->Thread,
-					'forum' => $post->Thread->Forum,
-					'receiver' => $user
-				];
-
-				$this->app->mailer()->newMail()
-					->setToUser($user)
-					->setTemplate('sv_usermentionsimprovements_quote', $params)
-					->queue();
-
-				$this->usersEmailed[$user->user_id] = true;
-				$response = true;
-			}
+			case 'quote':
+				if ($user->receivesQuoteEmails())
+				{
+					$this->notifyData[$type][$user->user_id]['email'] = true;
+				}
+				break;
+			case 'mention':
+				if ($user->receivesMentionEmails())
+				{
+					$this->notifyData[$type][$user->user_id]['email'] = true;
+				}
+				break;
 		}
 
-		return $response;
+		parent::addNotification($type, $userId, $alert, $email);
 	}
 
-	protected function sendMentionNotification(\XF\Entity\User $user)
+	public function addNotifications($type, array $userIds, $alert = true, $email = false)
 	{
-		$response = parent::sendMentionNotification($user);
+		parent::addNotifications($type, $userIds, $alert, $email);
 
-		if ($user->receivesMentionEmails())
+		$users = $this->app->em()->findByIds('XF:User', $userIds);
+
+		foreach ($users AS $user)
 		{
-			if (empty($this->usersEmailed[$user->user_id]) && $user->email && $user->user_state == 'valid')
+			/** @var \SV\UserMentionsImprovements\XF\Entity\User $user */
+
+			if ($user->receivesQuoteEmails())
 			{
-				$post = $this->post;
-
-				$params = [
-					'post' => $post,
-					'thread' => $post->Thread,
-					'forum' => $post->Thread->Forum,
-					'receiver' => $user
-				];
-
-				$this->app->mailer()->newMail()
-					->setToUser($user)
-					->setTemplate('sv_usermentionsimprovements_mention', $params)
-					->queue();
-
-				$this->usersEmailed[$user->user_id] = true;
-				$response = true;
+				switch ($type)
+				{
+					case 'quote':
+						if ($user->receivesQuoteEmails())
+						{
+							$this->notifyData[$type][$user->user_id]['email'] = true;
+						}
+						break;
+					case 'mention':
+						if ($user->receivesMentionEmails())
+						{
+							$this->notifyData[$type][$user->user_id]['email'] = true;
+						}
+						break;
+				}
 			}
 		}
-
-		return $response;
 	}
 }
