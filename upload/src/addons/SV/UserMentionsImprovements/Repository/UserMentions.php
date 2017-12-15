@@ -2,6 +2,7 @@
 
 namespace SV\UserMentionsImprovements\Repository;
 
+use SV\UserMentionsImprovements\Globals;
 use XF\Entity\UserGroup;
 use XF\Mvc\Entity\Repository;
 
@@ -57,7 +58,7 @@ class UserMentions extends Repository
             $mentionedUgUsers[$userId] = $mentionedUserGroups[$additionalUser['user_group_id']]['title'];
         }
 
-        \XF::app()->sv_userGroupMentionedIds = $mentionedUgUsers;
+        Globals::$sv_userGroupMentionedIds = $mentionedUgUsers;
 
         return $users;
     }
