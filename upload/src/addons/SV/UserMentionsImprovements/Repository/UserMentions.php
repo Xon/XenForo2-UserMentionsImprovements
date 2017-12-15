@@ -58,7 +58,7 @@ class UserMentions extends Repository
             $mentionedUgUsers[$userId] = $mentionedUserGroups[$additionalUser['user_group_id']]['title'];
         }
 
-        Globals::$sv_userGroupMentionedIds = $mentionedUgUsers;
+        Globals::$userGroupMentionedIds = $mentionedUgUsers;
 
         return $users;
     }

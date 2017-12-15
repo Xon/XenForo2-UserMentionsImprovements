@@ -54,7 +54,7 @@ class User extends XFCP_User
 
         $structure->relations['UserGroupRelations'] = [
             'entity'     => 'SV\UserMentionsImprovements:UserGroupRelation',
-            'type'       => Entity::TO_MANY,
+            'type'       => Entity::TO_ONE,
             'conditions' => 'user_id'
         ];
 
