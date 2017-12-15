@@ -1,9 +1,0 @@
-{
-    "event_id": "entity_pre_save",
-    "execute_order": 10,
-    "callback_class": "\\SV\\UserMentionsImprovements\\Listener",
-    "callback_method": "usergroupEntityPreSave",
-    "active": true,
-    "hint": "XF\\Entity\\UserGroup",
-    "description": "XF\\Entity\\UserGroup"
-}

@@ -2,6 +2,16 @@
 
 namespace SV\UserMentionsImprovements\XF\Entity;
 
+use XF\Mvc\Entity\Entity;
+use XF\Mvc\Entity\Structure;
+
+/**
+ * @property bool sv_mentionable
+ * @property bool sv_private
+ * @property string sv_avatar_s
+ * @property string sv_avatar_l
+ * @property int sv_avatar_edit_date
+ */
 class UserGroup extends XFCP_UserGroup
 {
     public function getSvAvatarS()
@@ -56,5 +66,32 @@ class UserGroup extends XFCP_UserGroup
         return \XF::visitor()
                   ->hasPermission('general', 'sv_ViewPrivateGroups') ||
                ($this->sv_mentionable && (!$this->sv_private || \XF::visitor()->isMemberOf($this->user_group_id)));
+    }
+
+    public function _preSave()
+    {
+        parent::_preSave();
+        if ($this->isUpdate() && ($this->isChanged('sv_mentionable') || $this->isChanged('sv_private') || $this->isChanged('sv_avatar_s')) ||
+            $this->isInsert() && ($this->get('sv_mentionable') && !$this->get('sv_private') && $this->get('sv_avatar_s'))
+        )
+        {
+            $this->set('sv_avatar_edit_date', \XF::$time);
+        }
+    }
+
+    public static function getStructure(Structure $structure)
+    {
+        $structure = parent::getStructure($structure);
+
+        $structure->columns['sv_mentionable'] = ['type' => Entity::BOOL, 'default' => 0];
+        $structure->columns['sv_private'] = ['type' => Entity::BOOL, 'default' => 0];
+        $structure->columns['sv_avatar_s'] = ['type' => Entity::STR, 'default' => null, 'nullable' => true];
+        $structure->columns['sv_avatar_l'] = ['type' => Entity::STR, 'default' => null, 'nullable' => true];
+        $structure->columns['sv_avatar_edit_date'] = ['type' => Entity::UINT, 'default' => \XF::$time];
+
+        $structure->getters['sv_avatar_s'] = true;
+        $structure->getters['sv_avatar_l'] = true;
+
+        return $structure;
     }
 }

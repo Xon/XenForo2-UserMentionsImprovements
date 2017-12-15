@@ -32,6 +32,7 @@ namespace SV\UserMentionsImprovements\XF\Entity
 {
 	class XFCP_User extends \XF\Entity\User {}
 	class XFCP_UserGroup extends \XF\Entity\UserGroup {}
+	class XFCP_UserOption extends \XF\Entity\UserOption {}
 }
 
 namespace SV\UserMentionsImprovements\XF\Notifier\Post
