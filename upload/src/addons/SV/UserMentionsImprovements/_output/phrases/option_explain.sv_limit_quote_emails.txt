@@ -1,0 +1,1 @@
+Only send quote alert emails if the user has not posted in that thread before.

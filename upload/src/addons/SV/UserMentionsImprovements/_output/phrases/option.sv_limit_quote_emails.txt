@@ -1,0 +1,1 @@
+Send quote emails only on unreplied threads

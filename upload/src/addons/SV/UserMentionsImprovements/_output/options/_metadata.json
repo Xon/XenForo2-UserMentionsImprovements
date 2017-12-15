@@ -1,11 +1,23 @@
 {
     "sv_default_group_avatar_l.json": {
-        "hash": "f206e5132189c4455dd09552bd57e349"
+        "hash": "32be788ae1a45257b55794a229f56a00"
     },
     "sv_default_group_avatar_s.json": {
-        "hash": "c4bb5bdf2a2b6354880ad8e28e070d0b"
+        "hash": "4b3773a89aa5da05e701673d9053f1de"
+    },
+    "sv_displayGroupAvatar.json": {
+        "hash": "02ad5f633992cc4b8bea63aa4c62a674"
+    },
+    "sv_limit_quote_emails.json": {
+        "hash": "a13c7296ee18be089cb876fce2aec891"
+    },
+    "sv_send_email_on_quote.json": {
+        "hash": "390b47a665edc8e2b6042a981605cf1d"
     },
     "sv_send_email_on_tagging.json": {
-        "hash": "b83ae23d7bce0b68423709cc5038a97d"
+        "hash": "c771e2781c4a330d27f8f9dd9dffb769"
+    },
+    "sv_styleGroupUsername.json": {
+        "hash": "4d960ba907bddda73b7722da2351cb9a"
     }
 }
