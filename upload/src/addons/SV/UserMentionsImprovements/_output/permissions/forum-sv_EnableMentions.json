@@ -1,0 +1,6 @@
+{
+    "permission_type": "flag",
+    "interface_group_id": "forumPermissions",
+    "display_order": 11233,
+    "depend_permission_id": ""
+}
