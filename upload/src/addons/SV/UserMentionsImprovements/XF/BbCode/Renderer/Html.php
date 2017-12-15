@@ -15,6 +15,9 @@ class Html extends XFCP_Html
         );
     }
 
+    static $groupAvatar = null;
+    static $groupUsername = null;
+
     public function renderTagUserGroup(array $children, $option, array $tag, array $options)
     {
         $content = $this->renderSubTree($children, $options);
@@ -30,11 +33,21 @@ class Html extends XFCP_Html
         }
 
         $link = \XF::app()->router('public')->buildLink('full:members/usergroup', ['user_group_id' => $userGroupId]);
+        if (self::$groupAvatar === null)
+        {
+            $options = \XF::app()->options();
+            self::$groupUsername = $options->sv_styleGroupUsername
+                ? 'username'
+                : '';
+            self::$groupAvatar = $options->sv_displayGroupAvatar
+                ? '<span class="groupImg"></span>'
+                : '';
+        }
 
         return $this->wrapHtml(
-            '<a href="' . htmlspecialchars($link) . '" class="usergroup">',
+            '<a href="' . htmlspecialchars($link) . '" class="'.self::$groupUsername.' ug" data-usergroup="' . $userGroupId . ', ' . htmlspecialchars($content) . '"><span class="style'.$userGroupId.'">'.self::$groupAvatar,
             $content,
-            '</a>'
+            '</span></a>'
         );
     }
 }
