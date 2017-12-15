@@ -3,13 +3,16 @@
         "hash": "a7679cc5e274af19ae00134ad7b72b98"
     },
     "public/sv_usermentionimprovements_alert_post_mention.json": {
-        "hash": "84f7b93d2270ed439a506b01ea6bd672"
+        "hash": "6606250f46c37e859dd550804bb0a2d0"
     },
     "public/sv_usermentionimprovements_alert_prof_post_mention.json": {
-        "hash": "5df2b5d27277443b78ffa1b185df4658"
+        "hash": "eff73e667c5d0ea75729cbe2370bbb28"
+    },
+    "public/sv_usermentionimprovements_alert_profile_post_comm.json": {
+        "hash": "9b5f4697544078fb54a797acc5278c3d"
     },
     "public/sv_usermentionimprovements_alert_report_mention.json": {
-        "hash": "a1a6623487d43901c003933005c653b5"
+        "hash": "8ed58195296eb8aaa5011ffe6d261708"
     },
     "public/sv_usermentionsimprovements_account_preferences.json": {
         "hash": "864b8be580497bb6ae55ef249df9a2bd"

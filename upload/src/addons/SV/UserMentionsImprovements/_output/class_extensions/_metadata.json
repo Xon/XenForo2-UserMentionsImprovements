@@ -41,8 +41,17 @@
     "XF-Repository-UserAlert_SV-UserMentionsImprovements-XF-Repository-UserAlert.json": {
         "hash": "db91803f68171024647dab78c55d7fcd"
     },
+    "XF-Service-Message-Preparer_SV-UserMentionsImprovements-XF-Service-Message-Preparer.json": {
+        "hash": "ed222b3726baf9ae893fa8f02dbe14b6"
+    },
     "XF-Service-Post-Notifier_SV-UserMentionsImprovements-XF-Service-Post-Notifier.json": {
         "hash": "5764f1580404bfc65944b9d2825b683e"
+    },
+    "XF-Service-ProfilePost-Notifier_SV-UserMentionsImprovements-XF-Service-ProfilePost-Notifier.json": {
+        "hash": "f4b09432b13c8b128f6f32c71d4b586d"
+    },
+    "XF-Service-ProfilePostComment-Notifier_SV-UserMentionsImprovements-XF-Service-ProfilePostComment-Notifier.json": {
+        "hash": "536f642d9783edf99136d1962807eb27"
     },
     "XF-Service-StructuredText-Preparer_SV-UserMentionsImprovements-XF-Service-StructuredText-Preparer.json": {
         "hash": "a13721c3f99e6cf1c910f2a16513b675"

@@ -1,1 +1,1 @@
-You were mentioned because you are a member of the {title} usergroup.
+As you are a member of the <a href="{link}" class="PopupItemLink">{title}</a> usergroup.

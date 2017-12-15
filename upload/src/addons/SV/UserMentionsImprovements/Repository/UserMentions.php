@@ -19,6 +19,11 @@ class UserMentions extends Repository
         return $users->fetch();
     }
 
+    /**
+     * @param array $users
+     * @param \XF\Entity\UserGroup[]|null $mentionedUserGroups
+     * @return array
+     */
     public function mergeUserGroupMembersIntoUsersArray(array $users, $mentionedUserGroups)
     {
         if (!$mentionedUserGroups)
@@ -44,7 +49,7 @@ class UserMentions extends Repository
 
         foreach ($additionalUsers AS $userId => $additionalUser)
         {
-            if (isset($users[$userId]))
+            if (isset($users[$userId]) || empty($mentionedUserGroups[$additionalUser['user_group_id']]))
             {
                 continue;
             }
@@ -55,7 +60,9 @@ class UserMentions extends Repository
                 'lower'    => strtolower($additionalUser['username'])
             ];
 
-            $mentionedUgUsers[$userId] = $mentionedUserGroups[$additionalUser['user_group_id']]['title'];
+            $group = $mentionedUserGroups[$additionalUser['user_group_id']];
+
+            $mentionedUgUsers[$userId] = ['title' => $group['title'], 'id' => $group['user_group_id']];
         }
 
         Globals::$userGroupMentionedIds = $mentionedUgUsers;

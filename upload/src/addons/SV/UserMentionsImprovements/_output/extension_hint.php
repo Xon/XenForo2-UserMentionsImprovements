@@ -57,6 +57,11 @@ namespace SV\UserMentionsImprovements\XF\Repository
 	class XFCP_UserAlert extends \XF\Repository\UserAlert {}
 }
 
+namespace SV\UserMentionsImprovements\XF\Service\Message
+{
+	class XFCP_Preparer extends \XF\Service\Message\Preparer {}
+}
+
 namespace SV\UserMentionsImprovements\XF\Service\Post
 {
 	class XFCP_Notifier extends \XF\Service\Post\Notifier {}

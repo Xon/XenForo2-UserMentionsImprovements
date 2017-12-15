@@ -2,6 +2,8 @@
 
 namespace SV\UserMentionsImprovements\XF\Service\Post;
 
+use SV\UserMentionsImprovements\Globals;
+
 class Notifier extends XFCP_Notifier
 {
     public function addNotification($type, $userId, $alert = true, $email = false)
@@ -9,21 +11,7 @@ class Notifier extends XFCP_Notifier
         /** @var \SV\UserMentionsImprovements\XF\Entity\User $user */
         $user = $this->app->find('XF:User', $userId);
 
-        switch ($type)
-        {
-            case 'quote':
-                if ($user->receivesQuoteEmails())
-                {
-                    $this->notifyData[$type][$user->user_id]['email'] = true;
-                }
-                break;
-            case 'mention':
-                if ($user->receivesMentionEmails())
-                {
-                    $this->notifyData[$type][$user->user_id]['email'] = true;
-                }
-                break;
-        }
+        $this->_addExtraAlertInfo($type, $user);
 
         parent::addNotification($type, $userId, $alert, $email);
     }
@@ -36,24 +24,54 @@ class Notifier extends XFCP_Notifier
 
         foreach ($users AS $user)
         {
-            /** @var \SV\UserMentionsImprovements\XF\Entity\User $user */
+            $this->_addExtraAlertInfo($type, $user);
+        }
+    }
 
-            if ($user->receivesQuoteEmails())
-            {
-                switch ($type)
+    /**
+     * @param \SV\UserMentionsImprovements\XF\Entity\User $user
+     * @param string                                      $type
+     */
+    protected function _addExtraAlertInfo($type, $user)
+    {
+        switch ($type)
+        {
+            case 'quote':
+                if (isset(Globals::$userGroupMentionedIds[$user->user_id]))
                 {
-                    case 'quote':
-                        if ($user->receivesQuoteEmails())
-                        {
-                            $this->notifyData[$type][$user->user_id]['email'] = true;
-                        }
-                        break;
-                    case 'mention':
-                        if ($user->receivesMentionEmails())
-                        {
-                            $this->notifyData[$type][$user->user_id]['email'] = true;
-                        }
-                        break;
+                    $this->notifyData[$type][$user->user_id]['group'] = Globals::$userGroupMentionedIds[$user->user_id];
+                }
+                if ($user->receivesQuoteEmails())
+                {
+                    $this->notifyData[$type][$user->user_id]['email'] = true;
+                }
+                break;
+            case 'mention':
+                if (isset(Globals::$userGroupMentionedIds[$user->user_id]))
+                {
+                    $this->notifyData[$type][$user->user_id]['group'] = Globals::$userGroupMentionedIds[$user->user_id];
+                }
+                if ($user->receivesMentionEmails())
+                {
+                    $this->notifyData[$type][$user->user_id]['email'] = true;
+                }
+                break;
+        }
+    }
+
+    protected function ensureDataLoaded()
+    {
+        parent::ensureDataLoaded();
+        foreach(['mention','quote'] as $type)
+        {
+            if (isset($this->notifyData[$type]))
+            {
+                foreach($this->notifyData[$type] as $userId => $value)
+                {
+                    if (isset($value['group']) && empty(Globals::$userGroupMentionedIds[$userId]))
+                    {
+                        Globals::$userGroupMentionedIds[$userId] = $value['group'];
+                    }
                 }
             }
         }

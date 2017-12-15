@@ -1,5 +1,5 @@
 {
-    "template": "alert_profile_post_mention",
+    "template": "alert_profile_post_comment_mention",
     "description": "",
     "execution_order": 10,
     "enabled": true,

@@ -2,6 +2,7 @@
 
 namespace SV\UserMentionsImprovements\XF\Entity;
 
+use XF\Entity\Post;
 use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
 
@@ -41,6 +42,28 @@ class User extends XFCP_User
         $option = $this->Option;
 
         return $option->sv_email_on_quote;
+    }
+
+    protected function _getMentionContentTypeAndId(Entity $messageEntity = null)
+    {
+        if ($messageEntity instanceof Post)
+        {
+            return ['node', $messageEntity->Thread->node_id];
+        }
+
+        return [null, null];
+    }
+
+    public function canMention(Entity $messageEntity = null)
+    {
+        list($contentType, $contentId) = $this->_getMentionContentTypeAndId($messageEntity);
+
+        if ($contentType && $contentId)
+        {
+            return $this->hasContentPermission($contentType, $contentId, 'sv_EnableMentions');
+        }
+
+        return true;
     }
 
     public function canMentionUserGroup()

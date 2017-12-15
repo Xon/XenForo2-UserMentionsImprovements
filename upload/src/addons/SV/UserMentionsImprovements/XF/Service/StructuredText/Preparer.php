@@ -30,8 +30,26 @@ class Preparer extends XFCP_Preparer
     {
         $users = parent::getMentionedUsers();
 
+        /** @noinspection PhpUndefinedFieldInspection */
+        if (isset($this->messageEntity->User))
+        {
+            /** @var \SV\UserMentionsImprovements\XF\Entity\User $user */
+            /** @noinspection PhpUndefinedFieldInspection */
+            $user = $this->messageEntity->User;
+
+            if (!$user->canMention($this->messageEntity))
+            {
+                $this->mentionedUsers = [];
+            }
+        }
         /** @var \SV\UserMentionsImprovements\XF\Entity\User $visitor */
         $visitor = \XF::visitor();
+
+        if (!$visitor->canMention(null))
+        {
+            return [];
+        }
+
         if (!$visitor->canMentionUserGroup())
         {
             return $users;

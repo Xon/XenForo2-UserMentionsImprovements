@@ -25,22 +25,4 @@ class MentionUsers extends XFCP_MentionUsers
     {
         return $this->mentionedUserGroups;
     }
-
-    public function getMentionedUsers()
-    {
-        $users = parent::getMentionedUsers();
-
-        /** @var \SV\UserMentionsImprovements\XF\Entity\User $visitor */
-        $visitor = \XF::visitor();
-        if (!$visitor->canMentionUserGroup())
-        {
-            return $users;
-        }
-
-        /** @var \SV\UserMentionsImprovements\Repository\UserMentions $userMentionsRepo */
-        $userMentionsRepo = \XF::app()->repository('SV\UserMentionsImprovements:UserMentions');
-        $users = $userMentionsRepo->mergeUserGroupMembersIntoUsersArray($users, $this->getMentionedUserGroups());
-
-        return $users;
-    }
 }
