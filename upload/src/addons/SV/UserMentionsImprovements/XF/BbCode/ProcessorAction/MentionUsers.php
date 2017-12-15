@@ -4,37 +4,43 @@ namespace SV\UserMentionsImprovements\XF\BbCode\ProcessorAction;
 
 class MentionUsers extends XFCP_MentionUsers
 {
-	protected $mentionedUserGroups = [];
+    protected $mentionedUserGroups = [];
 
-	public function filterFinal($string)
-	{
-		$string = parent::filterFinal($string);
+    public function filterFinal($string)
+    {
+        $string = parent::filterFinal($string);
 
-		$userGroupMentions = $this->formatter->getUserGroupMentionFormatter();
+        /** @var \SV\UserMentionsImprovements\XF\Str\Formatter $formatter */
+        $formatter = $this->formatter;
+        /** @var \SV\UserMentionsImprovements\Str\UserGroupMentionFormatter $userGroupMentions */
+        $userGroupMentions = $formatter->getUserGroupMentionFormatter();
 
-		$string = $userGroupMentions->getMentionsBbCode($string);
-		$this->mentionedUserGroups = $userGroupMentions->getMentionedUserGroups();
+        $string = $userGroupMentions->getMentionsBbCode($string);
+        $this->mentionedUserGroups = $userGroupMentions->getMentionedUserGroups();
 
-		return $string;
-	}
+        return $string;
+    }
 
-	public function getMentionedUserGroups()
-	{
-		return $this->mentionedUserGroups;
-	}
+    public function getMentionedUserGroups()
+    {
+        return $this->mentionedUserGroups;
+    }
 
-	public function getMentionedUsers()
-	{
-		$users = parent::getMentionedUsers();
+    public function getMentionedUsers()
+    {
+        $users = parent::getMentionedUsers();
 
-		if (!\XF::visitor()->canMentionUserGroup())
-		{
-			return $users;
-		}
+        /** @var \SV\UserMentionsImprovements\XF\Entity\User $visitor */
+        $visitor = \XF::visitor();
+        if (!$visitor->canMentionUserGroup())
+        {
+            return $users;
+        }
 
-		$users = \XF::app()->repository('SV\UserMentionsImprovements:UserMentions')
-			->mergeUserGroupMembersIntoUsersArray($users, $this->getMentionedUserGroups());
+        /** @var \SV\UserMentionsImprovements\Repository\UserMentions $userMentionsRepo */
+        $userMentionsRepo = \XF::app()->repository('SV\UserMentionsImprovements:UserMentions');
+        $users = $userMentionsRepo->mergeUserGroupMembersIntoUsersArray($users, $this->getMentionedUserGroups());
 
-		return $users;
-	}
+        return $users;
+    }
 }

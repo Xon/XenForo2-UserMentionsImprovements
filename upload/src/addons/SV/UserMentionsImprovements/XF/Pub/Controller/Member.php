@@ -7,63 +7,66 @@ use XF\Mvc\Reply\View;
 
 class Member extends XFCP_Member
 {
-	public function actionUsergroup(ParameterBag $params)
-	{
-		$userGroupId = $params['user_group_id'];
+    public function actionUsergroup(ParameterBag $params)
+    {
+        $userGroupId = $params['user_group_id'];
 
-		$userGroup = $this->assertRecordExists('XF:UserGroup', $userGroupId);
+        /** @var \SV\UserMentionsImprovements\XF\Entity\UserGroup $userGroup */
+        $userGroup = $this->assertRecordExists('XF:UserGroup', $userGroupId);
 
-		if (!$userGroup->canView())
-		{
-			return $this->noPermission();
-		}
+        if (!$userGroup->canView())
+        {
+            return $this->noPermission();
+        }
 
-		$users = $this->repository('SV\UserMentionsImprovements:UserMentions')->getMembersOfUserGroup($userGroup);
+        /** @var \SV\UserMentionsImprovements\Repository\UserMentions $userMentionsRepo */
+        $userMentionsRepo = \XF::app()->repository('SV\UserMentionsImprovements:UserMentions');
+        $users = $userMentionsRepo->getMembersOfUserGroup($userGroup);
 
-		$viewParams = [
-			'users' => $users,
-			'userGroup' => $userGroup
-		];
+        $viewParams = [
+            'users'     => $users,
+            'userGroup' => $userGroup
+        ];
 
-		return $this->view('SV\UserMentionsImprovements:Member\UserGroup', 'sv_usermentionsimprovements_usergroup_view', $viewParams);
-	}
+        return $this->view('SV\UserMentionsImprovements:Member\UserGroup', 'sv_usermentionsimprovements_usergroup_view', $viewParams);
+    }
 
-	public function actionFind()
-	{
-		$response = parent::actionFind();
+    public function actionFind()
+    {
+        $response = parent::actionFind();
 
-		if ($response instanceof View && \XF::visitor()->canMentionUserGroup())
-		{
-			$q = ltrim($this->filter('q', 'str', ['no-trim']));
+        if ($response instanceof View)
+        {
+            /** @var \SV\UserMentionsImprovements\XF\Entity\User $visitor */
+            $visitor = \XF::visitor();
 
-			if ($q !== '' && utf8_strlen($q) >= 2)
-			{
-				$userGroupFinder = $this->finder('XF:UserGroup');
+            $q = ltrim($this->filter('q', 'str', ['no-trim']));
 
-				/** @var \XF\Mvc\Entity\AbstractCollection $userGroups */
-				$userGroups = $userGroupFinder
-					->where('title', 'like', $userGroupFinder->escapeLike($q, '?%'))
-					->where('sv_mentionable', 1)
-					->fetch();
+            if ($visitor->canMentionUserGroup() && $q !== '' && utf8_strlen($q) >= 2)
+            {
+                $userGroupFinder = $this->finder('XF:UserGroup');
 
-				// TODO: Put this into the finder query if possible
-				$userGroups->filter(function ($userGroup)
-				{
-					return !$userGroup->sv_private || \XF::visitor()->isMemberOf($userGroup->user_group_id);
-				});
-			}
-			else
-			{
-				$userGroups = [];
-			}
+                /** @var \XF\Mvc\Entity\AbstractCollection $userGroups */
+                $userGroups = $userGroupFinder
+                    ->where('title', 'like', $userGroupFinder->escapeLike($q, '?%'))
+                    ->where('sv_mentionable', 1)
+                    ->fetch();
 
-			$response->setParam('usergroups', $userGroups);
-		}
-		else if ($response instanceof View)
-		{
-			$response->setParam('usergroups', []);
-		}
+                // TODO: Put this into the finder query if possible
+                $userGroups->filter(
+                    function ($userGroup) {
+                        return !$userGroup->sv_private || \XF::visitor()->isMemberOf($userGroup->user_group_id);
+                    }
+                );
+            }
+            else
+            {
+                $userGroups = [];
+            }
 
-		return $response;
-	}
+            $response->setParam('usergroups', $userGroups);
+        }
+
+        return $response;
+    }
 }
