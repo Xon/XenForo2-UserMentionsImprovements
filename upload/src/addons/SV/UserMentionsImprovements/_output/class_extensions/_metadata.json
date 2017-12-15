@@ -2,9 +2,6 @@
     "XF-Admin-Controller-UserGroup_SV-UserMentionsImprovements-XF-Admin-Controller-UserGroup.json": {
         "hash": "5cfaad8f310ba62bab8c1af7b679b10a"
     },
-    "XF-Alert-Post_SV-UserMentionsImprovements-XF-Alert-Post.json": {
-        "hash": "426912b26bc76b8651f79f581196162c"
-    },
     "XF-BbCode-ProcessorAction-MentionUsers_SV-UserMentionsImprovements-XF-BbCode-ProcessorAction-MentionUsers.json": {
         "hash": "f59612781a1ec6373a5600d8057246b8"
     },
@@ -47,11 +44,11 @@
     "XF-Service-Post-Notifier_SV-UserMentionsImprovements-XF-Service-Post-Notifier.json": {
         "hash": "5764f1580404bfc65944b9d2825b683e"
     },
-    "XF-Service-ProfilePost-Notifier_SV-UserMentionsImprovements-XF-Service-ProfilePost-Notifier.json": {
-        "hash": "f4b09432b13c8b128f6f32c71d4b586d"
+    "XF-Service-ProfilePost-Preparer_SV-UserMentionsImprovements-XF-Service-ProfilePost-Preparer.json": {
+        "hash": "5a4e4ffd40d39664325d521baffa89c3"
     },
-    "XF-Service-ProfilePostComment-Notifier_SV-UserMentionsImprovements-XF-Service-ProfilePostComment-Notifier.json": {
-        "hash": "536f642d9783edf99136d1962807eb27"
+    "XF-Service-ProfilePostComment-Preparer_SV-UserMentionsImprovements-XF-Service-ProfilePostComment-Preparer.json": {
+        "hash": "707d2f5c3c188fc6b55874a9e4a5a473"
     },
     "XF-Service-StructuredText-Preparer_SV-UserMentionsImprovements-XF-Service-StructuredText-Preparer.json": {
         "hash": "a13721c3f99e6cf1c910f2a16513b675"

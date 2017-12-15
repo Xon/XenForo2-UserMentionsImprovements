@@ -25,40 +25,4 @@ class Preparer extends XFCP_Preparer
     {
         return $this->mentionedUserGroups;
     }
-
-    public function getMentionedUsers()
-    {
-        $users = parent::getMentionedUsers();
-
-        /** @noinspection PhpUndefinedFieldInspection */
-        if (isset($this->messageEntity->User))
-        {
-            /** @var \SV\UserMentionsImprovements\XF\Entity\User $user */
-            /** @noinspection PhpUndefinedFieldInspection */
-            $user = $this->messageEntity->User;
-
-            if (!$user->canMention($this->messageEntity))
-            {
-                $this->mentionedUsers = [];
-            }
-        }
-        /** @var \SV\UserMentionsImprovements\XF\Entity\User $visitor */
-        $visitor = \XF::visitor();
-
-        if (!$visitor->canMention(null))
-        {
-            return [];
-        }
-
-        if (!$visitor->canMentionUserGroup())
-        {
-            return $users;
-        }
-
-        /** @var \SV\UserMentionsImprovements\Repository\UserMentions $userMentionsRepo */
-        $userMentionsRepo = \XF::app()->repository('SV\UserMentionsImprovements:UserMentions');
-        $users = $userMentionsRepo->mergeUserGroupMembersIntoUsersArray($users, $this->getMentionedUserGroups());
-
-        return $users;
-    }
 }

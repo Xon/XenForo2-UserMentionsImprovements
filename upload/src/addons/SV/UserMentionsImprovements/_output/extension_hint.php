@@ -8,11 +8,6 @@ namespace SV\UserMentionsImprovements\XF\Admin\Controller
 	class XFCP_UserGroup extends \XF\Admin\Controller\UserGroup {}
 }
 
-namespace SV\UserMentionsImprovements\XF\Alert
-{
-	class XFCP_Post extends \XF\Alert\Post {}
-}
-
 namespace SV\UserMentionsImprovements\XF\BbCode\ProcessorAction
 {
 	class XFCP_MentionUsers extends \XF\BbCode\ProcessorAction\MentionUsers {}
@@ -65,6 +60,16 @@ namespace SV\UserMentionsImprovements\XF\Service\Message
 namespace SV\UserMentionsImprovements\XF\Service\Post
 {
 	class XFCP_Notifier extends \XF\Service\Post\Notifier {}
+}
+
+namespace SV\UserMentionsImprovements\XF\Service\ProfilePostComment
+{
+	class XFCP_Preparer extends \XF\Service\ProfilePostComment\Preparer {}
+}
+
+namespace SV\UserMentionsImprovements\XF\Service\ProfilePost
+{
+	class XFCP_Preparer extends \XF\Service\ProfilePost\Preparer {}
 }
 
 namespace SV\UserMentionsImprovements\XF\Service\StructuredText

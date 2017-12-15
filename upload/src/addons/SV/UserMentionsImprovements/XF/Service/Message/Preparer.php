@@ -18,10 +18,10 @@ class Preparer extends XFCP_Preparer
 
             if ($user->canMention($this->messageEntity))
             {
-                /** @var \SV\UserMentionsImprovements\XF\BbCode\ProcessorAction\MentionUsers|null $mentions */
-                $mentions = $this->bbCodeProcessor->getFilterer('mentions');
                 if ($user->canMentionUserGroup())
                 {
+                    /** @var \SV\UserMentionsImprovements\XF\BbCode\ProcessorAction\MentionUsers|null $mentions */
+                    $mentions = $this->bbCodeProcessor->getFilterer('mentions');
                     /** @var \SV\UserMentionsImprovements\Repository\UserMentions $userMentionsRepo */
                     $userMentionsRepo = \XF::app()->repository('SV\UserMentionsImprovements:UserMentions');
                     $this->mentionedUsers = $userMentionsRepo->mergeUserGroupMembersIntoUsersArray($this->mentionedUsers, $mentions->getMentionedUserGroups());
