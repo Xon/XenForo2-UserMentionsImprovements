@@ -40,7 +40,7 @@ class Setup extends AbstractSetup
         $this->defaultPermission();
     }
 
-    public function upgrade10100000Step1()
+    public function upgrade1010000Step1()
     {
         $this->db()->query(
             "
@@ -51,7 +51,7 @@ class Setup extends AbstractSetup
         );
     }
 
-    public function upgrade1040100Step1()
+    public function upgrade104010Step1()
     {
         $this->db()->query(
             "
@@ -104,6 +104,7 @@ class Setup extends AbstractSetup
     {
         // rewrite permissions
         $db = $this->db();
+
         $db->query(
             "
                 UPDATE xf_permission_entry
@@ -138,7 +139,7 @@ class Setup extends AbstractSetup
             "INSERT IGNORE INTO xf_permission_entry_content (content_type, content_id, user_group_id, user_id, permission_group_id, permission_id, permission_value, permission_value_int)
                 SELECT DISTINCT content_type, content_id, user_group_id, user_id, 'forum', 'sv_ReceiveQuoteEmails', 'content_allow', 0
                 FROM xf_permission_entry_content
-                WHEREpermission_id = 'sv_ReceiveTagAlertEmails'
+                WHERE permission_id = 'sv_ReceiveTagAlertEmails'
             "
         );
         $db->query(
