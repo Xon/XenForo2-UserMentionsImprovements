@@ -19,8 +19,26 @@ class Account extends XFCP_Account
                 ]
             );
 
-            $userOptions = $visitor->getRelationOrDefault('Option');
-            $form->setupEntityInput($userOptions, $input['option']);
+            /** @var \SV\UserMentionsImprovements\XF\Entity\User $visitor */
+            $visitor = \XF::visitor();
+            /** @var \SV\UserMentionsImprovements\XF\Entity\UserOption $option */
+            $option = $visitor->Option;
+
+            if (!$visitor->canReceiveMentionEmails() && $option->sv_email_on_mention)
+            {
+                unset($input['option']['sv_email_on_mention']);
+            }
+
+            if (!$visitor->canReceiveQuoteEmails() && $option->sv_email_on_quote)
+            {
+                unset($input['option']['sv_email_on_quote']);
+            }
+
+            if ($input['option'])
+            {
+                $userOptions = $visitor->getRelationOrDefault('Option');
+                $form->setupEntityInput($userOptions, $input['option']);
+            }
         }
 
         return $form;
