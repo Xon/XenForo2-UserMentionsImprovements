@@ -10,6 +10,7 @@ class Find extends XFCP_Find
 
         foreach ($this->params['usergroups'] AS $usergroup)
         {
+            /** @var \SV\UserMentionsImprovements\XF\Entity\UserGroup $usergroup */
             array_unshift(
                 $response['results'], [
                 'id'       => $usergroup->user_group_id,

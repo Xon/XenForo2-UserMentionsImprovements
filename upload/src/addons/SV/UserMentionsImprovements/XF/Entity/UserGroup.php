@@ -8,9 +8,11 @@ use XF\Mvc\Entity\Structure;
 /**
  * @property bool sv_mentionable
  * @property bool sv_private
+ * @property int sv_avatar_edit_date
+ *
  * @property string sv_avatar_s
  * @property string sv_avatar_l
- * @property int sv_avatar_edit_date
+ * @property string icon_html
  */
 class UserGroup extends XFCP_UserGroup
 {
@@ -91,6 +93,7 @@ class UserGroup extends XFCP_UserGroup
 
         $structure->getters['sv_avatar_s'] = true;
         $structure->getters['sv_avatar_l'] = true;
+        $structure->getters['icon_html'] = true;
 
         return $structure;
     }
