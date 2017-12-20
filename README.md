@@ -11,7 +11,7 @@ Improvements to XenForo's tagging system.
 - User group tagging supports the following:
   - User profile posts/comments.
   - Posts/Threads.
-  - Reports (if Report Improvements are installed).
+  - Reports.
 - Opt-in emails on mentioned/quoting:
   - global option to enable/disable.
   - configurable default for users on account creation.
