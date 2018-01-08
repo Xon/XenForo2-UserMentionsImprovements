@@ -13,11 +13,6 @@ namespace SV\UserMentionsImprovements\XF\BbCode\ProcessorAction
 	class XFCP_MentionUsers extends \XF\BbCode\ProcessorAction\MentionUsers {}
 }
 
-namespace SV\UserMentionsImprovements\XF\BbCode\Renderer
-{
-	class XFCP_Html extends \XF\BbCode\Renderer\Html {}
-}
-
 namespace SV\UserMentionsImprovements\XF\BbCode
 {
 	class XFCP_RuleSet extends \XF\BbCode\RuleSet {}

@@ -1,0 +1,9 @@
+{
+    "event_id": "bb_code_renderer",
+    "execute_order": 10,
+    "callback_class": "SV\\UserMentionsImprovements\\bbCode\\Listener",
+    "callback_method": "bbCodeRender",
+    "active": true,
+    "hint": "",
+    "description": "Extend bbcode rendering to include user group tags and user icons"
+}

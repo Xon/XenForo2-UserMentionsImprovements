@@ -1,6 +1,0 @@
-{
-    "from_class": "XF\\BbCode\\Renderer\\Html",
-    "to_class": "SV\\UserMentionsImprovements\\XF\\BbCode\\Renderer\\Html",
-    "execute_order": 10,
-    "active": true
-}
