@@ -25,7 +25,7 @@ class Setup extends AbstractSetup
             $table->addColumn('sv_avatar_edit_date', 'int')->setDefault(0);
         }
         );
-        $this->upgrade10100000Step1();
+        $this->upgrade1010000Step1();
 
         $this->schemaManager()->alterTable(
             'xf_user_option', function (Alter $table) {
@@ -171,6 +171,24 @@ class Setup extends AbstractSetup
             [],
             false
         );
+    }
+
+    /**
+     * Rewrite options
+     */
+    public function upgrade2000070Step3()
+    {
+        /** @var \XF\Entity\Option[] $options */
+        $options = $this->app->finder('XF:Option')->whereIds(['sv_default_group_avatar_s', 'sv_default_group_avatar_l'])->fetch();
+        foreach ($options as $option)
+        {
+            $value = $option->getOptionValue();
+            if (is_string($value))
+            {
+                $option->option_value = str_replace('styles/default/sv/tagging/', 'styles/default/sv/mentionimprovements/', $value);
+                $option->saveIfChanged();
+            }
+        }
     }
 
     public function uninstallStep1()
