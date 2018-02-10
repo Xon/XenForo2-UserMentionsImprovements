@@ -14,6 +14,9 @@
     "public/sv_umi_alert_report_mention.json": {
         "hash": "bd93956e1a9ca5167feb179b6e7a0d11"
     },
+    "public/sv_umi_editor.json": {
+        "hash": "6cca6a774319130c37b466ac2fee830d"
+    },
     "public/sv_usermentionsimprovements_account_preferences.json": {
         "hash": "eb22f7ab2c44ac3e6bcd866cffb7b466"
     }
