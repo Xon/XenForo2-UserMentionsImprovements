@@ -69,13 +69,13 @@
         "global_cache": false,
         "version_id": 2000070,
         "version_string": "2.0.0",
-        "hash": "80a77e2101bbf83a11970a76d964940d"
+        "hash": "18c1ffee0100de1902a94095564c69bc"
     },
     "option_explain.sv_send_email_on_tagging.txt": {
         "global_cache": false,
         "version_id": 2000070,
         "version_string": "2.0.0",
-        "hash": "ef8554b3ef342e791e16702f96ab93a2"
+        "hash": "06d51e6b42de08cd2f0dc9064aa571a8"
     },
     "option_explain.sv_styleGroupUsername.txt": {
         "global_cache": false,
@@ -93,7 +93,7 @@
         "global_cache": false,
         "version_id": 2000070,
         "version_string": "2.0.0",
-        "hash": "d41d8cd98f00b204e9800998ecf8427e"
+        "hash": "9ee206291cd9ff06f70c339ba71cb441"
     },
     "permission.forum_sv_EnableMentions.txt": {
         "global_cache": false,

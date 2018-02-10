@@ -1,1 +1,1 @@
-Allows users to opt in to receiving emails when mentioned and/or quoted. Users still require opt-in under /account/contact-details
+Allows users to opt in to receiving emails when mentioned and/or quoted. Users still require opt-in under /account/preferences

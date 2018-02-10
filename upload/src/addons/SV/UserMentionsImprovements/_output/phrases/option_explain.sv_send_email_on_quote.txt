@@ -1,1 +1,1 @@
-Allows users to receive alert emails, when quoted. Users still require opt-in under /account/contact-details
+Allows users to receive alert emails, when quoted. Users still require opt-in under /account/preferences
