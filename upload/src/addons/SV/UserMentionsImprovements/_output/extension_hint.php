@@ -5,6 +5,7 @@
 
 namespace SV\UserMentionsImprovements\XF\Admin\Controller
 {
+	class XFCP_User extends \XF\Admin\Controller\User {}
 	class XFCP_UserGroup extends \XF\Admin\Controller\UserGroup {}
 }
 

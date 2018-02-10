@@ -2,6 +2,9 @@
     "XF-Admin-Controller-UserGroup_SV-UserMentionsImprovements-XF-Admin-Controller-UserGroup.json": {
         "hash": "5cfaad8f310ba62bab8c1af7b679b10a"
     },
+    "XF-Admin-Controller-User_SV-UserMentionsImprovements-XF-Admin-Controller-User.json": {
+        "hash": "70b39f4b3bd534b84fdfda573ad5e398"
+    },
     "XF-BbCode-ProcessorAction-MentionUsers_SV-UserMentionsImprovements-XF-BbCode-ProcessorAction-MentionUsers.json": {
         "hash": "f59612781a1ec6373a5600d8057246b8"
     },
