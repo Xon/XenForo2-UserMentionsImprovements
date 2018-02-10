@@ -1,9 +1,9 @@
 <?php
 
 namespace SV\UserMentionsImprovements\XF\Entity;
+
 use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
-
 
 /**
  * @property bool sv_email_on_mention

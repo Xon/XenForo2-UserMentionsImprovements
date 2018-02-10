@@ -20,7 +20,7 @@ class UserMentions extends Repository
     }
 
     /**
-     * @param array $users
+     * @param array                       $users
      * @param \XF\Entity\UserGroup[]|null $mentionedUserGroups
      * @return array
      */

@@ -62,11 +62,11 @@ class Notifier extends XFCP_Notifier
     protected function ensureDataLoaded()
     {
         parent::ensureDataLoaded();
-        foreach(['mention','quote'] as $type)
+        foreach (['mention', 'quote'] as $type)
         {
             if (isset($this->notifyData[$type]))
             {
-                foreach($this->notifyData[$type] as $userId => $value)
+                foreach ($this->notifyData[$type] as $userId => $value)
                 {
                     if (isset($value['group']) && empty(Globals::$userGroupMentionedIds[$userId]))
                     {

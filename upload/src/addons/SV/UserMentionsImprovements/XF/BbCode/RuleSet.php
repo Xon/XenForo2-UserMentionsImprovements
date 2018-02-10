@@ -9,12 +9,13 @@ class RuleSet extends XFCP_RuleSet
         parent::addDefaultTags();
 
         $this->addTag(
-            'usergroup', [
-            'hasOption'    => true,
-            'plain'        => true,
-            'stopSmilies'  => true,
-            'stopAutoLink' => true
-        ]
+            'usergroup',
+            [
+                'hasOption'    => true,
+                'plain'        => true,
+                'stopSmilies'  => true,
+                'stopAutoLink' => true
+            ]
         );
     }
 }

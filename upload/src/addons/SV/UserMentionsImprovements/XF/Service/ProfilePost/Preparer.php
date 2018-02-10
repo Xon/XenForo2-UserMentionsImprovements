@@ -5,12 +5,13 @@ namespace SV\UserMentionsImprovements\XF\Service\ProfilePost;
 
 class Preparer extends XFCP_Preparer
 {
-    /** @var \SV\UserMentionsImprovements\XF\Service\StructuredText\Preparer|null  */
+    /** @var \SV\UserMentionsImprovements\XF\Service\StructuredText\Preparer|null */
     protected $processor = null;
 
     protected function getStructuredTextPreparer($format = true)
     {
         $this->processor = parent::getStructuredTextPreparer($format);
+
         return $this->processor;
     }
 
