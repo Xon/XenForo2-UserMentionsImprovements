@@ -1,9 +1,9 @@
 {
     "template": "account_preferences",
-    "description": "",
+    "description": "Add additional account preferences",
     "execution_order": 10,
     "enabled": true,
-    "action": "str_replace",
-    "find": "<xf:option name=\"option[email_on_conversation]\" checked=\"{$xf.visitor.Option.email_on_conversation}\"\n\t\t\t\t\tlabel=\"{{ phrase('receive_email_when_new_conversation_message_is_received') }}\" />",
-    "replace": "$0\n<xf:if is=\"$xf.visitor.canReceiveMentionEmails() || $xf.visitor.Option.sv_email_on_mention\">\n\t<xf:option \n\t\t\t   name=\"option[sv_email_on_mention]\" \n\t\t\t   label=\"{{ phrase('sv_usermentionsimprovements_email_on_mention') . ($xf.visitor.canReceiveMentionEmails() ? '' : phrase('sv_receive_email_is_disabled')) }}\" \n\t\t\t   checked=\"{$xf.visitor.Option.sv_email_on_mention}\" \n\t\t\t   />\n</xf:if>\n<xf:if is=\"$xf.visitor.canReceiveQuoteEmails() || $xf.visitor.Option.sv_email_on_quote\">\n\t<xf:option \n\t\t\t   name=\"option[sv_email_on_quote]\" \n\t\t\t   label=\"{{ phrase('sv_usermentionsimprovements_email_on_quote'). ($xf.visitor.canReceiveQuoteEmails() ? '' : phrase('sv_receive_email_is_disabled')) }}\" \n\t\t\t   checked=\"{$xf.visitor.Option.sv_email_on_quote}\" \n\t\t\t   />\n</xf:if>"
+    "action": "preg_replace",
+    "find": "#([\\t ]*<xf:option name=\\\"option\\[receive_admin_email\\])#si",
+    "replace": "<xf:if is=\"$xf.visitor.canReceiveMentionEmails() || $xf.visitor.Option.sv_email_on_mention\">\n\t<xf:option \n\t\t\t   name=\"option[sv_email_on_mention]\" \n\t\t\t   label=\"{{ phrase('sv_usermentionsimprovements_email_on_mention') . ($xf.visitor.canReceiveMentionEmails() ? '' : phrase('sv_receive_email_is_disabled')) }}\" \n\t\t\t   checked=\"{$xf.visitor.Option.sv_email_on_mention}\" \n\t\t\t   />\n</xf:if>\n<xf:if is=\"$xf.visitor.canReceiveQuoteEmails() || $xf.visitor.Option.sv_email_on_quote\">\n\t<xf:option \n\t\t\t   name=\"option[sv_email_on_quote]\" \n\t\t\t   label=\"{{ phrase('sv_usermentionsimprovements_email_on_quote'). ($xf.visitor.canReceiveQuoteEmails() ? '' : phrase('sv_receive_email_is_disabled')) }}\" \n\t\t\t   checked=\"{$xf.visitor.Option.sv_email_on_quote}\" \n\t\t\t   />\n</xf:if>\n$0"
 }

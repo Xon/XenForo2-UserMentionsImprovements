@@ -11,7 +11,7 @@ class UserAlert extends XFCP_UserAlert
     {
         if (isset(Globals::$userGroupMentionedIds[$receiver->user_id]) && $action === 'mention')
         {
-            $extra['fromUserGroupMention'] = Globals::$userGroupMentionedIds[$receiver->user_id];
+            $extra['sv_group'] = Globals::$userGroupMentionedIds[$receiver->user_id];
         }
 
         return parent::alert($receiver, $senderId, $senderName, $contentType, $contentId, $action, $extra);

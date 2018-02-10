@@ -1,0 +1,9 @@
+{
+    "template": "alert_profile_post_mention",
+    "description": "Extend mention with groups",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/$/",
+    "replace": "$0\n<xf:include template=\"sv_alert_group_mention\" />"
+}

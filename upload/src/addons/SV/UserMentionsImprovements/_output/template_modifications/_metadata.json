@@ -2,19 +2,19 @@
     "admin/sv_usermentionsimprovements_user_group_edit.json": {
         "hash": "a7679cc5e274af19ae00134ad7b72b98"
     },
-    "public/sv_usermentionimprovements_alert_post_mention.json": {
-        "hash": "6606250f46c37e859dd550804bb0a2d0"
+    "public/sv_umi_alert_post_mention.json": {
+        "hash": "29817b8f99cf0ab5a453d0414d2e4ac1"
     },
-    "public/sv_usermentionimprovements_alert_prof_post_mention.json": {
-        "hash": "eff73e667c5d0ea75729cbe2370bbb28"
+    "public/sv_umi_alert_profile_post_comment_mention.json": {
+        "hash": "6269afe5184e8e947556e570859e280a"
     },
-    "public/sv_usermentionimprovements_alert_profile_post_comm.json": {
-        "hash": "9b5f4697544078fb54a797acc5278c3d"
+    "public/sv_umi_alert_profile_post_mention.json": {
+        "hash": "0aa61ff3af48932b2443232e368f5915"
     },
-    "public/sv_usermentionimprovements_alert_report_mention.json": {
-        "hash": "8ed58195296eb8aaa5011ffe6d261708"
+    "public/sv_umi_alert_report_mention.json": {
+        "hash": "bd93956e1a9ca5167feb179b6e7a0d11"
     },
     "public/sv_usermentionsimprovements_account_preferences.json": {
-        "hash": "2235babd049725d5502869b91978da75"
+        "hash": "eb22f7ab2c44ac3e6bcd866cffb7b466"
     }
 }

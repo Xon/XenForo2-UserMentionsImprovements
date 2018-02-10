@@ -1,0 +1,6 @@
+<xf:if is="{$extra.sv_group}">
+	{{ phrase('sv_mentioned_as_y_group', {
+		'title': {$extra.sv_group.title}, 
+		'group': link('members', '', 'ug={$extra.sv_group.id}')}) 
+	}}
+</xf:if>

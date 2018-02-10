@@ -125,17 +125,17 @@
         "version_string": "2.0.0",
         "hash": "e612b1ca9f122e2f91dfc5f223c0041c"
     },
+    "sv_mentioned_as_y_group.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "43c4357f637e32230e34741fba076cc0"
+    },
     "sv_receive_email_is_disabled.txt": {
         "global_cache": false,
         "version_id": 2000070,
         "version_string": "2.0.0",
         "hash": "32b0f9851967fd87703ed64abeaa5dc8"
-    },
-    "sv_usermentionimprovements_you_were_mentioned_because_you_are_a_member_of_x_usergroup.txt": {
-        "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "43c4357f637e32230e34741fba076cc0"
     },
     "sv_usermentionsimprovements_email_on_mention.txt": {
         "global_cache": false,

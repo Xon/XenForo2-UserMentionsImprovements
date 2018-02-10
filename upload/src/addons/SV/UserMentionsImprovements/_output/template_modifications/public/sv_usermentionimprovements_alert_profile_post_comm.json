@@ -1,9 +1,0 @@
-{
-    "template": "alert_profile_post_comment_mention",
-    "description": "",
-    "execution_order": 10,
-    "enabled": true,
-    "action": "preg_replace",
-    "find": "/$/",
-    "replace": "$0\n<xf:if is=\"{$extra.fromUserGroupMention}\">\n\t{{ phrase('sv_usermentionimprovements_you_were_mentioned_because_you_are_a_member_of_x_usergroup', {'title': {$extra.fromUserGroupMention.title}, 'group': link('members', '', 'ug={fromUserGroupMention.id}')}) }}\n</xf:if>"
-}
