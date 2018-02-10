@@ -34,15 +34,24 @@ class Preparer extends XFCP_Preparer
                 {
                     /** @var \SV\UserMentionsImprovements\Repository\UserMentions $userMentionsRepo */
                     $userMentionsRepo = \XF::app()->repository('SV\UserMentionsImprovements:UserMentions');
-                    $this->mentionedUsers = $userMentionsRepo->mergeUserGroupMembersIntoUsersArray($this->mentionedUsers, $processor->getMentionedUserGroups());
+                    $this->mentionedUserGroups = $processor->getMentionedUserGroups();
+                    $this->mentionedUsers = $userMentionsRepo->mergeUserGroupMembersIntoUsersArray($this->mentionedUsers, $this->mentionedUserGroups);
                 }
             }
             else
             {
+                $this->mentionedUserGroups = [];
                 $this->mentionedUsers = [];
             }
         }
 
         return $message;
+    }
+
+    protected $mentionedUserGroups = [];
+
+    public function getMentionedUserGroups()
+    {
+        return $this->mentionedUserGroups;
     }
 }
