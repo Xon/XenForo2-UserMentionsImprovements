@@ -6,6 +6,40 @@ use SV\UserMentionsImprovements\Globals;
 
 class Notifier extends XFCP_Notifier
 {
+    protected $doCleanup = true;
+
+    public function notifyAndEnqueue($timeLimit = null)
+    {
+        $this->doCleanup = false;
+        try
+        {
+            //$this->notify($timeLimit);
+            return $this->enqueueJobIfNeeded();
+        }
+        finally
+        {
+            $this->doCleanup = true;
+            // need to cleanup the static, or it could contaminate the next job
+            Globals::$userGroupMentionedIds = [];
+        }
+    }
+
+    public function notify($timeLimit = null)
+    {
+        try
+        {
+            return parent::notify($timeLimit);
+        }
+        finally
+        {
+            // need to cleanup the static, or it could contaminate the next job
+            if ($this->doCleanup)
+            {
+                Globals::$userGroupMentionedIds = [];
+            }
+        }
+    }
+
     public function addNotification($type, $userId, $alert = true, $email = false)
     {
         /** @var \SV\UserMentionsImprovements\XF\Entity\User $user */
