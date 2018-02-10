@@ -17,6 +17,9 @@
     "XF-Entity-User_SV-UserMentionsImprovements-XF-Entity-User.json": {
         "hash": "ca07045a6f31ba21abff4da7e9ed53f8"
     },
+    "XF-Finder-UserGroup_SV-UserMentionsImprovements-XF-Finder-UserGroup.json": {
+        "hash": "910ad374b34826d8e91ca0f9887eecf3"
+    },
     "XF-Notifier-Post-Mention_SV-UserMentionsImprovements-XF-Notifier-Post-Mention.json": {
         "hash": "10bc4fe5878329b9536f39a33bcee091"
     },

@@ -25,6 +25,11 @@ namespace SV\UserMentionsImprovements\XF\Entity
 	class XFCP_UserOption extends \XF\Entity\UserOption {}
 }
 
+namespace SV\UserMentionsImprovements\XF\Finder
+{
+	class XFCP_UserGroup extends \XF\Finder\UserGroup {}
+}
+
 namespace SV\UserMentionsImprovements\XF\Notifier\Post
 {
 	class XFCP_Mention extends \XF\Notifier\Post\Mention {}

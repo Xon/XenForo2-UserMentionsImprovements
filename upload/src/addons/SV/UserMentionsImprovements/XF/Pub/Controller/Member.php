@@ -44,20 +44,10 @@ class Member extends XFCP_Member
 
             if ($visitor->canMentionUserGroup() && $q !== '' && utf8_strlen($q) >= 2)
             {
+                /** @var \SV\UserMentionsImprovements\XF\Finder\UserGroup $userGroupFinder */
                 $userGroupFinder = $this->finder('XF:UserGroup');
-
-                /** @var \XF\Mvc\Entity\AbstractCollection $userGroups */
-                $userGroups = $userGroupFinder
-                    ->where('title', 'like', $userGroupFinder->escapeLike($q, '?%'))
-                    ->where('sv_mentionable', 1)
-                    ->fetch();
-
-                // TODO: Put this into the finder query if possible
-                $userGroups->filter(
-                    function ($userGroup) {
-                        return !$userGroup->sv_private || \XF::visitor()->isMemberOf($userGroup->user_group_id);
-                    }
-                );
+                $userGroups = $userGroupFinder->getMentionableGroups($q);
+                $userGroups = $userGroupFinder->filterMentionableGroup($userGroups);
             }
             else
             {
