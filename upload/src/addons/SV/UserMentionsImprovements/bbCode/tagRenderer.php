@@ -26,10 +26,17 @@ class tagRenderer
 
     public function bindToRenderer()
     {
+        $callback = [$this, 'renderTagUserGroup'];
+        // php 7.1+ only, but has better performance
+        if (is_callable('\Closure::fromCallable'))
+        {
+            $callback = \Closure::fromCallable($callback);
+        }
+
         $this->renderer->addTag(
             'usergroup',
             [
-                'callback' => \Closure::fromCallable([$this, 'renderTagUserGroup'])
+                'callback' => $callback
             ]
         );
     }

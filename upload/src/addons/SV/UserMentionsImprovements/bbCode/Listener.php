@@ -10,7 +10,7 @@ use XF\BbCode\Renderer\Html;
 class Listener
 {
     /**
-     * tagRenderer constructor.
+     * Extend bbcode rendering to include user group tags and user icons
      *
      * @param AbstractRenderer $renderer
      * @param string           $type
