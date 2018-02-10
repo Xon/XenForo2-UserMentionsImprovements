@@ -77,7 +77,7 @@ class tagRenderer
         }
 
         return $this->renderer->wrapHtml(
-            '<a href="' . htmlspecialchars($link) . '" class="' . $this->groupUsername . ' ug" data-usergroup="' . $userGroupId . ', ' . htmlspecialchars($content) . '"><span class="style' . $userGroupId . '">' . $this->groupAvatar,
+            '<a href="' . htmlspecialchars($link) . '" class="' . $this->groupUsername . ' ug" data-xf-init="sv-usergroup-tooltip" data-usergroup-id="' . $userGroupId . '" data-groupname="' . htmlspecialchars($content) . '"><span class="style' . $userGroupId . '">' . $this->groupAvatar,
             $content,
             '</span></a>'
         );
