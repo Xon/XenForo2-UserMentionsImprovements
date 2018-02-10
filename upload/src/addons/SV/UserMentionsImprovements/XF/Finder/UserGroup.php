@@ -11,13 +11,13 @@ use XF\Mvc\Entity\ArrayCollection;
 class UserGroup extends XFCP_UserGroup
 {
     /**
-     * @param string $q
+     * @param string $title
      * @return AbstractCollection
      */
-    public function getMentionableGroups($q)
+    public function mentionableGroups($title)
     {
         return $this
-            ->where('title', 'like', $this->escapeLike($q, '?%'))
+            ->where('title', 'like', $this->escapeLike($title, '?%'))
             ->where('sv_mentionable', 1);
     }
 
