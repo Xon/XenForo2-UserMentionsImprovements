@@ -1,4 +1,14 @@
 {
+    "admin/option_template_registrationDefaults_mentions.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "9fd63daba8102b452b83f20ff2e2609a"
+    },
+    "admin/user_edits_mentions.html": {
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "636f5bd05480863e2a61a74ffb36fa3f"
+    },
     "email/sv_usermentionsimprovements_mention.html": {
         "version_id": 2000070,
         "version_string": "2.0.0",

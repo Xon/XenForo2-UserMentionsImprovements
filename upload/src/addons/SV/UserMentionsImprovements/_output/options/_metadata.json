@@ -6,18 +6,21 @@
         "hash": "4b3773a89aa5da05e701673d9053f1de"
     },
     "sv_displayGroupAvatar.json": {
-        "hash": "02ad5f633992cc4b8bea63aa4c62a674"
+        "hash": "664eae381e1bdf61652792021b9edf04"
+    },
+    "sv_displayUserAvatar.json": {
+        "hash": "e0cf43662da77309ed2ddd52a0b10f08"
     },
     "sv_limit_quote_emails.json": {
         "hash": "a13c7296ee18be089cb876fce2aec891"
     },
     "sv_send_email_on_quote.json": {
-        "hash": "390b47a665edc8e2b6042a981605cf1d"
+        "hash": "e63b947285c7a985f43b69564f6b3846"
     },
     "sv_send_email_on_tagging.json": {
-        "hash": "c771e2781c4a330d27f8f9dd9dffb769"
+        "hash": "a2f4c62f9836e595bc0f8fba18d99571"
     },
     "sv_styleGroupUsername.json": {
-        "hash": "4d960ba907bddda73b7722da2351cb9a"
+        "hash": "ee617a695ca132186c4ba08647d0ff9a"
     }
 }

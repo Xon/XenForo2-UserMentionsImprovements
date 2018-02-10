@@ -33,6 +33,20 @@ class Setup extends AbstractSetup
             $table->addColumn('sv_email_on_quote', 'bool')->setDefault(0);
         }
         );
+
+        /** @var \XF\Entity\Option $entity */
+        $entity = \XF::finder('XF:Option')->where(['option_id', 'registrationDefaults'])->fetchOne();
+        $registrationDefaults = $entity->option_value;
+        if (!isset($registrationDefaults['sv_email_on_mention']))
+        {
+            $registrationDefaults['sv_email_on_mention'] = 0;
+        }
+        if (!isset($registrationDefaults['sv_email_on_quote']))
+        {
+            $registrationDefaults['sv_email_on_quote'] = 0;
+        }
+        $entity->option_value = $registrationDefaults;
+        $entity->saveIfChanged();
     }
 
     public function installStep2()
@@ -98,6 +112,17 @@ class Setup extends AbstractSetup
             $table->renameColumn('sv_email_on_tag', 'sv_email_on_mention');
         }
         );
+
+        /** @var \XF\Entity\Option $entity */
+        $entity = \XF::finder('XF:Option')->where(['option_id', 'registrationDefaults'])->fetchOne();
+        $registrationDefaults = $entity->option_value;
+        if (isset($registrationDefaults['sv_email_on_tag']))
+        {
+            $registrationDefaults['sv_email_on_mention'] = $registrationDefaults['sv_email_on_tag'];
+            unset($registrationDefaults['sv_email_on_tag']);
+        }
+        $entity->option_value = $registrationDefaults;
+        $entity->saveIfChanged();
     }
 
     public function upgrade2000070Step2()

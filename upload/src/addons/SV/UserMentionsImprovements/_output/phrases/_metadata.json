@@ -17,6 +17,12 @@
         "version_string": "2.0.0",
         "hash": "1af106dd9949789f57a7ca63a5d8bf16"
     },
+    "option.sv_displayUserAvatar.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "5a6eeba2a9936fe512ca90eca9a6bc5f"
+    },
     "option.sv_limit_quote_emails.txt": {
         "global_cache": false,
         "version_id": 2000070,
@@ -27,7 +33,7 @@
         "global_cache": false,
         "version_id": 2000070,
         "version_string": "2.0.0",
-        "hash": "28f726135773cda22343805f01bb369c"
+        "hash": "dca73bbe0c31b33d50a7e0ee5ede47f9"
     },
     "option.sv_send_email_on_tagging.txt": {
         "global_cache": false,
@@ -57,7 +63,13 @@
         "global_cache": false,
         "version_id": 2000070,
         "version_string": "2.0.0",
-        "hash": "d41d8cd98f00b204e9800998ecf8427e"
+        "hash": "253621f356d324c752f57eb11f864018"
+    },
+    "option_explain.sv_displayUserAvatar.txt": {
+        "global_cache": false,
+        "version_id": 2000070,
+        "version_string": "2.0.0",
+        "hash": "253621f356d324c752f57eb11f864018"
     },
     "option_explain.sv_limit_quote_emails.txt": {
         "global_cache": false,
@@ -69,13 +81,13 @@
         "global_cache": false,
         "version_id": 2000070,
         "version_string": "2.0.0",
-        "hash": "18c1ffee0100de1902a94095564c69bc"
+        "hash": "78623f9b108a64755ef6dfc148708da0"
     },
     "option_explain.sv_send_email_on_tagging.txt": {
         "global_cache": false,
         "version_id": 2000070,
         "version_string": "2.0.0",
-        "hash": "06d51e6b42de08cd2f0dc9064aa571a8"
+        "hash": "bac9d64a17cc0979cf91acccf80cc6c1"
     },
     "option_explain.sv_styleGroupUsername.txt": {
         "global_cache": false,
@@ -141,13 +153,13 @@
         "global_cache": false,
         "version_id": 2000070,
         "version_string": "2.0.0",
-        "hash": "98a37253e2dd7773d19c4cabdbe94e1d"
+        "hash": "414b68b6714c508d89c314b17b9b22e7"
     },
     "sv_usermentionsimprovements_email_on_quote.txt": {
         "global_cache": false,
         "version_id": 2000070,
         "version_string": "2.0.0",
-        "hash": "ef260ce248eb59896ba23201df81f2e3"
+        "hash": "2e88772e15211a647102f059d115f6a5"
     },
     "sv_usermentionsimprovements_is_mentionable.txt": {
         "global_cache": false,

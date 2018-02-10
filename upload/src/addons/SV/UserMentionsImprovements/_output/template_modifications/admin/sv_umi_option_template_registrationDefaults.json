@@ -1,0 +1,9 @@
+{
+    "template": "option_template_registrationDefaults",
+    "description": "",
+    "execution_order": 15,
+    "enabled": true,
+    "action": "str_replace",
+    "find": "<div class=\"u-inputSpacer\">",
+    "replace": "$0\n<xf:include template=\"option_template_registrationDefaults_mentions\" />"
+}

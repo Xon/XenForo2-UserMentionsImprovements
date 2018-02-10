@@ -1,1 +1,1 @@
-Receive Quoted Alert Emails
+Allow quoted alert emails
