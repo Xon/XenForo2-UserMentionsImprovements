@@ -7,7 +7,7 @@ use XF\Mvc\Reply\View;
 
 class Member extends XFCP_Member
 {
-    public function actionUsergroup(ParameterBag $params)
+    public function actionUserGroup(ParameterBag $params)
     {
         $userGroupId = $params['user_group_id'];
 
@@ -55,7 +55,7 @@ class Member extends XFCP_Member
                 $userGroups = [];
             }
 
-            $response->setParam('usergroups', $userGroups);
+            $response->setParam('userGroups', $userGroups);
         }
 
         return $response;

@@ -8,7 +8,7 @@ use XF\Mvc\Entity\Structure;
 /**
  * @property bool sv_mentionable
  * @property bool sv_private
- * @property int sv_avatar_edit_date
+ * @property int  sv_avatar_edit_date
  *
  * @property string sv_avatar_s
  * @property string sv_avatar_l

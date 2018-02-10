@@ -2,10 +2,15 @@
 
 namespace SV\UserMentionsImprovements\XF\Entity;
 
+use SV\UserMentionsImprovements\Entity\UserGroupRelation;
 use XF\Entity\Post;
 use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
 
+/**
+ *
+ * @property UserGroupRelation UserGroupRelations
+ */
 class User extends XFCP_User
 {
     public function canReceiveMentionEmails()

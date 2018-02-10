@@ -2,9 +2,16 @@
 
 namespace SV\UserMentionsImprovements\Entity;
 
+use SV\UserMentionsImprovements\XF\Entity\User;
 use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
 
+/**
+ * @property int     user_id
+ * @property int     user_group_id
+ * @property boolean is_primary
+ * @property User    User
+ */
 class UserGroupRelation extends Entity
 {
     public static function getStructure(Structure $structure)

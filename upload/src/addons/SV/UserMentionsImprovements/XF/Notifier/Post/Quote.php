@@ -2,9 +2,11 @@
 
 namespace SV\UserMentionsImprovements\XF\Notifier\Post;
 
+use XF\Entity\User;
+
 class Quote extends XFCP_Quote
 {
-    public function sendEmail(\XF\Entity\User $user)
+    public function sendEmail(User $user)
     {
         $params = [
             'post'     => $this->post,

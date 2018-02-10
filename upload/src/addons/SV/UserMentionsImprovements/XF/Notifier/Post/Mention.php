@@ -2,9 +2,11 @@
 
 namespace SV\UserMentionsImprovements\XF\Notifier\Post;
 
+use XF\Entity\User;
+
 class Mention extends XFCP_Mention
 {
-    public function sendEmail(\XF\Entity\User $user)
+    public function sendEmail(User $user)
     {
         $params = [
             'post'     => $this->post,

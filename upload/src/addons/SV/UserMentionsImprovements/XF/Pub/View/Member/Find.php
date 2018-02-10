@@ -8,7 +8,7 @@ class Find extends XFCP_Find
     {
         $response = parent::renderJson();
 
-        foreach ($this->params['usergroups'] AS $usergroup)
+        foreach ($this->params['userGroups'] AS $usergroup)
         {
             /** @var \SV\UserMentionsImprovements\XF\Entity\UserGroup $usergroup */
             array_unshift(

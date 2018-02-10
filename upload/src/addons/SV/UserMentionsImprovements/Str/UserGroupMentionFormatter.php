@@ -11,6 +11,10 @@ class UserGroupMentionFormatter
     protected $placeholders        = [];
     protected $mentionedUserGroups = [];
 
+    /**
+     * @param string $message
+     * @return null|string
+     */
     public function getMentionsBbCode($message)
     {
         // TODO: this regex needs to respect tags that disable parsing or tags that disable autolink
@@ -38,6 +42,10 @@ class UserGroupMentionFormatter
         return $message;
     }
 
+    /**
+     * @param string $message
+     * @return null|string
+     */
     public function getMentionsStructuredText($message)
     {
         $message = $this->setupPlaceholders(
@@ -83,6 +91,11 @@ class UserGroupMentionFormatter
         return $this->mentionedUserGroups;
     }
 
+    /**
+     * @param string $message
+     * @param string $regex
+     * @return null|string
+     */
     protected function setupPlaceholders($message, $regex)
     {
         $this->placeholders = [];
@@ -129,6 +142,10 @@ class UserGroupMentionFormatter
         return '[' . ($negated ? '^' : '') . ':;,.!?\s@\'"*/)\]\[-]';
     }
 
+    /**
+     * @param array $matches
+     * @return array
+     */
     protected function getMentionMatchUserGroups(array $matches)
     {
         $db = \XF::db();
@@ -194,6 +211,13 @@ class UserGroupMentionFormatter
         return $userGroupsByMatch;
     }
 
+    /**
+     * @param string   $message
+     * @param array    $matches
+     * @param array    $userGroupsByMatch
+     * @param \Closure $tagReplacement
+     * @return string
+     */
     protected function applyMentionUserGroupMatches($message, array $matches, array $userGroupsByMatch, \Closure $tagReplacement)
     {
         $this->mentionedUserGroups = [];

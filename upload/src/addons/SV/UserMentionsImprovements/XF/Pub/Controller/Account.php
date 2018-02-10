@@ -2,9 +2,11 @@
 
 namespace SV\UserMentionsImprovements\XF\Pub\Controller;
 
+use XF\Entity\User;
+
 class Account extends XFCP_Account
 {
-    protected function preferencesSaveProcess(\XF\Entity\User $visitor)
+    protected function preferencesSaveProcess(User $visitor)
     {
         $form = parent::preferencesSaveProcess($visitor);
 

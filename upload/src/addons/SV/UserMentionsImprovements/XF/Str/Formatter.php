@@ -14,6 +14,10 @@ class Formatter extends XFCP_Formatter
         return new $class();
     }
 
+    /**
+     * @param $string
+     * @return null|string
+     */
     public function linkStructuredTextMentions($string)
     {
         $string = parent::linkStructuredTextMentions($string);
