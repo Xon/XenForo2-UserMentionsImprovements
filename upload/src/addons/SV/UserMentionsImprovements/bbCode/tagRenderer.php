@@ -34,8 +34,8 @@ class tagRenderer
         );
     }
 
-    static $groupAvatar   = null;
-    static $groupUsername = null;
+    protected $groupAvatar   = null;
+    protected $groupUsername = null;
 
     public function renderTagUserGroup(
         /** @noinspection PhpUnusedParameterInspection */
@@ -58,19 +58,19 @@ class tagRenderer
         }
 
         $link = \XF::app()->router('public')->buildLink('full:members/usergroup', ['user_group_id' => $userGroupId]);
-        if (self::$groupAvatar === null)
+        if ($this->groupAvatar === null)
         {
             $options = \XF::app()->options();
-            self::$groupUsername = $options->sv_styleGroupUsername
+            $this->groupUsername = $options->sv_styleGroupUsername
                 ? 'username'
                 : '';
-            self::$groupAvatar = $options->sv_displayGroupAvatar
+            $this->groupAvatar = $options->sv_displayGroupAvatar
                 ? '<span class="groupImg"></span>'
                 : '';
         }
 
         return $this->renderer->wrapHtml(
-            '<a href="' . htmlspecialchars($link) . '" class="' . self::$groupUsername . ' ug" data-usergroup="' . $userGroupId . ', ' . htmlspecialchars($content) . '"><span class="style' . $userGroupId . '">' . self::$groupAvatar,
+            '<a href="' . htmlspecialchars($link) . '" class="' . $this->groupUsername . ' ug" data-usergroup="' . $userGroupId . ', ' . htmlspecialchars($content) . '"><span class="style' . $userGroupId . '">' . $this->groupAvatar,
             $content,
             '</span></a>'
         );
