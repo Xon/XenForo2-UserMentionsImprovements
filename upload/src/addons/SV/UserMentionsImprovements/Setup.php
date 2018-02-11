@@ -25,7 +25,13 @@ class Setup extends AbstractSetup
             $table->addColumn('sv_avatar_edit_date', 'int')->setDefault(0);
         }
         );
-        $this->upgrade1010000Step1();
+        $this->db()->query(
+            "
+                UPDATE xf_user_group
+                SET sv_avatar_edit_date = ?
+                WHERE sv_avatar_edit_date = 0
+            ", [\XF::$time]
+        );
 
         $this->schemaManager()->alterTable(
             'xf_user_option', function (Alter $table) {
@@ -280,14 +286,14 @@ class Setup extends AbstractSetup
             "INSERT IGNORE INTO xf_permission_entry (user_group_id, user_id, permission_group_id, permission_id, permission_value, permission_value_int)
                 SELECT DISTINCT user_group_id, user_id, 'forum', 'sv_EnableMentions', 'allow', 0
                 FROM xf_permission_entry
-                WHERE permission_group_id = 'general' AND permission_id IN ('maxTaggedUsers') AND permission_value_int <> 0
+                WHERE permission_group_id = 'general' AND permission_id IN ('maxMentionedUsers') AND permission_value_int <> 0
             "
         );
         $db->query(
             "INSERT IGNORE INTO xf_permission_entry_content (content_type, content_id, user_group_id, user_id, permission_group_id, permission_id, permission_value, permission_value_int)
                 SELECT DISTINCT content_type, content_id, user_group_id, user_id, 'forum', 'sv_EnableMentions', 'content_allow', 0
                 FROM xf_permission_entry_content
-                WHERE permission_group_id = 'general' AND permission_id IN ('maxTaggedUsers') AND permission_value_int <> 0
+                WHERE permission_group_id = 'general' AND permission_id IN ('maxMentionedUsers') AND permission_value_int <> 0
             "
         );
 
@@ -295,14 +301,14 @@ class Setup extends AbstractSetup
             "INSERT IGNORE INTO xf_permission_entry (user_group_id, user_id, permission_group_id, permission_id, permission_value, permission_value_int)
                 SELECT DISTINCT user_group_id, user_id, 'forum', 'sv_ReceiveQuoteEmails', 'allow', 0
                 FROM xf_permission_entry
-                WHERE permission_group_id = 'general' AND permission_id IN ('maxTaggedUsers') AND permission_value_int <> 0
+                WHERE permission_group_id = 'general' AND permission_id IN ('maxMentionedUsers') AND permission_value_int <> 0
             "
         );
         $db->query(
             "INSERT IGNORE INTO xf_permission_entry_content (content_type, content_id, user_group_id, user_id, permission_group_id, permission_id, permission_value, permission_value_int)
                 SELECT DISTINCT content_type, content_id, user_group_id, user_id, 'forum', 'sv_ReceiveQuoteEmails', 'content_allow', 0
                 FROM xf_permission_entry_content
-                WHERE permission_group_id = 'general' AND permission_id IN ('maxTaggedUsers') AND permission_value_int <> 0
+                WHERE permission_group_id = 'general' AND permission_id IN ('maxMentionedUsers') AND permission_value_int <> 0
             "
         );
 
@@ -310,14 +316,14 @@ class Setup extends AbstractSetup
             "INSERT IGNORE INTO xf_permission_entry (user_group_id, user_id, permission_group_id, permission_id, permission_value, permission_value_int)
                 SELECT DISTINCT user_group_id, user_id, 'forum', 'sv_ReceiveMentionEmails', 'allow', 0
                 FROM xf_permission_entry
-                WHERE permission_group_id = 'general' AND permission_id IN ('maxTaggedUsers') AND permission_value_int <> 0
+                WHERE permission_group_id = 'general' AND permission_id IN ('maxMentionedUsers') AND permission_value_int <> 0
             "
         );
         $db->query(
             "INSERT IGNORE INTO xf_permission_entry_content (content_type, content_id, user_group_id, user_id, permission_group_id, permission_id, permission_value, permission_value_int)
                 SELECT DISTINCT content_type, content_id, user_group_id, user_id, 'forum', 'sv_ReceiveMentionEmails', 'content_allow', 0
                 FROM xf_permission_entry_content
-                WHERE permission_group_id = 'general' AND permission_id IN ('maxTaggedUsers') AND permission_value_int <> 0
+                WHERE permission_group_id = 'general' AND permission_id IN ('maxMentionedUsers') AND permission_value_int <> 0
             "
         );
         $this->app->jobManager()->enqueueUnique(
