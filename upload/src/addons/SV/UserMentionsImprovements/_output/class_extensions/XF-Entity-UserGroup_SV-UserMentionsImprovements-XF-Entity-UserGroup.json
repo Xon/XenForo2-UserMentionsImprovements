@@ -1,6 +1,6 @@
 {
     "from_class": "XF\\Entity\\UserGroup",
     "to_class": "SV\\UserMentionsImprovements\\XF\\Entity\\UserGroup",
-    "execute_order": 10,
+    "execute_order": 15,
     "active": true
 }

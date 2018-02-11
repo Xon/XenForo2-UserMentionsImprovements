@@ -1,6 +1,6 @@
 {
     "from_class": "XF\\Notifier\\Post\\Mention",
     "to_class": "SV\\UserMentionsImprovements\\XF\\Notifier\\Post\\Mention",
-    "execute_order": 10,
+    "execute_order": 15,
     "active": true
 }

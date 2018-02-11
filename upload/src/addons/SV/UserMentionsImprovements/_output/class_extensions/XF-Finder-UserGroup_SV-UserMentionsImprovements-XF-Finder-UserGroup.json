@@ -1,6 +1,6 @@
 {
     "from_class": "XF\\Finder\\UserGroup",
     "to_class": "SV\\UserMentionsImprovements\\XF\\Finder\\UserGroup",
-    "execute_order": 10,
+    "execute_order": 15,
     "active": true
 }

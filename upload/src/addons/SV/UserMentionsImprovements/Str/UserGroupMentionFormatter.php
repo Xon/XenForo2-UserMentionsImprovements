@@ -3,7 +3,7 @@
 namespace SV\UserMentionsImprovements\Str;
 
 /**
- * This is basically a copy of the MentionsFormatter class, with changes for UserGroups instead.
+ * This is basically a copy of the \XF\Str\MentionFormatter class, with changes for UserGroups instead.
  * @package SV\UserMentionsImprovements\Str
  */
 class UserGroupMentionFormatter

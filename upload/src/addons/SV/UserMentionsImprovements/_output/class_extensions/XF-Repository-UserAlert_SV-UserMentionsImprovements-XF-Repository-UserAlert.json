@@ -1,6 +1,6 @@
 {
     "from_class": "XF\\Repository\\UserAlert",
     "to_class": "SV\\UserMentionsImprovements\\XF\\Repository\\UserAlert",
-    "execute_order": 10,
+    "execute_order": 15,
     "active": true
 }

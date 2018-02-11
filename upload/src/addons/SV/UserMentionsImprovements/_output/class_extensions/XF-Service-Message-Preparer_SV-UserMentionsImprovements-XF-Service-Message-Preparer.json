@@ -1,6 +1,6 @@
 {
     "from_class": "XF\\Service\\Message\\Preparer",
     "to_class": "SV\\UserMentionsImprovements\\XF\\Service\\Message\\Preparer",
-    "execute_order": 10,
+    "execute_order": 15,
     "active": true
 }
