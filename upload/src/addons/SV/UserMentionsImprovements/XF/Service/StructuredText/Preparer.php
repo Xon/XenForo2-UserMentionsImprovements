@@ -12,6 +12,11 @@ class Preparer extends XFCP_Preparer
 
         /** @var \SV\UserMentionsImprovements\XF\Str\Formatter $formatter */
         $formatter = $this->app->stringFormatter();
+        if (!\is_callable([$formatter, 'getUserGroupMentionFormatter']))
+        {
+            \XF::logError('Add-on conflict detected, XF\Str\Formatter is not extended as expected', true);
+            return $string;
+        }
         /** @var \SV\UserMentionsImprovements\Str\UserGroupMentionFormatter $mentions */
         $mentions = $formatter->getUserGroupMentionFormatter();
 
