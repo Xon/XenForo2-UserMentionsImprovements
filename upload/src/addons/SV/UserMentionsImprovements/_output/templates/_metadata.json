@@ -9,6 +9,11 @@
         "version_string": "2.0.0",
         "hash": "7e77815495abd7b1fdbca066c7f5a8c5"
     },
+    "admin/user_group_edit_mentions.html": {
+        "version_id": 2000074,
+        "version_string": "2.0.0 RC4",
+        "hash": "172166d5cfc49c95079ab28f5aa08550"
+    },
     "email/sv_usermentionsimprovements_mention.html": {
         "version_id": 2000070,
         "version_string": "2.0.0",
