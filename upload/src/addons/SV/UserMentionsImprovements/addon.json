@@ -7,7 +7,7 @@
     "dev": "Xon",
     "dev_url": "https://atelieraphelion.com/",
     "faq_url": "",
-    "support_url": "",
+    "support_url": "https://xenforo.com/community/resources/user-mentions-improvements-by-xon.6186/",
     "extra_urls": [],
     "require" : {
         "php": ["5.6.0", "PHP 5.6.0+"]
