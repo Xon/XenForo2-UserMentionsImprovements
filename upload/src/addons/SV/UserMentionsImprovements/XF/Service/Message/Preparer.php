@@ -9,30 +9,24 @@ class Preparer extends XFCP_Preparer
     {
         $message = parent::prepare($message, $checkValidity);
 
-        /** @noinspection PhpUndefinedFieldInspection */
-        if (isset($this->messageEntity->User))
+        /** @var \SV\UserMentionsImprovements\XF\Entity\User $user */
+        $user = \XF::visitor();
+        if ($user->canMention($this->messageEntity))
         {
-            /** @var \SV\UserMentionsImprovements\XF\Entity\User $user */
-            /** @noinspection PhpUndefinedFieldInspection */
-            $user = $this->messageEntity->User;
-
-            if ($user->canMention($this->messageEntity))
+            if ($user->canMentionUserGroup())
             {
-                if ($user->canMentionUserGroup())
-                {
-                    /** @var \SV\UserMentionsImprovements\XF\BbCode\ProcessorAction\MentionUsers|null $processor */
-                    $processor = $this->bbCodeProcessor->getFilterer('mentions');
-                    /** @var \SV\UserMentionsImprovements\Repository\UserMentions $userMentionsRepo */
-                    $userMentionsRepo = \XF::app()->repository('SV\UserMentionsImprovements:UserMentions');
-                    $this->mentionedUserGroups = $processor->getMentionedUserGroups();
-                    $this->mentionedUsers = $userMentionsRepo->mergeUserGroupMembersIntoUsersArray($this->mentionedUsers, $this->mentionedUserGroups);
-                }
+                /** @var \SV\UserMentionsImprovements\XF\BbCode\ProcessorAction\MentionUsers|null $processor */
+                $processor = $this->bbCodeProcessor->getFilterer('mentions');
+                /** @var \SV\UserMentionsImprovements\Repository\UserMentions $userMentionsRepo */
+                $userMentionsRepo = \XF::app()->repository('SV\UserMentionsImprovements:UserMentions');
+                $this->mentionedUserGroups = $processor->getMentionedUserGroups();
+                $this->mentionedUsers = $userMentionsRepo->mergeUserGroupMembersIntoUsersArray($this->mentionedUsers, $this->mentionedUserGroups);
             }
-            else
-            {
-                $this->mentionedUserGroups = [];
-                $this->mentionedUsers = [];
-            }
+        }
+        else
+        {
+            $this->mentionedUserGroups = [];
+            $this->mentionedUsers = [];
         }
 
         return $message;
