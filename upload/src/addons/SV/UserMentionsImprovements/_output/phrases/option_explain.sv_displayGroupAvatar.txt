@@ -1,1 +1,0 @@
-In content, display a mini-avatar next to a mention

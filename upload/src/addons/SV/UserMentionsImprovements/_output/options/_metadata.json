@@ -5,12 +5,6 @@
     "sv_default_group_avatar_s.json": {
         "hash": "4b3773a89aa5da05e701673d9053f1de"
     },
-    "sv_displayGroupAvatar.json": {
-        "hash": "664eae381e1bdf61652792021b9edf04"
-    },
-    "sv_displayUserAvatar.json": {
-        "hash": "e0cf43662da77309ed2ddd52a0b10f08"
-    },
     "sv_limit_quote_emails.json": {
         "hash": "a13c7296ee18be089cb876fce2aec891"
     },
@@ -19,8 +13,5 @@
     },
     "sv_send_email_on_tagging.json": {
         "hash": "a2f4c62f9836e595bc0f8fba18d99571"
-    },
-    "sv_styleGroupUsername.json": {
-        "hash": "ee617a695ca132186c4ba08647d0ff9a"
     }
 }

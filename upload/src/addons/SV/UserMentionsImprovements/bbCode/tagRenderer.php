@@ -12,10 +12,6 @@ class tagRenderer
     /** @var string */
     private $type;
 
-    protected $styleGroupUsername     = false;
-    protected $displayMiniGroupAvatar = false;
-    protected $displayMiniUserAvatar  = false;
-
     /**
      * tagRenderer constructor.
      *
@@ -26,10 +22,6 @@ class tagRenderer
     {
         $this->renderer = $renderer;
         $this->type = $type;
-        $options = \XF::app()->options();
-        $this->styleGroupUsername = \boolval($options->sv_styleGroupUsername);
-        //$this->displayMiniGroupAvatar = \boolval($options->sv_displayUserAvatar);
-        //$this->displayMiniUserAvatar = \boolval($options->sv_displayGroupAvatar);
     }
 
     public function bindToRenderer()
@@ -70,14 +62,11 @@ class tagRenderer
         }
 
         $link = \XF::app()->router('public')->buildLink('full:members/usergroup', ['user_group_id' => $userGroupId]);
-        $displayMiniGroupAvatar = $this->displayMiniGroupAvatar ? 'avatar' : '';
-        $groupUsernameStyle = $this->styleGroupUsername ? 'username' : '';
-
         $link = htmlspecialchars($link);
         $content = htmlspecialchars($content);
 
         return $this->renderer->wrapHtml(
-            "<a href='{$link}' class='ug {$groupUsernameStyle} {$displayMiniGroupAvatar}' data-xf-init='sv-usergroup-tooltip' data-usergroup-id='{$userGroupId}' data-groupname='{$content}' >",
+            "<a href='{$link}' class='ug' data-xf-init='sv-usergroup-tooltip' data-usergroup-id='{$userGroupId}' data-groupname='{$content}' >",
             $content,
             '</a>'
         );

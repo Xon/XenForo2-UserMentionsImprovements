@@ -11,18 +11,6 @@
         "version_string": "2.0.0",
         "hash": "9c01cd12894305df1382c2c70ee741e4"
     },
-    "option.sv_displayGroupAvatar.txt": {
-        "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "1af106dd9949789f57a7ca63a5d8bf16"
-    },
-    "option.sv_displayUserAvatar.txt": {
-        "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "5a6eeba2a9936fe512ca90eca9a6bc5f"
-    },
     "option.sv_limit_quote_emails.txt": {
         "global_cache": false,
         "version_id": 2000070,
@@ -41,12 +29,6 @@
         "version_string": "2.0.0",
         "hash": "9c3697cc5bc014dad5a5f98c24feb81b"
     },
-    "option.sv_styleGroupUsername.txt": {
-        "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "76c4fb97849265e9cb83f459492a53c4"
-    },
     "option_explain.sv_default_group_avatar_l.txt": {
         "global_cache": false,
         "version_id": 2000070,
@@ -58,18 +40,6 @@
         "version_id": 2000070,
         "version_string": "2.0.0",
         "hash": "3e75ed545c3529e9b5b540868e66cfe6"
-    },
-    "option_explain.sv_displayGroupAvatar.txt": {
-        "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "253621f356d324c752f57eb11f864018"
-    },
-    "option_explain.sv_displayUserAvatar.txt": {
-        "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "253621f356d324c752f57eb11f864018"
     },
     "option_explain.sv_limit_quote_emails.txt": {
         "global_cache": false,
@@ -88,12 +58,6 @@
         "version_id": 2000070,
         "version_string": "2.0.0",
         "hash": "bac9d64a17cc0979cf91acccf80cc6c1"
-    },
-    "option_explain.sv_styleGroupUsername.txt": {
-        "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "54ebdf97108c874cbc3d836ae868f761"
     },
     "option_group.sv_usermentionsimprovements.txt": {
         "global_cache": false,

@@ -1,1 +1,0 @@
-Allows mentioned group names to have the same username styling applied
