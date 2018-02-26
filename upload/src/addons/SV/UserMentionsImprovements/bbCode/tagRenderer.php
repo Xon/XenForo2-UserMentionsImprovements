@@ -41,6 +41,21 @@ class tagRenderer
         );
     }
 
+    /**
+     * @param int    $userGroupId
+     * @param string $css
+     * @param string $link HTML escaped text
+     * @param string $content HTML escaped text
+     * @return string
+     */
+    public function renderTagUserGroupHtml($userGroupId, $css, $link, $content)
+    {
+        return $this->renderer->wrapHtml(
+            "<a href='{$link}' class='{$css}' data-xf-init='sv-usergroup-tooltip' data-usergroup-id='{$userGroupId}' data-groupname='{$content}' >",
+            $content,
+            '</a>');
+    }
+
     public function renderTagUserGroup(
         /** @noinspection PhpUnusedParameterInspection */
         array $children,
@@ -65,10 +80,6 @@ class tagRenderer
         $link = htmlspecialchars($link);
         $content = htmlspecialchars($content);
 
-        return $this->renderer->wrapHtml(
-            "<a href='{$link}' class='ug' data-xf-init='sv-usergroup-tooltip' data-usergroup-id='{$userGroupId}' data-groupname='{$content}' >",
-            $content,
-            '</a>'
-        );
+        return $this->renderTagUserGroupHtml($userGroupId, 'ug', $link, $content);
     }
 }
