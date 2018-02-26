@@ -31,6 +31,11 @@ namespace SV\UserMentionsImprovements\XF\Finder
 	class XFCP_UserGroup extends \XF\Finder\UserGroup {}
 }
 
+namespace SV\UserMentionsImprovements\XF\Job
+{
+	class XFCP_PermissionRebuild extends \XF\Job\PermissionRebuild {}
+}
+
 namespace SV\UserMentionsImprovements\XF\Notifier\Post
 {
 	class XFCP_Mention extends \XF\Notifier\Post\Mention {}
@@ -76,6 +81,11 @@ namespace SV\UserMentionsImprovements\XF\Service\ProfilePost
 namespace SV\UserMentionsImprovements\XF\Service\StructuredText
 {
 	class XFCP_Preparer extends \XF\Service\StructuredText\Preparer {}
+}
+
+namespace SV\UserMentionsImprovements\XF\Service
+{
+	class XFCP_UpdatePermissions extends \XF\Service\UpdatePermissions {}
 }
 
 namespace SV\UserMentionsImprovements\XF\Str
