@@ -19,12 +19,12 @@
         "version_string": "2.0.2",
         "hash": "51550002dcafe9445eb203d3a878ead7"
     },
-    "email/sv_user_mention.html": {
+    "email/sv_user_mention_post.html": {
         "version_id": 2000200,
         "version_string": "2.0.2",
         "hash": "bf1f123d7909946d22e418a045a53e89"
     },
-    "email/sv_user_quote.html": {
+    "email/sv_user_quote_post.html": {
         "version_id": 2000200,
         "version_string": "2.0.2",
         "hash": "38821917af9217b2ec3c0b7ebc2f95d1"

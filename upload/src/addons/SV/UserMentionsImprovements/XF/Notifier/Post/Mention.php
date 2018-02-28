@@ -17,7 +17,7 @@ class Mention extends XFCP_Mention
 
         $this->app->mailer()->newMail()
                   ->setToUser($user)
-                  ->setTemplate('sv_user_quote', $params)
+                  ->setTemplate('sv_user_quote_post', $params)
                   ->queue();
     }
 }
