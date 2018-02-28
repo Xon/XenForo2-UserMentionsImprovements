@@ -22,7 +22,10 @@
 
 	<h2><a href="{$contentLink}">{$contentTitle}</a></h2>
 
-	<xf:if is="$xf.options.emailWatchedThreadIncludeMessage && $message">
+	<xf:if is="$xf.options.sv_mention_snippet_length && $message">
+		<xf:if is="$xf.options.sv_mention_snippet_length > 0">
+			<xf:set var="$message" value="{{ snippet($message, $xf.options.sv_mention_snippet_length)|raw }}" />
+		</xf:if>
 		<div class="message">{{ bb_code_type('emailHtml', $message, $contentType, $content) }}</div>
 	</xf:if>
 </xf:macro>
