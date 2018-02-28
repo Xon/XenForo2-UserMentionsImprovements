@@ -1,37 +1,42 @@
 {
     "admin/option_template_registrationDefaults_mentions.html": {
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "9fd63daba8102b452b83f20ff2e2609a"
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "d67f0028e0f499496d35b578defd2a6d"
     },
     "admin/user_edits_mentions.html": {
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "7e77815495abd7b1fdbca066c7f5a8c5"
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "873eaf2785caaae0eb17c1bfe5ced9dc"
     },
     "admin/user_group_edit_mentions.html": {
-        "version_id": 2000074,
-        "version_string": "2.0.0 RC4",
-        "hash": "172166d5cfc49c95079ab28f5aa08550"
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "3e2e6240c52073a719c344db8de1f317"
     },
-    "email/sv_usermentionsimprovements_mention.html": {
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "adf24183232d7c1c9c4f2884159ef0ad"
+    "email/sv_mention_macros.html": {
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "51550002dcafe9445eb203d3a878ead7"
     },
-    "email/sv_usermentionsimprovements_quote.html": {
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "ac8fd6db7eb1deb9f63bdf02f7697092"
+    "email/sv_user_mention.html": {
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "bf1f123d7909946d22e418a045a53e89"
+    },
+    "email/sv_user_quote.html": {
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "38821917af9217b2ec3c0b7ebc2f95d1"
     },
     "public/sv_alert_group_mention.html": {
         "version_id": 2000070,
         "version_string": "2.0.0",
         "hash": "79e6f05cc32e714c41599ad7d126d78c"
     },
-    "public/sv_usermentionsimprovements_usergroup_view.html": {
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "7241c6c00e9c21d993c3401502da2070"
+    "public/sv_members_usergroup.html": {
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "0a32626deaea17c70fe9b813cf69deb5"
     }
 }

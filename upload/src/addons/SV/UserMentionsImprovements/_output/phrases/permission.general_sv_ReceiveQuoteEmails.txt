@@ -1,1 +1,1 @@
-Receive quote alert emails
+[UMI] Receive quote alert emails

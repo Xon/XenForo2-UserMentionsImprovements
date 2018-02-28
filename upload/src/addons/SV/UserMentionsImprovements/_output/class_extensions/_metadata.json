@@ -1,63 +1,63 @@
 {
     "XF-Admin-Controller-UserGroup_SV-UserMentionsImprovements-XF-Admin-Controller-UserGroup.json": {
-        "hash": "5cfaad8f310ba62bab8c1af7b679b10a"
+        "hash": "873df705b35e1b785d973d7c91a30e4d"
     },
     "XF-Admin-Controller-User_SV-UserMentionsImprovements-XF-Admin-Controller-User.json": {
-        "hash": "70b39f4b3bd534b84fdfda573ad5e398"
+        "hash": "9951bee46c39e0c823bcc587335a1c73"
     },
     "XF-BbCode-ProcessorAction-MentionUsers_SV-UserMentionsImprovements-XF-BbCode-ProcessorAction-MentionUsers.json": {
-        "hash": "f59612781a1ec6373a5600d8057246b8"
+        "hash": "0ab069c0da77e21b3ad78c0b9d93d9c0"
     },
     "XF-BbCode-RuleSet_SV-UserMentionsImprovements-XF-BbCode-RuleSet.json": {
-        "hash": "28ab684bad569b68c3280c002d7f1d12"
+        "hash": "7c964ce81ecb666aaaf5b08b2fb0ef0f"
     },
     "XF-Entity-UserGroup_SV-UserMentionsImprovements-XF-Entity-UserGroup.json": {
-        "hash": "2b031535f89805d893505129de526c94"
+        "hash": "dcc3d335b85d10df4bbc43d3c63aeeb2"
     },
     "XF-Entity-UserOption_SV-UserMentionsImprovements-XF-Entity-UserOption.json": {
-        "hash": "8c1d757895ad8f05b604c2116246682e"
+        "hash": "57cf1b0029a426ccac43c060fe87cc99"
     },
     "XF-Entity-User_SV-UserMentionsImprovements-XF-Entity-User.json": {
-        "hash": "ca07045a6f31ba21abff4da7e9ed53f8"
+        "hash": "8733ecc7eeb5f634993f47681b74a0ca"
     },
     "XF-Finder-UserGroup_SV-UserMentionsImprovements-XF-Finder-UserGroup.json": {
-        "hash": "910ad374b34826d8e91ca0f9887eecf3"
+        "hash": "84a9c53d65c3622bb5fc3e9cd788fd03"
     },
     "XF-Job-PermissionRebuild_SV-UserMentionsImprovements-XF-Job-PermissionRebuild.json": {
         "hash": "77302e18bc4157109e9cd525008f340c"
     },
     "XF-Notifier-Post-Mention_SV-UserMentionsImprovements-XF-Notifier-Post-Mention.json": {
-        "hash": "10bc4fe5878329b9536f39a33bcee091"
+        "hash": "9c47ae77140dd8f5be40cc6811b50223"
     },
     "XF-Notifier-Post-Quote_SV-UserMentionsImprovements-XF-Notifier-Post-Quote.json": {
-        "hash": "dec75fde8f30ac1eaccef333790ac88e"
+        "hash": "167d5ac16f377c21e903a52fcaa9e4da"
     },
     "XF-Pub-Controller-Account_SV-UserMentionsImprovements-XF-Pub-Controller-Account.json": {
-        "hash": "c93974e16810400db064f8b5faf25549"
+        "hash": "ebf6fb9e8f68ba1699bae9132c9e89d0"
     },
     "XF-Pub-Controller-Member_SV-UserMentionsImprovements-XF-Pub-Controller-Member.json": {
-        "hash": "8eefc7621cad8e1db58783f612c835fb"
+        "hash": "7575eb1b16855b37ce6e8bbf15455235"
     },
     "XF-Pub-View-Member-Find_SV-UserMentionsImprovements-XF-Pub-View-Member-Find.json": {
-        "hash": "924ff34141e556f6d7d6a32d8613a494"
+        "hash": "36dcf9e9bdd56ecb7be60d9abe1d568c"
     },
     "XF-Repository-UserAlert_SV-UserMentionsImprovements-XF-Repository-UserAlert.json": {
-        "hash": "db91803f68171024647dab78c55d7fcd"
+        "hash": "ee22f99ceb73fbda0f0d8deb7d9992aa"
     },
     "XF-Service-Message-Preparer_SV-UserMentionsImprovements-XF-Service-Message-Preparer.json": {
-        "hash": "ed222b3726baf9ae893fa8f02dbe14b6"
+        "hash": "f254c3213e0032b52ad57531f9124460"
     },
     "XF-Service-Post-Notifier_SV-UserMentionsImprovements-XF-Service-Post-Notifier.json": {
-        "hash": "5764f1580404bfc65944b9d2825b683e"
+        "hash": "9ac03c2af6e8b8ff7faf9da86ac260a0"
     },
     "XF-Service-ProfilePost-Preparer_SV-UserMentionsImprovements-XF-Service-ProfilePost-Preparer.json": {
-        "hash": "5a4e4ffd40d39664325d521baffa89c3"
+        "hash": "d8d5b130d971865e1b0f11a295800af5"
     },
     "XF-Service-ProfilePostComment-Preparer_SV-UserMentionsImprovements-XF-Service-ProfilePostComment-Preparer.json": {
-        "hash": "707d2f5c3c188fc6b55874a9e4a5a473"
+        "hash": "0f99192f173440af790a86c6234a25db"
     },
     "XF-Service-StructuredText-Preparer_SV-UserMentionsImprovements-XF-Service-StructuredText-Preparer.json": {
-        "hash": "a13721c3f99e6cf1c910f2a16513b675"
+        "hash": "cb39f9d52a6d86afc5d3ca02d7747477"
     },
     "XF-Service-UpdatePermissions_SV-UserMentionsImprovements-XF-Service-UpdatePermissions.json": {
         "hash": "4848b7db4156c0eba2ec818866c2c23b"

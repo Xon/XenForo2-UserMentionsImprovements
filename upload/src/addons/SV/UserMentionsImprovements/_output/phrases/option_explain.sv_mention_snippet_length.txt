@@ -1,0 +1,4 @@
+On Mention/Quote emails, include a snippet this long<br/>
+<br/>
+0 to disable<br/>
+-1 for all text

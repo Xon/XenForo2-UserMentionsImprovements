@@ -1,0 +1,14 @@
+<xf:macro template="sv_mention_macros" 
+		  name="mention"
+          arg-content="{{$post}}"
+          arg-message="{{$post.message}}"
+          arg-user="{{$post.User}}"
+          arg-username="{{$post.username}}"
+          arg-contentType="post"
+          arg-contentLink="{{ link('canonical:posts', $post) }}"
+          arg-contentTitle="{{ prefix('thread', $thread, 'escaped') }}{$thread.title}"
+		  />
+
+<xf:macro template="thread_forum_macros" name="go_thread_bar" arg-thread="{$thread}" arg-watchType="forums" />
+
+<xf:macro template="thread_forum_macros" name="watched_forum_footer" arg-thread="{$thread}" arg-forum="{$forum}" />

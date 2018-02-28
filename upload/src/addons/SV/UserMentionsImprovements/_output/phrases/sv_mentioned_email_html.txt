@@ -1,0 +1,1 @@
+<p>{receiver}, {mentioner} quoted you at {board}.</p>

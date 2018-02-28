@@ -1,0 +1,57 @@
+<xf:macro name="quote"
+		  arg-content="!"
+		  arg-message="!"
+		  arg-user="!"
+		  arg-username="!"
+		  arg-contentType="!"
+		  arg-contentLink="!"
+		  arg-contentTitle="!"		  
+		  >
+	<mail:subject>
+		{{ phrase('sv_quoted_email_subject', {
+		'receiver': $receiver.username,
+		'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
+		}) }}
+	</mail:subject>
+
+	{{ phrase('sv_quoted_email_html', {
+	'receiver': $receiver.username,
+	'quoter': username_link_email($user, $username),
+	'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
+	}) }}
+
+	<h2><a href="{$contentLink}">{$contentTitle}</a></h2>
+
+	<xf:if is="$xf.options.emailWatchedThreadIncludeMessage && $message">
+		<div class="message">{{ bb_code_type('emailHtml', $message, $contentType, $content) }}</div>
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="quote"
+		  arg-content="!"
+		  arg-message="!"
+		  arg-user="!"
+		  arg-username="!"
+		  arg-contentType="!"
+		  arg-contentLink="!"
+		  arg-contentTitle="!"		  
+		  >
+	<mail:subject>
+		{{ phrase('sv_mentioned_email_subject', {
+		'receiver': $receiver.username,
+		'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
+		}) }}
+	</mail:subject>
+
+	{{ phrase('sv_mentioned_email_html', {
+	'receiver': $receiver.username,
+	'quoter': username_link_email($user, $username),
+	'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
+	}) }}
+
+	<h2><a href="{$contentLink}">{$contentTitle}</a></h2>
+
+	<xf:if is="$xf.options.emailWatchedThreadIncludeMessage && $message">
+		<div class="message">{{ bb_code_type('emailHtml', $message, $contentType, $content) }}</div>
+	</xf:if>
+</xf:macro>

@@ -28,7 +28,7 @@ class Member extends XFCP_Member
             'userGroup' => $userGroup
         ];
 
-        return $this->view('SV\UserMentionsImprovements:Member\UserGroup', 'sv_usermentionsimprovements_usergroup_view', $viewParams);
+        return $this->view('SV\UserMentionsImprovements:Member\UserGroup', 'sv_members_usergroup', $viewParams);
     }
 
     public function actionFind()

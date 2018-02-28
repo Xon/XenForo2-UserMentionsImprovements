@@ -17,6 +17,12 @@
         "version_string": "2.0.0",
         "hash": "af67ba2d1367eb6b34a590c5c0a35260"
     },
+    "option.sv_mention_snippet_length.txt": {
+        "global_cache": false,
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "5b1ac6d8611da672f43410b25d161c75"
+    },
     "option.sv_send_email_on_quote.txt": {
         "global_cache": false,
         "version_id": 2000070,
@@ -47,6 +53,12 @@
         "version_string": "2.0.0",
         "hash": "45c722ff235cc466ee97fea0933d2365"
     },
+    "option_explain.sv_mention_snippet_length.txt": {
+        "global_cache": false,
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "fe43cbecdb05f068f61f0beafd27d1e1"
+    },
     "option_explain.sv_send_email_on_quote.txt": {
         "global_cache": false,
         "version_id": 2000070,
@@ -75,31 +87,31 @@
         "global_cache": false,
         "version_id": 1040200,
         "version_string": "1.4.2",
-        "hash": "f8360ee2d3da1641ef4142fc4522cee1"
+        "hash": "c5f1c67bd9e78f5a2ec8c1a76ae61a77"
     },
     "permission.general_sv_MentionUserGroup.txt": {
         "global_cache": false,
         "version_id": 2000070,
         "version_string": "2.0.0",
-        "hash": "3cfe440d94ef6707c590770f04467ed8"
+        "hash": "e3f54c509bd54c0b37af409275ec7a5b"
     },
     "permission.general_sv_ReceiveMentionEmails.txt": {
         "global_cache": false,
         "version_id": 2000070,
         "version_string": "2.0.0",
-        "hash": "b6c924da02d174a7f015ebd0dd76912d"
+        "hash": "98d50fc413c1d3702e819c093a008ea1"
     },
     "permission.general_sv_ReceiveQuoteEmails.txt": {
         "global_cache": false,
         "version_id": 2000070,
         "version_string": "2.0.0",
-        "hash": "ce4b4c41e9eb23b6b727494b4b1b7823"
+        "hash": "13ba9978e928f6aa8761615d78888937"
     },
     "permission.general_sv_ViewPrivateGroups.txt": {
         "global_cache": false,
         "version_id": 2000070,
         "version_string": "2.0.0",
-        "hash": "e612b1ca9f122e2f91dfc5f223c0041c"
+        "hash": "e29508e694d476bd6b6a1289b3145057"
     },
     "sv_mentioned_as_y_group.txt": {
         "global_cache": false,
@@ -107,100 +119,94 @@
         "version_string": "2.0.0",
         "hash": "43c4357f637e32230e34741fba076cc0"
     },
+    "sv_mentioned_email_html.txt": {
+        "global_cache": false,
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "6509257a4a0c1edf43ea3c4fc4dedf0a"
+    },
+    "sv_mentioned_email_subject.txt": {
+        "global_cache": false,
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "3f3c5719e940b5e5f0917ca423983d7a"
+    },
+    "sv_quoted_email_html.txt": {
+        "global_cache": false,
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "f9380bdfa374354b9fa6b44811deee95"
+    },
+    "sv_quoted_email_subject.txt": {
+        "global_cache": false,
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "00179c43024f4345a5e03fdac271e7af"
+    },
     "sv_receive_email_is_disabled.txt": {
         "global_cache": false,
         "version_id": 2000070,
         "version_string": "2.0.0",
         "hash": "32b0f9851967fd87703ed64abeaa5dc8"
     },
-    "sv_usermentionsimprovements_email_on_mention.txt": {
+    "sv_receive_email_when_mentioned.txt": {
         "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
+        "version_id": 2000200,
+        "version_string": "2.0.2",
         "hash": "414b68b6714c508d89c314b17b9b22e7"
     },
-    "sv_usermentionsimprovements_email_on_quote.txt": {
+    "sv_receive_email_when_quoted.txt": {
         "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
+        "version_id": 2000200,
+        "version_string": "2.0.2",
         "hash": "2e88772e15211a647102f059d115f6a5"
     },
-    "sv_usermentionsimprovements_is_mentionable.txt": {
+    "sv_user_group_avatar_image_large.txt": {
         "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "1bbf502d8a9bb239115d57670c759ec4"
-    },
-    "sv_usermentionsimprovements_is_mentionable_explain.txt": {
-        "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "11ed0bc3ea046d73db72c4adde35c749"
-    },
-    "sv_usermentionsimprovements_is_private.txt": {
-        "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "634865bf320e78b521132a258838258e"
-    },
-    "sv_usermentionsimprovements_is_private_explain.txt": {
-        "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "b08563ea24ced082a5f8d310993fdda2"
-    },
-    "sv_usermentionsimprovements_mention_email_html.txt": {
-        "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "bedbd89f69c1e91661624ed1de0ddb7d"
-    },
-    "sv_usermentionsimprovements_quote_email_html.txt": {
-        "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "eeb73c87a4567bde38956d730ed26b0c"
-    },
-    "sv_usermentionsimprovements_usergroup.txt": {
-        "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "4d01e3bd5fff4e8dcae69a8c2d9310de"
-    },
-    "sv_usermentionsimprovements_usergroup_avatar_image_large.txt": {
-        "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
+        "version_id": 2000200,
+        "version_string": "2.0.2",
         "hash": "99bb2ffcf3e9dbb0620d879414d1f5e1"
     },
-    "sv_usermentionsimprovements_usergroup_avatar_image_large_explain.txt": {
+    "sv_user_group_avatar_image_large_explain.txt": {
         "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
+        "version_id": 2000200,
+        "version_string": "2.0.2",
         "hash": "c07c3fdffaa8387abced7c46f9f47404"
     },
-    "sv_usermentionsimprovements_usergroup_avatar_image_small.txt": {
+    "sv_user_group_avatar_image_small.txt": {
         "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
+        "version_id": 2000200,
+        "version_string": "2.0.2",
         "hash": "40c4d5515b718cb8055af11a1f322277"
     },
-    "sv_usermentionsimprovements_usergroup_avatar_image_small_explain.txt": {
+    "sv_user_group_avatar_image_small_explain.txt": {
         "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
+        "version_id": 2000200,
+        "version_string": "2.0.2",
         "hash": "2614c2c1d48888fc754a9d60a525b3f6"
     },
-    "sv_usermentionsimprovements_you_were_mentioned_in_a_thread.txt": {
+    "sv_user_group_is_mentionable.txt": {
         "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "a96f1dcf2d97dbf2bf2bada5250e6d99"
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "1bbf502d8a9bb239115d57670c759ec4"
     },
-    "sv_usermentionsimprovements_you_were_quoted_in_a_thread.txt": {
+    "sv_user_group_is_mentionable_explain.txt": {
         "global_cache": false,
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "ede9b6e217b44b4755567f93e1fe0bc5"
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "11ed0bc3ea046d73db72c4adde35c749"
+    },
+    "sv_user_group_is_private.txt": {
+        "global_cache": false,
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "634865bf320e78b521132a258838258e"
+    },
+    "sv_user_group_is_private_explain.txt": {
+        "global_cache": false,
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "b08563ea24ced082a5f8d310993fdda2"
     }
 }

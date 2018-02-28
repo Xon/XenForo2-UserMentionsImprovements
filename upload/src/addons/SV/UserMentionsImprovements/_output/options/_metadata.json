@@ -8,6 +8,9 @@
     "sv_limit_quote_emails.json": {
         "hash": "a13c7296ee18be089cb876fce2aec891"
     },
+    "sv_mention_snippet_length.json": {
+        "hash": "cd46debb6ef8c49b95b44b0eacc7a701"
+    },
     "sv_send_email_on_quote.json": {
         "hash": "e63b947285c7a985f43b69564f6b3846"
     },
