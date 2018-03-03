@@ -1,4 +1,10 @@
 {
+    "mention_email_html_footer.txt": {
+        "global_cache": false,
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "5f68e5c94e7e748d1ff12e9acc9af0be"
+    },
     "option.sv_default_group_avatar_l.txt": {
         "global_cache": false,
         "version_id": 2000070,
@@ -113,6 +119,12 @@
         "version_string": "2.0.0",
         "hash": "e29508e694d476bd6b6a1289b3145057"
     },
+    "quote_email_html_footer.txt": {
+        "global_cache": false,
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "f2c078ae09c16eea89994e4dda6c9d7f"
+    },
     "sv_mentioned_as_y_group.txt": {
         "global_cache": false,
         "version_id": 2000070,
@@ -208,5 +220,11 @@
         "version_id": 2000200,
         "version_string": "2.0.2",
         "hash": "b08563ea24ced082a5f8d310993fdda2"
+    },
+    "sv_user_profile.txt": {
+        "global_cache": false,
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "644b3a4302b86340f310f5204c422a38"
     }
 }

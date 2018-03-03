@@ -1,0 +1,16 @@
+<xf:macro template="sv_mention_macros" 
+		  name="mention"
+          arg-content="{{$profilePost}}"
+          arg-message="{{$profilePost.message}}"
+          arg-user="{{$profilePost.User}}"
+          arg-username="{{$profilePost.username}}"
+          arg-contentType="profile_post"
+          arg-contentLink="{{ link('canonical:profile-posts', $profilePost) }}"
+          arg-contentTitle="{{ phrase('sv_user_profile', {
+	'name': $profilePost.ProfileUser.username
+}) }}"
+		  />
+
+<xf:macro template="sv_mention_macros" 
+		  name="mention_footer"
+		  />

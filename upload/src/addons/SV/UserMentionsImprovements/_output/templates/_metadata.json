@@ -17,17 +17,32 @@
     "email/sv_mention_macros.html": {
         "version_id": 2000200,
         "version_string": "2.0.2",
-        "hash": "aa024dfca494a3a22e63da39e3184e7e"
+        "hash": "6c3cabf831e379e0e33a98245e97df20"
     },
     "email/sv_user_mention_post.html": {
         "version_id": 2000200,
         "version_string": "2.0.2",
-        "hash": "bf1f123d7909946d22e418a045a53e89"
+        "hash": "3915037ccb9a789d06027a034ebba2b6"
+    },
+    "email/sv_user_mention_profile_post.html": {
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "11c4462e698695c8079f66536305d4dc"
+    },
+    "email/sv_user_mention_profile_post_comment.html": {
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "c556369afa79adf7fdbed2142faa7339"
+    },
+    "email/sv_user_mention_report_comment.html": {
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "27132eef2ea5331ca653b917b1d72d48"
     },
     "email/sv_user_quote_post.html": {
         "version_id": 2000200,
         "version_string": "2.0.2",
-        "hash": "38821917af9217b2ec3c0b7ebc2f95d1"
+        "hash": "5fae580e23dd4c8dd45012cf645fedf0"
     },
     "public/sv_alert_group_mention.html": {
         "version_id": 2000070,

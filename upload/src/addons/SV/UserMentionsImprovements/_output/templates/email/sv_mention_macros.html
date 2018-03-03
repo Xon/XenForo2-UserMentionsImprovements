@@ -54,7 +54,26 @@
 
 	<h2><a href="{$contentLink}">{$contentTitle}</a></h2>
 
-	<xf:if is="$xf.options.emailWatchedThreadIncludeMessage && $message">
+	<xf:if is="$xf.options.sv_mention_snippet_length && $message">
+		<xf:if is="$xf.options.sv_mention_snippet_length > 0">
+			<xf:set var="$message" value="{{ snippet($message, $xf.options.sv_mention_snippet_length)|raw }}" />
+		</xf:if>
 		<div class="message">{{ bb_code_type('emailHtml', $message, $contentType, $content) }}</div>
 	</xf:if>
+</xf:macro>
+
+<xf:macro name="mention_footer">
+	{{ phrase('mention_email_html_footer', {
+		'board': $xf.options.boardTitle,
+		'disable_this_link': link('canonical:email-stop/content', $xf.toUser, {'t': 'mention', 'id': 1}),
+		'disable_all_link': link('canonical:email-stop/all', $xf.toUser)
+	}) }}
+</xf:macro>
+
+<xf:macro name="quote_footer">
+	{{ phrase('quote_email_html_footer', {
+		'board': $xf.options.boardTitle,
+		'disable_this_link': link('canonical:email-stop/content', $xf.toUser, {'t': 'quote', 'id': 1}),
+		'disable_all_link': link('canonical:email-stop/all', $xf.toUser)
+	}) }}
 </xf:macro>
