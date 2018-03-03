@@ -173,6 +173,18 @@
         "version_string": "2.0.2",
         "hash": "2e88772e15211a647102f059d115f6a5"
     },
+    "sv_stop_notification_emails_for_all_mentions.txt": {
+        "global_cache": false,
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "1d0b1875b257318b6835a39a6897403c"
+    },
+    "sv_stop_notification_emails_for_all_quotes.txt": {
+        "global_cache": false,
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "bc57175f468b0842025fd737a18f3f5f"
+    },
     "sv_user_group_avatar_image_large.txt": {
         "global_cache": false,
         "version_id": 2000200,

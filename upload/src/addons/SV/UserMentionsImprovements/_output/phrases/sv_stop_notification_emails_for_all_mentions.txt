@@ -1,0 +1,1 @@
+Stop notification emails for when you are mentioned

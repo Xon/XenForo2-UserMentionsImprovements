@@ -1,0 +1,5 @@
+{
+    "content_type": "svMention",
+    "field_name": "email_stop_class",
+    "field_value": "SV\\UserMentionsImprovements\\EmailStop\\Mention"
+}

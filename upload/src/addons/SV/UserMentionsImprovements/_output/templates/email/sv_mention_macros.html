@@ -65,7 +65,7 @@
 <xf:macro name="mention_footer">
 	{{ phrase('mention_email_html_footer', {
 		'board': $xf.options.boardTitle,
-		'disable_this_link': link('canonical:email-stop/content', $xf.toUser, {'t': 'mention', 'id': 1}),
+		'disable_this_link': link('canonical:email-stop/content', $xf.toUser, {'t': 'svMention', 'id': $xf.toUser.user_id}),
 		'disable_all_link': link('canonical:email-stop/all', $xf.toUser)
 	}) }}
 </xf:macro>
@@ -73,7 +73,7 @@
 <xf:macro name="quote_footer">
 	{{ phrase('quote_email_html_footer', {
 		'board': $xf.options.boardTitle,
-		'disable_this_link': link('canonical:email-stop/content', $xf.toUser, {'t': 'quote', 'id': 1}),
+		'disable_this_link': link('canonical:email-stop/content', $xf.toUser, {'t': 'svQuote', 'id': $xf.toUser.user_id}),
 		'disable_all_link': link('canonical:email-stop/all', $xf.toUser)
 	}) }}
 </xf:macro>
