@@ -11,11 +11,11 @@
           arg-message="{$profilePost.message}"
 		  arg-receiver="{$receiver}"
           arg-user="{$profilePost.User}"
-          arg-username="{$profilePost.ProfileUser.username}"
+          arg-username="{$profilePost.username}"
           arg-contentType="profile_post"
           arg-contentLink="{{ link('canonical:profile-posts', $profilePost) }}"
           arg-contentTitle="{{ phrase('sv_user_profile', {
-	'name': $profilePostComment.ProfilePost.ProfileUser.username
+	'name': $profilePost.ProfileUser.username
 }) }}"
 		  />
 
