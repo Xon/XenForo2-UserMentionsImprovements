@@ -141,7 +141,7 @@
         "global_cache": false,
         "version_id": 2000200,
         "version_string": "2.0.2",
-        "hash": "3f3c5719e940b5e5f0917ca423983d7a"
+        "hash": "2a84bc33b1a898e94348c0869288223e"
     },
     "sv_quoted_email_html.txt": {
         "global_cache": false,
@@ -153,7 +153,7 @@
         "global_cache": false,
         "version_id": 2000200,
         "version_string": "2.0.2",
-        "hash": "00179c43024f4345a5e03fdac271e7af"
+        "hash": "2dd75e67e23766bba63714a150f993eb"
     },
     "sv_receive_email_is_disabled.txt": {
         "global_cache": false,

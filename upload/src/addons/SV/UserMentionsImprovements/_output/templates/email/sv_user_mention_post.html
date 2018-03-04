@@ -1,14 +1,22 @@
-<xf:macro template="sv_mention_macros" 
-		  name="mention"
-          arg-content="{{$post}}"
-          arg-message="{{$post.message}}"
-          arg-user="{{$post.User}}"
-          arg-username="{{$post.username}}"
+<mail:subject>
+<xf:macro template="sv_mention_macros"
+          name="mention_subject"
+          arg-sender="{$post.username}"
+          />
+</mail:subject>
+
+<xf:macro template="sv_mention_macros"
+          name="mention"
+          arg-content="{$post}"
+          arg-message="{$post.message}"
+          arg-receiver="{$receiver}"
+          arg-user="{$post.User}}"
+          arg-username="{$post.username}"
           arg-contentType="post"
           arg-contentLink="{{ link('canonical:posts', $post) }}"
           arg-contentTitle="{{ prefix('thread', $thread, 'escaped') }}{$thread.title}"
-		  />
+          />
 
-<xf:macro template="sv_mention_macros" 
-		  name="mention_footer"
-		  />
+<xf:macro template="sv_mention_macros"
+          name="mention_footer"
+          />

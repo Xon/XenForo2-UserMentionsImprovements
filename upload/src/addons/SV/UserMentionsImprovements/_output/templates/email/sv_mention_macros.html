@@ -1,79 +1,83 @@
-<xf:macro name="quote"
-		  arg-content="!"
-		  arg-message="!"
-		  arg-user="!"
-		  arg-username="!"
-		  arg-contentType="!"
-		  arg-contentLink="!"
-		  arg-contentTitle="!"		  
-		  >
-	<mail:subject>
-		{{ phrase('sv_quoted_email_subject', {
-		'receiver': $receiver.username,
-		'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
-		}) }}
-	</mail:subject>
+<xf:macro name="quote_subject"
+          arg-sender="!"
+          >
+    {{ phrase('sv_quoted_email_subject', {
+    'sender': $sender
+    }) }}
+</xf:macro>
 
-	{{ phrase('sv_quoted_email_html', {
-	'receiver': $receiver.username,
-	'quoter': username_link_email($user, $username),
-	'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
-	}) }}
-
-	<h2><a href="{$contentLink}">{$contentTitle}</a></h2>
-
-	<xf:if is="$xf.options.sv_mention_snippet_length && $message">
-		<xf:if is="$xf.options.sv_mention_snippet_length > 0">
-			<xf:set var="$message" value="{{ snippet($message, $xf.options.sv_mention_snippet_length)|raw }}" />
-		</xf:if>
-		<div class="message">{{ bb_code_type('emailHtml', $message, $contentType, $content) }}</div>
-	</xf:if>
+<xf:macro name="mention_subject"
+          arg-sender="!"
+          >
+    {{ phrase('sv_mentioned_email_subject', {
+    'sender': $sender
+    }) }}
 </xf:macro>
 
 <xf:macro name="quote"
-		  arg-content="!"
-		  arg-message="!"
-		  arg-user="!"
-		  arg-username="!"
-		  arg-contentType="!"
-		  arg-contentLink="!"
-		  arg-contentTitle="!"		  
-		  >
-	<mail:subject>
-		{{ phrase('sv_mentioned_email_subject', {
-		'receiver': $receiver.username,
-		'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
-		}) }}
-	</mail:subject>
+          arg-content="!"
+          arg-message="!"
+          arg-receiver="!"
+          arg-user="!"
+          arg-username="!"
+          arg-contentType="!"
+          arg-contentLink="!"
+          arg-contentTitle="!"
+          >
+    {{ phrase('sv_quoted_email_html', {
+    'receiver': $receiver.username,
+    'quoter': username_link_email($user, $username),
+    'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
+    }) }}
 
-	{{ phrase('sv_mentioned_email_html', {
-	'receiver': $receiver.username,
-	'quoter': username_link_email($user, $username),
-	'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
-	}) }}
+    <h2><a href="{$contentLink}">{$contentTitle}</a></h2>
 
-	<h2><a href="{$contentLink}">{$contentTitle}</a></h2>
+    <xf:if is="$xf.options.sv_mention_snippet_length && $message">
+        <xf:if is="$xf.options.sv_mention_snippet_length > 0">
+            <xf:set var="$message" value="{{ snippet($message, $xf.options.sv_mention_snippet_length)|raw }}" />
+        </xf:if>
+        <div class="message">{{ bb_code_type('emailHtml', $message, $contentType, $content) }}</div>
+    </xf:if>
+</xf:macro>
 
-	<xf:if is="$xf.options.sv_mention_snippet_length && $message">
-		<xf:if is="$xf.options.sv_mention_snippet_length > 0">
-			<xf:set var="$message" value="{{ snippet($message, $xf.options.sv_mention_snippet_length)|raw }}" />
-		</xf:if>
-		<div class="message">{{ bb_code_type('emailHtml', $message, $contentType, $content) }}</div>
-	</xf:if>
+<xf:macro name="mention"
+          arg-content="!"
+          arg-message="!"
+          arg-receiver="!"
+          arg-user="!"
+          arg-username="!"
+          arg-contentType="!"
+          arg-contentLink="!"
+          arg-contentTitle="!"
+          >
+    {{ phrase('sv_mentioned_email_html', {
+    'receiver': $receiver.username,
+    'mentioner': username_link_email($user, $username),
+    'board': '<a href="' . link('canonical:index') . '">' . $xf.options.boardTitle . '</a>'
+    }) }}
+
+    <h2><a href="{$contentLink}">{$contentTitle}</a></h2>
+
+    <xf:if is="$xf.options.sv_mention_snippet_length && $message">
+        <xf:if is="$xf.options.sv_mention_snippet_length > 0">
+            <xf:set var="$message" value="{{ snippet($message, $xf.options.sv_mention_snippet_length)|raw }}" />
+        </xf:if>
+        <div class="message">{{ bb_code_type('emailHtml', $message, $contentType, $content) }}</div>
+    </xf:if>
 </xf:macro>
 
 <xf:macro name="mention_footer">
-	{{ phrase('mention_email_html_footer', {
-		'board': $xf.options.boardTitle,
-		'disable_this_link': link('canonical:email-stop/content', $xf.toUser, {'t': 'svMention', 'id': $xf.toUser.user_id}),
-		'disable_all_link': link('canonical:email-stop/all', $xf.toUser)
-	}) }}
+    {{ phrase('mention_email_html_footer', {
+        'board': $xf.options.boardTitle,
+        'disable_this_link': link('canonical:email-stop/content', $xf.toUser, {'t': 'svMention', 'id': $xf.toUser.user_id}),
+        'disable_all_link': link('canonical:email-stop/all', $xf.toUser)
+    }) }}
 </xf:macro>
 
 <xf:macro name="quote_footer">
-	{{ phrase('quote_email_html_footer', {
-		'board': $xf.options.boardTitle,
-		'disable_this_link': link('canonical:email-stop/content', $xf.toUser, {'t': 'svQuote', 'id': $xf.toUser.user_id}),
-		'disable_all_link': link('canonical:email-stop/all', $xf.toUser)
-	}) }}
+    {{ phrase('quote_email_html_footer', {
+        'board': $xf.options.boardTitle,
+        'disable_this_link': link('canonical:email-stop/content', $xf.toUser, {'t': 'svQuote', 'id': $xf.toUser.user_id}),
+        'disable_all_link': link('canonical:email-stop/all', $xf.toUser)
+    }) }}
 </xf:macro>

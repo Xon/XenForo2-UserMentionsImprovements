@@ -17,37 +17,37 @@
     "email/sv_mention_macros.html": {
         "version_id": 2000200,
         "version_string": "2.0.2",
-        "hash": "fc42314c88abe7ee7f35a43f36fe73ee"
+        "hash": "8feb3b55ede797a3ae0ea5c78f929c00"
     },
     "email/sv_user_mention_post.html": {
         "version_id": 2000200,
         "version_string": "2.0.2",
-        "hash": "3915037ccb9a789d06027a034ebba2b6"
+        "hash": "fd48fc9d70965ec6681c1cf3c1036ab2"
     },
     "email/sv_user_mention_profile_post.html": {
         "version_id": 2000200,
         "version_string": "2.0.2",
-        "hash": "11c4462e698695c8079f66536305d4dc"
+        "hash": "664397f11998c02dd6dc30d88cb990af"
     },
     "email/sv_user_mention_profile_post_comment.html": {
         "version_id": 2000200,
         "version_string": "2.0.2",
-        "hash": "c556369afa79adf7fdbed2142faa7339"
+        "hash": "997e0ac0ae64b6f34000203bf55ced06"
     },
     "email/sv_user_mention_report_comment.html": {
         "version_id": 2000200,
         "version_string": "2.0.2",
-        "hash": "27132eef2ea5331ca653b917b1d72d48"
+        "hash": "a8d2c52d02ed8a5cc4f18dcce6391105"
     },
     "email/sv_user_quote_post.html": {
         "version_id": 2000200,
         "version_string": "2.0.2",
-        "hash": "5fae580e23dd4c8dd45012cf645fedf0"
+        "hash": "83fb4b155667bc9dbea7f4803f429a41"
     },
     "public/sv_alert_group_mention.html": {
-        "version_id": 2000070,
-        "version_string": "2.0.0",
-        "hash": "79e6f05cc32e714c41599ad7d126d78c"
+        "version_id": 2000200,
+        "version_string": "2.0.2",
+        "hash": "7ca5c78dac5bd012ceae82fb46bd3c84"
     },
     "public/sv_members_usergroup.html": {
         "version_id": 2000200,

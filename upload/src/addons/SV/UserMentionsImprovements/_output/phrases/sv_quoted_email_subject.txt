@@ -1,1 +1,1 @@
-You have been quoted by {quoter} at {board}
+{sender} quoted you

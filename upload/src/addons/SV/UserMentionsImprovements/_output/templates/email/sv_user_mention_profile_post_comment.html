@@ -1,16 +1,24 @@
-<xf:macro template="sv_mention_macros" 
-		  name="mention"
-          arg-content="{{$profilePostComment}}"
-          arg-message="{{$profilePostComment.message}}"
-          arg-user="{{$profilePostComment.User}}"
-          arg-username="{{$profilePostComment.username}}"
+<mail:subject>
+<xf:macro template="sv_mention_macros"
+          name="mention_subject"
+          arg-sender="{$profilePostComment.username}"
+          />
+</mail:subject>
+
+<xf:macro template="sv_mention_macros"
+          name="mention"
+          arg-content="{$profilePostComment}"
+          arg-message="{$profilePostComment.message}"
+          arg-receiver="{$receiver}"
+          arg-user="{$profilePostComment.User}"
+          arg-username="{$profilePostComment.username}"
           arg-contentType="profile_post_comment"
           arg-contentLink="{{ link('profile-posts/comments', $profilePostComment) }}"
           arg-contentTitle="{{ phrase('sv_user_profile', {
-	'name': $profilePost.ProfileUser.username
-}) }}"
-		  />
+    'name': $profilePost.ProfileUser.username
+    }) }}"
+          />
 
-<xf:macro template="sv_mention_macros" 
-		  name="mention_footer"
-		  />
+<xf:macro template="sv_mention_macros"
+          name="mention_footer"
+          />
