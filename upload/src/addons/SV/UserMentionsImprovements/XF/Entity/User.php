@@ -20,7 +20,7 @@ class User extends XFCP_User
 
     public function canReceiveQuoteEmails()
     {
-        return \XF::options()->sv_send_email_on_tagging && $this->hasPermission('general', 'sv_ReceiveQuoteEmails');
+        return \XF::options()->sv_send_email_on_quote && $this->hasPermission('general', 'sv_ReceiveQuoteEmails');
     }
 
     public function receivesMentionEmails()

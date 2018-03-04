@@ -10,14 +10,21 @@ class Account extends XFCP_Account
     {
         $form = parent::preferencesSaveProcess($visitor);
 
+        $options = [];
         if (\XF::options()->sv_send_email_on_tagging)
+        {
+            $options['sv_email_on_mention'] = 'bool';
+        }
+        if (\XF::options()->sv_send_email_on_quote)
+        {
+            $options['sv_email_on_quote'] = 'bool';
+        }
+
+        if ($options)
         {
             $input = $this->filter(
                 [
-                    'option' => [
-                        'sv_email_on_mention' => 'bool',
-                        'sv_email_on_quote'   => 'bool'
-                    ]
+                    'option' => $options
                 ]
             );
 

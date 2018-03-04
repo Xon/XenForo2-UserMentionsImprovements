@@ -16,7 +16,8 @@ class Notifier extends XFCP_Notifier
     protected function sendMentionNotification(User $user)
     {
         $alerted = parent::sendMentionNotification($user);
-        if ($alerted)
+        /** @var \SV\UserMentionsImprovements\XF\Entity\User $user */
+        if ($alerted && $user->receivesMentionEmails())
         {
             if (!$this->svNotifier)
             {
