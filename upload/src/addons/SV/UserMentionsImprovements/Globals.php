@@ -49,7 +49,7 @@ class Globals
 
         if ($userIdsToFetch)
         {
-            $users = \array_merge($users, $em->findByIds('XF:User', $userIdsToFetch));
+            $users = \array_merge($users, $em->findByIds('XF:User', $userIdsToFetch)->toArray());
         }
 
         return $users;
