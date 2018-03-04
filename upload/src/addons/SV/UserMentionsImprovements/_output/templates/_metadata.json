@@ -25,19 +25,19 @@
         "hash": "fd48fc9d70965ec6681c1cf3c1036ab2"
     },
     "email/sv_user_mention_profile_post.html": {
-        "version_id": 2000200,
-        "version_string": "2.0.2",
-        "hash": "664397f11998c02dd6dc30d88cb990af"
+        "version_id": 2010000,
+        "version_string": "2.1.0",
+        "hash": "44b7842ae2b42d45bf35d8263e7ef513"
     },
     "email/sv_user_mention_profile_post_comment.html": {
-        "version_id": 2000200,
-        "version_string": "2.0.2",
-        "hash": "997e0ac0ae64b6f34000203bf55ced06"
+        "version_id": 2010000,
+        "version_string": "2.1.0",
+        "hash": "232ec24b15b1e968ea15358cb2a3637b"
     },
     "email/sv_user_mention_report_comment.html": {
         "version_id": 2000200,
         "version_string": "2.0.2",
-        "hash": "a8d2c52d02ed8a5cc4f18dcce6391105"
+        "hash": "b8cc46f8c3b5afbf8b436837ffb83f90"
     },
     "email/sv_user_quote_post.html": {
         "version_id": 2000200,

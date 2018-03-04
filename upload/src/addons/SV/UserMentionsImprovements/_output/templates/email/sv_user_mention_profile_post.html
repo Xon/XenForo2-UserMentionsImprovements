@@ -1,24 +1,24 @@
 <mail:subject>
-<xf:macro template="sv_mention_macros"
-          name="mention_subject"
-          arg-sender="{$profilePost.username}"
-          />
+<xf:macro template="sv_mention_macros" 
+		  name="mention_subject" 
+		  arg-sender="{$profilePost.username}"
+		  />
 </mail:subject>
 
-<xf:macro template="sv_mention_macros"
-          name="mention"
+<xf:macro template="sv_mention_macros" 
+		  name="mention"
           arg-content="{$profilePost}"
           arg-message="{$profilePost.message}"
-          arg-receiver="{$receiver}"
+		  arg-receiver="{$receiver}"
           arg-user="{$profilePost.User}"
-          arg-username="{$profilePost.username}"
+          arg-username="{$profilePost.ProfileUser.username}"
           arg-contentType="profile_post"
           arg-contentLink="{{ link('canonical:profile-posts', $profilePost) }}"
           arg-contentTitle="{{ phrase('sv_user_profile', {
-    'name': $profilePost.ProfileUser.username
-    }) }}"
-          />
+	'name': $profilePostComment.ProfilePost.ProfileUser.username
+}) }}"
+		  />
 
-<xf:macro template="sv_mention_macros"
-          name="mention_footer"
-          />
+<xf:macro template="sv_mention_macros" 
+		  name="mention_footer"
+		  />

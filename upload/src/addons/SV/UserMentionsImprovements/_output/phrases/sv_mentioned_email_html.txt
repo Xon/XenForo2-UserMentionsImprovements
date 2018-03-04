@@ -1,1 +1,3 @@
-<p>{receiver}, {mentioner} quoted you at {board}.</p>
+<p>{receiver},<br/>
+<br/>
+{mentioner} mentioned you at:</p>

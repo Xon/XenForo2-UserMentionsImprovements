@@ -1,6 +1,6 @@
 <?php
 
-namespace XF\Notifier\Report;
+namespace SV\UserMentionsImprovements\XF\Notifier\Report;
 
 use XF\App;
 use XF\Entity\ReportComment;
@@ -42,7 +42,7 @@ class Mention extends AbstractNotifier
 
         $this->app->mailer()->newMail()
                   ->setToUser($user)
-                  ->setTemplate('sv_user_quote_report_comment', $params)
+                  ->setTemplate('sv_user_mention_report_comment', $params)
                   ->queue();
     }
 }

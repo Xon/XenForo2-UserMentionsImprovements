@@ -1,6 +1,6 @@
 <?php
 
-namespace XF\Notifier\ProfilePostComment;
+namespace SV\UserMentionsImprovements\XF\Notifier\ProfilePostComment;
 
 use XF\App;
 use XF\Entity\ProfilePostComment;
@@ -42,7 +42,7 @@ class Mention extends AbstractNotifier
 
         $this->app->mailer()->newMail()
                   ->setToUser($user)
-                  ->setTemplate('sv_user_quote_profile_post_comment', $params)
+                  ->setTemplate('sv_user_mention_profile_post_comment', $params)
                   ->queue();
     }
 }

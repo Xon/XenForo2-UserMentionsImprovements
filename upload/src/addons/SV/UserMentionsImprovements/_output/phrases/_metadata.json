@@ -133,9 +133,9 @@
     },
     "sv_mentioned_email_html.txt": {
         "global_cache": false,
-        "version_id": 2000200,
-        "version_string": "2.0.2",
-        "hash": "6509257a4a0c1edf43ea3c4fc4dedf0a"
+        "version_id": 2010000,
+        "version_string": "2.1.0",
+        "hash": "b66afe9ac3015da2c8bb9981aebb3147"
     },
     "sv_mentioned_email_subject.txt": {
         "global_cache": false,
@@ -145,9 +145,9 @@
     },
     "sv_quoted_email_html.txt": {
         "global_cache": false,
-        "version_id": 2000200,
-        "version_string": "2.0.2",
-        "hash": "f9380bdfa374354b9fa6b44811deee95"
+        "version_id": 2010000,
+        "version_string": "2.1.0",
+        "hash": "c132ab3173c752b7524e98ab86fb4608"
     },
     "sv_quoted_email_subject.txt": {
         "global_cache": false,

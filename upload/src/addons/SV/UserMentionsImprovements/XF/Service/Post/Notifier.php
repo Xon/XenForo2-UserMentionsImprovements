@@ -42,8 +42,7 @@ class Notifier extends XFCP_Notifier
 
     public function addNotification($type, $userId, $alert = true, $email = false)
     {
-        /** @var \SV\UserMentionsImprovements\XF\Entity\User $user */
-        $user = $this->app->find('XF:User', $userId);
+        $user = Globals::getUser($userId);
 
         $this->_addExtraAlertInfo($type, $user);
 
@@ -54,7 +53,7 @@ class Notifier extends XFCP_Notifier
     {
         parent::addNotifications($type, $userIds, $alert, $email);
 
-        $users = $this->app->em()->findByIds('XF:User', $userIds);
+        $users = Globals::getUsers($userIds);
 
         foreach ($users AS $user)
         {

@@ -50,11 +50,20 @@
     "XF-Service-Post-Notifier_SV-UserMentionsImprovements-XF-Service-Post-Notifier.json": {
         "hash": "9ac03c2af6e8b8ff7faf9da86ac260a0"
     },
+    "XF-Service-ProfilePost-Notifier_SV-UserMentionsImprovements-XF-Service-ProfilePost-Notifier.json": {
+        "hash": "29045a4cf4985c15c2a4495e22091a68"
+    },
     "XF-Service-ProfilePost-Preparer_SV-UserMentionsImprovements-XF-Service-ProfilePost-Preparer.json": {
         "hash": "d8d5b130d971865e1b0f11a295800af5"
     },
+    "XF-Service-ProfilePostComment-Notifier_SV-UserMentionsImprovements-XF-Service-ProfilePostComment-Notifier.json": {
+        "hash": "27e9c3504e7a77adf759b50dc1323984"
+    },
     "XF-Service-ProfilePostComment-Preparer_SV-UserMentionsImprovements-XF-Service-ProfilePostComment-Preparer.json": {
         "hash": "0f99192f173440af790a86c6234a25db"
+    },
+    "XF-Service-Report-Notifier_SV-UserMentionsImprovements-XF-Service-Report-Notifier.json": {
+        "hash": "9f976e4159ee8b5c16218c880d3f39ab"
     },
     "XF-Service-StructuredText-Preparer_SV-UserMentionsImprovements-XF-Service-StructuredText-Preparer.json": {
         "hash": "cb39f9d52a6d86afc5d3ca02d7747477"

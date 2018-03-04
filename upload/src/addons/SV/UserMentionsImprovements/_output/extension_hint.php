@@ -70,12 +70,19 @@ namespace SV\UserMentionsImprovements\XF\Service\Post
 
 namespace SV\UserMentionsImprovements\XF\Service\ProfilePostComment
 {
+	class XFCP_Notifier extends \XF\Service\ProfilePostComment\Notifier {}
 	class XFCP_Preparer extends \XF\Service\ProfilePostComment\Preparer {}
 }
 
 namespace SV\UserMentionsImprovements\XF\Service\ProfilePost
 {
+	class XFCP_Notifier extends \XF\Service\ProfilePost\Notifier {}
 	class XFCP_Preparer extends \XF\Service\ProfilePost\Preparer {}
+}
+
+namespace SV\UserMentionsImprovements\XF\Service\Report
+{
+	class XFCP_Notifier extends \XF\Service\Report\Notifier {}
 }
 
 namespace SV\UserMentionsImprovements\XF\Service\StructuredText
