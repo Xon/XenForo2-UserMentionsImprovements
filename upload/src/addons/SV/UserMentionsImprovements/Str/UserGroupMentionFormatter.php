@@ -172,13 +172,14 @@ class UserGroupMentionFormatter
             return [];
         }
 
+        $sql = '';
         $visitor = \XF::visitor();
         $viewAllGroups = $visitor->hasPermission('general', 'sv_ViewPrivateGroups');
         // private groups are only view able by members and administrators.
         if (!$viewAllGroups)
         {
             $groupMembership = \array_merge([$visitor->user_group_id, $visitor->secondary_group_ids]);
-            $sql .= ' AND ( usergroup.sv_private = 0 or usergroup.user_group_id in ( ' . $db->quote($groupMembership) . ' ) )';
+            $sql = ' AND ( usergroup.sv_private = 0 or usergroup.user_group_id in ( ' . $db->quote($groupMembership) . ' ) )';
         }
 
         $userGroupResults = $db->query(
