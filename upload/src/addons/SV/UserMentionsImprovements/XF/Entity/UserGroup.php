@@ -87,7 +87,7 @@ class UserGroup extends XFCP_UserGroup
     public function canViewContents()
     {
         $visitor = \XF::visitor();
-        if ($visitor->hasPermission('general', 'sv_ViewPublicGroups'))
+        if (!$visitor->hasPermission('general', 'sv_ViewPublicGroups'))
         {
             return false;
         }
