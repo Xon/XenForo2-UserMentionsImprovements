@@ -5,6 +5,12 @@
         "version_string": "2.0.2",
         "hash": "5f68e5c94e7e748d1ff12e9acc9af0be"
     },
+    "option.svUMIPermDeniedOnViewGroup.txt": {
+        "global_cache": false,
+        "version_id": 2020000,
+        "version_string": "2.2.0",
+        "hash": "f5493e6513ad4afac404cda51f317124"
+    },
     "option.sv_default_group_avatar_l.txt": {
         "global_cache": false,
         "version_id": 2000070,
@@ -40,6 +46,12 @@
         "version_id": 2000070,
         "version_string": "2.0.0",
         "hash": "9c3697cc5bc014dad5a5f98c24feb81b"
+    },
+    "option_explain.svUMIPermDeniedOnViewGroup.txt": {
+        "global_cache": false,
+        "version_id": 2020000,
+        "version_string": "2.2.0",
+        "hash": "d545e7749571ca2ba23178da79f62976"
     },
     "option_explain.sv_default_group_avatar_l.txt": {
         "global_cache": false,

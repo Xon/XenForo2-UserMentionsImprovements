@@ -1,0 +1,1 @@
+If disabled, the @usergroup tag is also not rendered

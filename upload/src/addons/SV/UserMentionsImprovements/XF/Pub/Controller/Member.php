@@ -16,6 +16,10 @@ class Member extends XFCP_Member
 
         if (!$userGroup->canViewContents())
         {
+            if (\XF::options()->svUMIPermDeniedOnViewGroup)
+            {
+                return $this->noPermission();
+            }
             return $this->notFound();
         }
 
