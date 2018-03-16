@@ -8,9 +8,11 @@ use XF\BbCode\Renderer\Html;
 class tagRenderer
 {
     /**  @var Html */
-    private $renderer;
+    protected $renderer;
     /** @var string */
-    private $type;
+    protected $type;
+    /** @var bool  */
+    protected $canViewPublicGroups;
 
     /**
      * tagRenderer constructor.
@@ -22,6 +24,7 @@ class tagRenderer
     {
         $this->renderer = $renderer;
         $this->type = $type;
+        $this->canViewPublicGroups = \XF::visitor()->hasPermission('general', 'sv_ViewPublicGroups');
     }
 
     public function bindToRenderer()
@@ -68,6 +71,11 @@ class tagRenderer
         if ($content === '')
         {
             return '';
+        }
+
+        if (!$this->canViewPublicGroups)
+        {
+            return $content;
         }
 
         $userGroupId = intval($option);
