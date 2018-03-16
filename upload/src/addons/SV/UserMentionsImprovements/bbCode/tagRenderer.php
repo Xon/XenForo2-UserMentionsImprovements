@@ -54,7 +54,7 @@ class tagRenderer
     public function renderTagUserGroupHtml($userGroupId, $css, $link, $content)
     {
         return $this->renderer->wrapHtml(
-            "<a href='{$link}' class='{$css}' data-xf-init='sv-usergroup-tooltip' data-usergroup-id='{$userGroupId}' data-groupname='{$content}' >",
+            "<a href='{$link}' class='{$css}' data-xf-click='overlay' data-usergroup-id='{$userGroupId}' data-groupname='{$content}' >",
             $content,
             '</a>');
     }
