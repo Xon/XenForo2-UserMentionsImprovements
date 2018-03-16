@@ -20,22 +20,4 @@ class UserGroup extends XFCP_UserGroup
             ->where('title', 'like', $this->escapeLike($title, '?%'))
             ->where('sv_mentionable', 1);
     }
-
-    /**
-     * @param AbstractCollection|\SV\UserMentionsImprovements\XF\Entity\UserGroup[] $userGroups
-     * @return AbstractCollection
-     */
-    public function filterMentionableGroup($userGroups)
-    {
-        if (is_array($userGroups))
-        {
-            $userGroups = new ArrayCollection($userGroups);
-        }
-        /** @var AbstractCollection $userGroups */
-        return $userGroups->filter(
-            function ($userGroup) {
-                return !$userGroup->sv_private || \XF::visitor()->isMemberOf($userGroup->user_group_id);
-            }
-        );
-    }
 }

@@ -48,7 +48,7 @@ class Member extends XFCP_Member
                 $userGroupFinder = $this->finder('XF:UserGroup');
                 $userGroupFinder->mentionableGroups($q);
                 $userGroups = $userGroupFinder->fetch();
-                $userGroups = $userGroupFinder->filterMentionableGroup($userGroups);
+                $userGroups = $userGroups->filterViewable();
             }
             else
             {
