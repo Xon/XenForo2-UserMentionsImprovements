@@ -76,23 +76,17 @@ class UserGroup extends XFCP_UserGroup
             return true;
         }
 
+        if (!$visitor->hasPermission('general', 'sv_ViewPublicGroups'))
+        {
+            return false;
+        }
+
         if ($this->sv_private && \XF::visitor()->isMemberOf($this->user_group_id))
         {
             return false;
         }
 
         return true;
-    }
-
-    public function canViewContents()
-    {
-        $visitor = \XF::visitor();
-        if (!$visitor->hasPermission('general', 'sv_ViewPublicGroups'))
-        {
-            return false;
-        }
-
-        return $this->canView();
     }
 
     public function _preSave()

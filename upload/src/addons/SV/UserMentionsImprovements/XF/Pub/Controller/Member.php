@@ -14,7 +14,7 @@ class Member extends XFCP_Member
         /** @var \SV\UserMentionsImprovements\XF\Entity\UserGroup $userGroup */
         $userGroup = $this->assertRecordExists('XF:UserGroup', $userGroupId);
 
-        if (!$userGroup->canViewContents())
+        if (!$userGroup->canView())
         {
             if (\XF::options()->svUMIPermDeniedOnViewGroup)
             {
