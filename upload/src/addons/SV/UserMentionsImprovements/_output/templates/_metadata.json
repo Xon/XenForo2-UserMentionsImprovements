@@ -2,17 +2,17 @@
     "admin/option_template_registrationDefaults_mentions.html": {
         "version_id": 2000200,
         "version_string": "2.0.2",
-        "hash": "d67f0028e0f499496d35b578defd2a6d"
+        "hash": "c4ac426e1a057a79c454a6810377654a"
     },
     "admin/user_edits_mentions.html": {
         "version_id": 2000200,
         "version_string": "2.0.2",
-        "hash": "873eaf2785caaae0eb17c1bfe5ced9dc"
+        "hash": "27b43ed7625212f3376ea00ba07f7c1a"
     },
     "admin/user_group_edit_mentions.html": {
         "version_id": 2000200,
         "version_string": "2.0.2",
-        "hash": "3e2e6240c52073a719c344db8de1f317"
+        "hash": "c2788dd34540cd9a2fa1dbb516e6d5b7"
     },
     "email/sv_mention_macros.html": {
         "version_id": 2000200,
