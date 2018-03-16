@@ -71,11 +71,6 @@ class UserGroup extends XFCP_UserGroup
         }
 
         $visitor = \XF::visitor();
-        if ($visitor->hasPermission('general', 'sv_ViewPublicGroups'))
-        {
-            return false;
-        }
-
         if ($visitor->hasPermission('general', 'sv_ViewPrivateGroups'))
         {
             return true;
@@ -87,6 +82,17 @@ class UserGroup extends XFCP_UserGroup
         }
 
         return true;
+    }
+
+    public function canViewContents()
+    {
+        $visitor = \XF::visitor();
+        if ($visitor->hasPermission('general', 'sv_ViewPublicGroups'))
+        {
+            return false;
+        }
+
+        return $this->canView();
     }
 
     public function _preSave()
