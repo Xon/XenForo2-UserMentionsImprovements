@@ -172,27 +172,27 @@ class UserGroupMentionFormatter
             return [];
         }
 
+        $visitor = \XF::visitor();
+        $viewAllGroups = $visitor->hasPermission('general', 'sv_ViewPrivateGroups');
+        // private groups are only view able by members and administrators.
+        if (!$viewAllGroups)
+        {
+            $groupMembership = \array_merge([$visitor->user_group_id, $visitor->secondary_group_ids]);
+            $sql .= ' AND ( usergroup.sv_private = 0 or usergroup.user_group_id in ( ' . $db->quote($groupMembership) . ' ) )';
+        }
+
         $userGroupResults = $db->query(
             "
 			SELECT usergroup.user_group_id, usergroup.title, usergroup.sv_private, usergroup.sv_mentionable,
 				" . implode(', ', $matchParts) . "
 			FROM xf_user_group AS usergroup
-			WHERE (" . implode(' OR ', $whereParts) . ")
+			WHERE sv_mentionable = 1 AND (" . implode(' OR ', $whereParts) . ") {$sql}
 			ORDER BY LENGTH(usergroup.title) DESC
 		"
         );
+
         while ($userGroup = $userGroupResults->fetch())
         {
-            if (!$userGroup['sv_mentionable'])
-            {
-                continue;
-            }
-
-            if ($userGroup['sv_private'] && !\XF::visitor()->isMemberOf($userGroup['user_group_id']))
-            {
-                continue;
-            }
-
             $userGroupInfo = [
                 'user_group_id' => $userGroup['user_group_id'],
                 'title'         => $userGroup['title'],
