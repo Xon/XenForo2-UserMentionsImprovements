@@ -16,7 +16,7 @@ class Member extends XFCP_Member
 
         if (!$userGroup->canViewContents())
         {
-            return $this->noPermission();
+            return $this->notFound();
         }
 
         /** @var \SV\UserMentionsImprovements\Repository\UserMentions $userMentionsRepo */
