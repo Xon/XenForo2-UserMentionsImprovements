@@ -2,6 +2,7 @@
 
 namespace SV\UserMentionsImprovements;
 
+use SV\UserMentionsImprovements\XF\Entity\User;
 use XF\AddOn\AbstractSetup;
 use XF\AddOn\StepRunnerInstallTrait;
 use XF\AddOn\StepRunnerUninstallTrait;
@@ -101,6 +102,15 @@ class Setup extends AbstractSetup
         );
 
         $this->defaultPermission();
+    }
+
+    public function upgrade1060000Step1()
+    {
+        $this->db()->query("insert ignore into xf_permission_entry (user_group_id, user_id, permission_group_id, permission_id, permission_value, permission_value_int)
+            values 
+            (?, 0, 'general', 'sv_ViewPublicGroups', 'allow', '0'),
+            (?, 0, 'general', 'sv_ViewPublicGroups', 'allow', '0')
+        ", [User::GROUP_REG, User::GROUP_GUEST]);
     }
 
     // Upgrade steps add 1 to the installed version - the version should be equal to the version being installed.
