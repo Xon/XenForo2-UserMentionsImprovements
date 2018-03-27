@@ -66,6 +66,7 @@ namespace SV\UserMentionsImprovements\XF\Service\Message
 namespace SV\UserMentionsImprovements\XF\Service\Post
 {
 	class XFCP_Notifier extends \XF\Service\Post\Notifier {}
+	class XFCP_Preparer extends \XF\Service\Post\Preparer {}
 }
 
 namespace SV\UserMentionsImprovements\XF\Service\ProfilePostComment

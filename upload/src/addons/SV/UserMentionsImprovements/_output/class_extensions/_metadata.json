@@ -50,6 +50,9 @@
     "XF-Service-Post-Notifier_SV-UserMentionsImprovements-XF-Service-Post-Notifier.json": {
         "hash": "9ac03c2af6e8b8ff7faf9da86ac260a0"
     },
+    "XF-Service-Post-Preparer_SV-UserMentionsImprovements-XF-Service-Post-Preparer.json": {
+        "hash": "102f1de3fd8b02b6c9c43253f70d6a59"
+    },
     "XF-Service-ProfilePost-Notifier_SV-UserMentionsImprovements-XF-Service-ProfilePost-Notifier.json": {
         "hash": "29045a4cf4985c15c2a4495e22091a68"
     },

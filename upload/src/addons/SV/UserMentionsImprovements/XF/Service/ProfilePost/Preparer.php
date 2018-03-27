@@ -48,4 +48,12 @@ class Preparer extends XFCP_Preparer
     {
         return $this->mentionedUserGroups;
     }
+
+    /**
+     * @return array
+     */
+    public function getMentionedUserGroupIds()
+    {
+        return array_keys($this->getMentionedUserGroups());
+    }
 }
