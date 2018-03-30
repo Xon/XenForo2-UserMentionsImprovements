@@ -5,16 +5,59 @@ namespace SV\UserMentionsImprovements\XF\Service\ProfilePost;
 
 class Preparer extends XFCP_Preparer
 {
-    /** @var \SV\UserMentionsImprovements\XF\Service\StructuredText\Preparer|null */
-    protected $processor = null;
+    /**
+     * @var \SV\UserMentionsImprovements\XF\Service\StructuredText\Preparer|null
+     */
+    protected $processor;
 
-    protected function getStructuredTextPreparer($format = true)
+    /**
+     * @var array
+     */
+    protected $explicitMentionedUsers = [];
+
+    /**
+     * @var array
+     */
+    protected $mentionedUserGroups = [];
+
+    /**
+     * @return array
+     */
+    public function getExplicitMentionedUsers()
     {
-        $this->processor = parent::getStructuredTextPreparer($format);
-
-        return $this->processor;
+        return $this->explicitMentionedUsers;
     }
 
+    /**
+     * @return array
+     */
+    public function getExplicitMentionedUserIds()
+    {
+        return array_keys($this->getExplicitMentionedUsers());
+    }
+
+    /**
+     * @return array
+     */
+    public function getMentionedUserGroups()
+    {
+        return $this->mentionedUserGroups;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMentionedUserGroupIds()
+    {
+        return array_keys($this->getMentionedUserGroups());
+    }
+
+    /**
+     * @param string $message
+     * @param bool   $format
+     *
+     * @return string
+     */
     public function setMessage($message, $format = true)
     {
         $message = parent::setMessage($message, $format);
@@ -29,35 +72,37 @@ class Preparer extends XFCP_Preparer
         $user = \XF::visitor();
         if ($user->canMention($this->profilePost))
         {
+            $this->explicitMentionedUsers = $this->mentionedUsers;
+
             if ($user->canMentionUserGroup())
             {
                 /** @var \SV\UserMentionsImprovements\Repository\UserMentions $userMentionsRepo */
                 $userMentionsRepo = \XF::app()->repository('SV\UserMentionsImprovements:UserMentions');
                 $this->mentionedUserGroups = $processor->getMentionedUserGroups();
-                $this->mentionedUsers = $userMentionsRepo->mergeUserGroupMembersIntoUsersArray($this->mentionedUsers, $this->mentionedUserGroups);
+                $this->mentionedUsers = $userMentionsRepo->mergeUserGroupMembersIntoUsersArray(
+                    $this->mentionedUsers,
+                    $this->mentionedUserGroups
+                );
             }
         }
         else
         {
-            $this->mentionedUserGroups = [];
             $this->mentionedUsers = [];
+            $this->explicitMentionedUsers = [];
+            $this->mentionedUserGroups = [];
         }
 
         return $message;
     }
 
-    protected $mentionedUserGroups = [];
-
-    public function getMentionedUserGroups()
-    {
-        return $this->mentionedUserGroups;
-    }
-
     /**
-     * @return array
+     * @param bool $format
+     *
+     * @return \SV\UserMentionsImprovements\XF\Service\StructuredText\Preparer
      */
-    public function getMentionedUserGroupIds()
+    protected function getStructuredTextPreparer($format = true)
     {
-        return array_keys($this->getMentionedUserGroups());
+        $this->processor = parent::getStructuredTextPreparer($format);
+        return $this->processor;
     }
 }

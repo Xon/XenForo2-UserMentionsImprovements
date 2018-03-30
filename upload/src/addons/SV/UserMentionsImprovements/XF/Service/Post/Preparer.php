@@ -13,7 +13,28 @@ class Preparer extends XFCP_Preparer
     /**
      * @var array
      */
+    protected $explicitMentionedUsers = [];
+
+    /**
+     * @var array
+     */
     protected $mentionedUserGroups = [];
+
+    /**
+     * @return array
+     */
+    public function getExplicitMentionedUsers()
+    {
+        return $this->explicitMentionedUsers;
+    }
+
+    /**
+     * @return array
+     */
+    public function getExplicitMentionedUserIds()
+    {
+        return array_keys($this->getExplicitMentionedUsers());
+    }
 
     /**
      * @return array
@@ -41,7 +62,6 @@ class Preparer extends XFCP_Preparer
     public function setMessage($message, $format = true, $checkValidity = true)
     {
         $valid = parent::setMessage($message, $format, $checkValidity);
-
         /** @var Preparer $preparer */
         $preparer = $this->messagePreparer;
         if (!$preparer)
@@ -49,6 +69,7 @@ class Preparer extends XFCP_Preparer
             // mentions are just not enabled
             return $valid;
         }
+        $this->explicitMentionedUsers = $preparer->getExplicitMentionedUsers();
         $this->mentionedUserGroups = $preparer->getMentionedUserGroups();
 
         return $valid;
