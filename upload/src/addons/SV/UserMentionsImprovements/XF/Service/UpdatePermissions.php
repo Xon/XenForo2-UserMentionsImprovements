@@ -1,7 +1,8 @@
 <?php
 
 namespace SV\UserMentionsImprovements\XF\Service;
-
+use XF\Entity\Permission;
+use XF\Mvc\Entity\Entity;
 
 
 /**
@@ -12,13 +13,13 @@ class UpdatePermissions extends XFCP_UpdatePermissions
     protected $hadChanges = false;
 
     /**
-     * @param \XF\Entity\Permission                                                                   $permission
-     * @param mixed                                                                                   $value
-     * @param \XF\Mvc\Entity\Entity|\XF\Entity\PermissionEntry|\XF\Entity\PermissionEntryContent|null $entry
-     * @return null|\XF\Entity\PermissionEntry|\XF\Entity\PermissionEntry|\XF\Entity\PermissionEntryContent|\XF\Mvc\Entity\Entity
+     * @param Permission                                                               $permission
+     * @param mixed                                                                    $value
+     * @param Entity|\XF\Entity\PermissionEntry|\XF\Entity\PermissionEntryContent|null $entry
+     * @return null|\XF\Entity\PermissionEntry|\XF\Entity\PermissionEntry|\XF\Entity\PermissionEntryContent|Entity
      * @throws \XF\PrintableException
      */
-    protected function writeEntry(\XF\Entity\Permission $permission, $value, \XF\Mvc\Entity\Entity $entry = null)
+    protected function writeEntry(Permission $permission, $value, Entity $entry = null)
     {
         if ($value == 'unset' || $value === '0' || $value === 0)
         {

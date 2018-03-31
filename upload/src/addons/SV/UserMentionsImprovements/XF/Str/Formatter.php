@@ -32,6 +32,7 @@ class Formatter extends XFCP_Formatter
 
                 $link = \XF::app()->router()->buildLink('full:members/usergroup', ['user_group_id' => $userGroupId]);
 
+                /** @noinspection HtmlUnknownTarget */
                 return sprintf(
                     '<a href="%s" class="usergroup">%s</a>',
                     htmlspecialchars($link), $title

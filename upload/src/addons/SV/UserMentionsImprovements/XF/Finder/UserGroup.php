@@ -3,7 +3,6 @@
 namespace SV\UserMentionsImprovements\XF\Finder;
 
 use XF\Mvc\Entity\AbstractCollection;
-use XF\Mvc\Entity\ArrayCollection;
 
 /**
  * Extends \XF\Finder\UserGroup

@@ -57,12 +57,14 @@ class UserGroup extends XFCP_UserGroup
     public function getIconHtml()
     {
         $link = \XF::app()->router()->buildLink('members/usergroup', $this);
+        /** @noinspection HtmlUnknownTarget */
         $image = sprintf(
             '<img src="%s" alt="%s" />',
             $this->sv_avatar_s,
             htmlspecialchars($this->title)
         );
 
+        /** @noinspection HtmlUnknownTarget */
         return sprintf(
             '<a class="%s" href="%s">%s</a>',
             'avatar avatar--xxs',
