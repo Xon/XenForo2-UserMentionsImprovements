@@ -19,7 +19,11 @@ class Preparer extends XFCP_Preparer
     {
         $message = parent::setMessage($message, $format);
         $processor = $this->processor;
-        $this->processor = null;
+        if (!$processor)
+        {
+            // mentions are just not enabled
+            return $message;
+        }
 
         /** @var \SV\UserMentionsImprovements\XF\Entity\User $user */
         $user = \XF::visitor();

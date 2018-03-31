@@ -42,8 +42,13 @@ class Preparer extends XFCP_Preparer
     {
         $valid = parent::setMessage($message, $format, $checkValidity);
 
+        /** @var Preparer $preparer */
         $preparer = $this->messagePreparer;
-        $this->messagePreparer = null;
+        if (!$preparer)
+        {
+            // mentions are just not enabled
+            return $valid;
+        }
         $this->mentionedUserGroups = $preparer->getMentionedUserGroups();
 
         return $valid;
