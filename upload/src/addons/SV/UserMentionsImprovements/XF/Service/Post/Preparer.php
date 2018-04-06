@@ -13,12 +13,33 @@ class Preparer extends XFCP_Preparer
     /**
      * @var array
      */
+    protected $implicitMentionedUsers = [];
+
+    /**
+     * @var array
+     */
     protected $explicitMentionedUsers = [];
 
     /**
      * @var array
      */
     protected $mentionedUserGroups = [];
+
+    /**
+     * @return array
+     */
+    public function getImplicitMentionedUsers()
+    {
+        return $this->implicitMentionedUsers;
+    }
+
+    /**
+     * @return array
+     */
+    public function getImplicitMentionedUserIds()
+    {
+        return array_keys($this->getImplicitMentionedUsers());
+    }
 
     /**
      * @return array
@@ -69,6 +90,7 @@ class Preparer extends XFCP_Preparer
             // mentions are just not enabled
             return $valid;
         }
+        $this->implicitMentionedUsers = $preparer->getImplicitMentionedUsers();
         $this->explicitMentionedUsers = $preparer->getExplicitMentionedUsers();
         $this->mentionedUserGroups = $preparer->getMentionedUserGroups();
 
