@@ -1,6 +1,6 @@
 {
     "template": "account_preferences",
-    "description": "Add additional account preferences",
+    "description": "Add additional account preferences (XF2.0.3)",
     "execution_order": 10,
     "enabled": true,
     "action": "preg_replace",
