@@ -11,6 +11,17 @@ use XF\Mvc\Entity\Structure;
  */
 class UserOption extends XFCP_UserOption
 {
+    protected function _setupDefaults()
+    {
+        parent::_setupDefaults();
+
+        $options = \XF::options();
+
+        $defaults = $options->registrationDefaults;
+        $this->sv_email_on_mention = $defaults['sv_email_on_mention'] ? true : false;
+        $this->sv_email_on_quote = $defaults['sv_email_on_quote'] ? true : false;
+    }
+
     public static function getStructure(Structure $structure)
     {
         $structure = parent::getStructure($structure);

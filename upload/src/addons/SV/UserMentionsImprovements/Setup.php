@@ -2,6 +2,7 @@
 
 namespace SV\UserMentionsImprovements;
 
+use XF\Db\Schema\Create;
 use XF\Entity\User;
 use XF\AddOn\AbstractSetup;
 use XF\AddOn\StepRunnerInstallTrait;
@@ -19,11 +20,11 @@ class Setup extends AbstractSetup
     {
         $this->schemaManager()->alterTable(
             'xf_user_group', function (Alter $table) {
-            $table->addColumn('sv_mentionable', 'bool')->setDefault(0);
-            $table->addColumn('sv_private', 'bool')->setDefault(0);
-            $table->addColumn('sv_avatar_s', 'text')->nullable()->setDefault(null);
-            $table->addColumn('sv_avatar_l', 'text')->nullable()->setDefault(null);
-            $table->addColumn('sv_avatar_edit_date', 'int')->setDefault(0);
+            $this->addOrChangeColumn($table,'sv_mentionable', 'bool')->setDefault(0);
+            $this->addOrChangeColumn($table,'sv_private', 'bool')->setDefault(0);
+            $this->addOrChangeColumn($table,'sv_avatar_s', 'text')->nullable()->setDefault(null);
+            $this->addOrChangeColumn($table,'sv_avatar_l', 'text')->nullable()->setDefault(null);
+            $this->addOrChangeColumn($table,'sv_avatar_edit_date', 'int')->setDefault(0);
         }
         );
         $this->db()->query(
@@ -36,24 +37,15 @@ class Setup extends AbstractSetup
 
         $this->schemaManager()->alterTable(
             'xf_user_option', function (Alter $table) {
-            $table->addColumn('sv_email_on_mention', 'bool')->setDefault(0);
-            $table->addColumn('sv_email_on_quote', 'bool')->setDefault(0);
+            $this->addOrChangeColumn($table,'sv_email_on_mention', 'bool')->setDefault(0);
+            $this->addOrChangeColumn($table,'sv_email_on_quote', 'bool')->setDefault(0);
         }
         );
 
-        /** @var \XF\Entity\Option $entity */
-        $entity = \XF::finder('XF:Option')->where(['option_id', 'registrationDefaults'])->fetchOne();
-        $registrationDefaults = $entity->option_value;
-        if (!isset($registrationDefaults['sv_email_on_mention']))
-        {
-            $registrationDefaults['sv_email_on_mention'] = 0;
-        }
-        if (!isset($registrationDefaults['sv_email_on_quote']))
-        {
-            $registrationDefaults['sv_email_on_quote'] = 0;
-        }
-        $entity->option_value = $registrationDefaults;
-        $entity->saveIfChanged();
+        $this->applyRegistrationDefaults([
+            'sv_email_on_mention' => 0,
+            'sv_email_on_quote' => 0,
+        ]);
     }
 
     public function installStep2()
@@ -63,6 +55,7 @@ class Setup extends AbstractSetup
 
     public function upgrade1010000Step1()
     {
+        /** @noinspection SqlResolve */
         $this->db()->query(
             "
                 UPDATE xf_user_group
@@ -74,6 +67,7 @@ class Setup extends AbstractSetup
 
     public function upgrade104010Step1()
     {
+        /** @noinspection SqlResolve */
         $this->db()->query(
             "
                 UPDATE xf_user_option
@@ -342,5 +336,69 @@ class Setup extends AbstractSetup
             [],
             false
         );
+    }
+
+
+    /**
+     * @param array $newRegistrationDefaults
+     */
+    protected function applyRegistrationDefaults(array $newRegistrationDefaults)
+    {
+        /** @var \XF\Entity\Option $option */
+        $option = $this->app->finder('XF:Option')
+                            ->where('option_id', '=', 'registrationDefaults')
+                            ->fetchOne();
+
+        if (!$option)
+        {
+            // Option: Mr. XenForo I don't feel so good
+            throw new \LogicException("XenForo installation is damaged. Expected option 'registrationDefaults' to exist.");
+        }
+        $registrationDefaults = $option->option_value;
+
+        foreach ($newRegistrationDefaults AS $optionName => $optionDefault)
+        {
+            if (!isset($registrationDefaults[$optionName]))
+            {
+                $registrationDefaults[$optionName] = $optionDefault;
+            }
+        }
+
+        $option->option_value = $registrationDefaults;
+        $option->saveIfChanged();
+    }
+
+    /**
+     * @param Create|Alter $table
+     * @param string       $name
+     * @param string|null  $type
+     * @param string|null  $length
+     *
+     * @return \XF\Db\Schema\Column
+     */
+    protected function addOrChangeColumn($table, $name, $type = null, $length = null)
+    {
+        if ($table instanceof Create)
+        {
+            $table->checkExists(true);
+
+            return $table->addColumn($name, $type, $length);
+        }
+        else
+        {
+            if ($table instanceof Alter)
+            {
+                if ($table->getColumnDefinition($name))
+                {
+                    return $table->changeColumn($name, $type, $length);
+                }
+
+                return $table->addColumn($name, $type, $length);
+            }
+            else
+            {
+                throw new \LogicException("Unknown schema DDL type " . get_class($table));
+            }
+        }
     }
 }
