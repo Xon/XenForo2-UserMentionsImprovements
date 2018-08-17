@@ -226,6 +226,11 @@ class Setup extends AbstractSetup
         ", [User::GROUP_REG, User::GROUP_GUEST]);
     }
 
+    public function upgrade2030400Step1()
+    {
+        $this->installStep1();
+    }
+
     public function uninstallStep1()
     {
         $this->schemaManager()->alterTable(

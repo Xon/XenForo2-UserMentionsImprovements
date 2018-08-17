@@ -18,8 +18,8 @@ class UserOption extends XFCP_UserOption
         $options = \XF::options();
 
         $defaults = $options->registrationDefaults;
-        $this->sv_email_on_mention = $defaults['sv_email_on_mention'] ? true : false;
-        $this->sv_email_on_quote = $defaults['sv_email_on_quote'] ? true : false;
+        $this->sv_email_on_mention = isset($defaults['sv_email_on_mention']) ? (bool)$defaults['sv_email_on_mention'] : false;
+        $this->sv_email_on_quote = isset($defaults['sv_email_on_quote']) ? (bool)$defaults['sv_email_on_quote'] : false;
     }
 
     public static function getStructure(Structure $structure)
