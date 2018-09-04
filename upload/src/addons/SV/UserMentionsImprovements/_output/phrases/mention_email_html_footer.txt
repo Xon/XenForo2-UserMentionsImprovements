@@ -1,5 +1,5 @@
 <p class="minorText">Please do not reply to this message. You must visit the forum to reply.</p>
 
-<p class="minorText">This message was sent to you because you opted to recieved emails when mentioned at {board}.</p>
+<p class="minorText">This message was sent to you because you opted to received emails when mentioned at {board}.</p>
 
 <p class="minorText">If you no longer wish to receive these emails, you may <a href="{disable_this_link}">disable emails on being mentioned</a> or <a href="{disable_all_link}">disable all emails</a>.</p>

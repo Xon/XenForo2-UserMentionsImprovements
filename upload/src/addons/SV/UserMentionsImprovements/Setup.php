@@ -3,7 +3,6 @@
 namespace SV\UserMentionsImprovements;
 
 use SV\Utils\InstallerHelper;
-use XF\Db\Schema\Create;
 use XF\Entity\User;
 use XF\AddOn\AbstractSetup;
 use XF\AddOn\StepRunnerInstallTrait;

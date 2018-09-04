@@ -1,9 +1,9 @@
 {
     "mention_email_html_footer.txt": {
         "global_cache": false,
-        "version_id": 2000200,
-        "version_string": "2.0.2",
-        "hash": "5f68e5c94e7e748d1ff12e9acc9af0be"
+        "version_id": 2030400,
+        "version_string": "2.3.4",
+        "hash": "ab46a513c0ca2a9f7633caeaada1fed3"
     },
     "option.svUMIPermDeniedOnViewGroup.txt": {
         "global_cache": false,
@@ -139,9 +139,9 @@
     },
     "quote_email_html_footer.txt": {
         "global_cache": false,
-        "version_id": 2000200,
-        "version_string": "2.0.2",
-        "hash": "f2c078ae09c16eea89994e4dda6c9d7f"
+        "version_id": 2030400,
+        "version_string": "2.3.4",
+        "hash": "9112fccb3204a7e8a89e2d9f806a2b17"
     },
     "sv_mentioned_as_y_group.txt": {
         "global_cache": false,
