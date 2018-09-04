@@ -2,6 +2,7 @@
 
 namespace SV\UserMentionsImprovements;
 
+use SV\Utils\InstallerHelper;
 use XF\Db\Schema\Create;
 use XF\Entity\User;
 use XF\AddOn\AbstractSetup;
@@ -12,6 +13,8 @@ use XF\Db\Schema\Alter;
 
 class Setup extends AbstractSetup
 {
+    // from https://github.com/Xon/XenForo2-Utils cloned to src/addons/SV/Utils
+    use InstallerHelper;
     use StepRunnerInstallTrait;
     use StepRunnerUpgradeTrait;
     use StepRunnerUninstallTrait;
@@ -219,11 +222,7 @@ class Setup extends AbstractSetup
 
     public function upgrade2020000Step1()
     {
-        $this->db()->query("insert ignore into xf_permission_entry (user_group_id, user_id, permission_group_id, permission_id, permission_value, permission_value_int)
-            values 
-            (?, 0, 'general', 'sv_ViewPublicGroups', 'allow', '0'),
-            (?, 0, 'general', 'sv_ViewPublicGroups', 'allow', '0')
-        ", [User::GROUP_REG, User::GROUP_GUEST]);
+        $this->applyGlobalPermissionByGroup('general', 'sv_ViewPublicGroups', [User::GROUP_REG, User::GROUP_GUEST]);
     }
 
     public function upgrade2030400Step1()
@@ -341,69 +340,5 @@ class Setup extends AbstractSetup
             [],
             false
         );
-    }
-
-
-    /**
-     * @param array $newRegistrationDefaults
-     */
-    protected function applyRegistrationDefaults(array $newRegistrationDefaults)
-    {
-        /** @var \XF\Entity\Option $option */
-        $option = $this->app->finder('XF:Option')
-                            ->where('option_id', '=', 'registrationDefaults')
-                            ->fetchOne();
-
-        if (!$option)
-        {
-            // Option: Mr. XenForo I don't feel so good
-            throw new \LogicException("XenForo installation is damaged. Expected option 'registrationDefaults' to exist.");
-        }
-        $registrationDefaults = $option->option_value;
-
-        foreach ($newRegistrationDefaults AS $optionName => $optionDefault)
-        {
-            if (!isset($registrationDefaults[$optionName]))
-            {
-                $registrationDefaults[$optionName] = $optionDefault;
-            }
-        }
-
-        $option->option_value = $registrationDefaults;
-        $option->saveIfChanged();
-    }
-
-    /**
-     * @param Create|Alter $table
-     * @param string       $name
-     * @param string|null  $type
-     * @param string|null  $length
-     *
-     * @return \XF\Db\Schema\Column
-     */
-    protected function addOrChangeColumn($table, $name, $type = null, $length = null)
-    {
-        if ($table instanceof Create)
-        {
-            $table->checkExists(true);
-
-            return $table->addColumn($name, $type, $length);
-        }
-        else
-        {
-            if ($table instanceof Alter)
-            {
-                if ($table->getColumnDefinition($name))
-                {
-                    return $table->changeColumn($name, $type, $length);
-                }
-
-                return $table->addColumn($name, $type, $length);
-            }
-            else
-            {
-                throw new \LogicException("Unknown schema DDL type " . get_class($table));
-            }
-        }
     }
 }
