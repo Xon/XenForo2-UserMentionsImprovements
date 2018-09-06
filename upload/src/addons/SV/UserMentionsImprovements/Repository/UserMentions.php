@@ -66,6 +66,9 @@ class UserMentions extends Repository
         }
 
         Globals::$userGroupMentionedIds = $mentionedUgUsers;
+        \XF::runOnce('userMentionImprovementCleanup', function() {
+            Globals::$userGroupMentionedIds = [];
+        });
 
         return $users;
     }
