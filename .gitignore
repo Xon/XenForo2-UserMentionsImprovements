@@ -1,5 +1,8 @@
-# Created by .ignore support plugin (hsz.mobi)
-_data/
-_releases/
+_releases
+_data
 hashes.json
 /.idea/
+.DS_Store
+git.json
+.phpstorm.meta.php
+_metadata.json
