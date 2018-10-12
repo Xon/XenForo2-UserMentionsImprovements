@@ -51,7 +51,7 @@ class User extends XFCP_User
 
     protected function _getMentionContentTypeAndId(Entity $messageEntity = null)
     {
-        if ($messageEntity instanceof Post)
+        if ($messageEntity instanceof Post && $messageEntity->Thread)
         {
             return ['node', $messageEntity->Thread->node_id];
         }
