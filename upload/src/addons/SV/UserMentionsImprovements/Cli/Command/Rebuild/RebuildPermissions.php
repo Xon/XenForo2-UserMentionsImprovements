@@ -28,6 +28,17 @@ class RebuildPermissions extends AbstractRebuildCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        /** @var \XF\Repository\PermissionCombination $permComboRepo */
+        $permComboRepo = \XF::repository('XF:PermissionCombination');
+
+        /** @var \XF\Repository\PermissionEntry $permEntryRepo */
+        $permEntryRepo = \XF::repository('XF:PermissionEntry');
+
+        $permEntryRepo->deleteOrphanedGlobalUserPermissionEntries();
+        $permEntryRepo->deleteOrphanedContentUserPermissionEntries();
+
+        $permComboRepo->deleteUnusedPermissionCombinations();
+
         $this->setupAndRunJob(
             'permissionRebuild',
             $this->getRebuildClass(),
