@@ -1,0 +1,9 @@
+{
+    "template": "tools_rebuild",
+    "description": "Inject permission rebuild option",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "#(<xf:inforow>{{ phrase\\('this_will_clean_up_permission_combinations_no_longer_in_use'\\) }}.*?)(</xf:inforow>)#si",
+    "replace": "$1\n\t<xf:checkboxrow>\n\t\t<xf:option name=\"sv_rebuild_perms\" value=\"1\"\n\t\t\tlabel=\"{{ phrase('sv_rebuild_permissions') }}\" />\n\t</xf:checkboxrow>\n$2"
+}
