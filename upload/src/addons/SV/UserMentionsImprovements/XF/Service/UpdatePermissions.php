@@ -20,11 +20,11 @@ class UpdatePermissions extends XFCP_UpdatePermissions
      */
     protected function writeEntry(Permission $permission, $value, Entity $entry = null)
     {
-        $oldState = $entry ? $entry->toArray() : null;
+        $oldState = $this->userGroup && $entry ? $entry->toArray() : null;
 
         $newEntry = parent::writeEntry($permission, $value, $entry);
 
-        if ($newEntry !== null || $entry !== null)
+        if ($this->userGroup && ($newEntry !== null || $entry !== null))
         {
             if ($newEntry === null ||
                 $entry === null ||
