@@ -276,13 +276,6 @@ class Setup extends AbstractSetup
             )
         "
         );
-
-        $this->app->jobManager()->enqueueUnique(
-            'permissionRebuild',
-            'XF:PermissionRebuild',
-            [],
-            false
-        );
     }
 
     public function defaultPermission()
@@ -332,12 +325,6 @@ class Setup extends AbstractSetup
                 FROM xf_permission_entry_content
                 WHERE permission_group_id = 'general' AND permission_id IN ('maxMentionedUsers') AND permission_value_int <> 0
             "
-        );
-        $this->app->jobManager()->enqueueUnique(
-            'permissionRebuild',
-            'XF:PermissionRebuild',
-            [],
-            false
         );
     }
 }
