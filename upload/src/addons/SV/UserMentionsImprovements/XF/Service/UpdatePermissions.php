@@ -25,6 +25,7 @@ class UpdatePermissions extends XFCP_UpdatePermissions
         {
             if ($entry)
             {
+                $this->hadChanges = true;
                 $entry->delete();
             }
 
