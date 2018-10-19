@@ -17,75 +17,40 @@ class UpdatePermissions extends XFCP_UpdatePermissions
      * @param mixed                                                                    $value
      * @param Entity|\XF\Entity\PermissionEntry|\XF\Entity\PermissionEntryContent|null $entry
      * @return null|\XF\Entity\PermissionEntry|\XF\Entity\PermissionEntry|\XF\Entity\PermissionEntryContent|Entity
-     * @throws \XF\PrintableException
      */
     protected function writeEntry(Permission $permission, $value, Entity $entry = null)
     {
-        if ($value == 'unset' || $value === '0' || $value === 0)
+        $oldState = $entry ? $entry->toArray() : null;
+
+        $newEntry = parent::writeEntry($permission, $value, $entry);
+
+        if ($newEntry !== null || $entry !== null)
         {
-            if ($entry)
+            if ($newEntry === null ||
+                $entry === null ||
+                $newEntry->getUniqueEntityId() !== $entry->getUniqueEntityId())
             {
                 $this->hadChanges = true;
-                $entry->delete();
             }
-
-            return null;
-        }
-
-        if (!$entry)
-        {
-            if ($this->contentType)
+            else if ($oldState && $oldState !== $newEntry->toArray())
             {
-                /** @var \XF\Entity\PermissionEntryContent $entry */
-                $entry = $this->em()->create('XF:PermissionEntryContent');
-                $entry->content_type = $this->contentType;
-                $entry->content_id = $this->contentId;
+                $this->hadChanges = true;
             }
-            else
-            {
-                /** @var \XF\Entity\PermissionEntry $entry */
-                $entry = $this->em()->create('XF:PermissionEntry');
-            }
-
-            $entry->permission_group_id = $permission->permission_group_id;
-            $entry->permission_id = $permission->permission_id;
         }
 
-        $entry->user_id = $this->user ? $this->user->user_id : 0;
-        $entry->user_group_id = $this->userGroup ? $this->userGroup->user_group_id : 0;
-
-        if ($permission->permission_type == 'integer')
-        {
-            $entry->permission_value = 'use_int';
-            $entry->permission_value_int = intval($value);
-        }
-        else
-        {
-            $entry->permission_value = $value;
-            $entry->permission_value_int = 0;
-        }
-
-        $entry->saveIfChanged($saved);
-        if ($saved)
-        {
-            $this->hadChanges = true;
-        }
-
-        return $entry;
+        return $newEntry;
     }
 
     public function triggerCacheRebuild()
     {
-        if (!$this->hadChanges)
-        {
-            return;
-        }
-
-        /** @var \XF\Repository\PermissionCombination $combinationRepo */
-        $combinationRepo = $this->repository('XF:PermissionCombination');
-
         if ($this->userGroup)
         {
+            if (!$this->hadChanges)
+            {
+                return;
+            }
+            /** @var \XF\Repository\PermissionCombination $combinationRepo */
+            $combinationRepo = $this->repository('XF:PermissionCombination');
             $combinations = $combinationRepo->getPermissionCombinationsForUserGroup($this->userGroup->user_group_id);
             if (count($combinations) > 8)
             {
