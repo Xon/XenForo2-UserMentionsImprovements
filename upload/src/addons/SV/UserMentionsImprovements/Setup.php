@@ -229,6 +229,11 @@ class Setup extends AbstractSetup
         $this->installStep1();
     }
 
+    public function upgrade2040000Step1()
+    {
+        $this->app->jobManager()->enqueueUnique('permissionRebuild', 'XF:PermissionRebuild', [], true);
+    }
+
     public function uninstallStep1()
     {
         $this->schemaManager()->alterTable(
