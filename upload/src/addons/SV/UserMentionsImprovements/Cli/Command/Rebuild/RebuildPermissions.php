@@ -1,6 +1,6 @@
 <?php
 
-namespace SV\UserEssentials\Cli\Command\Rebuild;
+namespace SV\UserMentionsImprovements\Cli\Command\Rebuild;
 
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
