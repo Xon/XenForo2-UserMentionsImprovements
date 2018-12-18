@@ -3,7 +3,6 @@
 namespace SV\UserMentionsImprovements\Cli\Command\Rebuild;
 
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use XF\Cli\Command\Rebuild\AbstractRebuildCommand;
 

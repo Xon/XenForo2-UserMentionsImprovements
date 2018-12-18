@@ -8,13 +8,20 @@ namespace SV\UserMentionsImprovements\XF\Job;
  */
 class PermissionRebuild extends XFCP_PermissionRebuild
 {
-    protected $defaultData = [
+    protected $extraDefaultData = [
         'steps' => 0,
         'combinationId' => 0,
         'cleaned' => false,
         'batch' => 5,
         'combinationIds' => [],
     ];
+
+    protected function setupData(array $data)
+    {
+        $data = array_merge($this->extraDefaultData, $data);
+
+        return parent::setupData($data);
+    }
 
     public function run($maxRunTime)
     {
