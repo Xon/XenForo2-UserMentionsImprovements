@@ -6,7 +6,7 @@ namespace SV\UserMentionsImprovements\XF\Service\ProfilePost;
 class Preparer extends XFCP_Preparer
 {
     /**
-     * @var \SV\UserMentionsImprovements\XF\Service\StructuredText\Preparer|null
+     * @var \SV\UserMentionsImprovements\XF\Service\StructuredText\Preparer|\XF\Service\Message\Preparer
      */
     protected $processor;
 
@@ -122,13 +122,32 @@ class Preparer extends XFCP_Preparer
     }
 
     /**
+     * XF2.0 support
+     *
      * @param bool $format
      *
      * @return \SV\UserMentionsImprovements\XF\Service\StructuredText\Preparer
      */
     protected function getStructuredTextPreparer($format = true)
     {
+        /** @noinspection PhpUndefinedMethodInspection */
         $this->processor = parent::getStructuredTextPreparer($format);
         return $this->processor;
+    }
+
+    /**
+     * XF2.1 support
+     *
+     * @param bool $format
+     *
+     * @return \XF\Service\Message\Preparer
+     */
+    protected function getMessagePreparer($format = true)
+    {
+        /** @noinspection PhpUndefinedMethodInspection */
+        $preparer = parent::getMessagePreparer($format);
+        $this->processor = $preparer;
+
+        return $preparer;
     }
 }
