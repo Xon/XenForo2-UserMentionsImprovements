@@ -99,7 +99,7 @@ class UserGroup extends XFCP_UserGroup
         return true;
     }
 
-    public function _preSave()
+    protected function _preSave()
     {
         parent::_preSave();
         if ($this->isUpdate() && ($this->isChanged('sv_mentionable') || $this->isChanged('sv_private') || $this->isChanged('sv_avatar_s')) ||
