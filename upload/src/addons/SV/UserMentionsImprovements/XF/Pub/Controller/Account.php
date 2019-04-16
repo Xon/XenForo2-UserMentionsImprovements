@@ -3,9 +3,19 @@
 namespace SV\UserMentionsImprovements\XF\Pub\Controller;
 
 use XF\Entity\User;
+use XF\Mvc\FormAction;
 
 class Account extends XFCP_Account
 {
+    protected function savePrivacyProcess(User $visitor)
+    {
+        $form = parent::savePrivacyProcess($visitor);
+
+        $this->svEmailSaveProcess($visitor, $form);
+
+        return $form;
+    }
+
     protected function accountDetailsSaveProcess(User $visitor)
     {
         $form = parent::accountDetailsSaveProcess($visitor);
@@ -25,7 +35,7 @@ class Account extends XFCP_Account
     }
 
     protected function svEmailSaveProcess(/** @noinspection PhpUnusedParameterInspection */
-        User $visitor, \XF\Mvc\FormAction $form)
+        User $visitor, FormAction $form)
     {
         $options = [];
         if (\XF::options()->sv_send_email_on_tagging)
