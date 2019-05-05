@@ -1,6 +1,0 @@
-{
-    "from_class": "XF\\Permission\\Builder",
-    "to_class": "SV\\UserMentionsImprovements\\XF\\Permission\\Builder",
-    "execute_order": 10,
-    "active": true
-}

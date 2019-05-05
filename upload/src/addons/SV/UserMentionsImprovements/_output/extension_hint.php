@@ -43,11 +43,6 @@ namespace SV\UserMentionsImprovements\XF\Notifier\Post
 	class XFCP_Quote extends \XF\Notifier\Post\Quote {}
 }
 
-namespace SV\UserMentionsImprovements\XF\Permission
-{
-	class XFCP_Builder extends \XF\Permission\Builder {}
-}
-
 namespace SV\UserMentionsImprovements\XF\Pub\Controller
 {
 	class XFCP_Account extends \XF\Pub\Controller\Account {}
