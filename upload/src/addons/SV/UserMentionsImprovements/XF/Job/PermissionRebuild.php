@@ -12,7 +12,7 @@ class PermissionRebuild extends XFCP_PermissionRebuild
         'steps' => 0,
         'combinationId' => 0,
         'cleaned' => false,
-        'batch' => 5,
+        'batch' => 100,
         'combinationIds' => [],
     ];
 
@@ -25,11 +25,6 @@ class PermissionRebuild extends XFCP_PermissionRebuild
 
     public function run($maxRunTime)
     {
-        if (!$this->data['combinationIds'])
-        {
-            return parent::run($maxRunTime);
-        }
-
         $start = microtime(true);
 
         if (!$this->data['cleaned'])
@@ -45,33 +40,42 @@ class PermissionRebuild extends XFCP_PermissionRebuild
 
         $app = \XF::app();
 
-        $permissionBuilder = $app->permissionBuilder();
-
         $done = 0;
-        $combinations = \XF::finder('XF:PermissionCombination')
-                           ->whereId($this->data['combinationIds'])
-                           ->where('permission_combination_id','>', $this->data['combinationId'])
-                           ->order('permission_combination_id')
-                           ->fetch();
-        if (count($combinations) == 0)
+        $finder = \XF::finder('XF:PermissionCombination')
+                     ->where('permission_combination_id', '>', $this->data['combinationId'])
+                     ->order('permission_combination_id')
+                     ->limit($this->data['batch']);
+        if ($this->data['combinationIds'])
         {
+            $finder->whereId($this->data['combinationIds']);
+        }
+
+        $combinations = $finder->fetch();
+        if (!$combinations->count())
+        {
+            // there are situations where we run this job but not with this unique key, so this is unnecessary
+            $this->app->jobManager()->cancelUniqueJob('permissionRebuild');
+
             return $this->complete();
         }
+
+        $permissionBuilder = $app->permissionBuilder();
+
         foreach ($combinations AS $combination)
         {
-            if (microtime(true) - $start >= $maxRunTime)
-            {
-                break;
-            }
-
             /** @var \XF\Entity\PermissionCombination $combination */
             $this->data['combinationId'] = $combination->permission_combination_id;
 
             $permissionBuilder->rebuildCombination($combination);
             $done++;
+
+            if (microtime(true) - $start >= $maxRunTime)
+            {
+                break;
+            }
         }
 
-        $this->data['batch'] = $this->calculateOptimalBatch($this->data['batch'], $done, $start, $maxRunTime, 20);
+        $this->data['batch'] = $this->calculateOptimalBatch($this->data['batch'], $done, $start, $maxRunTime, 500);
 
         return $this->resume();
     }
