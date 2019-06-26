@@ -37,12 +37,13 @@ class Account extends XFCP_Account
     protected function svEmailSaveProcess(/** @noinspection PhpUnusedParameterInspection */
         User $visitor, FormAction $form)
     {
+        /** @var \SV\UserMentionsImprovements\XF\Entity\User $visitor */
         $options = [];
-        if (\XF::options()->sv_send_email_on_tagging)
+        if ($visitor->canReceiveMentionEmails())
         {
             $options['sv_email_on_mention'] = 'bool';
         }
-        if (\XF::options()->sv_send_email_on_quote)
+        if ($visitor->canReceiveQuoteEmails())
         {
             $options['sv_email_on_quote'] = 'bool';
         }
@@ -54,20 +55,6 @@ class Account extends XFCP_Account
                     'option' => $options
                 ]
             );
-
-            /** @var \SV\UserMentionsImprovements\XF\Entity\User $visitor */
-            /** @var \SV\UserMentionsImprovements\XF\Entity\UserOption $option */
-            $option = $visitor->Option;
-
-            if (!$visitor->canReceiveMentionEmails() && $option->sv_email_on_mention)
-            {
-                unset($input['option']['sv_email_on_mention']);
-            }
-
-            if (!$visitor->canReceiveQuoteEmails() && $option->sv_email_on_quote)
-            {
-                unset($input['option']['sv_email_on_quote']);
-            }
 
             if ($input['option'])
             {
