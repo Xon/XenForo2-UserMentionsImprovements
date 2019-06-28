@@ -32,7 +32,8 @@ class UserGroup extends XFCP_UserGroup
             return false;
         }
 
-        return $this->app()->templater()->fn('base_url', [$val]);
+        $func = \XF::$versionId >= 2010370 ? 'func' : 'fn';
+        return $this->app()->templater()->$func('base_url', [$val]);
     }
 
     public function getSvAvatarL()
@@ -51,7 +52,8 @@ class UserGroup extends XFCP_UserGroup
             return false;
         }
 
-        return $this->app()->templater()->fn('base_url', [$val]);
+        $func = \XF::$versionId >= 2010370 ? 'func' : 'fn';
+        return $this->app()->templater()->$func('base_url', [$val]);
     }
 
     public function getIconHtml()
