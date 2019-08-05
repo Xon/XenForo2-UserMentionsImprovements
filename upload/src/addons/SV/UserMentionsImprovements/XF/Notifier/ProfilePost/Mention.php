@@ -23,7 +23,18 @@ class Mention extends AbstractNotifier
 
     public function canNotify(User $user)
     {
-        return ($user->user_id != $this->content->user_id);
+        $senderId = $this->content->user_id;
+        if ($user->user_id === $senderId)
+        {
+            return false;
+        }
+
+        if ($senderId && $user->isIgnoring($senderId))
+        {
+            return false;
+        }
+
+        return true;
     }
 
     public function sendAlert(User $user)
@@ -35,6 +46,11 @@ class Mention extends AbstractNotifier
 
     public function sendEmail(User $user)
     {
+        if (!$user->email || $user->user_state != 'valid')
+        {
+            return;
+        }
+
         $params = [
             'profilePost' => $this->content,
             'receiver'    => $user
