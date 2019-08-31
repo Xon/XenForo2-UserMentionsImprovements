@@ -33,7 +33,7 @@ class Listener
         {
             $class = 'SV\UserMentionsImprovements\bbCode\tagRenderer';
             $class = \XF::app()->extendClass($class);
-            /** @var \SV\UserMentionsImprovements\bbCode\tagRenderer $obj */
+            /** @var tagRenderer $obj */
             $obj = new $class($renderer, $type);
             $obj->bindToRenderer();
         }

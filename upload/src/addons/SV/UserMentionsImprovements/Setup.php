@@ -70,6 +70,7 @@ class Setup extends AbstractSetup
     public function upgrade104010Step1()
     {
         /** @noinspection SqlResolve */
+        /** @noinspection SqlWithoutWhere */
         $this->db()->query(
             "
                 UPDATE xf_user_option

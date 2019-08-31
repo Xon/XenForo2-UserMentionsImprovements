@@ -9,7 +9,7 @@ use XF\Mvc\Entity\Repository;
 class UserMentions extends Repository
 {
     /**
-     * @param \XF\Entity\UserGroup $userGroup
+     * @param UserGroup $userGroup
      * @return \XF\Mvc\Entity\ArrayCollection
      */
     public function getMembersOfUserGroup(UserGroup $userGroup)
@@ -20,8 +20,8 @@ class UserMentions extends Repository
     }
 
     /**
-     * @param array                       $users
-     * @param \XF\Entity\UserGroup[]|null $mentionedUserGroups
+     * @param array            $users
+     * @param UserGroup[]|null $mentionedUserGroups
      * @return array
      */
     public function mergeUserGroupMembersIntoUsersArray(array $users, $mentionedUserGroups)

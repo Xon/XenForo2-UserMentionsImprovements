@@ -23,6 +23,7 @@ class Formatter extends XFCP_Formatter
         $string = parent::linkStructuredTextMentions($string);
         $string = $this->moveHtmlToPlaceholders($string, $restorePlaceholders);
 
+        /** @noinspection RegExpRedundantEscape */
         $string = preg_replace_callback(
             '#(?<=^|\s|[\](,]|--|@)@UG\[(\d+):(\'|"|&quot;|)(.*)\\2\]#iU',
             function (array $match) {
