@@ -3,12 +3,15 @@
 		  arg-extra="!"
 		  >
 	<xf:if is="$extra.sv_group">
-		{{ phrase('sv_mentioned_as_y_group', {
-			'title': '<a href="' . link('members', '', {'ug':$extra.sv_group.id}) . '" class="PopupItemLink">' . $extra.sv_group.title . '</a>'
-		}) }}
+		<xf:set var="$group" value="{{ $extra.sv_group }}"/>
 	<xf:elseif is="$extra.taggedGroupId" />
+		<xf:set var="$group" value="{{ {'id': $extra.taggedGroupId, 'title': $extra.taggedGroup} }}"/>
+	</xf:if>
+	<xf:if is="$group">
+		<xf:set var="$link" value="{{ link('members/usergroup', {'user_group_id':$group.id}) }}"/>
+		<xf:set var="$attributes">class="ug" data-xf-click='overlay' data-usergroup-id='{$group.id}' data-groupname='{$group.title|for_attr}'</xf:set>
 		{{ phrase('sv_mentioned_as_y_group', {
-			'title': '<a href="' . link('members', '', {'ug':$extra.sv_group.id}) . '" class="PopupItemLink">' . $extra.taggedGroup . '</a>'
+			'title': '<a href="' . $link . '" ' . $attributes .'>' . $group.title . '</a>'
 		}) }}
 	</xf:if>
 </xf:macro>
