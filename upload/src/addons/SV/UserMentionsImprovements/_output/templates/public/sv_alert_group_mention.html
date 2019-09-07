@@ -1,11 +1,29 @@
-<xf:if is="{$extra.sv_group}">
-    {{ phrase('sv_mentioned_as_y_group', {
-        'title': {$extra.sv_group.title}, 
-        'group': link('members', '', 'ug={$extra.sv_group.id}')}) 
-    }}
-<xf:elseif is="{$extra.taggedGroupId}" />
-    {{ phrase('sv_mentioned_as_y_group', {
-        'title': {$extra.taggedGroup}, 
-        'group': link('members', '', 'ug={$extra.taggedGroupId}')}) 
-    }}
-</xf:if>
+<xf:macro name="alert" 
+		  arg-alert="!"
+		  arg-extra="!"
+		  >
+	<xf:if is="$extra.sv_group">
+		{{ phrase('sv_mentioned_as_y_group', {
+			'title': '<a href="' . link('members', '', {'ug':$extra.sv_group.id}) . '" class="PopupItemLink">' . $extra.sv_group.title . '</a>'
+		}) }}
+	<xf:elseif is="$extra.taggedGroupId" />
+		{{ phrase('sv_mentioned_as_y_group', {
+			'title': '<a href="' . link('members', '', {'ug':$extra.sv_group.id}) . '" class="PopupItemLink">' . $extra.taggedGroup . '</a>'
+		}) }}
+	</xf:if>
+</xf:macro>
+
+<xf:macro name="push" 
+		  arg-alert="!"
+		  arg-extra="!"
+		  >
+	<xf:if is="$extra.sv_group">
+		{{ phrase('sv_mentioned_as_y_group', {
+			'title': $extra.sv_group.title
+		}) }}
+	<xf:elseif is="$extra.taggedGroupId" />
+		{{ phrase('sv_mentioned_as_y_group', {
+			'title': $extra.taggedGroup
+		}) }}
+	</xf:if>
+</xf:macro>

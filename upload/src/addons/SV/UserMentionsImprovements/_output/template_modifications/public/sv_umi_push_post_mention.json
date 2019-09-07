@@ -1,0 +1,9 @@
+{
+    "template": "push_post_mention",
+    "description": "Extend mention with groups",
+    "execution_order": 10,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "/$/",
+    "replace": "$0\n<xf:macro template=\"sv_alert_group_mention\" \n\t\t  name=\"push\" \n\t\t  arg-alert=\"{$alert}\"\n\t\t  arg-extra=\"{$extra}\"\n\t\t  />"
+}

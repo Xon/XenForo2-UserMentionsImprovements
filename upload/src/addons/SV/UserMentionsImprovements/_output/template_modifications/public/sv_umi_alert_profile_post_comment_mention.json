@@ -5,5 +5,5 @@
     "enabled": true,
     "action": "preg_replace",
     "find": "/$/",
-    "replace": "$0\n<xf:include template=\"sv_alert_group_mention\" />"
+    "replace": "$0\n<xf:macro template=\"sv_alert_group_mention\" \n\t\t  name=\"alert\" \n\t\t  arg-alert=\"{$alert}\"\n\t\t  arg-extra=\"{$extra}\"\n\t\t  />"
 }
