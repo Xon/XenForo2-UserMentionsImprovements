@@ -99,7 +99,7 @@ class Notifier extends XFCP_Notifier
         switch ($type)
         {
             case 'quote':
-                if (\XF::options()->sv_limit_quote_emails)
+                if ($userIds && \XF::options()->sv_limit_quote_emails)
                 {
                     $db = \XF::db();
                     $ids = [];
@@ -114,12 +114,12 @@ class Notifier extends XFCP_Notifier
                     }
                     /** @var int[] $userIds */
                     /** @noinspection SqlResolve */
-                    $userIds = $db->fetchAllColumn("
+                    $userIds = $ids ? $db->fetchAllColumn("
                         SELECT DISTINCT a.id
                         FROM ( " . join(' union ', $ids) . " ) a
                         LEFT JOIN xf_thread_user_post ON (xf_thread_user_post.thread_id = {$threadId} AND xf_thread_user_post.user_id = a.id)
                         WHERE xf_thread_user_post.user_id IS null
-                    ");
+                    ") : [];
                 }
                 $users = $this->getUsers($userIds);
                 foreach($userIds as $userId)
