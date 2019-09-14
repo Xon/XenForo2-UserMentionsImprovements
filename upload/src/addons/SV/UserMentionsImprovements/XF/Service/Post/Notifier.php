@@ -3,10 +3,46 @@
 namespace SV\UserMentionsImprovements\XF\Service\Post;
 
 use SV\UserMentionsImprovements\Globals;
+use SV\UserMentionsImprovements\XF\Entity\User;
 
 class Notifier extends XFCP_Notifier
 {
     protected $doCleanup = true;
+
+    /**
+     * @param int[] $userIds
+     * @return User[]
+     */
+    public function getUsers(array $userIds = null)
+    {
+        if (!$userIds)
+        {
+            return [];
+        }
+        $em = \XF::em();
+        /** @var User[] $users */
+        $users = [];
+        $userIdsToFetch = [];
+        foreach($userIds as $userId)
+        {
+            $user = $em->findCached('XF:User', $userId);
+            if ($user)
+            {
+                $users[$userId] = $user;
+            }
+            else
+            {
+                $userIdsToFetch[] = $userId;
+            }
+        }
+
+        if ($userIdsToFetch)
+        {
+            $users = \array_merge($users, $em->findByIds('XF:User', $userIdsToFetch)->toArray());
+        }
+
+        return $users;
+    }
 
     public function notifyAndEnqueue($timeLimit = null)
     {
@@ -42,51 +78,76 @@ class Notifier extends XFCP_Notifier
 
     public function addNotification($type, $userId, $alert = true, $email = false)
     {
-        $user = Globals::getUser($userId);
-
-        $this->_addExtraAlertInfo($type, $user);
-
         parent::addNotification($type, $userId, $alert, $email);
+
+        $this->_addExtraAlertInfo($type, [$userId]);
     }
 
     public function addNotifications($type, array $userIds, $alert = true, $email = false)
     {
         parent::addNotifications($type, $userIds, $alert, $email);
 
-        $users = Globals::getUsers($userIds);
-
-        foreach ($users AS $user)
-        {
-            $this->_addExtraAlertInfo($type, $user);
-        }
+        $this->_addExtraAlertInfo($type, $userIds);
     }
 
     /**
-     * @param \SV\UserMentionsImprovements\XF\Entity\User $user
-     * @param string                                      $type
+     * @param string $type
+     * @param int[]  $userIds
      */
-    protected function _addExtraAlertInfo($type, $user)
+    protected function _addExtraAlertInfo($type, array $userIds)
     {
         switch ($type)
         {
             case 'quote':
-                if (isset(Globals::$userGroupMentionedIds[$user->user_id]))
+                if (\XF::options()->sv_limit_quote_emails)
                 {
-                    $this->notifyData[$type][$user->user_id]['group'] = Globals::$userGroupMentionedIds[$user->user_id];
+                    $db = \XF::db();
+                    $ids = [];
+                    $threadId = $this->post->thread_id;
+                    foreach ($userIds as $id)
+                    {
+                        $id = intval($id);
+                        if ($id)
+                        {
+                            $ids[] = "SELECT $id AS id";
+                        }
+                    }
+                    /** @var int[] $userIds */
+                    /** @noinspection SqlResolve */
+                    $userIds = $db->fetchAllColumn("
+                        SELECT DISTINCT a.id
+                        FROM ( " . join(' union ', $ids) . " ) a
+                        LEFT JOIN xf_thread_user_post ON (xf_thread_user_post.thread_id = {$threadId} AND xf_thread_user_post.user_id = a.id)
+                        WHERE xf_thread_user_post.user_id IS null
+                    ");
                 }
-                if ($user->receivesQuoteEmails())
+                $users = $this->getUsers($userIds);
+                foreach($userIds as $userId)
                 {
-                    $this->notifyData[$type][$user->user_id]['email'] = true;
+                    if (isset(Globals::$userGroupMentionedIds[$userId]))
+                    {
+                        $this->notifyData[$type][$userId]['group'] = Globals::$userGroupMentionedIds[$userId];
+                    }
+                    $user = isset($users[$userId]) ? $users[$userId] : null;
+                    if ($user && $user->receivesQuoteEmails())
+                    {
+                        $this->notifyData[$type][$userId]['email'] = true;
+                    }
                 }
                 break;
             case 'mention':
-                if (isset(Globals::$userGroupMentionedIds[$user->user_id]))
+                $users = $this->getUsers($userIds);
+                foreach($userIds as $userId)
                 {
-                    $this->notifyData[$type][$user->user_id]['group'] = Globals::$userGroupMentionedIds[$user->user_id];
-                }
-                if ($user->receivesMentionEmails())
-                {
-                    $this->notifyData[$type][$user->user_id]['email'] = true;
+                    if (isset(Globals::$userGroupMentionedIds[$userId]))
+                    {
+                        $this->notifyData[$type][$userId]['group'] = Globals::$userGroupMentionedIds[$userId];
+                    }
+                    $user = isset($users[$userId]) ? $users[$userId] : null;
+                    if ($user && $user->receivesMentionEmails())
+                    {
+                        $this->notifyData[$type][$userId]['email'] = true;
+                    }
                 }
                 break;
         }
