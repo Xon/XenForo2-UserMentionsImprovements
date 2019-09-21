@@ -9,23 +9,27 @@ use XF\Mvc\Entity\Structure;
  * @property bool sv_mentionable
  * @property bool sv_private
  * @property int  sv_avatar_edit_date
- *
  * @property string sv_avatar_s
  * @property string sv_avatar_l
+ *
+ * GETTER
+ * @property string sv_avatar_s_url
+ * @property string sv_avatar_l_url
  * @property string icon_html
  */
 class UserGroup extends XFCP_UserGroup
 {
     public function getSvAvatarS()
     {
-        if ($this->getValue('sv_avatar_s'))
+        if ($this->sv_avatar_s)
         {
-            $val = $this->getValue('sv_avatar_s') . '?c=' . $this->sv_avatar_edit_date;
+            $val = $this->sv_avatar_s . '?c=' . $this->sv_avatar_edit_date;
         }
         else
         {
-            $val = \XF::options()->sv_default_group_avatar_s;
+            $val = \XF::options()->sv_default_group_avatar_s ?: '';
         }
+        $val = trim($val);
 
         if (!$val)
         {
@@ -33,19 +37,21 @@ class UserGroup extends XFCP_UserGroup
         }
 
         $func = \XF::$versionId >= 2010370 ? 'func' : 'fn';
+
         return $this->app()->templater()->$func('base_url', [$val]);
     }
 
     public function getSvAvatarL()
     {
-        if ($this->getValue('sv_avatar_l'))
+        if ($this->sv_avatar_l)
         {
-            $val = $this->getValue('sv_avatar_l') . '?c=' . $this->sv_avatar_edit_date;
+            $val = $this->sv_avatar_l . '?c=' . $this->sv_avatar_edit_date;
         }
         else
         {
-            $val = \XF::options()->sv_default_group_avatar_l;
+            $val = \XF::options()->sv_default_group_avatar_l ?: '';
         }
+        $val = trim($val);
 
         if (!$val)
         {
@@ -53,6 +59,7 @@ class UserGroup extends XFCP_UserGroup
         }
 
         $func = \XF::$versionId >= 2010370 ? 'func' : 'fn';
+
         return $this->app()->templater()->$func('base_url', [$val]);
     }
 
@@ -60,19 +67,10 @@ class UserGroup extends XFCP_UserGroup
     {
         $link = \XF::app()->router()->buildLink('members/usergroup', $this);
         /** @noinspection HtmlUnknownTarget */
-        $image = sprintf(
-            '<img src="%s" alt="%s" />',
-            $this->sv_avatar_s,
-            htmlspecialchars($this->title)
-        );
+        $image = sprintf('<img src="%s" alt="%s" />', $this->sv_avatar_s_url, htmlspecialchars($this->title));
 
         /** @noinspection HtmlUnknownTarget */
-        return sprintf(
-            '<a class="%s" href="%s">%s</a>',
-            'avatar avatar--xxs',
-            $link,
-            $image
-        );
+        return sprintf('<a class="%s" href="%s">%s</a>', 'avatar avatar--xxs', $link, $image);
     }
 
     public function canView()
@@ -93,7 +91,7 @@ class UserGroup extends XFCP_UserGroup
             return false;
         }
 
-        if ($this->sv_private && \XF::visitor()->isMemberOf($this->user_group_id))
+        if ($this->sv_private && $visitor->isMemberOf($this->user_group_id))
         {
             return false;
         }
@@ -122,8 +120,8 @@ class UserGroup extends XFCP_UserGroup
         $structure->columns['sv_avatar_l'] = ['type' => Entity::STR, 'default' => null, 'nullable' => true];
         $structure->columns['sv_avatar_edit_date'] = ['type' => Entity::UINT, 'default' => \XF::$time];
 
-        $structure->getters['sv_avatar_s'] = true;
-        $structure->getters['sv_avatar_l'] = true;
+        $structure->getters['sv_avatar_s_url'] = true;
+        $structure->getters['sv_avatar_l_url'] = true;
         $structure->getters['icon_html'] = true;
 
         return $structure;
