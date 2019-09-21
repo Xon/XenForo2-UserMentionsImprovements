@@ -19,7 +19,7 @@ use XF\Mvc\Entity\Structure;
  */
 class UserGroup extends XFCP_UserGroup
 {
-    public function getSvAvatarS()
+    public function getSvAvatarSUrl()
     {
         if ($this->sv_avatar_s)
         {
@@ -41,7 +41,7 @@ class UserGroup extends XFCP_UserGroup
         return $this->app()->templater()->$func('base_url', [$val]);
     }
 
-    public function getSvAvatarL()
+    public function getSvAvatarLUrl()
     {
         if ($this->sv_avatar_l)
         {
