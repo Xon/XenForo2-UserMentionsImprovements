@@ -8,7 +8,40 @@ use XF\BbCode\RuleSet;
 class MentionUsers extends XFCP_MentionUsers
 {
     protected $mentionedUserGroups = [];
+    /**
+     * @var array
+     */
+    protected $placeholders;
 
+    /**
+     * @param string $message
+     * @param string $regex
+     * @return null|string
+     */
+    protected function setupPlaceholders($message, $regex)
+    {
+        $this->placeholders = [];
+
+        return preg_replace_callback(
+            $regex, function ($match) {
+            $replace = "\x1A" . count($this->placeholders) . "\x1A";
+            $this->placeholders[$replace] = $match[0];
+
+            return $replace;
+        }, $message
+        );
+    }
+
+    protected function restorePlaceholders($message)
+    {
+        if ($this->placeholders)
+        {
+            $message = strtr($message, $this->placeholders);
+            $this->placeholders = [];
+        }
+
+        return $message;
+    }
     /**
      * XF2.1.0
      *
@@ -17,9 +50,19 @@ class MentionUsers extends XFCP_MentionUsers
      */
     public function filterFinal($string)
     {
+        $string = $this->extractMentionedUserGroups($string);
+
+        if ($this->mentionedUserGroups)
+        {
+            $string = $this->setupPlaceholders($string,
+                '#\[(usergroup)(=[^\]]*)?](.*)\[/\\1]#siU'
+            );
+        }
+
         /** @noinspection PhpUndefinedMethodInspection */
         $string = parent::filterFinal($string);
-        $string = $this->extractMentionedUserGroups($string);
+
+        $string = $this->restorePlaceholders($string);
 
         return $string;
     }
@@ -35,8 +78,18 @@ class MentionUsers extends XFCP_MentionUsers
      */
     public function filterInput($string, Parser $parser, RuleSet $rules, array &$options)
     {
-        $string = parent::filterInput($string, $parser, $rules, $options);
         $string = $this->extractMentionedUserGroups($string);
+
+        if ($this->mentionedUserGroups)
+        {
+            $string = $this->setupPlaceholders($string,
+                '#\[(usergroup)(=[^\]]*)?](.*)\[/\\1]#siU'
+            );
+        }
+
+        $string = parent::filterInput($string, $parser, $rules, $options);
+
+        $string = $this->restorePlaceholders($string);
 
         return $string;
     }
