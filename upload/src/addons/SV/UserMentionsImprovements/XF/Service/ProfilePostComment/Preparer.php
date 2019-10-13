@@ -126,7 +126,6 @@ class Preparer extends XFCP_Preparer
      */
     protected function getMessagePreparer($format = true)
     {
-        /** @noinspection PhpUndefinedMethodInspection */
         $preparer = parent::getMessagePreparer($format);
         $this->processor = $preparer;
 

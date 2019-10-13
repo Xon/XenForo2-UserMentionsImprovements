@@ -35,7 +35,6 @@ class MentionUsers extends XFCP_MentionUsers
      */
     public function filterInput($string, Parser $parser, RuleSet $rules, array &$options)
     {
-        /** @noinspection PhpUndefinedMethodInspection */
         $string = parent::filterInput($string, $parser, $rules, $options);
         $string = $this->extractMentionedUserGroups($string);
 
