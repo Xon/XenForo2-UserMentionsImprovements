@@ -121,22 +121,6 @@ class Preparer extends XFCP_Preparer
     }
 
     /**
-     * XF2.0 support
-     *
-     * @param bool $format
-     * @return \SV\UserMentionsImprovements\XF\Service\StructuredText\Preparer
-     */
-    protected function getStructuredTextPreparer($format = true)
-    {
-        /** @noinspection PhpUndefinedMethodInspection */
-        $this->processor = parent::getStructuredTextPreparer($format);
-
-        return $this->processor;
-    }
-
-    /**
-     * XF2.1 support
-     *
      * @param bool $format
      * @return \XF\Service\Message\Preparer
      */

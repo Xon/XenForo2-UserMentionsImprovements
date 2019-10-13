@@ -21,7 +21,7 @@ class UpdatePermissions extends XFCP_UpdatePermissions
      */
     protected function writeEntry(Permission $permission, $value, Entity $entry = null)
     {
-        $oldState = $this->userGroup && $entry ? $entry->toArray() : null;
+        $oldState = ($this->userGroup && $entry) ? $entry->toArray() : null;
 
         $newEntry = parent::writeEntry($permission, $value, $entry);
 
@@ -49,20 +49,6 @@ class UpdatePermissions extends XFCP_UpdatePermissions
             if (!$this->hadChanges)
             {
                 return;
-            }
-            if (\XF::$versionId < 2010000)
-            {
-                /** @var \XF\Repository\PermissionCombination $combinationRepo */
-                $combinationRepo = $this->repository('XF:PermissionCombination');
-                $combinations = $combinationRepo->getPermissionCombinationsForUserGroup($this->userGroup->user_group_id);
-                if (count($combinations) > 8)
-                {
-                    $combinationIds = $combinations->pluckNamed('permission_combination_id');
-                    // too much to build inline
-                    $this->app->jobManager()->enqueueUnique('permissionRebuild', 'XF:PermissionRebuild', ['combinationIds' => $combinationIds]);
-
-                    return;
-                }
             }
         }
 

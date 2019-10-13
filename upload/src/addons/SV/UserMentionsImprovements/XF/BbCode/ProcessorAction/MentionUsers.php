@@ -10,7 +10,7 @@ class MentionUsers extends XFCP_MentionUsers
     protected $mentionedUserGroups = [];
 
     /**
-     * XF2.0- XF2.1
+     * XF2.1.0
      *
      * @param $string
      * @return string|null
