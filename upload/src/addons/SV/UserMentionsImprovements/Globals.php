@@ -16,5 +16,5 @@ class Globals
     /**
      * Private constructor, use statically.
      */
-    private function __construct() {}
+    private function __construct() { }
 }

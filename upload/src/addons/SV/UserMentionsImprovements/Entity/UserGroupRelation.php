@@ -20,21 +20,21 @@ class UserGroupRelation extends Entity
         $structure->primaryKey = ['user_id', 'user_group_id'];
         $structure->columns = [
             'user_id'       => [
-                'type' => self::UINT
+                'type' => self::UINT,
             ],
             'user_group_id' => [
-                'type' => self::UINT
+                'type' => self::UINT,
             ],
             'is_primary'    => [
-                'type' => self::BOOL
-            ]
+                'type' => self::BOOL,
+            ],
         ];
         $structure->relations = [
             'User' => [
                 'entity'     => 'XF:User',
                 'type'       => self::TO_MANY,
-                'conditions' => 'user_id'
-            ]
+                'conditions' => 'user_id',
+            ],
         ];
 
         return $structure;

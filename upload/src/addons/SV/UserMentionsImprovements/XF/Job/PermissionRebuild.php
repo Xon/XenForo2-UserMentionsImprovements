@@ -9,10 +9,10 @@ namespace SV\UserMentionsImprovements\XF\Job;
 class PermissionRebuild extends XFCP_PermissionRebuild
 {
     protected $extraDefaultData = [
-        'steps' => 0,
-        'combinationId' => 0,
-        'cleaned' => false,
-        'batch' => 100,
+        'steps'          => 0,
+        'combinationId'  => 0,
+        'cleaned'        => false,
+        'batch'          => 100,
         'combinationIds' => [],
     ];
 
@@ -84,6 +84,7 @@ class PermissionRebuild extends XFCP_PermissionRebuild
     {
         $actionPhrase = \XF::phrase('rebuilding');
         $typePhrase = \XF::phrase('permissions');
+
         return sprintf('%s... %s %s', $actionPhrase, $typePhrase, str_repeat('. ', $this->data['steps']));
     }
 }

@@ -4,6 +4,7 @@ namespace SV\UserMentionsImprovements\Str;
 
 /**
  * This is basically a copy of the \XF\Str\MentionFormatter class, with changes for UserGroups instead.
+ *
  * @package SV\UserMentionsImprovements\Str
  */
 class UserGroupMentionFormatter
@@ -125,11 +126,10 @@ class UserGroupMentionFormatter
     {
         $min = 2;
 
+        /** @noinspection RegExpRedundantEscape */
         if (!preg_match_all(
             '#(?<=^|\s|[\](,/\'"]|--)@(?!\[|\s)(([^\s@]|(?<![\s\](,-])@| ){' . $min . '}((?>[:,.!?](?=[^\s:,.!?[\]()])|' . $this->getTagEndPartialRegex(true) . '+?))*)#iu',
-            $message, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER
-        )
-        )
+            $message, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER))
         {
             return [];
         }
@@ -202,7 +202,7 @@ class UserGroupMentionFormatter
             $userGroupInfo = [
                 'user_group_id' => $userGroup['user_group_id'],
                 'title'         => $userGroup['title'],
-                'lower'         => utf8_strtolower($userGroup['title'])
+                'lower'         => utf8_strtolower($userGroup['title']),
             ];
 
             foreach ($matchKeys AS $key)

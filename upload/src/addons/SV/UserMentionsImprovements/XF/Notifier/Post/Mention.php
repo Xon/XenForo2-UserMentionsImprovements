@@ -25,10 +25,10 @@ class Mention extends XFCP_Mention
         }
 
         $params = [
-            'post'  => $this->post,
+            'post'     => $this->post,
             'thread'   => $this->post->Thread,
             'forum'    => $this->post->Thread->Forum,
-            'receiver' => $user
+            'receiver' => $user,
         ];
 
         $this->app->mailer()->newMail()

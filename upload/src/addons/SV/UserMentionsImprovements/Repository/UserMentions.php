@@ -57,7 +57,7 @@ class UserMentions extends Repository
             $users[$userId] = [
                 'user_id'  => $additionalUser['user_id'],
                 'username' => $additionalUser['username'],
-                'lower'    => strtolower($additionalUser['username'])
+                'lower'    => strtolower($additionalUser['username']),
             ];
 
             $group = $mentionedUserGroups[$additionalUser['user_group_id']];
@@ -66,7 +66,7 @@ class UserMentions extends Repository
         }
 
         Globals::$userGroupMentionedIds = $mentionedUgUsers;
-        \XF::runOnce('userMentionImprovementCleanup', function() {
+        \XF::runOnce('userMentionImprovementCleanup', function () {
             Globals::$userGroupMentionedIds = [];
         });
 

@@ -25,7 +25,7 @@ class Listener
                     'replace'             => null,
                     'callback'            => null,
                     'trimAfter'           => 0,
-                    'stopBreakConversion' => false
+                    'stopBreakConversion' => false,
                 ]
             );
         }

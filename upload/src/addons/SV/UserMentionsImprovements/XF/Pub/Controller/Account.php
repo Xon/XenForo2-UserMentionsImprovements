@@ -52,7 +52,7 @@ class Account extends XFCP_Account
         {
             $input = $this->filter(
                 [
-                    'option' => $options
+                    'option' => $options,
                 ]
             );
 

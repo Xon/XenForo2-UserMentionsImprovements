@@ -23,7 +23,6 @@ class Preparer extends XFCP_Preparer
     /**
      * @param string $message
      * @param bool   $checkValidity
-     *
      * @return string
      */
     public function prepare($message, $checkValidity = true)

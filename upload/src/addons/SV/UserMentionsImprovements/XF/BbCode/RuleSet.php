@@ -14,7 +14,7 @@ class RuleSet extends XFCP_RuleSet
                 'hasOption'    => true,
                 'plain'        => true,
                 'stopSmilies'  => true,
-                'stopAutoLink' => true
+                'stopAutoLink' => true,
             ]
         );
     }

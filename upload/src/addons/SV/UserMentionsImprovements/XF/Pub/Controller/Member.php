@@ -20,6 +20,7 @@ class Member extends XFCP_Member
             {
                 return $this->noPermission();
             }
+
             return $this->notFound();
         }
 
@@ -29,7 +30,7 @@ class Member extends XFCP_Member
 
         $viewParams = [
             'users'     => $users,
-            'userGroup' => $userGroup
+            'userGroup' => $userGroup,
         ];
 
         return $this->view('SV\UserMentionsImprovements:Member\UserGroup', 'sv_members_usergroup', $viewParams);

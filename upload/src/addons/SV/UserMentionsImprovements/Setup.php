@@ -3,12 +3,12 @@
 namespace SV\UserMentionsImprovements;
 
 use SV\Utils\InstallerHelper;
-use XF\Entity\User;
 use XF\AddOn\AbstractSetup;
 use XF\AddOn\StepRunnerInstallTrait;
 use XF\AddOn\StepRunnerUninstallTrait;
 use XF\AddOn\StepRunnerUpgradeTrait;
 use XF\Db\Schema\Alter;
+use XF\Entity\User;
 
 class Setup extends AbstractSetup
 {
@@ -22,11 +22,11 @@ class Setup extends AbstractSetup
     {
         $this->schemaManager()->alterTable(
             'xf_user_group', function (Alter $table) {
-            $this->addOrChangeColumn($table,'sv_mentionable', 'bool')->setDefault(0);
-            $this->addOrChangeColumn($table,'sv_private', 'bool')->setDefault(0);
-            $this->addOrChangeColumn($table,'sv_avatar_s', 'text')->nullable()->setDefault(null);
-            $this->addOrChangeColumn($table,'sv_avatar_l', 'text')->nullable()->setDefault(null);
-            $this->addOrChangeColumn($table,'sv_avatar_edit_date', 'int')->setDefault(0);
+            $this->addOrChangeColumn($table, 'sv_mentionable', 'bool')->setDefault(0);
+            $this->addOrChangeColumn($table, 'sv_private', 'bool')->setDefault(0);
+            $this->addOrChangeColumn($table, 'sv_avatar_s', 'text')->nullable()->setDefault(null);
+            $this->addOrChangeColumn($table, 'sv_avatar_l', 'text')->nullable()->setDefault(null);
+            $this->addOrChangeColumn($table, 'sv_avatar_edit_date', 'int')->setDefault(0);
         }
         );
         $this->db()->query(
@@ -39,14 +39,14 @@ class Setup extends AbstractSetup
 
         $this->schemaManager()->alterTable(
             'xf_user_option', function (Alter $table) {
-            $this->addOrChangeColumn($table,'sv_email_on_mention', 'bool')->setDefault(0);
-            $this->addOrChangeColumn($table,'sv_email_on_quote', 'bool')->setDefault(0);
+            $this->addOrChangeColumn($table, 'sv_email_on_mention', 'bool')->setDefault(0);
+            $this->addOrChangeColumn($table, 'sv_email_on_quote', 'bool')->setDefault(0);
         }
         );
 
         $this->applyRegistrationDefaults([
             'sv_email_on_mention' => 0,
-            'sv_email_on_quote' => 0,
+            'sv_email_on_quote'   => 0,
         ]);
     }
 

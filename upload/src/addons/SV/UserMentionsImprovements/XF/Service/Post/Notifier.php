@@ -23,7 +23,7 @@ class Notifier extends XFCP_Notifier
         /** @var User[] $users */
         $users = [];
         $userIdsToFetch = [];
-        foreach($userIds as $userId)
+        foreach ($userIds as $userId)
         {
             $user = $em->findCached('XF:User', $userId);
             if ($user)
@@ -122,7 +122,7 @@ class Notifier extends XFCP_Notifier
                     ") : [];
                 }
                 $users = $this->getUsers($userIds);
-                foreach($userIds as $userId)
+                foreach ($userIds as $userId)
                 {
                     if (isset(Globals::$userGroupMentionedIds[$userId]))
                     {
@@ -137,7 +137,7 @@ class Notifier extends XFCP_Notifier
                 break;
             case 'mention':
                 $users = $this->getUsers($userIds);
-                foreach($userIds as $userId)
+                foreach ($userIds as $userId)
                 {
                     if (isset(Globals::$userGroupMentionedIds[$userId]))
                     {

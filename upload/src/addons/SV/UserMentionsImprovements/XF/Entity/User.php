@@ -8,7 +8,6 @@ use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
 
 /**
- *
  * @property UserGroupRelation UserGroupRelations
  */
 class User extends XFCP_User
@@ -83,7 +82,7 @@ class User extends XFCP_User
         $structure->relations['UserGroupRelations'] = [
             'entity'     => 'SV\UserMentionsImprovements:UserGroupRelation',
             'type'       => Entity::TO_ONE,
-            'conditions' => 'user_id'
+            'conditions' => 'user_id',
         ];
 
         return $structure;

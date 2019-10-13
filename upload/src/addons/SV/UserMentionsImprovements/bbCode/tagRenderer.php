@@ -11,7 +11,7 @@ class tagRenderer
     protected $renderer;
     /** @var string */
     protected $type;
-    /** @var bool  */
+    /** @var bool */
     protected $canViewPublicGroups;
 
     /**
@@ -41,7 +41,7 @@ class tagRenderer
         $this->renderer->addTag(
             'usergroup',
             [
-                'callback' => $callback
+                'callback' => $callback,
             ]
         );
     }
@@ -49,7 +49,7 @@ class tagRenderer
     /**
      * @param int    $userGroupId
      * @param string $css
-     * @param string $link HTML escaped text
+     * @param string $link    HTML escaped text
      * @param string $content HTML escaped text
      * @return string
      */

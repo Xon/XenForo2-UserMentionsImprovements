@@ -77,7 +77,6 @@ class Preparer extends XFCP_Preparer
      * @param string $message
      * @param bool   $format
      * @param bool   $checkValidity
-     *
      * @return bool
      */
     public function setMessage($message, $format = true, $checkValidity = true)
@@ -99,7 +98,6 @@ class Preparer extends XFCP_Preparer
 
     /**
      * @param bool $format
-     *
      * @return \XF\Service\Message\Preparer
      */
     protected function getMessagePreparer($format = true)

@@ -13,7 +13,7 @@ class UserGroup extends XFCP_UserGroup
                 'sv_mentionable' => 'bool',
                 'sv_private'     => 'bool',
                 'sv_avatar_s'    => 'str',
-                'sv_avatar_l'    => 'str'
+                'sv_avatar_l'    => 'str',
             ]
         );
 

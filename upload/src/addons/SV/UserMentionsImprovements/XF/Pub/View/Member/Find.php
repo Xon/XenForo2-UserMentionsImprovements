@@ -17,7 +17,7 @@ class Find extends XFCP_Find
                     'id'       => $usergroup->user_group_id,
                     'iconHtml' => $usergroup->icon_html,
                     'text'     => $usergroup->title,
-                    'q'        => $this->params['q']
+                    'q'        => $this->params['q'],
                 ]
             );
         }

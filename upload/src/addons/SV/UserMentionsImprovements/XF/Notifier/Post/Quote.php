@@ -25,10 +25,10 @@ class Quote extends XFCP_Quote
         }
 
         $params = [
-            'post'  => $this->post,
+            'post'     => $this->post,
             'thread'   => $this->post->Thread,
             'forum'    => $this->post->Thread->Forum,
-            'receiver' => $user
+            'receiver' => $user,
         ];
 
         $this->app->mailer()->newMail()

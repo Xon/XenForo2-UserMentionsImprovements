@@ -53,6 +53,7 @@ class MentionUsers extends XFCP_MentionUsers
         if (!\is_callable([$formatter, 'getUserGroupMentionFormatter']))
         {
             \XF::logError('Add-on conflict detected, XF\Str\Formatter is not extended as expected', true);
+
             return $string;
         }
         /** @var \SV\UserMentionsImprovements\Str\UserGroupMentionFormatter $userGroupMentions */

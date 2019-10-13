@@ -53,7 +53,7 @@ class Mention extends AbstractNotifier
 
         $params = [
             'profilePostComment' => $this->content,
-            'receiver'           => $user
+            'receiver'           => $user,
         ];
 
         $this->app->mailer()->newMail()
