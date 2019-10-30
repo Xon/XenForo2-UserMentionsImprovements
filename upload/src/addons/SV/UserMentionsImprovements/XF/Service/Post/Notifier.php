@@ -44,12 +44,28 @@ class Notifier extends XFCP_Notifier
         return $users;
     }
 
+    public function shouldFullyDefer()
+    {
+        $this->ensureDataLoaded();
+
+        $nonUniqueUserCount = 0;
+        foreach($this->notifyData as $type => $data)
+        {
+            $nonUniqueUserCount = is_array($data) ? count($data) : 0;
+        }
+
+        return $nonUniqueUserCount > 3 * self::USERS_PER_CYCLE;
+    }
+
     public function notifyAndEnqueue($timeLimit = null)
     {
         $this->doCleanup = false;
         try
         {
-            //$this->notify($timeLimit);
+            if (!$this->shouldFullyDefer())
+            {
+                $this->notify($timeLimit === 3 ? 0.5 : $timeLimit);
+            }
             return $this->enqueueJobIfNeeded();
         }
         finally
