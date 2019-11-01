@@ -1,0 +1,9 @@
+{
+    "template": "helper_account",
+    "description": "Add additional account preferences",
+    "execution_order": 6186,
+    "enabled": true,
+    "action": "preg_replace",
+    "find": "#(email_options_row.*?)([\\t ]*</xf:checkboxrow>)#si",
+    "replace": "$1\n<xf:if is=\"$xf.visitor.canReceiveMentionEmails()\">\n\t<xf:option \n\t\t\t   name=\"option[sv_email_on_mention]\" \n\t\t\t   label=\"{{ phrase('sv_receive_email_when_mentioned') }}\" \n\t\t\t   checked=\"{$xf.visitor.Option.sv_email_on_mention}\" \n\t\t\t   />\n</xf:if>\n<xf:if is=\"$xf.visitor.canReceiveQuoteEmails()\">\n\t<xf:option \n\t\t\t   name=\"option[sv_email_on_quote]\" \n\t\t\t   label=\"{{ phrase('sv_receive_email_when_quoted') }}\" \n\t\t\t   checked=\"{$xf.visitor.Option.sv_email_on_quote}\" \n\t\t\t   />\n</xf:if>\n$2"
+}
