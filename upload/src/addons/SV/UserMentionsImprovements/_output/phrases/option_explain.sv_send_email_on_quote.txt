@@ -1,3 +1,3 @@
 Allows users to receive alert emails, when quoted.<br/>
-Requires the "Receive quote alert emails" permission<br/>
+Requires the "[UMI] Receive quote alert emails" permission<br/>
 Users still require opt-in under /account/preferences

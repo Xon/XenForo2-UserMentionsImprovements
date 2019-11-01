@@ -1,3 +1,3 @@
 Allows users to opt in to receiving emails when mentioned and/or quoted.<br/>
-Requires the "Receive mention alert emails" permission<br/>
+Requires the "[UMI] Receive mention alert emails" permission<br/>
 Users still require opt-in under /account/preferences
