@@ -1,0 +1,1 @@
+Block mention rendering if the user has no permissions to use mentions

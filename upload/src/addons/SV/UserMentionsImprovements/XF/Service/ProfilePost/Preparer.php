@@ -74,6 +74,26 @@ class Preparer extends XFCP_Preparer
     }
 
     /**
+     * @return \SV\UserMentionsImprovements\XF\Entity\User
+     */
+    protected function svGetUserEntity()
+    {
+        $user = null;
+        if ($this->profilePost->isValidRelation('User'))
+        {
+            $user = $this->profilePost->getRelation('User');
+        }
+
+        if (!$user)
+        {
+            $user = $this->repository('XF:User')->getGuestUser();
+        }
+
+        return $user;
+    }
+
+
+    /**
      * @param string $message
      * @param bool   $format
      * @return string
@@ -88,8 +108,7 @@ class Preparer extends XFCP_Preparer
             return $message;
         }
 
-        /** @var \SV\UserMentionsImprovements\XF\Entity\User $user */
-        $user = \XF::visitor();
+        $user = $this->svGetUserEntity();
         if ($user->canMention($this->profilePost))
         {
             $this->explicitMentionedUsers = $this->mentionedUsers;

@@ -21,12 +21,38 @@ class Preparer extends XFCP_Preparer
     protected $mentionedUserGroups = [];
 
     /**
+     * @return \SV\UserMentionsImprovements\XF\Entity\User
+     */
+    protected function svGetUserEntity()
+    {
+        $user = null;
+        if ($this->messageEntity->isValidRelation('User'))
+        {
+            $user = $this->messageEntity->getRelation('User');
+        }
+
+        if (!$user)
+        {
+            $user = $this->repository('XF:User')->getGuestUser();
+        }
+
+        return $user;
+    }
+
+    /**
      * @param string $message
      * @param bool   $checkValidity
      * @return string
      */
     public function prepare($message, $checkValidity = true)
     {
+        $user = $this->svGetUserEntity();
+
+        $canMention = $user->canMention($this->messageEntity);
+        if (!$canMention && \XF::options()->svBlockMentionRenderingOnNoPermissions)
+        {
+            $this->filters['mentions'] = false;
+        }
         $message = parent::prepare($message, $checkValidity);
 
         /** @var \SV\UserMentionsImprovements\XF\BbCode\ProcessorAction\MentionUsers|null $processor */
@@ -37,9 +63,7 @@ class Preparer extends XFCP_Preparer
             return $message;
         }
 
-        /** @var \SV\UserMentionsImprovements\XF\Entity\User $user */
-        $user = \XF::visitor();
-        if ($user->canMention($this->messageEntity))
+        if ($canMention)
         {
             $this->explicitMentionedUsers = $this->mentionedUsers;
 
