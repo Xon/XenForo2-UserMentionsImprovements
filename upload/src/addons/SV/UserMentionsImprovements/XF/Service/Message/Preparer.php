@@ -21,11 +21,16 @@ class Preparer extends XFCP_Preparer
     protected $mentionedUserGroups = [];
 
     /**
-     * @return \SV\UserMentionsImprovements\XF\Entity\User
+     * @return \SV\UserMentionsImprovements\XF\Entity\User|\XF\Entity\User
      */
     protected function svGetUserEntity()
     {
         $user = null;
+        if ($this->messageEntity === null)
+        {
+            return \XF::visitor();
+        }
+
         if ($this->messageEntity->isValidRelation('User'))
         {
             $user = $this->messageEntity->getRelation('User');
