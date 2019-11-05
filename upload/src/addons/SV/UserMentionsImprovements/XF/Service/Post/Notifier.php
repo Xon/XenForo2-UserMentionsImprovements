@@ -48,13 +48,29 @@ class Notifier extends XFCP_Notifier
     {
         $this->ensureDataLoaded();
 
-        $nonUniqueUserCount = 0;
-        foreach($this->notifyData as $type => $data)
+        if (isset($this->notifyData['threadStarter']) && is_array($this->notifyData['threadStarter']))
         {
-            $nonUniqueUserCount = is_array($data) ? count($data) : 0;
+            // most alerts should be just the thread starter
+            return count($this->notifyData['threadStarter']) > 4 * self::USERS_PER_CYCLE;
+        }
+        else if (isset($this->notifyData['followedUsers']) && is_array($this->notifyData['followedUsers']))
+        {
+            // most alerts should be to followers
+            return count($this->notifyData['followedUsers']) > 4 * self::USERS_PER_CYCLE;
         }
 
-        return $nonUniqueUserCount > 3 * self::USERS_PER_CYCLE;
+        // most users shouldn't be alerted
+        $limit = 6 * self::USERS_PER_CYCLE;
+        foreach ($this->notifyData as $type => $data)
+        {
+            $userCount = is_array($data) ? count($data) : 0;
+            if ($userCount > $limit)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function notifyAndEnqueue($timeLimit = null)
