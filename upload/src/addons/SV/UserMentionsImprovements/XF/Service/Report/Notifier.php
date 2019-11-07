@@ -34,6 +34,8 @@ class Notifier extends XFCP_Notifier
             $user->receivesMentionEmails())
         {
             $this->svReportMentionNotifier->sendEmail($user);
+
+            $this->userEmailed[$userId] = true;
         }
 
         return $alerted;
