@@ -38,7 +38,12 @@ class Notifier extends XFCP_Notifier
 
         if ($userIdsToFetch)
         {
-            $users = \array_merge($users, $em->findByIds('XF:User', $userIdsToFetch)->toArray());
+            /** @var User[] $newlyFetchedUsers */
+            $newlyFetchedUsers = $em->findByIds('XF:User', $userIdsToFetch);
+            foreach ($newlyFetchedUsers AS $newlyFetchedUser)
+            {
+                $users[$newlyFetchedUser->user_id] = $newlyFetchedUser;
+            }
         }
 
         return $users;
