@@ -38,9 +38,7 @@ class Notifier extends XFCP_Notifier
 
         if ($userIdsToFetch)
         {
-            /** @var User[] $newlyFetchedUsers */
-            $newlyFetchedUsers = $em->findByIds('XF:User', $userIdsToFetch);
-            $users += $em->findByIds('XF:User', $newlyFetchedUsers);
+            $users += $em->findByIds('XF:User', $userIdsToFetch)->toArray();
         }
 
         return $users;
