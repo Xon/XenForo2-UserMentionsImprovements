@@ -90,8 +90,13 @@ class UserGroup extends XFCP_UserGroup
             return false;
         }
 
-        if ($this->sv_private && $visitor->isMemberOf($this->user_group_id))
+        if ($this->sv_private)
         {
+            if ($visitor->isMemberOf($this->user_group_id))
+            {
+                return true;
+            }
+
             return false;
         }
 
