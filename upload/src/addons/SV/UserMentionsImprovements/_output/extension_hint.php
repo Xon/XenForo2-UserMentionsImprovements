@@ -20,6 +20,11 @@ namespace SV\UserMentionsImprovements\XF\BbCode
 	class XFCP_RuleSet extends \XF\BbCode\RuleSet {}
 }
 
+namespace SV\UserMentionsImprovements\XF\ChangeLog
+{
+	class XFCP_User extends \XF\ChangeLog\User {}
+}
+
 namespace SV\UserMentionsImprovements\XF\Entity
 {
 	class XFCP_User extends \XF\Entity\User {}
