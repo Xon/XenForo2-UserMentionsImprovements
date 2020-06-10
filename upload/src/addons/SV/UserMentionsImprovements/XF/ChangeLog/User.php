@@ -9,7 +9,7 @@ namespace SV\UserMentionsImprovements\XF\ChangeLog;
  */
 class User extends XFCP_User
 {
-    public function getLabelMap()
+    protected function getLabelMap()
     {
         $map = parent::getLabelMap();
         $map['sv_email_on_quote'] = 'sv_receive_email_when_quoted';
@@ -18,7 +18,7 @@ class User extends XFCP_User
         return $map;
     }
 
-    public function getFormatterMap()
+    protected function getFormatterMap()
     {
         $map = parent::getFormatterMap();
         $map['sv_email_on_quote'] = 'formatYesNo';
