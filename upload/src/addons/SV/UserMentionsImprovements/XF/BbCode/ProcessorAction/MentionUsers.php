@@ -108,7 +108,6 @@ class MentionUsers extends XFCP_MentionUsers
 
             return $string;
         }
-        /** @var \SV\UserMentionsImprovements\Str\UserGroupMentionFormatter $userGroupMentions */
         $userGroupMentions = $formatter->getUserGroupMentionFormatter();
 
         $string = $userGroupMentions->getMentionsBbCode($string);

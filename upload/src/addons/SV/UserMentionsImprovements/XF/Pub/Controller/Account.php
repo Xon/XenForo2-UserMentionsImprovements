@@ -34,8 +34,7 @@ class Account extends XFCP_Account
         return $form;
     }
 
-    protected function svEmailSaveProcess(/** @noinspection PhpUnusedParameterInspection */
-        User $visitor, FormAction $form)
+    protected function svEmailSaveProcess(User $visitor, FormAction $form)
     {
         /** @var \SV\UserMentionsImprovements\XF\Entity\User $visitor */
         $options = [];

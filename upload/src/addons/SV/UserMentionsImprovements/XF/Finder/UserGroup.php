@@ -11,12 +11,13 @@ class UserGroup extends XFCP_UserGroup
 {
     /**
      * @param string $title
-     * @return AbstractCollection
+     * @return $this
      */
     public function mentionableGroups($title)
     {
-        return $this
-            ->where('title', 'like', $this->escapeLike($title, '?%'))
-            ->where('sv_mentionable', 1);
+        $this->where('title', 'like', $this->escapeLike($title, '?%'))
+             ->where('sv_mentionable', 1);
+
+        return $this;
     }
 }

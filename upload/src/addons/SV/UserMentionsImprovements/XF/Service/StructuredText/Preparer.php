@@ -18,7 +18,6 @@ class Preparer extends XFCP_Preparer
 
             return $string;
         }
-        /** @var \SV\UserMentionsImprovements\Str\UserGroupMentionFormatter $mentions */
         $mentions = $formatter->getUserGroupMentionFormatter();
 
         $string = $mentions->getMentionsStructuredText($string);
