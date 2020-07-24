@@ -3,6 +3,8 @@
 
 namespace SV\UserMentionsImprovements\XF\Service\ProfilePostComment;
 
+use SV\UserMentionsImprovements\XF\Entity\User;
+
 class Preparer extends XFCP_Preparer
 {
     /**
@@ -86,7 +88,9 @@ class Preparer extends XFCP_Preparer
 
         if (!$user)
         {
-            $user = $this->repository('XF:User')->getGuestUser();
+            /** @var \XF\Repository\User $userRepo */
+            $userRepo = $this->repository('XF:User');
+            $user = $userRepo->getGuestUser();
         }
 
         return $user;
@@ -108,7 +112,8 @@ class Preparer extends XFCP_Preparer
             return $message;
         }
 
-        $user = $this->svGetUserEntity();
+        /** @var User $user */
+        $user = \SV\StandardLib\Helper::repo()->getUserEntity($this->comment);
         if ($user->canMention($this->comment))
         {
             $this->explicitMentionedUsers = $this->mentionedUsers;

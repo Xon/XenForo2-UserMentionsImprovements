@@ -3,6 +3,8 @@
 
 namespace SV\UserMentionsImprovements\XF\Service\Message;
 
+use SV\UserMentionsImprovements\XF\Entity\User;
+
 class Preparer extends XFCP_Preparer
 {
     /**
@@ -21,37 +23,14 @@ class Preparer extends XFCP_Preparer
     protected $mentionedUserGroups = [];
 
     /**
-     * @return \SV\UserMentionsImprovements\XF\Entity\User|\XF\Entity\User
-     */
-    protected function svGetUserEntity()
-    {
-        $user = null;
-        if ($this->messageEntity === null)
-        {
-            return \XF::visitor();
-        }
-
-        if ($this->messageEntity->isValidRelation('User'))
-        {
-            $user = $this->messageEntity->getRelation('User');
-        }
-
-        if (!$user)
-        {
-            $user = $this->repository('XF:User')->getGuestUser();
-        }
-
-        return $user;
-    }
-
-    /**
      * @param string $message
      * @param bool   $checkValidity
      * @return string
      */
     public function prepare($message, $checkValidity = true)
     {
-        $user = $this->svGetUserEntity();
+        /** @var User $user */
+        $user = \SV\StandardLib\Helper::repo()->getUserEntity($this->messageEntity) ?: \XF::visitor();
 
         $canMention = $user->canMention($this->messageEntity);
         if (!$canMention && \XF::options()->svBlockMentionRenderingOnNoPermissions)
