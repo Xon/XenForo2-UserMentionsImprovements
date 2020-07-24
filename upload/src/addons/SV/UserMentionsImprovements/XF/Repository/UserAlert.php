@@ -2,18 +2,17 @@
 
 namespace SV\UserMentionsImprovements\XF\Repository;
 
-use SV\UserMentionsImprovements\Globals;
-use XF\Entity\User;
-
-class UserAlert extends XFCP_UserAlert
+if (\XF::$versionId < 2020000)
 {
-    public function alert(User $receiver, $senderId, $senderName, $contentType, $contentId, $action, array $extra = [])
+    class UserAlert extends \SV\UserMentionsImprovements\XF\Repository\XF2\UserAlert
     {
-        if (isset(Globals::$userGroupMentionedIds[$receiver->user_id]) && $action === 'mention')
-        {
-            $extra['sv_group'] = Globals::$userGroupMentionedIds[$receiver->user_id];
-        }
 
-        return parent::alert($receiver, $senderId, $senderName, $contentType, $contentId, $action, $extra);
+    }
+}
+else
+{
+    class UserAlert extends \SV\UserMentionsImprovements\XF\Repository\XF22\UserAlert
+    {
+
     }
 }
