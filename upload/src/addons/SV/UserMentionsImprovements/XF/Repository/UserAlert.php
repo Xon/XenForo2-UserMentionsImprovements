@@ -4,15 +4,9 @@ namespace SV\UserMentionsImprovements\XF\Repository;
 
 if (\XF::$versionId < 2020000)
 {
-    class UserAlert extends \SV\UserMentionsImprovements\XF\Repository\XF2\UserAlert
-    {
-
-    }
+    \class_alias('SV\UserMentionsImprovements\XF\Repository\XF2\UserAlert', 'SV\UserMentionsImprovements\XF\Repository\UserAlert', false);
 }
 else
 {
-    class UserAlert extends \SV\UserMentionsImprovements\XF\Repository\XF22\UserAlert
-    {
-
-    }
+    \class_alias('SV\UserMentionsImprovements\XF\Repository\XF22\UserAlert', 'SV\UserMentionsImprovements\XF\Repository\UserAlert', false);
 }
