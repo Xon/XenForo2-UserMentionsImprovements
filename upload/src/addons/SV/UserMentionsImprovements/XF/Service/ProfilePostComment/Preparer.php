@@ -80,7 +80,7 @@ class Preparer extends XFCP_Preparer
      * @param string                $username
      * @return User
      */
-    protected function svGetUserEntity(\XF\Mvc\Entity\Entity $content, string $username)
+    protected function svGetUserEntity(\XF\Mvc\Entity\Entity $content, string $username = null)
     {
         /** @var User $user */
         $user = \SV\StandardLib\Helper::repo()->getUserEntity($content);
@@ -110,7 +110,7 @@ class Preparer extends XFCP_Preparer
             return $message;
         }
 
-        $user = $this->svGetUserEntity($this->comment, $this->comment->username);
+        $user = $this->svGetUserEntity($this->comment, $this->comment->username ?: \XF::visitor()->username);
         if ($user->canMention($this->comment))
         {
             $this->explicitMentionedUsers = $this->mentionedUsers;

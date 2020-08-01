@@ -27,7 +27,7 @@ class Preparer extends XFCP_Preparer
      * @param string                $username
      * @return User
      */
-    protected function svGetUserEntity(\XF\Mvc\Entity\Entity $content, string $username)
+    protected function svGetUserEntity(\XF\Mvc\Entity\Entity $content, string $username = null)
     {
         /** @var User $user */
         $user = \SV\StandardLib\Helper::repo()->getUserEntity($content);
@@ -50,9 +50,9 @@ class Preparer extends XFCP_Preparer
     public function prepare($message, $checkValidity = true)
     {
         $user = $this->svGetUserEntity($this->messageEntity,
-            $this->messageEntity->offsetExists('username')
+            ($this->messageEntity->offsetExists('username')
                 ? $this->messageEntity->get('username')
-                : null
+                : null) ?: \XF::visitor()->username
         );
 
         $canMention = $user->canMention($this->messageEntity);
