@@ -23,14 +23,37 @@ class Preparer extends XFCP_Preparer
     protected $mentionedUserGroups = [];
 
     /**
+     * @param \XF\Mvc\Entity\Entity $content
+     * @param string                $username
+     * @return User
+     */
+    protected function svGetUserEntity(\XF\Mvc\Entity\Entity $content, string $username)
+    {
+        /** @var User $user */
+        $user = \SV\StandardLib\Helper::repo()->getUserEntity($content);
+
+        if (!$user)
+        {
+            /** @var \XF\Repository\User $userRepo */
+            $userRepo = $this->repository('XF:User');
+            $user = $userRepo->getGuestUser($username);
+        }
+
+        return $user;
+    }
+
+    /**
      * @param string $message
      * @param bool   $checkValidity
      * @return string
      */
     public function prepare($message, $checkValidity = true)
     {
-        /** @var User $user */
-        $user = \SV\StandardLib\Helper::repo()->getUserEntity($this->messageEntity) ?: \XF::visitor();
+        $user = $this->svGetUserEntity($this->messageEntity,
+            $this->messageEntity->offsetExists('username')
+                ? $this->messageEntity->get('username')
+                : null
+        );
 
         $canMention = $user->canMention($this->messageEntity);
         if (!$canMention && \XF::options()->svBlockMentionRenderingOnNoPermissions)

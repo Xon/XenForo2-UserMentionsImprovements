@@ -76,26 +76,24 @@ class Preparer extends XFCP_Preparer
     }
 
     /**
-     * @return \SV\UserMentionsImprovements\XF\Entity\User
+     * @param \XF\Mvc\Entity\Entity $content
+     * @param string                $username
+     * @return User
      */
-    protected function svGetUserEntity()
+    protected function svGetUserEntity(\XF\Mvc\Entity\Entity $content, string $username)
     {
-        $user = null;
-        if ($this->comment->isValidRelation('User'))
-        {
-            $user = $this->comment->getRelation('User');
-        }
+        /** @var User $user */
+        $user = \SV\StandardLib\Helper::repo()->getUserEntity($content);
 
         if (!$user)
         {
             /** @var \XF\Repository\User $userRepo */
             $userRepo = $this->repository('XF:User');
-            $user = $userRepo->getGuestUser();
+            $user = $userRepo->getGuestUser($username);
         }
 
         return $user;
     }
-
 
     /**
      * @param string $message
@@ -112,8 +110,7 @@ class Preparer extends XFCP_Preparer
             return $message;
         }
 
-        /** @var User $user */
-        $user = \SV\StandardLib\Helper::repo()->getUserEntity($this->comment);
+        $user = $this->svGetUserEntity($this->comment, $this->comment->username);
         if ($user->canMention($this->comment))
         {
             $this->explicitMentionedUsers = $this->mentionedUsers;

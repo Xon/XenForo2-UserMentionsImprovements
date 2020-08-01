@@ -76,6 +76,26 @@ class Preparer extends XFCP_Preparer
     }
 
     /**
+     * @param \XF\Mvc\Entity\Entity $content
+     * @param string                $username
+     * @return User
+     */
+    protected function svGetUserEntity(\XF\Mvc\Entity\Entity $content, string $username)
+    {
+        /** @var User $user */
+        $user = \SV\StandardLib\Helper::repo()->getUserEntity($content);
+
+        if (!$user)
+        {
+            /** @var \XF\Repository\User $userRepo */
+            $userRepo = $this->repository('XF:User');
+            $user = $userRepo->getGuestUser($username);
+        }
+
+        return $user;
+    }
+
+    /**
      * @param string $message
      * @param bool   $format
      * @return string
@@ -90,8 +110,7 @@ class Preparer extends XFCP_Preparer
             return $message;
         }
 
-        /** @var User $user */
-        $user = \SV\StandardLib\Helper::repo()->getUserEntity($this->profilePost);
+        $user = $this->svGetUserEntity($this->profilePost, $this->profilePost->username);
         if ($user->canMention($this->profilePost))
         {
             $this->explicitMentionedUsers = $this->mentionedUsers;
