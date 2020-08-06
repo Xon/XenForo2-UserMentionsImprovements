@@ -2,8 +2,24 @@
 
 namespace SV\UserMentionsImprovements\XF\Str;
 
+use SV\UserMentionsImprovements\XF\BbCode\ProcessorAction\MentionUsers;
+
 class Formatter extends XFCP_Formatter
 {
+    /** @var MentionUsers  */
+    public $svMentionUserGroup = null;
+
+    public function getMentionFormatter()
+    {
+        /** @var MentionFormatter $mentions */
+        $mentions = parent::getMentionFormatter();
+        if ($this->svMentionUserGroup)
+        {
+            $mentions->svMentionUserGroup = $this->svMentionUserGroup;
+        }
+        return $mentions;
+    }
+
     /**
      * @return \SV\UserMentionsImprovements\Str\UserGroupMentionFormatter
      */

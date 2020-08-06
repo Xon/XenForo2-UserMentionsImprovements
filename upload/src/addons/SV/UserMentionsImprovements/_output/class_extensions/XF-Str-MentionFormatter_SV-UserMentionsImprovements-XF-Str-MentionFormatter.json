@@ -1,0 +1,6 @@
+{
+    "from_class": "XF\\Str\\MentionFormatter",
+    "to_class": "SV\\UserMentionsImprovements\\XF\\Str\\MentionFormatter",
+    "execute_order": 15,
+    "active": true
+}

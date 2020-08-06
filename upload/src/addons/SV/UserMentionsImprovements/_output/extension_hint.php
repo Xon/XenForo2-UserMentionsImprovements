@@ -105,4 +105,5 @@ namespace SV\UserMentionsImprovements\XF\Service
 namespace SV\UserMentionsImprovements\XF\Str
 {
 	class XFCP_Formatter extends \XF\Str\Formatter {}
+	class XFCP_MentionFormatter extends \XF\Str\MentionFormatter {}
 }
