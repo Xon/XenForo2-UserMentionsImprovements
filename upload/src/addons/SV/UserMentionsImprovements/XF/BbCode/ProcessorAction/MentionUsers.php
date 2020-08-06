@@ -13,7 +13,7 @@ class MentionUsers extends XFCP_MentionUsers
         parent::__construct($formatter);
         // When calling getMentionsBbCode(), which transforms `@user => [user=ID]@user[/url]`;
         // XF2.0.0-2.1.0 calls it in filterFinal($string)
-        // XF2.1.1-XF2.2.0B2 calls it in filterInput($string, Parser $parser, RuleSet $rules, array &$options)
+        // XF2.1.1-XF2.2.0B1 calls it in filterInput($string, Parser $parser, RuleSet $rules, array &$options)
         // XF2.2.0 Beta 2+ calls it in filterInput($string, \XF\BbCode\Processor $processor)
         // so just shim XF\Str\Formatter::getMentionFormatter to push user-groups into this object.
         // Note; getMentionFormatter() always returns a new stateful object, and isn't stored in \XF\BbCode\ProcessorAction\MentionUsers !
