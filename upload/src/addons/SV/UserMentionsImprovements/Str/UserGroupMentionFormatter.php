@@ -21,7 +21,7 @@ class UserGroupMentionFormatter
         // TODO: this regex needs to respect tags that disable parsing or tags that disable autolink
         $message = $this->setupPlaceholders(
             $message,
-            '#\[(code|php|html|plain|media|url|img|user|usergroup|quote)(=[^\]]*)?](.*)\[/\\1]#siU'
+            '#\[(code|php|html|plain|media|url|img|user|quote|attach|usergroup)([= ][^\]]*)?](.*)\[/\\1]#siU'
         );
 
         $matches = $this->getPossibleMentionMatches($message);
