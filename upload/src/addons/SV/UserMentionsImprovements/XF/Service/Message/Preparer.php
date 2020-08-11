@@ -27,7 +27,7 @@ class Preparer extends XFCP_Preparer
      * @param string                $username
      * @return User
      */
-    protected function svGetUserEntity(\XF\Mvc\Entity\Entity $content, string $username = null)
+    protected function svGetUserEntity(\XF\Mvc\Entity\Entity $content = null, string $username = null)
     {
         /** @var User $user */
         $user = \SV\StandardLib\Helper::repo()->getUserEntity($content);
