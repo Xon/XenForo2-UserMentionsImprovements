@@ -50,7 +50,7 @@ class Preparer extends XFCP_Preparer
     public function prepare($message, $checkValidity = true)
     {
         $user = $this->svGetUserEntity($this->messageEntity,
-            ($this->messageEntity->offsetExists('username')
+            ($this->messageEntity && $this->messageEntity->offsetExists('username')
                 ? $this->messageEntity->get('username')
                 : null) ?: \XF::visitor()->username
         );
