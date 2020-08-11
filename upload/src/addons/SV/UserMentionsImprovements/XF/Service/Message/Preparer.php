@@ -49,6 +49,12 @@ class Preparer extends XFCP_Preparer
      */
     public function prepare($message, $checkValidity = true)
     {
+        // skip doing checks
+        if ($message === '' || $message === null)
+        {
+            return parent::prepare($message, $checkValidity);
+        }
+
         $user = $this->svGetUserEntity($this->messageEntity,
             ($this->messageEntity && $this->messageEntity->offsetExists('username')
                 ? $this->messageEntity->get('username')
