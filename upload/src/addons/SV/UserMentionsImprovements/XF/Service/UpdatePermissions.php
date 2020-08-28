@@ -17,7 +17,7 @@ class UpdatePermissions extends XFCP_UpdatePermissions
      * @param Permission                                                               $permission
      * @param mixed                                                                    $value
      * @param Entity|\XF\Entity\PermissionEntry|\XF\Entity\PermissionEntryContent|null $entry
-     * @return null|\XF\Entity\PermissionEntry|\XF\Entity\PermissionEntry|\XF\Entity\PermissionEntryContent|Entity
+     * @return null|\XF\Entity\PermissionEntry|\XF\Entity\PermissionEntryContent|Entity
      */
     protected function writeEntry(Permission $permission, $value, Entity $entry = null)
     {

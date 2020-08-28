@@ -4,13 +4,14 @@ namespace SV\UserMentionsImprovements\Repository;
 
 use SV\UserMentionsImprovements\Globals;
 use XF\Entity\UserGroup;
+use XF\Mvc\Entity\AbstractCollection;
 use XF\Mvc\Entity\Repository;
 
 class UserMentions extends Repository
 {
     /**
      * @param UserGroup $userGroup
-     * @return \XF\Mvc\Entity\ArrayCollection
+     * @return \XF\Mvc\Entity\ArrayCollection|AbstractCollection
      */
     public function getMembersOfUserGroup(UserGroup $userGroup)
     {

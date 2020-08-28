@@ -2,8 +2,6 @@
 
 namespace SV\UserMentionsImprovements\XF\Finder;
 
-use XF\Mvc\Entity\AbstractCollection;
-
 /**
  * Extends \XF\Finder\UserGroup
  */

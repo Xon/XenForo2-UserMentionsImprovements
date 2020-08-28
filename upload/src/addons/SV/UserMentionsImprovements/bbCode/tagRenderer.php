@@ -35,6 +35,7 @@ class tagRenderer
         // php 7.1+ only, but has better performance
         if (is_callable('\Closure::fromCallable'))
         {
+            /** @noinspection PhpElementIsNotAvailableInCurrentPhpVersionInspection */
             $callback = \Closure::fromCallable($callback);
         }
 
