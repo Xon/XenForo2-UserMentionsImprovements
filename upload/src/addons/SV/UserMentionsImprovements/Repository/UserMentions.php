@@ -11,7 +11,7 @@ class UserMentions extends Repository
 {
     /**
      * @param UserGroup $userGroup
-     * @return \XF\Mvc\Entity\ArrayCollection|AbstractCollection
+     * @return AbstractCollection
      */
     public function getMembersOfUserGroup(UserGroup $userGroup)
     {

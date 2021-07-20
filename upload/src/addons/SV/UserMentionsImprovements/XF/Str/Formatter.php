@@ -33,6 +33,7 @@ class Formatter extends XFCP_Formatter
     /**
      * @param $string
      * @return null|string
+     * @noinspection PhpUnnecessaryLocalVariableInspection
      */
     public function linkStructuredTextMentions($string)
     {

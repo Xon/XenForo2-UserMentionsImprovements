@@ -61,7 +61,7 @@ class Notifier extends XFCP_Notifier
 
         // most users shouldn't be alerted
         $limit = 6 * self::USERS_PER_CYCLE;
-        foreach ($this->notifyData as $type => $data)
+        foreach ($this->notifyData as $data)
         {
             $userCount = \is_array($data) ? \count($data) : 0;
             if ($userCount > $limit)
@@ -96,7 +96,7 @@ class Notifier extends XFCP_Notifier
     {
         try
         {
-            return parent::notify($timeLimit);
+            parent::notify($timeLimit);
         }
         finally
         {

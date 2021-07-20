@@ -15,6 +15,7 @@ class UserGroupMentionFormatter
     /**
      * @param string $message
      * @return null|string
+     * @noinspection PhpUnnecessaryLocalVariableInspection
      */
     public function getMentionsBbCode($message)
     {
@@ -46,6 +47,7 @@ class UserGroupMentionFormatter
     /**
      * @param string $message
      * @return null|string
+     * @noinspection PhpUnnecessaryLocalVariableInspection
      */
     public function getMentionsStructuredText($message)
     {

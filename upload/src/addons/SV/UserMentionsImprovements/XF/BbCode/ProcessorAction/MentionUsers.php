@@ -4,6 +4,9 @@ namespace SV\UserMentionsImprovements\XF\BbCode\ProcessorAction;
 
 use SV\UserMentionsImprovements\XF\Str\Formatter;
 
+/**
+ * @property \XF\Str\Formatter|Formatter formatter
+ */
 class MentionUsers extends XFCP_MentionUsers
 {
     protected $mentionedUserGroups = [];
@@ -18,9 +21,7 @@ class MentionUsers extends XFCP_MentionUsers
         // so just shim XF\Str\Formatter::getMentionFormatter to push user-groups into this object.
         // Note; getMentionFormatter() always returns a new stateful object, and isn't stored in \XF\BbCode\ProcessorAction\MentionUsers !
         // not great, but has the best compatibility...
-        /** @var Formatter $formatter */
-        $formatter = $this->formatter;
-        $formatter->svMentionUserGroup = $this;
+        $this->formatter->svMentionUserGroup = $this;
     }
 
     /**

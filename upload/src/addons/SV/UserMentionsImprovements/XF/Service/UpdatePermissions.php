@@ -15,14 +15,15 @@ class UpdatePermissions extends XFCP_UpdatePermissions
 
     /**
      * @param Permission                                                               $permission
-     * @param mixed                                                                    $value
-     * @param Entity|\XF\Entity\PermissionEntry|\XF\Entity\PermissionEntryContent|null $entry
-     * @return null|\XF\Entity\PermissionEntry|\XF\Entity\PermissionEntryContent|Entity
+     * @param string|bool|int                                                          $value
+     * @param \XF\Entity\PermissionEntry|\XF\Entity\PermissionEntryContent|Entity|null $entry
+     * @return \XF\Entity\PermissionEntry|\XF\Entity\PermissionEntryContent|Entity|null
      */
     protected function writeEntry(Permission $permission, $value, Entity $entry = null)
     {
         $oldState = ($this->userGroup && $entry) ? $entry->toArray() : null;
 
+        /** @var Entity|\XF\Entity\PermissionEntry|\XF\Entity\PermissionEntryContent|null $newEntry */
         $newEntry = parent::writeEntry($permission, $value, $entry);
 
         if ($this->userGroup && ($newEntry !== null || $entry !== null))

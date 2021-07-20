@@ -76,6 +76,7 @@ class MentionFormatter extends XFCP_MentionFormatter
     /**
      * @param string $message
      * @return string
+     * @noinspection PhpUnnecessaryLocalVariableInspection
      */
     public function getMentionsBbCode($message)
     {
