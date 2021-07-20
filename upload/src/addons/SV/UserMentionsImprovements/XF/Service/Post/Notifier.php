@@ -156,11 +156,12 @@ class Notifier extends XFCP_Notifier
                 $users = $this->getUsers($userIds);
                 foreach ($userIds as $userId)
                 {
-                    if (isset(Globals::$userGroupMentionedIds[$userId]))
+                    $group = Globals::$userGroupMentionedIds[$userId] ?? null;
+                    if ($group !== null)
                     {
-                        $this->notifyData[$type][$userId]['group'] = Globals::$userGroupMentionedIds[$userId];
+                        $this->notifyData[$type][$userId]['group'] = $group;
                     }
-                    $user = isset($users[$userId]) ? $users[$userId] : null;
+                    $user = $users[$userId] ?? null;
                     if ($user && $user->receivesQuoteEmails())
                     {
                         $this->notifyData[$type][$userId]['email'] = true;
@@ -171,11 +172,12 @@ class Notifier extends XFCP_Notifier
                 $users = $this->getUsers($userIds);
                 foreach ($userIds as $userId)
                 {
-                    if (isset(Globals::$userGroupMentionedIds[$userId]))
+                    $group = Globals::$userGroupMentionedIds[$userId] ?? null;
+                    if ($group !== null)
                     {
-                        $this->notifyData[$type][$userId]['group'] = Globals::$userGroupMentionedIds[$userId];
+                        $this->notifyData[$type][$userId]['group'] = $group;
                     }
-                    $user = isset($users[$userId]) ? $users[$userId] : null;
+                    $user = $users[$userId] ?? null;
                     if ($user && $user->receivesMentionEmails())
                     {
                         $this->notifyData[$type][$userId]['email'] = true;
@@ -190,13 +192,18 @@ class Notifier extends XFCP_Notifier
         parent::ensureDataLoaded();
         foreach (['mention', 'quote'] as $type)
         {
-            if (isset($this->notifyData[$type]))
+            $notifyData = $this->notifyData[$type] ?? null;
+            if (\is_array($notifyData))
             {
                 foreach ($this->notifyData[$type] as $userId => $value)
                 {
-                    if (isset($value['group']) && empty(Globals::$userGroupMentionedIds[$userId]))
+                    if (empty(Globals::$userGroupMentionedIds[$userId]))
                     {
-                        Globals::$userGroupMentionedIds[$userId] = $value['group'];
+                        $groupData = $value['group'] ?? null;
+                        if ($groupData !== null)
+                        {
+                            Globals::$userGroupMentionedIds[$userId] = $groupData;
+                        }
                     }
                 }
             }
