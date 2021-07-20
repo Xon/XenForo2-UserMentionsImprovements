@@ -302,34 +302,6 @@ class Setup extends AbstractSetup
             "
         );
 
-        $db->query(
-            "INSERT IGNORE INTO xf_permission_entry (user_group_id, user_id, permission_group_id, permission_id, permission_value, permission_value_int)
-                SELECT DISTINCT user_group_id, user_id, 'forum', 'sv_ReceiveQuoteEmails', 'allow', 0
-                FROM xf_permission_entry
-                WHERE permission_group_id = 'general' AND permission_id IN ('maxMentionedUsers') AND permission_value_int <> 0
-            "
-        );
-        $db->query(
-            "INSERT IGNORE INTO xf_permission_entry_content (content_type, content_id, user_group_id, user_id, permission_group_id, permission_id, permission_value, permission_value_int)
-                SELECT DISTINCT content_type, content_id, user_group_id, user_id, 'forum', 'sv_ReceiveQuoteEmails', 'content_allow', 0
-                FROM xf_permission_entry_content
-                WHERE permission_group_id = 'general' AND permission_id IN ('maxMentionedUsers') AND permission_value_int <> 0
-            "
-        );
-
-        $db->query(
-            "INSERT IGNORE INTO xf_permission_entry (user_group_id, user_id, permission_group_id, permission_id, permission_value, permission_value_int)
-                SELECT DISTINCT user_group_id, user_id, 'forum', 'sv_ReceiveMentionEmails', 'allow', 0
-                FROM xf_permission_entry
-                WHERE permission_group_id = 'general' AND permission_id IN ('maxMentionedUsers') AND permission_value_int <> 0
-            "
-        );
-        $db->query(
-            "INSERT IGNORE INTO xf_permission_entry_content (content_type, content_id, user_group_id, user_id, permission_group_id, permission_id, permission_value, permission_value_int)
-                SELECT DISTINCT content_type, content_id, user_group_id, user_id, 'forum', 'sv_ReceiveMentionEmails', 'content_allow', 0
-                FROM xf_permission_entry_content
-                WHERE permission_group_id = 'general' AND permission_id IN ('maxMentionedUsers') AND permission_value_int <> 0
-            "
-        );
+        $this->applyGlobalPermissionByGroup('general', 'sv_ViewPublicGroups', [User::GROUP_REG, User::GROUP_GUEST]);
     }
 }
