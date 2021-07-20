@@ -5,6 +5,7 @@
     "sub_options": [],
     "validation_class": "",
     "validation_method": "",
+    "advanced": false,
     "default_value": "styles/default/sv/mentionimprovements/group_48.png",
     "relations": {
         "sv_usermentionsimprovements": 210

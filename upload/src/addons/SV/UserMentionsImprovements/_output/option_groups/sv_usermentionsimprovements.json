@@ -1,5 +1,6 @@
 {
     "icon": "fa-bullhorn",
     "display_order": 141,
+    "advanced": false,
     "debug_only": false
 }
