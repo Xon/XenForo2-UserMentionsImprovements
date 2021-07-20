@@ -25,9 +25,9 @@ class MentionFormatter extends XFCP_MentionFormatter
     {
         $this->svPlaceholders = [];
 
-        return preg_replace_callback(
+        return \preg_replace_callback(
             $regex, function ($match) {
-            $replace = "\x1B" . count($this->svPlaceholders) . "\x1B";
+            $replace = "\x1B" . \count($this->svPlaceholders) . "\x1B";
             $this->svPlaceholders[$replace] = $match[0];
 
             return $replace;
@@ -39,7 +39,7 @@ class MentionFormatter extends XFCP_MentionFormatter
     {
         if ($this->svPlaceholders)
         {
-            $message = strtr($message, $this->svPlaceholders);
+            $message = \strtr($message, $this->svPlaceholders);
             $this->svPlaceholders = [];
         }
 

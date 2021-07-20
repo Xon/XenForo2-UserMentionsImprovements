@@ -38,7 +38,7 @@ class Preparer extends XFCP_Preparer
      */
     public function getImplicitMentionedUserIds()
     {
-        return array_keys($this->getImplicitMentionedUsers());
+        return \array_keys($this->getImplicitMentionedUsers());
     }
 
     /**
@@ -54,7 +54,7 @@ class Preparer extends XFCP_Preparer
      */
     public function getExplicitMentionedUserIds()
     {
-        return array_keys($this->getExplicitMentionedUsers());
+        return \array_keys($this->getExplicitMentionedUsers());
     }
 
     /**
@@ -70,7 +70,7 @@ class Preparer extends XFCP_Preparer
      */
     public function getMentionedUserGroupIds()
     {
-        return array_keys($this->getMentionedUserGroups());
+        return \array_keys($this->getMentionedUserGroups());
     }
 
     /**

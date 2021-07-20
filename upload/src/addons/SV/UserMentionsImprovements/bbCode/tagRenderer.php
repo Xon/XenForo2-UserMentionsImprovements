@@ -33,7 +33,7 @@ class tagRenderer
     {
         $callback = [$this, 'renderTagUserGroup'];
         // php 7.1+ only, but has better performance
-        if (is_callable('\Closure::fromCallable'))
+        if (\is_callable('\Closure::fromCallable'))
         {
             /** @noinspection PhpElementIsNotAvailableInCurrentPhpVersionInspection */
             $callback = \Closure::fromCallable($callback);
@@ -81,15 +81,15 @@ class tagRenderer
             return $content;
         }
 
-        $userGroupId = intval($option);
+        $userGroupId = \intval($option);
         if ($userGroupId <= 0)
         {
             return $content;
         }
 
         $link = \XF::app()->router('public')->buildLink('full:members/usergroup', ['user_group_id' => $userGroupId]);
-        $link = htmlspecialchars($link);
-        $content = htmlspecialchars($content);
+        $link = \htmlspecialchars($link);
+        $content = \htmlspecialchars($content);
 
         return $this->renderTagUserGroupHtml($userGroupId, 'ug', $link, $content);
     }

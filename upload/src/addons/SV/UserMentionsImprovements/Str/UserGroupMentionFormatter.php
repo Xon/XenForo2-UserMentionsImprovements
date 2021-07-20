@@ -62,9 +62,9 @@ class UserGroupMentionFormatter
         $message = $this->applyMentionUserGroupMatches(
             $message, $matches, $usersByMatch,
             function ($userGroup) use ($prefix) {
-                if (strpos($userGroup['title'], ']') !== false)
+                if (\strpos($userGroup['title'], ']') !== false)
                 {
-                    if (strpos($userGroup['title'], "'") !== false)
+                    if (\strpos($userGroup['title'], "'") !== false)
                     {
                         $title = '"' . $prefix . $userGroup['title'] . '"';
                     }
@@ -101,9 +101,9 @@ class UserGroupMentionFormatter
     {
         $this->placeholders = [];
 
-        return preg_replace_callback(
+        return \preg_replace_callback(
             $regex, function ($match) {
-            $replace = "\x1A" . count($this->placeholders) . "\x1A";
+            $replace = "\x1A" . \count($this->placeholders) . "\x1A";
             $this->placeholders[$replace] = $match[0];
 
             return $replace;
@@ -115,7 +115,7 @@ class UserGroupMentionFormatter
     {
         if ($this->placeholders)
         {
-            $message = strtr($message, $this->placeholders);
+            $message = \strtr($message, $this->placeholders);
             $this->placeholders = [];
         }
 
@@ -127,7 +127,7 @@ class UserGroupMentionFormatter
         $min = 2;
 
         /** @noinspection RegExpRedundantEscape */
-        if (!preg_match_all(
+        if (!\preg_match_all(
             '#(?<=^|\s|[\](,/\'"]|--)@(?!\[|\s)(([^\s@]|(?<![\s\](,-])@| ){' . $min . '}((?>[:,.!?](?=[^\s:,.!?[\]()])|' . $this->getTagEndPartialRegex(true) . '+?))*)#iu',
             $message, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER))
         {
@@ -149,14 +149,14 @@ class UserGroupMentionFormatter
     protected function getMentionMatchUserGroups(array $matches)
     {
         $db = \XF::db();
-        $matchKeys = array_keys($matches);
+        $matchKeys = \array_keys($matches);
         $whereParts = [];
         $matchParts = [];
         $userGroupsByMatch = [];
 
         foreach ($matches AS $key => $match)
         {
-            if (utf8_strlen($match[1][0]) > 50)
+            if (\utf8_strlen($match[1][0]) > 50)
             {
                 // longer than max usergroup title length
                 continue;
@@ -179,7 +179,7 @@ class UserGroupMentionFormatter
         if (!$viewAllGroups)
         {
             $sql = ' AND ( usergroup.sv_private = 0 ';
-            $groupMembership = array_filter(array_merge([$visitor->user_group_id], array_map('intval', $visitor->secondary_group_ids)));
+            $groupMembership = \array_filter(\array_merge([$visitor->user_group_id], \array_map('\intval', $visitor->secondary_group_ids)));
             if ($groupMembership)
             {
                 $sql .= ' or usergroup.user_group_id in ( ' . $db->quote($groupMembership) . ' )';
@@ -190,9 +190,9 @@ class UserGroupMentionFormatter
         $userGroupResults = $db->query(
             "
 			SELECT usergroup.user_group_id, usergroup.title, usergroup.sv_private, usergroup.sv_mentionable,
-				" . implode(', ', $matchParts) . "
+				" . \implode(', ', $matchParts) . "
 			FROM xf_user_group AS usergroup
-			WHERE sv_mentionable = 1 AND (" . implode(' OR ', $whereParts) . ") {$sql}
+			WHERE sv_mentionable = 1 AND (" . \implode(' OR ', $whereParts) . ") {$sql}
 			ORDER BY LENGTH(usergroup.title) DESC
 		"
         );
@@ -202,7 +202,7 @@ class UserGroupMentionFormatter
             $userGroupInfo = [
                 'user_group_id' => $userGroup['user_group_id'],
                 'title'         => $userGroup['title'],
-                'lower'         => utf8_strtolower($userGroup['title']),
+                'lower'         => \utf8_strtolower($userGroup['title']),
             ];
 
             foreach ($matchKeys AS $key)
@@ -235,7 +235,7 @@ class UserGroupMentionFormatter
 
         $newMessage = '';
         $lastOffset = 0;
-        $testString = utf8_strtolower($message);
+        $testString = \utf8_strtolower($message);
         $mentionedUserGroups = [];
         $endMatch = $this->getTagEndPartialRegex(false);
 
@@ -243,35 +243,35 @@ class UserGroupMentionFormatter
         {
             if ($match[0][1] > $lastOffset)
             {
-                $newMessage .= substr($message, $lastOffset, $match[0][1] - $lastOffset);
+                $newMessage .= \substr($message, $lastOffset, $match[0][1] - $lastOffset);
             }
             else if ($lastOffset > $match[0][1])
             {
                 continue;
             }
 
-            $lastOffset = $match[0][1] + strlen($match[0][0]);
+            $lastOffset = $match[0][1] + \strlen($match[0][0]);
 
             $haveMatch = false;
             if (!empty($userGroupsByMatch[$key]))
             {
-                $testTitle = utf8_strtolower($match[1][0]);
+                $testTitle = \utf8_strtolower($match[1][0]);
                 $testOffset = $match[1][1];
 
                 foreach ($userGroupsByMatch[$key] AS $userGroupId => $userGroup)
                 {
-                    $titleLen = strlen($userGroup['lower']);
+                    $titleLen = \strlen($userGroup['lower']);
                     $nextTestOffsetStart = $testOffset + $titleLen;
 
                     if (
-                        ($testTitle === $userGroup['lower'] || substr($testString, $testOffset, $titleLen) === $userGroup['lower'])
-                        && (!isset($testString[$nextTestOffsetStart]) || preg_match('#' . $endMatch . '#i', $testString[$nextTestOffsetStart]))
+                        ($testTitle === $userGroup['lower'] || \substr($testString, $testOffset, $titleLen) === $userGroup['lower'])
+                        && (!isset($testString[$nextTestOffsetStart]) || \preg_match('#' . $endMatch . '#i', $testString[$nextTestOffsetStart]))
                     )
                     {
                         $mentionedUserGroups[$userGroupId] = $userGroup;
                         $newMessage .= $tagReplacement($userGroup);
                         $haveMatch = true;
-                        $lastOffset = $testOffset + strlen($userGroup['title']);
+                        $lastOffset = $testOffset + \strlen($userGroup['title']);
                         break;
                     }
                 }
@@ -283,7 +283,7 @@ class UserGroupMentionFormatter
             }
         }
 
-        $newMessage .= substr($message, $lastOffset);
+        $newMessage .= \substr($message, $lastOffset);
 
         $this->mentionedUserGroups = $mentionedUserGroups;
 

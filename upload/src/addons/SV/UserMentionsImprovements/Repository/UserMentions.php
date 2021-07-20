@@ -37,7 +37,7 @@ class UserMentions extends Repository
 			SELECT DISTINCT user.user_id, user.username, relation.user_group_id
 			FROM xf_user AS user
 			LEFT JOIN xf_user_group_relation AS relation ON relation.user_id = user.user_id
-            WHERE relation.user_group_id IN (' . \XF::db()->quote(array_keys($mentionedUserGroups)) . ')
+            WHERE relation.user_group_id IN (' . \XF::db()->quote(\array_keys($mentionedUserGroups)) . ')
 		', 'user_id'
         );
 
@@ -58,7 +58,7 @@ class UserMentions extends Repository
             $users[$userId] = [
                 'user_id'  => $additionalUser['user_id'],
                 'username' => $additionalUser['username'],
-                'lower'    => strtolower($additionalUser['username']),
+                'lower'    => \strtolower($additionalUser['username']),
             ];
 
             $group = $mentionedUserGroups[$additionalUser['user_group_id']];

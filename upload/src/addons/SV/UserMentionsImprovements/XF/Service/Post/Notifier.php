@@ -48,22 +48,22 @@ class Notifier extends XFCP_Notifier
     {
         $this->ensureDataLoaded();
 
-        if (isset($this->notifyData['threadStarter']) && is_array($this->notifyData['threadStarter']))
+        if (isset($this->notifyData['threadStarter']) && \is_array($this->notifyData['threadStarter']))
         {
             // most alerts should be just the thread starter
-            return count($this->notifyData['threadStarter']) > 4 * self::USERS_PER_CYCLE;
+            return \count($this->notifyData['threadStarter']) > 4 * self::USERS_PER_CYCLE;
         }
-        else if (isset($this->notifyData['followedUsers']) && is_array($this->notifyData['followedUsers']))
+        else if (isset($this->notifyData['followedUsers']) && \is_array($this->notifyData['followedUsers']))
         {
             // most alerts should be to followers
-            return count($this->notifyData['followedUsers']) > 4 * self::USERS_PER_CYCLE;
+            return \count($this->notifyData['followedUsers']) > 4 * self::USERS_PER_CYCLE;
         }
 
         // most users shouldn't be alerted
         $limit = 6 * self::USERS_PER_CYCLE;
         foreach ($this->notifyData as $type => $data)
         {
-            $userCount = is_array($data) ? count($data) : 0;
+            $userCount = \is_array($data) ? \count($data) : 0;
             if ($userCount > $limit)
             {
                 return true;
@@ -124,7 +124,7 @@ class Notifier extends XFCP_Notifier
 
     /**
      * @param string $type
-     * @param int[]  $userIds
+     * @param int[]|string[]  $userIds
      */
     protected function _addExtraAlertInfo($type, array $userIds)
     {
@@ -138,7 +138,7 @@ class Notifier extends XFCP_Notifier
                     $threadId = $this->post->thread_id;
                     foreach ($userIds as $id)
                     {
-                        $id = intval($id);
+                        $id = \intval($id);
                         if ($id)
                         {
                             $ids[] = "SELECT $id AS id";

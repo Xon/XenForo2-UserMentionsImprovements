@@ -18,14 +18,14 @@ class PermissionRebuild extends XFCP_PermissionRebuild
 
     protected function setupData(array $data)
     {
-        $data = array_merge($this->extraDefaultData, $data);
+        $data = \array_merge($this->extraDefaultData, $data);
 
         return parent::setupData($data);
     }
 
     public function run($maxRunTime)
     {
-        $start = microtime(true);
+        $start = \microtime(true);
 
         if (!$this->data['cleaned'])
         {
@@ -69,7 +69,7 @@ class PermissionRebuild extends XFCP_PermissionRebuild
             $permissionBuilder->rebuildCombination($combination);
             $done++;
 
-            if (microtime(true) - $start >= $maxRunTime)
+            if (\microtime(true) - $start >= $maxRunTime)
             {
                 break;
             }
@@ -85,6 +85,6 @@ class PermissionRebuild extends XFCP_PermissionRebuild
         $actionPhrase = \XF::phrase('rebuilding');
         $typePhrase = \XF::phrase('permissions');
 
-        return sprintf('%s... %s %s', $actionPhrase, $typePhrase, str_repeat('. ', $this->data['steps']));
+        return \sprintf('%s... %s %s', $actionPhrase, $typePhrase, \str_repeat('. ', $this->data['steps']));
     }
 }

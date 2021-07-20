@@ -47,7 +47,7 @@ class Member extends XFCP_Member
 
             $q = ltrim($this->filter('q', 'str', ['no-trim']));
 
-            if ($visitor->canMentionUserGroup() && $q !== '' && utf8_strlen($q) >= 2)
+            if ($visitor->canMentionUserGroup() && $q !== '' && \utf8_strlen($q) >= 2)
             {
                 /** @var \SV\UserMentionsImprovements\XF\Finder\UserGroup $userGroupFinder */
                 $userGroupFinder = $this->finder('XF:UserGroup');

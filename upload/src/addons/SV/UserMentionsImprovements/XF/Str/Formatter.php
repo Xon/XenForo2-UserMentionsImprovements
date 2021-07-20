@@ -40,19 +40,19 @@ class Formatter extends XFCP_Formatter
         $string = $this->moveHtmlToPlaceholders($string, $restorePlaceholders);
 
         /** @noinspection RegExpRedundantEscape */
-        $string = preg_replace_callback(
+        $string = \preg_replace_callback(
             '#(?<=^|\s|[\](,]|--|@)@UG\[(\d+):(\'|"|&quot;|)(.*)\\2\]#iU',
             function (array $match) {
-                $userGroupId = intval($match[1]);
+                $userGroupId = \intval($match[1]);
                 $title = $this->removeHtmlPlaceholders($match[3]);
-                $title = htmlspecialchars($title, ENT_QUOTES, 'utf-8', false);
+                $title = \htmlspecialchars($title, ENT_QUOTES, 'utf-8', false);
 
                 $link = \XF::app()->router()->buildLink('full:members/usergroup', ['user_group_id' => $userGroupId]);
 
                 /** @noinspection HtmlUnknownTarget */
-                return sprintf(
+                return \sprintf(
                     '<a href="%s" class="usergroup">%s</a>',
-                    htmlspecialchars($link), $title
+                    \htmlspecialchars($link), $title
                 );
             },
             $string

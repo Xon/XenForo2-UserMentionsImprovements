@@ -211,9 +211,9 @@ class Setup extends AbstractSetup
         foreach ($options as $option)
         {
             $value = $option->getOptionValue();
-            if (is_string($value))
+            if (\is_string($value))
             {
-                $option->option_value = str_replace('styles/default/sv/tagging/', 'styles/default/sv/mentionimprovements/', $value);
+                $option->option_value = \str_replace('styles/default/sv/tagging/', 'styles/default/sv/mentionimprovements/', $value);
                 $option->saveIfChanged();
             }
         }
