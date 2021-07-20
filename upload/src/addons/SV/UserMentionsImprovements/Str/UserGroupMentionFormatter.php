@@ -189,15 +189,13 @@ class UserGroupMentionFormatter
             $sql .= ')';
         }
 
-        $userGroupResults = $db->query(
-            "
+        $userGroupResults = $db->query('
 			SELECT usergroup.user_group_id, usergroup.title, usergroup.sv_private, usergroup.sv_mentionable,
-				" . \implode(', ', $matchParts) . "
+				' . \implode(', ', $matchParts) . '
 			FROM xf_user_group AS usergroup
-			WHERE sv_mentionable = 1 AND (" . \implode(' OR ', $whereParts) . ") {$sql}
+			WHERE sv_mentionable = 1 AND (' . \implode(' OR ', $whereParts) . ') ' . $sql .'
 			ORDER BY LENGTH(usergroup.title) DESC
-		"
-        );
+		');
 
         while ($userGroup = $userGroupResults->fetch())
         {

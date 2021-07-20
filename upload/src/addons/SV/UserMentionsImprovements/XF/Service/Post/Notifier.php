@@ -146,12 +146,12 @@ class Notifier extends XFCP_Notifier
                     }
                     /** @var int[] $userIds */
                     /** @noinspection SqlResolve */
-                    $userIds = $ids ? $db->fetchAllColumn("
+                    $userIds = $ids ? $db->fetchAllColumn('
                         SELECT DISTINCT a.id
-                        FROM ( " . join(' union ', $ids) . " ) a
-                        LEFT JOIN xf_thread_user_post ON (xf_thread_user_post.thread_id = {$threadId} AND xf_thread_user_post.user_id = a.id)
+                        FROM ( ' . join(' union ', $ids) . ' ) a
+                        LEFT JOIN xf_thread_user_post ON (xf_thread_user_post.thread_id = ? AND xf_thread_user_post.user_id = a.id)
                         WHERE xf_thread_user_post.user_id IS null
-                    ") : [];
+                    ', [$threadId]) : [];
                 }
                 $users = $this->getUsers($userIds);
                 foreach ($userIds as $userId)
