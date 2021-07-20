@@ -98,16 +98,16 @@ class Preparer extends XFCP_Preparer
     /**
      * @param string $message
      * @param bool   $format
-     * @return string
+     * @return bool
      */
     public function setMessage($message, $format = true)
     {
-        $message = parent::setMessage($message, $format);
+        $retval = parent::setMessage($message, $format);
         $processor = $this->processor;
         if (!$processor)
         {
             // mentions are just not enabled
-            return $message;
+            return $retval;
         }
 
         $user = $this->svGetUserEntity($this->comment, $this->comment->username ?: \XF::visitor()->username);
@@ -138,7 +138,7 @@ class Preparer extends XFCP_Preparer
             $this->mentionedUserGroups = [];
         }
 
-        return $message;
+        return $retval;
     }
 
     /**
