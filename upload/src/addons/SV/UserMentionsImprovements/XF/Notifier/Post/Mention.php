@@ -19,7 +19,7 @@ class Mention extends XFCP_Mention
 
     public function sendEmail(User $user)
     {
-        if (!$user->email || $user->user_state != 'valid')
+        if (!$user->email || $user->user_state !== 'valid')
         {
             return;
         }

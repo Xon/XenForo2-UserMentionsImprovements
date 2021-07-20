@@ -264,7 +264,7 @@ class UserGroupMentionFormatter
                     $nextTestOffsetStart = $testOffset + $titleLen;
 
                     if (
-                        ($testTitle == $userGroup['lower'] || substr($testString, $testOffset, $titleLen) == $userGroup['lower'])
+                        ($testTitle === $userGroup['lower'] || substr($testString, $testOffset, $titleLen) === $userGroup['lower'])
                         && (!isset($testString[$nextTestOffsetStart]) || preg_match('#' . $endMatch . '#i', $testString[$nextTestOffsetStart]))
                     )
                     {
