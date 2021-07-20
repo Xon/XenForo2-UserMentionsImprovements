@@ -234,6 +234,26 @@ class Setup extends AbstractSetup
         $this->app->jobManager()->enqueueUnique('permissionRebuild', 'XF:PermissionRebuild', [], true);
     }
 
+    public function upgrade2070700Step1()
+    {
+        $db = $this->db();
+        $db->query("
+            DELETE FROM xf_permission_entry
+            WHERE permission_group_id = 'forum' AND permission_id IN (
+                 'sv_ReceiveMentionEmails',
+                 'sv_ReceiveQuoteEmails'
+            )
+        ");
+
+        $db->query("
+            DELETE FROM xf_permission_entry_content
+            WHERE permission_group_id = 'forum' AND permission_id IN (
+                 'sv_ReceiveMentionEmails',
+                 'sv_ReceiveQuoteEmails'
+            )
+        ");
+    }
+
     public function uninstallStep1()
     {
         $this->schemaManager()->alterTable(
