@@ -44,8 +44,8 @@ class Setup extends AbstractSetup
         );
 
         $this->applyRegistrationDefaults([
-            'sv_email_on_mention' => 0,
-            'sv_email_on_quote'   => 0,
+            'sv_email_on_mention' => '',
+            'sv_email_on_quote'   => '',
         ]);
     }
 
