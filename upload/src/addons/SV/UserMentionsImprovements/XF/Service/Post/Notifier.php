@@ -146,6 +146,7 @@ class Notifier extends XFCP_Notifier
                     }
                     /** @var int[] $userIds */
                     /** @noinspection SqlResolve */
+                    /** @noinspection SqlConstantExpression */
                     $userIds = $ids ? $db->fetchAllColumn('
                         SELECT DISTINCT a.id
                         FROM ( ' . join(' union ', $ids) . ' ) a

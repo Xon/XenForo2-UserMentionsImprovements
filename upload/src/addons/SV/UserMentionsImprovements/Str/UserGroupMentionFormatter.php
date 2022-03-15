@@ -1,4 +1,7 @@
 <?php
+/**
+ * @noinspection RegExpRedundantEscape
+ */
 
 namespace SV\UserMentionsImprovements\Str;
 

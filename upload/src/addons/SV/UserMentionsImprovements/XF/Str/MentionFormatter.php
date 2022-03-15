@@ -2,8 +2,6 @@
 
 namespace SV\UserMentionsImprovements\XF\Str;
 
-
-
 use SV\UserMentionsImprovements\XF\BbCode\ProcessorAction\MentionUsers;
 
 /**
@@ -86,6 +84,7 @@ class MentionFormatter extends XFCP_MentionFormatter
         if ($mentionedUserGroups)
         {
             $this->svMentionUserGroup->setMentionedUsers($mentionedUserGroups);
+            /** @noinspection RegExpRedundantEscape */
             $message = $this->svSetupPlaceholders($message,
                 '#\[(usergroup)(=[^\]]*)?](.*)\[/\\1]#siU'
             );
