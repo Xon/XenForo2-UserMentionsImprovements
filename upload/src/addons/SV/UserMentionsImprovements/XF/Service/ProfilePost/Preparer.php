@@ -5,68 +5,14 @@
 
 namespace SV\UserMentionsImprovements\XF\Service\ProfilePost;
 
-use SV\UserMentionsImprovements\XF\Entity\User;
+use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractor;
 
 class Preparer extends XFCP_Preparer
 {
+    use ServiceUserGroupExtractor;
+
     /**@var \SV\UserMentionsImprovements\XF\Service\StructuredText\Preparer|\XF\Service\Message\Preparer */
     protected $processor;
-    /** @var array */
-    protected $implicitMentionedUsers = [];
-    /** @var array */
-    protected $explicitMentionedUsers = [];
-    /** @var array */
-    protected $mentionedUserGroups = [];
-
-    public function getImplicitMentionedUsers(): array
-    {
-        return $this->implicitMentionedUsers;
-    }
-
-    public function getImplicitMentionedUserIds(): array
-    {
-        return \array_keys($this->getImplicitMentionedUsers());
-    }
-
-    public function getExplicitMentionedUsers(): array
-    {
-        return $this->explicitMentionedUsers;
-    }
-
-    public function getExplicitMentionedUserIds(): array
-    {
-        return \array_keys($this->getExplicitMentionedUsers());
-    }
-
-    public function getMentionedUserGroups(): array
-    {
-        return $this->mentionedUserGroups;
-    }
-
-    public function getMentionedUserGroupIds(): array
-    {
-        return \array_keys($this->getMentionedUserGroups());
-    }
-
-    /**
-     * @param \XF\Mvc\Entity\Entity $content
-     * @param string                $username
-     * @return User
-     */
-    protected function svGetUserEntity(\XF\Mvc\Entity\Entity $content, string $username = null): User
-    {
-        /** @var User $user */
-        $user = \SV\StandardLib\Helper::repo()->getUserEntity($content);
-
-        if (!$user)
-        {
-            /** @var \XF\Repository\User $userRepo */
-            $userRepo = $this->repository('XF:User');
-            $user = $userRepo->getGuestUser($username);
-        }
-
-        return $user;
-    }
 
     /**
      * @param string $message

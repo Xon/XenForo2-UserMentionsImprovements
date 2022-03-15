@@ -5,46 +5,14 @@
 
 namespace SV\UserMentionsImprovements\XF\Service\Post;
 
+use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractor;
+
 class Preparer extends XFCP_Preparer
 {
+    use ServiceUserGroupExtractor;
+
     /**  @var \XF\Service\Message\Preparer|null */
     protected $messagePreparer;
-    /** @var array */
-    protected $implicitMentionedUsers = [];
-    /** @var array */
-    protected $explicitMentionedUsers = [];
-    /** @var array */
-    protected $mentionedUserGroups = [];
-
-    public function getImplicitMentionedUsers(): array
-    {
-        return $this->implicitMentionedUsers;
-    }
-
-    public function getImplicitMentionedUserIds(): array
-    {
-        return \array_keys($this->getImplicitMentionedUsers());
-    }
-
-    public function getExplicitMentionedUsers(): array
-    {
-        return $this->explicitMentionedUsers;
-    }
-
-    public function getExplicitMentionedUserIds(): array
-    {
-        return \array_keys($this->getExplicitMentionedUsers());
-    }
-
-    public function getMentionedUserGroups(): array
-    {
-        return $this->mentionedUserGroups;
-    }
-
-    public function getMentionedUserGroupIds(): array
-    {
-        return \array_keys($this->getMentionedUserGroups());
-    }
 
     /**
      * @param string $message

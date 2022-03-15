@@ -2,36 +2,11 @@
 
 namespace SV\UserMentionsImprovements\XF\Service\Message;
 
-use SV\UserMentionsImprovements\XF\Entity\User;
+use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractor;
 
 class Preparer extends XFCP_Preparer
 {
-    /** @var array */
-    protected $implicitMentionedUsers = [];
-    /** @var array */
-    protected $explicitMentionedUsers = [];
-    /** @var array */
-    protected $mentionedUserGroups = [];
-
-    /**
-     * @param \XF\Mvc\Entity\Entity $content
-     * @param string                $username
-     * @return User
-     */
-    protected function svGetUserEntity(\XF\Mvc\Entity\Entity $content = null, string $username = null): User
-    {
-        /** @var User $user */
-        $user = \SV\StandardLib\Helper::repo()->getUserEntity($content);
-
-        if (!$user)
-        {
-            /** @var \XF\Repository\User $userRepo */
-            $userRepo = $this->repository('XF:User');
-            $user = $userRepo->getGuestUser($username);
-        }
-
-        return $user;
-    }
+    use ServiceUserGroupExtractor;
 
     /**
      * @param string $message
@@ -96,20 +71,5 @@ class Preparer extends XFCP_Preparer
         }
 
         return $message;
-    }
-
-    public function getImplicitMentionedUsers(): array
-    {
-        return $this->implicitMentionedUsers;
-    }
-
-    public function getExplicitMentionedUsers(): array
-    {
-        return $this->explicitMentionedUsers;
-    }
-
-    public function getMentionedUserGroups(): array
-    {
-        return $this->mentionedUserGroups;
     }
 }
