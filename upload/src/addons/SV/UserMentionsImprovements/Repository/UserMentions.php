@@ -9,11 +9,7 @@ use XF\Mvc\Entity\Repository;
 
 class UserMentions extends Repository
 {
-    /**
-     * @param UserGroup $userGroup
-     * @return AbstractCollection
-     */
-    public function getMembersOfUserGroup(UserGroup $userGroup)
+    public function getMembersOfUserGroup(UserGroup $userGroup): AbstractCollection
     {
         $users = $this->finder('XF:User')->where('UserGroupRelations.user_group_id', $userGroup->user_group_id);
 
@@ -21,13 +17,13 @@ class UserMentions extends Repository
     }
 
     /**
-     * @param array            $users
-     * @param UserGroup[]|null $mentionedUserGroups
+     * @param array       $users
+     * @param UserGroup[] $mentionedUserGroups
      * @return array
      */
-    public function mergeUserGroupMembersIntoUsersArray(array $users, $mentionedUserGroups)
+    public function mergeUserGroupMembersIntoUsersArray(array $users, array $mentionedUserGroups): array
     {
-        if (!$mentionedUserGroups)
+        if (\count($mentionedUserGroups) === 0)
         {
             return $users;
         }
@@ -41,7 +37,7 @@ class UserMentions extends Repository
 		', 'user_id'
         );
 
-        if (!$additionalUsers)
+        if (\count($additionalUsers) === 0)
         {
             return $users;
         }

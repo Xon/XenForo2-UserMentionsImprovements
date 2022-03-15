@@ -1,8 +1,9 @@
 <?php
+/**
+ * @noinspection PhpMissingReturnTypeInspection
+ */
 
 namespace SV\UserMentionsImprovements\XF\ChangeLog;
-
-
 
 /**
  * Extends \XF\ChangeLog\User

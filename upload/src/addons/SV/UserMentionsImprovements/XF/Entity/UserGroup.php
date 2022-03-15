@@ -18,7 +18,7 @@ use XF\Mvc\Entity\Structure;
  */
 class UserGroup extends XFCP_UserGroup
 {
-    public function getSvAvatarSUrl()
+    protected function getSvAvatarSUrl(): string
     {
         if ($this->sv_avatar_s)
         {
@@ -40,7 +40,7 @@ class UserGroup extends XFCP_UserGroup
         return $this->app()->templater()->$func('base_url', [$val]);
     }
 
-    public function getSvAvatarLUrl()
+    protected function getSvAvatarLUrl(): string
     {
         if ($this->sv_avatar_l)
         {
@@ -62,7 +62,7 @@ class UserGroup extends XFCP_UserGroup
         return $this->app()->templater()->$func('base_url', [$val]);
     }
 
-    public function getIconHtml()
+    public function getIconHtml(): string
     {
         $link = \XF::app()->router()->buildLink('members/usergroup', $this);
         /** @noinspection HtmlUnknownTarget */
@@ -72,6 +72,7 @@ class UserGroup extends XFCP_UserGroup
         return \sprintf('<a class="%s" href="%s">%s</a>', 'avatar avatar--xxs', $link, $image);
     }
 
+    /** @noinspection PhpMissingReturnTypeInspection */
     public function canView()
     {
         if (!$this->sv_mentionable)
@@ -114,6 +115,7 @@ class UserGroup extends XFCP_UserGroup
         }
     }
 
+    /** @noinspection PhpMissingReturnTypeInspection */
     public static function getStructure(Structure $structure)
     {
         $structure = parent::getStructure($structure);

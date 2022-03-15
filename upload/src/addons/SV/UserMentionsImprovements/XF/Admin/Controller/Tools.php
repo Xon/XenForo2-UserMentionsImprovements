@@ -2,7 +2,6 @@
 
 namespace SV\UserMentionsImprovements\XF\Admin\Controller;
 
-
 use XF\Mvc\Reply\Redirect;
 
 /**

@@ -1,4 +1,7 @@
 <?php
+/**
+ * @noinspection PhpMissingReturnTypeInspection
+ */
 
 namespace SV\UserMentionsImprovements\XF\Service\ProfilePostComment;
 
@@ -12,6 +15,7 @@ class Notifier extends XFCP_Notifier
 {
     /** @var AbstractNotifier */
     protected $svNotifier             = null;
+    /** @var array|null */
     protected $notifyingMentionLookup = null;
 
     protected function sendNotification(User $user, $action)
@@ -32,7 +36,7 @@ class Notifier extends XFCP_Notifier
             {
                 if (!$this->svNotifier)
                 {
-                    $class = \XF::extendClass('SV\UserMentionsImprovements\XF\Notifier\ProfilePostComment\Mention');
+                    $class = \XF::extendClass(\SV\UserMentionsImprovements\XF\Notifier\ProfilePostComment\Mention::class);
                     $this->svNotifier = new $class($this->app, $this->comment);
                 }
 

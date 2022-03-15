@@ -13,7 +13,7 @@ class Notifier extends XFCP_Notifier
      * @param int[] $userIds
      * @return User[]
      */
-    public function getUsers(array $userIds = null)
+    public function getSvUsers(array $userIds): array
     {
         if (!$userIds)
         {
@@ -44,7 +44,7 @@ class Notifier extends XFCP_Notifier
         return $users;
     }
 
-    public function shouldFullyDefer()
+    public function svShouldFullyDefer(): bool
     {
         $this->ensureDataLoaded();
 
@@ -73,12 +73,13 @@ class Notifier extends XFCP_Notifier
         return false;
     }
 
+    /** @noinspection PhpMissingReturnTypeInspection */
     public function notifyAndEnqueue($timeLimit = null)
     {
         $this->doCleanup = false;
         try
         {
-            if (!$this->shouldFullyDefer())
+            if (!$this->svShouldFullyDefer())
             {
                 $this->notify($timeLimit === 3 ? 0.5 : $timeLimit);
             }
@@ -112,21 +113,21 @@ class Notifier extends XFCP_Notifier
     {
         parent::addNotification($type, $userId, $alert, $email);
 
-        $this->_addExtraAlertInfo($type, [$userId]);
+        $this->svAddExtraAlertInfo($type, [$userId]);
     }
 
     public function addNotifications($type, array $userIds, $alert = true, $email = false)
     {
         parent::addNotifications($type, $userIds, $alert, $email);
 
-        $this->_addExtraAlertInfo($type, $userIds);
+        $this->svAddExtraAlertInfo($type, $userIds);
     }
 
     /**
      * @param string $type
      * @param int[]|string[]  $userIds
      */
-    protected function _addExtraAlertInfo($type, array $userIds)
+    protected function svAddExtraAlertInfo(string $type, array $userIds)
     {
         switch ($type)
         {
@@ -154,7 +155,7 @@ class Notifier extends XFCP_Notifier
                         WHERE xf_thread_user_post.user_id IS null
                     ', [$threadId]) : [];
                 }
-                $users = $this->getUsers($userIds);
+                $users = $this->getSvUsers($userIds);
                 foreach ($userIds as $userId)
                 {
                     $group = Globals::$userGroupMentionedIds[$userId] ?? null;
@@ -170,7 +171,7 @@ class Notifier extends XFCP_Notifier
                 }
                 break;
             case 'mention':
-                $users = $this->getUsers($userIds);
+                $users = $this->getSvUsers($userIds);
                 foreach ($userIds as $userId)
                 {
                     $group = Globals::$userGroupMentionedIds[$userId] ?? null;

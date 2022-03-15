@@ -1,74 +1,47 @@
 <?php
-
+/**
+ * @noinspection PhpMissingReturnTypeInspection
+ */
 
 namespace SV\UserMentionsImprovements\XF\Service\Post;
 
 class Preparer extends XFCP_Preparer
 {
-    /**
-     * @var \XF\Service\Message\Preparer
-     */
+    /**  @var \XF\Service\Message\Preparer|null */
     protected $messagePreparer;
-
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $implicitMentionedUsers = [];
-
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $explicitMentionedUsers = [];
-
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $mentionedUserGroups = [];
 
-    /**
-     * @return array
-     */
-    public function getImplicitMentionedUsers()
+    public function getImplicitMentionedUsers(): array
     {
         return $this->implicitMentionedUsers;
     }
 
-    /**
-     * @return array
-     */
-    public function getImplicitMentionedUserIds()
+    public function getImplicitMentionedUserIds(): array
     {
         return \array_keys($this->getImplicitMentionedUsers());
     }
 
-    /**
-     * @return array
-     */
-    public function getExplicitMentionedUsers()
+    public function getExplicitMentionedUsers(): array
     {
         return $this->explicitMentionedUsers;
     }
 
-    /**
-     * @return array
-     */
-    public function getExplicitMentionedUserIds()
+    public function getExplicitMentionedUserIds(): array
     {
         return \array_keys($this->getExplicitMentionedUsers());
     }
 
-    /**
-     * @return array
-     */
-    public function getMentionedUserGroups()
+    public function getMentionedUserGroups(): array
     {
         return $this->mentionedUserGroups;
     }
 
-    /**
-     * @return array
-     */
-    public function getMentionedUserGroupIds()
+    public function getMentionedUserGroupIds(): array
     {
         return \array_keys($this->getMentionedUserGroups());
     }

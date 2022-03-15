@@ -5,7 +5,6 @@ namespace SV\UserMentionsImprovements\XF\Service;
 use XF\Entity\Permission;
 use XF\Mvc\Entity\Entity;
 
-
 /**
  * Extends \XF\Service\UpdatePermissions
  */

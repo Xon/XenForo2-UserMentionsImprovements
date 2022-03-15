@@ -27,7 +27,7 @@ class MentionUsers extends XFCP_MentionUsers
     /**
      * @return \XF\Str\Formatter|Formatter
      */
-    public function getFormatter()
+    public function getFormatter(): \XF\Str\Formatter
     {
         return $this->formatter;
     }
@@ -37,7 +37,7 @@ class MentionUsers extends XFCP_MentionUsers
         $this->mentionedUserGroups = $mentionedUserGroups;
     }
 
-    public function getMentionedUserGroups()
+    public function getMentionedUserGroups(): array
     {
         // cleanup
         /** @var Formatter $formatter */

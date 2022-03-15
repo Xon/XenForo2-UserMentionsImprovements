@@ -14,12 +14,7 @@ class MentionFormatter extends XFCP_MentionFormatter
     /** string[] */
     protected $svPlaceholders;
 
-    /**
-     * @param string $message
-     * @param string $regex
-     * @return null|string
-     */
-    protected function svSetupPlaceholders($message, $regex)
+    protected function svSetupPlaceholders(string $message, string $regex): string
     {
         $this->svPlaceholders = [];
 
@@ -30,10 +25,10 @@ class MentionFormatter extends XFCP_MentionFormatter
 
             return $replace;
         }, $message
-        );
+        ) ?? '';
     }
 
-    protected function svRestorePlaceholders($message)
+    protected function svRestorePlaceholders(string $message): string
     {
         if ($this->svPlaceholders)
         {
@@ -49,7 +44,7 @@ class MentionFormatter extends XFCP_MentionFormatter
      * @param array $mentionedUserGroups
      * @return string
      */
-    protected function extractMentionedUserGroups($string, array &$mentionedUserGroups)
+    protected function extractMentionedUserGroups(string $string, array &$mentionedUserGroups): string
     {
         if (!$this->svMentionUserGroup)
         {
@@ -75,6 +70,7 @@ class MentionFormatter extends XFCP_MentionFormatter
      * @param string $message
      * @return string
      * @noinspection PhpUnnecessaryLocalVariableInspection
+     * @noinspection PhpMissingReturnTypeInspection
      */
     public function getMentionsBbCode($message)
     {

@@ -1,25 +1,16 @@
 <?php
 
-
 namespace SV\UserMentionsImprovements\XF\Service\Message;
 
 use SV\UserMentionsImprovements\XF\Entity\User;
 
 class Preparer extends XFCP_Preparer
 {
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $implicitMentionedUsers = [];
-
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $explicitMentionedUsers = [];
-
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $mentionedUserGroups = [];
 
     /**
@@ -27,7 +18,7 @@ class Preparer extends XFCP_Preparer
      * @param string                $username
      * @return User
      */
-    protected function svGetUserEntity(\XF\Mvc\Entity\Entity $content = null, string $username = null)
+    protected function svGetUserEntity(\XF\Mvc\Entity\Entity $content = null, string $username = null): User
     {
         /** @var User $user */
         $user = \SV\StandardLib\Helper::repo()->getUserEntity($content);
@@ -46,6 +37,7 @@ class Preparer extends XFCP_Preparer
      * @param string $message
      * @param bool   $checkValidity
      * @return string
+     * @noinspection PhpMissingReturnTypeInspection
      */
     public function prepare($message, $checkValidity = true)
     {
@@ -106,26 +98,17 @@ class Preparer extends XFCP_Preparer
         return $message;
     }
 
-    /**
-     * @return array
-     */
-    public function getImplicitMentionedUsers()
+    public function getImplicitMentionedUsers(): array
     {
         return $this->implicitMentionedUsers;
     }
 
-    /**
-     * @return array
-     */
-    public function getExplicitMentionedUsers()
+    public function getExplicitMentionedUsers(): array
     {
         return $this->explicitMentionedUsers;
     }
 
-    /**
-     * @return array
-     */
-    public function getMentionedUserGroups()
+    public function getMentionedUserGroups(): array
     {
         return $this->mentionedUserGroups;
     }

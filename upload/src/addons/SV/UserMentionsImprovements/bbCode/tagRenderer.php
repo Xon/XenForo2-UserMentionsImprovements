@@ -1,5 +1,8 @@
 <?php
-
+/**
+ * @noinspection PhpMissingReturnTypeInspection
+ * @noinspection PhpMissingParamTypeInspection
+ */
 
 namespace SV\UserMentionsImprovements\bbCode;
 

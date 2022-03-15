@@ -17,10 +17,10 @@ class UserGroupMentionFormatter
 
     /**
      * @param string $message
-     * @return null|string
+     * @return string
      * @noinspection PhpUnnecessaryLocalVariableInspection
      */
-    public function getMentionsBbCode($message)
+    public function getMentionsBbCode(string $message): string
     {
         // TODO: this regex needs to respect tags that disable parsing or tags that disable autolink
         $message = $this->setupPlaceholders(
@@ -49,10 +49,10 @@ class UserGroupMentionFormatter
 
     /**
      * @param string $message
-     * @return null|string
+     * @return string
      * @noinspection PhpUnnecessaryLocalVariableInspection
      */
-    public function getMentionsStructuredText($message)
+    public function getMentionsStructuredText(string $message): string
     {
         $message = $this->setupPlaceholders(
             $message,
@@ -92,7 +92,7 @@ class UserGroupMentionFormatter
         return $message;
     }
 
-    public function getMentionedUserGroups()
+    public function getMentionedUserGroups(): array
     {
         return $this->mentionedUserGroups;
     }
@@ -100,9 +100,9 @@ class UserGroupMentionFormatter
     /**
      * @param string $message
      * @param string $regex
-     * @return null|string
+     * @return string
      */
-    protected function setupPlaceholders($message, $regex)
+    protected function setupPlaceholders(string $message, string $regex): string
     {
         $this->placeholders = [];
 
@@ -113,10 +113,10 @@ class UserGroupMentionFormatter
 
             return $replace;
         }, $message
-        );
+        ) ?? '';
     }
 
-    protected function restorePlaceholders($message)
+    protected function restorePlaceholders(string $message): string
     {
         if ($this->placeholders)
         {
@@ -127,7 +127,7 @@ class UserGroupMentionFormatter
         return $message;
     }
 
-    protected function getPossibleMentionMatches($message)
+    protected function getPossibleMentionMatches(string $message): array
     {
         $min = 2;
 
@@ -142,7 +142,7 @@ class UserGroupMentionFormatter
         return $matches;
     }
 
-    protected function getTagEndPartialRegex($negated)
+    protected function getTagEndPartialRegex(string $negated): string
     {
         return '[' . ($negated ? '^' : '') . ':;,.!?\s@\'"*/)\]\[-]';
     }
@@ -151,7 +151,7 @@ class UserGroupMentionFormatter
      * @param array $matches
      * @return array
      */
-    protected function getMentionMatchUserGroups(array $matches)
+    protected function getMentionMatchUserGroups(array $matches): array
     {
         $db = \XF::db();
         $matchKeys = \array_keys($matches);
@@ -227,7 +227,7 @@ class UserGroupMentionFormatter
      * @param \Closure $tagReplacement
      * @return string
      */
-    protected function applyMentionUserGroupMatches($message, array $matches, array $userGroupsByMatch, \Closure $tagReplacement)
+    protected function applyMentionUserGroupMatches(string $message, array $matches, array $userGroupsByMatch, \Closure $tagReplacement): string
     {
         $this->mentionedUserGroups = [];
 

@@ -26,7 +26,7 @@ class Preparer extends XFCP_Preparer
         return $string;
     }
 
-    public function getMentionedUserGroups()
+    public function getMentionedUserGroups(): array
     {
         return $this->mentionedUserGroups;
     }

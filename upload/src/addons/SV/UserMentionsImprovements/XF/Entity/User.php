@@ -12,17 +12,17 @@ use XF\Mvc\Entity\Structure;
  */
 class User extends XFCP_User
 {
-    public function canReceiveMentionEmails()
+    public function canReceiveMentionEmails(): bool
     {
         return (\XF::options()->sv_send_email_on_tagging ?? false) && $this->hasPermission('general', 'sv_ReceiveMentionEmails');
     }
 
-    public function canReceiveQuoteEmails()
+    public function canReceiveQuoteEmails(): bool
     {
         return (\XF::options()->sv_send_email_on_quote ?? false) && $this->hasPermission('general', 'sv_ReceiveQuoteEmails');
     }
 
-    public function receivesMentionEmails()
+    public function receivesMentionEmails(): bool
     {
         if (!$this->canReceiveMentionEmails())
         {
@@ -35,7 +35,7 @@ class User extends XFCP_User
         return $option->sv_email_on_mention;
     }
 
-    public function receivesQuoteEmails()
+    public function receivesQuoteEmails(): bool
     {
         if (!$this->canReceiveQuoteEmails())
         {
@@ -48,7 +48,7 @@ class User extends XFCP_User
         return $option->sv_email_on_quote;
     }
 
-    protected function _getMentionContentTypeAndId(Entity $messageEntity = null)
+    protected function _getMentionContentTypeAndId(Entity $messageEntity = null): array
     {
         if ($messageEntity instanceof Post)
         {
@@ -62,7 +62,7 @@ class User extends XFCP_User
         return [null, null];
     }
 
-    public function canMention(Entity $messageEntity = null)
+    public function canMention(Entity $messageEntity = null): bool
     {
         list($contentType, $contentId) = $this->_getMentionContentTypeAndId($messageEntity);
 
@@ -74,11 +74,12 @@ class User extends XFCP_User
         return true;
     }
 
-    public function canMentionUserGroup()
+    public function canMentionUserGroup(): bool
     {
         return $this->hasPermission('general', 'sv_MentionUserGroup');
     }
 
+    /** @noinspection PhpMissingReturnTypeInspection */
     public static function getStructure(Structure $structure)
     {
         $structure = parent::getStructure($structure);

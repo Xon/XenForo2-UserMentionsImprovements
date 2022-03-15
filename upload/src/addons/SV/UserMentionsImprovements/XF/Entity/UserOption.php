@@ -22,6 +22,7 @@ class UserOption extends XFCP_UserOption
         $this->sv_email_on_quote = (bool)($defaults['sv_email_on_quote'] ?? false);
     }
 
+    /** @noinspection PhpMissingReturnTypeInspection */
     public static function getStructure(Structure $structure)
     {
         $structure = parent::getStructure($structure);

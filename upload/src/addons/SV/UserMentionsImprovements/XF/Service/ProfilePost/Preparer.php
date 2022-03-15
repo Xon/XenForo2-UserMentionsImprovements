@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * @noinspection PhpMissingReturnTypeInspection
+ */
 
 namespace SV\UserMentionsImprovements\XF\Service\ProfilePost;
 
@@ -7,70 +9,41 @@ use SV\UserMentionsImprovements\XF\Entity\User;
 
 class Preparer extends XFCP_Preparer
 {
-    /**
-     * @var \SV\UserMentionsImprovements\XF\Service\StructuredText\Preparer|\XF\Service\Message\Preparer
-     */
+    /**@var \SV\UserMentionsImprovements\XF\Service\StructuredText\Preparer|\XF\Service\Message\Preparer */
     protected $processor;
-
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $implicitMentionedUsers = [];
-
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $explicitMentionedUsers = [];
-
-    /**
-     * @var array
-     */
+    /** @var array */
     protected $mentionedUserGroups = [];
 
-    /**
-     * @return array
-     */
-    public function getImplicitMentionedUsers()
+    public function getImplicitMentionedUsers(): array
     {
         return $this->implicitMentionedUsers;
     }
 
-    /**
-     * @return array
-     */
-    public function getImplicitMentionedUserIds()
+    public function getImplicitMentionedUserIds(): array
     {
         return \array_keys($this->getImplicitMentionedUsers());
     }
 
-    /**
-     * @return array
-     */
-    public function getExplicitMentionedUsers()
+    public function getExplicitMentionedUsers(): array
     {
         return $this->explicitMentionedUsers;
     }
 
-    /**
-     * @return array
-     */
-    public function getExplicitMentionedUserIds()
+    public function getExplicitMentionedUserIds(): array
     {
         return \array_keys($this->getExplicitMentionedUsers());
     }
 
-    /**
-     * @return array
-     */
-    public function getMentionedUserGroups()
+    public function getMentionedUserGroups(): array
     {
         return $this->mentionedUserGroups;
     }
 
-    /**
-     * @return array
-     */
-    public function getMentionedUserGroupIds()
+    public function getMentionedUserGroupIds(): array
     {
         return \array_keys($this->getMentionedUserGroups());
     }
@@ -80,7 +53,7 @@ class Preparer extends XFCP_Preparer
      * @param string                $username
      * @return User
      */
-    protected function svGetUserEntity(\XF\Mvc\Entity\Entity $content, string $username = null)
+    protected function svGetUserEntity(\XF\Mvc\Entity\Entity $content, string $username = null): User
     {
         /** @var User $user */
         $user = \SV\StandardLib\Helper::repo()->getUserEntity($content);

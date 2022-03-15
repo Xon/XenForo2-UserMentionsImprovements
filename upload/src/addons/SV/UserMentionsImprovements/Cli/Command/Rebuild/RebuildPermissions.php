@@ -8,24 +8,24 @@ use XF\Cli\Command\Rebuild\AbstractRebuildCommand;
 
 class RebuildPermissions extends AbstractRebuildCommand
 {
-    protected function getRebuildName()
+    protected function getRebuildName(): string
     {
         return 'sv-permissions';
     }
 
-    protected function getRebuildDescription()
+    protected function getRebuildDescription(): string
     {
         return 'Rebuilds all permissions';
     }
 
-    protected function getRebuildClass()
+    protected function getRebuildClass(): string
     {
         \XF::db()->logQueries(false); // need to limit memory usage
 
         return 'XF:PermissionRebuild';
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         /** @var \XF\Repository\PermissionCombination $permComboRepo */
         $permComboRepo = \XF::repository('XF:PermissionCombination');

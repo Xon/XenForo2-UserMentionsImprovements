@@ -1,6 +1,5 @@
 <?php
 
-
 namespace SV\UserMentionsImprovements\bbCode;
 
 use XF\BbCode\Renderer\AbstractRenderer;
@@ -15,7 +14,7 @@ class Listener
      * @param AbstractRenderer $renderer
      * @param string           $type
      */
-    public static function bbCodeRender(AbstractRenderer $renderer, $type)
+    public static function bbCodeRender(AbstractRenderer $renderer, string $type)
     {
         if ($renderer instanceof EditorHtml)
         {
@@ -31,8 +30,7 @@ class Listener
         }
         else if ($renderer instanceof Html)
         {
-            $class = 'SV\UserMentionsImprovements\bbCode\tagRenderer';
-            $class = \XF::app()->extendClass($class);
+            $class = \XF::app()->extendClass(tagRenderer::class);
             /** @var tagRenderer $obj */
             $obj = new $class($renderer, $type);
             $obj->bindToRenderer();

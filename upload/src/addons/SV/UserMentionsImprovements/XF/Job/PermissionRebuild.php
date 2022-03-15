@@ -1,7 +1,9 @@
 <?php
+/**
+ * @noinspection PhpMissingReturnTypeInspection
+ */
 
 namespace SV\UserMentionsImprovements\XF\Job;
-
 
 /**
  * Extends \XF\Job\PermissionRebuild

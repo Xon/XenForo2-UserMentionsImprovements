@@ -9,6 +9,7 @@ class Formatter extends XFCP_Formatter
     /** @var MentionUsers  */
     public $svMentionUserGroup = null;
 
+    /** @noinspection PhpMissingReturnTypeInspection */
     public function getMentionFormatter()
     {
         /** @var MentionFormatter $mentions */
@@ -20,12 +21,9 @@ class Formatter extends XFCP_Formatter
         return $mentions;
     }
 
-    /**
-     * @return \SV\UserMentionsImprovements\Str\UserGroupMentionFormatter
-     */
-    public function getUserGroupMentionFormatter()
+    public function getUserGroupMentionFormatter(): \SV\UserMentionsImprovements\Str\UserGroupMentionFormatter
     {
-        $class = \XF::extendClass('SV\UserMentionsImprovements\Str\UserGroupMentionFormatter');
+        $class = \XF::extendClass(\SV\UserMentionsImprovements\Str\UserGroupMentionFormatter::class);
 
         return new $class();
     }

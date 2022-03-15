@@ -14,7 +14,7 @@ use XF\Mvc\Entity\Structure;
  */
 class UserGroupRelation extends Entity
 {
-    public static function getStructure(Structure $structure)
+    public static function getStructure(Structure $structure): Structure
     {
         $structure->table = 'xf_user_group_relation';
         $structure->primaryKey = ['user_id', 'user_group_id'];

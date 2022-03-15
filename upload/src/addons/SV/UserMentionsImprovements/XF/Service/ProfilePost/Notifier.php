@@ -1,4 +1,7 @@
 <?php
+/**
+ * @noinspection PhpMissingReturnTypeInspection
+ */
 
 namespace SV\UserMentionsImprovements\XF\Service\ProfilePost;
 
@@ -32,7 +35,7 @@ class Notifier extends XFCP_Notifier
             {
                 if (!$this->svNotifier)
                 {
-                    $class = \XF::extendClass('SV\UserMentionsImprovements\XF\Notifier\ProfilePost\Mention');
+                    $class = \XF::extendClass(\SV\UserMentionsImprovements\XF\Notifier\ProfilePost\Mention::class);
                     $this->svNotifier = new $class($this->app, $this->profilePost);
                 }
 
