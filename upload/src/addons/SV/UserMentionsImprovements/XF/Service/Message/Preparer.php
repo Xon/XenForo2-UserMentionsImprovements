@@ -62,7 +62,7 @@ class Preparer extends XFCP_Preparer
         );
 
         $canMention = $user->canMention($this->messageEntity);
-        if (!$canMention && \XF::options()->svBlockMentionRenderingOnNoPermissions)
+        if (!$canMention && (\XF::options()->svBlockMentionRenderingOnNoPermissions ?? true))
         {
             $this->filters['mentions'] = false;
         }

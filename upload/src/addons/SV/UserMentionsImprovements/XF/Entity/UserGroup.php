@@ -26,7 +26,7 @@ class UserGroup extends XFCP_UserGroup
         }
         else
         {
-            $val = \XF::options()->sv_default_group_avatar_s ?: '';
+            $val = \XF::options()->sv_default_group_avatar_s ?? '';
         }
         $val = \trim($val);
 
@@ -48,7 +48,7 @@ class UserGroup extends XFCP_UserGroup
         }
         else
         {
-            $val = \XF::options()->sv_default_group_avatar_l ?: '';
+            $val = \XF::options()->sv_default_group_avatar_l ?? '';
         }
         $val = \trim($val);
 

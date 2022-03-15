@@ -24,7 +24,7 @@ class tagRenderer
     {
         $this->renderer = $renderer;
         $this->type = $type;
-        $this->canViewPublicGroups = \XF::options()->svUMIPermDeniedOnViewGroup ||
+        $this->canViewPublicGroups = (\XF::options()->svUMIPermDeniedOnViewGroup ?? true) ||
                                      \XF::visitor()->hasPermission('general', 'sv_ViewPrivateGroups') ||
                                      \XF::visitor()->hasPermission('general', 'sv_ViewPublicGroups');
     }

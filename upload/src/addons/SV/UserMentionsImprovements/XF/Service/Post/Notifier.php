@@ -131,7 +131,7 @@ class Notifier extends XFCP_Notifier
         switch ($type)
         {
             case 'quote':
-                if ($userIds && \XF::options()->sv_limit_quote_emails)
+                if ($userIds && (\XF::options()->sv_limit_quote_emails ?? false))
                 {
                     $db = \XF::db();
                     $ids = [];

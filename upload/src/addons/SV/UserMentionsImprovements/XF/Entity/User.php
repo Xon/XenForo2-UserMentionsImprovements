@@ -14,12 +14,12 @@ class User extends XFCP_User
 {
     public function canReceiveMentionEmails()
     {
-        return \XF::options()->sv_send_email_on_tagging && $this->hasPermission('general', 'sv_ReceiveMentionEmails');
+        return (\XF::options()->sv_send_email_on_tagging ?? false) && $this->hasPermission('general', 'sv_ReceiveMentionEmails');
     }
 
     public function canReceiveQuoteEmails()
     {
-        return \XF::options()->sv_send_email_on_quote && $this->hasPermission('general', 'sv_ReceiveQuoteEmails');
+        return (\XF::options()->sv_send_email_on_quote ?? false) && $this->hasPermission('general', 'sv_ReceiveQuoteEmails');
     }
 
     public function receivesMentionEmails()
