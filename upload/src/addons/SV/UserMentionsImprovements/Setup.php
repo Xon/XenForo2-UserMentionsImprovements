@@ -22,7 +22,7 @@ class Setup extends AbstractSetup
         $this->schemaManager()->alterTable(
             'xf_user_group', function (Alter $table) {
             $this->addOrChangeColumn($table, 'sv_mentionable', 'bool')->setDefault(0);
-            $this->addOrChangeColumn($table, 'sv_private', 'bool')->setDefault(0);
+            $this->addOrChangeColumn($table, 'sv_private', 'bool')->setDefault(1);
             $this->addOrChangeColumn($table, 'sv_avatar_s', 'text')->nullable()->setDefault(null);
             $this->addOrChangeColumn($table, 'sv_avatar_l', 'text')->nullable()->setDefault(null);
             $this->addOrChangeColumn($table, 'sv_avatar_edit_date', 'int')->setDefault(0);

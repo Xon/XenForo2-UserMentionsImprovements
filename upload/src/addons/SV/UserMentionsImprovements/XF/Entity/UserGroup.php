@@ -116,8 +116,8 @@ class UserGroup extends XFCP_UserGroup
     {
         $structure = parent::getStructure($structure);
 
-        $structure->columns['sv_mentionable'] = ['type' => Entity::BOOL, 'default' => 0];
-        $structure->columns['sv_private'] = ['type' => Entity::BOOL, 'default' => 0];
+        $structure->columns['sv_mentionable'] = ['type' => Entity::BOOL, 'default' => false];
+        $structure->columns['sv_private'] = ['type' => Entity::BOOL, 'default' => true];
         $structure->columns['sv_avatar_s'] = ['type' => Entity::STR, 'default' => null, 'nullable' => true];
         $structure->columns['sv_avatar_l'] = ['type' => Entity::STR, 'default' => null, 'nullable' => true];
         $structure->columns['sv_avatar_edit_date'] = ['type' => Entity::UINT, 'default' => \XF::$time];
