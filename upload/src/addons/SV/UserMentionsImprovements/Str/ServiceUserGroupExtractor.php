@@ -21,6 +21,9 @@ trait ServiceUserGroupExtractor
     {
         if ($preparer instanceof ServiceUserGroupExtractorInterface)
         {
+            // These variables are largely not used in \XF\Service\XXX\Preparer, as the actual user-groups are pushed via
+            // \SV\UserMentionsImprovements\Globals::$userGroupMentionedIds due to the disconnect between mention extraction and mention alerting
+            // however these are useful for debugging so kept for now.
             $this->implicitMentionedUsers = $preparer->getImplicitMentionedUsers();
             $this->explicitMentionedUsers = $preparer->getExplicitMentionedUsers();
             $this->mentionedUserGroups = $preparer->getMentionedUserGroups();
