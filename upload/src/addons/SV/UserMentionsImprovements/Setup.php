@@ -19,37 +19,35 @@ class Setup extends AbstractSetup
 
     public function installStep1()
     {
-        $this->schemaManager()->alterTable(
-            'xf_user_group', function (Alter $table) {
-            $this->addOrChangeColumn($table, 'sv_mentionable', 'bool')->setDefault(0);
-            $this->addOrChangeColumn($table, 'sv_private', 'bool')->setDefault(1);
-            $this->addOrChangeColumn($table, 'sv_avatar_s', 'text')->nullable()->setDefault(null);
-            $this->addOrChangeColumn($table, 'sv_avatar_l', 'text')->nullable()->setDefault(null);
-            $this->addOrChangeColumn($table, 'sv_avatar_edit_date', 'int')->setDefault(0);
-        }
-        );
-        $this->db()->query(
-            "
-                UPDATE xf_user_group
-                SET sv_avatar_edit_date = ?
-                WHERE sv_avatar_edit_date = 0
-            ", [\XF::$time]
-        );
+        $sm = $this->schemaManager();
 
-        $this->schemaManager()->alterTable(
-            'xf_user_option', function (Alter $table) {
-            $this->addOrChangeColumn($table, 'sv_email_on_mention', 'bool')->setDefault(0);
-            $this->addOrChangeColumn($table, 'sv_email_on_quote', 'bool')->setDefault(0);
+        foreach ($this->getAlterTables() as $tableName => $callback)
+        {
+            if ($sm->tableExists($tableName))
+            {
+                $sm->alterTable($tableName, $callback);
+            }
         }
-        );
+    }
 
+    public function installStep2()
+    {
+        $this->db()->query('
+            UPDATE xf_user_group
+            SET sv_avatar_edit_date = ?
+            WHERE sv_avatar_edit_date = 0
+        ', [\XF::$time]);
+    }
+
+    public function installStep3()
+    {
         $this->applyRegistrationDefaults([
             'sv_email_on_mention' => '',
             'sv_email_on_quote'   => '',
         ]);
     }
 
-    public function installStep2()
+    public function installStep4()
     {
         $this->defaultPermission();
     }
@@ -254,53 +252,22 @@ class Setup extends AbstractSetup
         ");
     }
 
+    public function upgrade2080100Step1()
+    {
+        $this->installStep1();
+    }
+
     public function uninstallStep1()
     {
-        $this->schemaManager()->alterTable(
-            'xf_user_group', function (Alter $table) {
-            $table->dropColumns(['sv_mentionable', 'sv_private', 'sv_avatar_s', 'sv_avatar_l', 'sv_avatar_edit_date']);
+        $sm = $this->schemaManager();
+
+        foreach ($this->getRemoveAlterTables() as $tableName => $callback)
+        {
+            if ($sm->tableExists($tableName))
+            {
+                $sm->alterTable($tableName, $callback);
+            }
         }
-        );
-    }
-
-    public function uninstallStep2()
-    {
-        $this->schemaManager()->alterTable(
-            'xf_user_option', function (Alter $table) {
-            $table->dropColumns(['sv_email_on_mention', 'sv_email_on_quote']);
-        }
-        );
-    }
-
-    public function uninstallStep3()
-    {
-        $db = $this->db();
-
-        $db->query(
-            "
-            DELETE FROM xf_permission_entry
-            WHERE permission_id IN (            
-                 'sv_EnableMentions',
-                 'sv_MentionUserGroup',
-                 'sv_ReceiveMentionEmails',
-                 'sv_ReceiveQuoteEmails',
-                 'sv_ViewPrivateGroups'
-            )
-        "
-        );
-
-        $db->query(
-            "
-            DELETE FROM xf_permission_entry_content
-            WHERE permission_id IN (
-                 'sv_EnableMentions',
-                 'sv_MentionUserGroup',
-                 'sv_ReceiveMentionEmails',
-                 'sv_ReceiveQuoteEmails',
-                 'sv_ViewPrivateGroups'
-            )
-        "
-        );
     }
 
     public function defaultPermission()
@@ -323,5 +290,34 @@ class Setup extends AbstractSetup
         );
 
         $this->applyGlobalPermissionByGroup('general', 'sv_ViewPublicGroups', [User::GROUP_REG, User::GROUP_GUEST]);
+    }
+
+    protected function getAlterTables(): array
+    {
+        return [
+            'xf_user_group'  => function (Alter $table) {
+                $this->addOrChangeColumn($table, 'sv_mentionable', 'bool')->setDefault(0);
+                $this->addOrChangeColumn($table, 'sv_private', 'bool')->setDefault(1);
+                $this->addOrChangeColumn($table, 'sv_avatar_s', 'text')->nullable()->setDefault(null);
+                $this->addOrChangeColumn($table, 'sv_avatar_l', 'text')->nullable()->setDefault(null);
+                $this->addOrChangeColumn($table, 'sv_avatar_edit_date', 'int')->setDefault(0);
+            },
+            'xf_user_option' => function (Alter $table) {
+                $this->addOrChangeColumn($table, 'sv_email_on_mention', 'bool')->setDefault(0);
+                $this->addOrChangeColumn($table, 'sv_email_on_quote', 'bool')->setDefault(0);
+            },
+        ];
+    }
+
+    protected function getRemoveAlterTables(): array
+    {
+        return [
+            'xf_user_option' => function (Alter $table) {
+                $table->dropColumns(['sv_email_on_mention', 'sv_email_on_quote']);
+            },
+            'xf_user_group'  => function (Alter $table) {
+                $table->dropColumns(['sv_mentionable', 'sv_private', 'sv_avatar_s', 'sv_avatar_l', 'sv_avatar_edit_date']);
+            }
+        ];
     }
 }
