@@ -5,7 +5,7 @@ namespace SV\UserMentionsImprovements\Repository;
 use SV\UserMentionsImprovements\Globals;
 use XF\Entity\UserGroup;
 use XF\Mvc\Entity\Repository;
-use function array_key_exists;
+use function count, array_keys, array_key_exists;
 
 class UserMentions extends Repository
 {
@@ -26,19 +26,20 @@ class UserMentions extends Repository
      */
     public function mergeUserGroupMembersIntoUsersArray(array $users, array $mentionedUserGroups): array
     {
-        if (\count($mentionedUserGroups) === 0)
+        if (count($mentionedUserGroups) === 0)
         {
             return $users;
         }
 
+        $groupMentionIds = array_keys($mentionedUserGroups);
         $additionalUsers = \XF::db()->fetchAll('
             SELECT DISTINCT `user`.user_id, `user`.username, `relation`.user_group_id
             FROM xf_user AS `user`
             JOIN xf_user_group_relation AS `relation` ON `relation`.user_id = `user`.user_id
-            WHERE `relation`.user_group_id IN (' . \XF::db()->quote(\array_keys($mentionedUserGroups)) . ')
+            WHERE `relation`.user_group_id IN (' . \XF::db()->quote($groupMentionIds) . ')
         ');
 
-        if (\count($additionalUsers) === 0)
+        if (count($additionalUsers) === 0)
         {
             return $users;
         }
@@ -60,7 +61,27 @@ class UserMentions extends Repository
             $group = $mentionedUserGroups[$additionalUser['user_group_id']] ?? null;
             \assert($group !== null);
 
-            $mentionedUgUsers[$userId][] = ['title' => $group['title'], 'id' => $group['user_group_id']];
+            $mentionedUgUsers[$userId][$group['user_group_id']] = ['title' => $group['title'], 'id' => $group['user_group_id']];
+        }
+        // preserve original ordering of user-group mentions as $additionalUsers is non-ordered
+        foreach ($mentionedUgUsers as &$groups)
+        {
+            if (count($groups) <= 1)
+            {
+                $groups = array_values($groups);
+                continue;
+            }
+
+            $orderedGroups = [];
+            foreach ($groupMentionIds AS $groupId)
+            {
+                $id = (int)($groups[$groupId]['id'] ?? 0);
+                if ($groupId === $id)
+                {
+                    $orderedGroups[$groupId] = $groups[$groupId];
+                }
+            }
+            $groups = $orderedGroups;
         }
 
         Globals::$userGroupMentionedIds = $mentionedUgUsers;
