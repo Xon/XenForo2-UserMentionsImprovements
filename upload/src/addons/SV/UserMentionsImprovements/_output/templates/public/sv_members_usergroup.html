@@ -20,6 +20,11 @@
         </ol>
     </div>
     <div class="block-outer block-outer--after">
-        <xf:pagenav link="account/likes" page="{$page}" perpage="{$perPage}" total="{$total}"/>
+        <xf:pagenav link="members/usergroup"
+					page="{$page}"
+					perpage="{$perPage}"
+					total="{$total}"
+					data="{$userGroup}"
+					params="{{ $linkFilters ?: [] }}" />
     </div>
 </div>

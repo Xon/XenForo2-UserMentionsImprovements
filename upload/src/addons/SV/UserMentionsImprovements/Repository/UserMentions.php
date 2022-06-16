@@ -9,11 +9,14 @@ use XF\Mvc\Entity\Repository;
 
 class UserMentions extends Repository
 {
-    public function getMembersOfUserGroup(UserGroup $userGroup): AbstractCollection
+    public function findUsersByGroup(UserGroup $userGroup): \XF\Finder\User
     {
-        $users = $this->finder('XF:User')->where('UserGroupRelations.user_group_id', $userGroup->user_group_id);
+        /** @var \XF\Finder\User $finder */
+        $finder = $this->finder('XF:User')
+                    ->where('UserGroupRelations.user_group_id', $userGroup->user_group_id)
+                    ->order('user_id');
 
-        return $users->fetch();
+        return $finder;
     }
 
     /**
