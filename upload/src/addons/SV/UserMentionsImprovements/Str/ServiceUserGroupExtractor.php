@@ -14,6 +14,20 @@ trait ServiceUserGroupExtractor
     protected $mentionedUserGroups = [];
 
     /**
+     * @param \XF\Service\Message\Preparer|ServiceUserGroupExtractorInterface|null $preparer
+     * @return void
+     */
+    public function svCopyFields(\XF\Service\Message\Preparer $preparer = null)
+    {
+        if ($preparer instanceof ServiceUserGroupExtractorInterface)
+        {
+            $this->implicitMentionedUsers = $preparer->getImplicitMentionedUsers();
+            $this->explicitMentionedUsers = $preparer->getExplicitMentionedUsers();
+            $this->mentionedUserGroups = $preparer->getMentionedUserGroups();
+        }
+    }
+
+    /**
      * @param \XF\Mvc\Entity\Entity $content
      * @param string                $username
      * @return User

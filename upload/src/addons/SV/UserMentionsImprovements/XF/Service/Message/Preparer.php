@@ -3,8 +3,9 @@
 namespace SV\UserMentionsImprovements\XF\Service\Message;
 
 use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractor;
+use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractorInterface;
 
-class Preparer extends XFCP_Preparer
+class Preparer extends XFCP_Preparer implements ServiceUserGroupExtractorInterface
 {
     use ServiceUserGroupExtractor;
 

@@ -6,13 +6,14 @@
 namespace SV\UserMentionsImprovements\XF\Service\Post;
 
 use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractor;
+use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractorInterface;
 
-class Preparer extends XFCP_Preparer
+class Preparer extends XFCP_Preparer implements ServiceUserGroupExtractorInterface
 {
     use ServiceUserGroupExtractor;
 
-    /**  @var \XF\Service\Message\Preparer|null */
-    protected $messagePreparer;
+    /**@var \XF\Service\Message\Preparer|null */
+    protected $svPreparer = null;
 
     /**
      * @param string $message
@@ -23,16 +24,8 @@ class Preparer extends XFCP_Preparer
     public function setMessage($message, $format = true, $checkValidity = true)
     {
         $valid = parent::setMessage($message, $format, $checkValidity);
-        /** @var Preparer $preparer */
-        $preparer = $this->messagePreparer;
-        if (!$preparer)
-        {
-            // mentions are just not enabled
-            return $valid;
-        }
-        $this->implicitMentionedUsers = $preparer->getImplicitMentionedUsers();
-        $this->explicitMentionedUsers = $preparer->getExplicitMentionedUsers();
-        $this->mentionedUserGroups = $preparer->getMentionedUserGroups();
+
+        $this->svCopyFields($this->svPreparer);
 
         return $valid;
     }
@@ -44,7 +37,7 @@ class Preparer extends XFCP_Preparer
     protected function getMessagePreparer($format = true)
     {
         $preparer = parent::getMessagePreparer($format);
-        $this->messagePreparer = $preparer;
+        $this->svPreparer = $preparer;
 
         return $preparer;
     }

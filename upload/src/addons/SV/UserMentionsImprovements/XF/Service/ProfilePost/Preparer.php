@@ -6,13 +6,14 @@
 namespace SV\UserMentionsImprovements\XF\Service\ProfilePost;
 
 use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractor;
+use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractorInterface;
 
-class Preparer extends XFCP_Preparer
+class Preparer extends XFCP_Preparer implements ServiceUserGroupExtractorInterface
 {
     use ServiceUserGroupExtractor;
 
-    /**@var \SV\UserMentionsImprovements\XF\Service\StructuredText\Preparer|\XF\Service\Message\Preparer */
-    protected $processor;
+    /**@var \XF\Service\Message\Preparer|null */
+    protected $svPreparer = null;
 
     /**
      * @param string $message
@@ -21,43 +22,11 @@ class Preparer extends XFCP_Preparer
      */
     public function setMessage($message, $format = true)
     {
-        $retval = parent::setMessage($message, $format);
-        $processor = $this->processor;
-        if (!$processor)
-        {
-            // mentions are just not enabled
-            return $retval;
-        }
+        $ret = parent::setMessage($message, $format);
 
-        $user = $this->svGetUserEntity($this->profilePost, $this->profilePost->username ?: \XF::visitor()->username);
-        if ($user->canMention($this->profilePost))
-        {
-            $this->explicitMentionedUsers = $this->mentionedUsers;
+        $this->svCopyFields($this->svPreparer);
 
-            if ($user->canMentionUserGroup())
-            {
-                /** @var \SV\UserMentionsImprovements\Repository\UserMentions $userMentionsRepo */
-                $userMentionsRepo = \XF::app()->repository('SV\UserMentionsImprovements:UserMentions');
-                $this->mentionedUserGroups = $processor->getMentionedUserGroups();
-                $this->mentionedUsers = $userMentionsRepo->mergeUserGroupMembersIntoUsersArray(
-                    $this->mentionedUsers,
-                    $this->mentionedUserGroups
-                );
-                $this->implicitMentionedUsers = array_diff_key(
-                    $this->mentionedUsers,
-                    $this->explicitMentionedUsers
-                );
-            }
-        }
-        else
-        {
-            $this->mentionedUsers = [];
-            $this->implicitMentionedUsers = [];
-            $this->explicitMentionedUsers = [];
-            $this->mentionedUserGroups = [];
-        }
-
-        return $retval;
+        return $ret;
     }
 
     /**
@@ -67,7 +36,7 @@ class Preparer extends XFCP_Preparer
     protected function getMessagePreparer($format = true)
     {
         $preparer = parent::getMessagePreparer($format);
-        $this->processor = $preparer;
+        $this->svPreparer = $preparer;
 
         return $preparer;
     }
