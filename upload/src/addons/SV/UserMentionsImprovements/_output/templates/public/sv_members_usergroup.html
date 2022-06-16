@@ -1,30 +1,54 @@
 <xf:title>{$userGroup.title}</xf:title>
-
 <xf:description>
-    <xf:if is="{$userGroup.sv_private}">{{ phrase('sv_user_group_is_private') }}</xf:if>
+    <xf:if is="$userGroup.sv_private">{{ phrase('sv_user_group_is_private') }}</xf:if>
 </xf:description>
 
-<div class="block">
-    <div class="block-container">
-        <xf:if is="$userGroup.sv_avatar_s_url">
-            <div class="block-header">
-                <img src="{$userGroup.sv_avatar_s_url}"/>
-            </div>
-        </xf:if>
-        <ol class="block-body">
-            <xf:foreach loop="$users" key="$userId" value="$user">
-                <li class="block-row block-row--separated">
-                    <xf:macro template="member_list_macros" name="item" arg-user="{$user}"/>
-                </li>
-            </xf:foreach>
-        </ol>
-    </div>
-    <div class="block-outer block-outer--after">
-        <xf:pagenav link="members/usergroup"
-					page="{$page}"
-					perpage="{$perPage}"
-					total="{$total}"
-					data="{$userGroup}"
-					params="{{ $linkFilters ?: [] }}" />
-    </div>
+<div class="block sv-quick-filter">
+	<xf:if is="$users is not empty">
+		<div class="block-outer">
+			<div class="block-outer-main">
+				<div class="block-outer block-outer--after block-outer--page-nav-wrapper">
+					<xf:pagenav page="{$page}"
+								perpage="{$perPage}"
+								total="{$total}"
+								link="members/usergroup"
+								data="{$userGroup}"
+								params="{{ $addParamsToPageNav ? $linkFilters : [] }}" />
+				</div>
+			</div>
+			<xf:macro template="svStandardLib_macros" name="dynamic_quick_filter"
+					  arg-key="users"
+					  arg-ajax="{{ link('members/usergroup', $userGroup) }}"
+					  arg-class="block-outer-opposite"
+					  arg-filter="{$filter}"
+			/>
+		</div>
+		
+		<div class="block-container">
+			<div class="block-body userList">
+				<xf:foreach loop="$users" key="$userId" value="$user">
+					<li class="block-row block-row--separated userList-row js-filterSearchable">
+						<xf:macro template="member_list_macros"
+								  name="item"
+								  arg-user="{$user}"
+								  />
+					</li>
+				</xf:foreach>
+			</div>
+			<div class="block-footer block-footer--split">
+				<span class="block-footer-counter">{{ display_totals($users, $total) }}</span>
+			</div>
+		</div>
+		<div class="block-outer block-outer--after block-outer--page-nav-wrapper">
+			<xf:pagenav page="{$page}"
+						perpage="{$perPage}"
+						total="{$total}"
+						link="members/usergroup"
+						data="{$userGroup}"
+						params="{{ $addParamsToPageNav ? $linkFilters : [] }}" />
+		</div>
+	<xf:else />
+		<div class="blockMessage">{{ phrase('no_records_matched') }}</div>
+	</xf:if>
+	<xf:hiddenval name="final_url" value="{$finalUrl}" />
 </div>

@@ -59,6 +59,9 @@ class Member extends XFCP_Member
             $linkFilters['_xfFilter'] = $filters;
         }
 
+        $finalUrl = $this->buildLink('full:members/usergroup', $userGroup, $linkFilters);
+        $addParamsToPageNav = $this->filter('_xfWithData', 'bool');
+
         $users = $finder->fetch();
 
         $viewParams = [
@@ -69,8 +72,10 @@ class Member extends XFCP_Member
             'page'    => $page,
             'perPage' => $perPage,
 
+            'addParamsToPageNav' => $addParamsToPageNav,
             'linkFilters' => $linkFilters,
             'filter' => $filters,
+            'finalUrl' => $finalUrl,
         ];
 
         return $this->view('SV\UserMentionsImprovements:Member\UserGroup', 'sv_members_usergroup', $viewParams);
@@ -80,7 +85,7 @@ class Member extends XFCP_Member
     {
         if (strlen($filters['text'] ?? '') !== 0)
         {
-            $hasPrefixSearch = (bool)($filters['prefix']  ?? false);
+            $hasPrefixSearch = (bool)($filters['prefix']  ?? true);
             if (!$hasPrefixSearch)
             {
                 unset($filters['prefix']);
@@ -91,7 +96,7 @@ class Member extends XFCP_Member
                 'LIKE',
                 $finder->escapeLike(
                     $filters['text'],
-                    $filters['prefix'] ? '?%' : '%?%'
+                    $hasPrefixSearch ? '?%' : '%?%'
                 )
             );
         }
