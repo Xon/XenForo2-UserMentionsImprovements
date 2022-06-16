@@ -44,7 +44,7 @@ class Member extends XFCP_Member
             $linkFilters['_xfFilter'] = $filters;
         }
 
-        $finalUrl = $this->buildLink('full:members/usergroup', $userGroup, $linkFilters);
+        $finalUrl = $this->buildLink('full:members/usergroup', $userGroup, $linkFilters + ['page' => $page]);
         $addParamsToPageNav = $this->filter('_xfWithData', 'bool');
 
         $users = $finder->fetch();
