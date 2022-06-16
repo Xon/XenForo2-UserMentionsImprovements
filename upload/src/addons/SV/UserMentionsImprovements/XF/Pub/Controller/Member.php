@@ -26,7 +26,7 @@ class Member extends XFCP_Member
         }
 
         $filters = $this->getUserGroupFilters();
-        $page = $this->filterPage($filters['page'] ?? 0);
+        $page = $this->filterPage($params['page'] ?? 0);
         $perPage = (int)(\XF::options()->svUMI_usersPerPage ?? 50);
 
         /** @var \SV\UserMentionsImprovements\Repository\UserMentions $userMentionsRepo */
@@ -73,7 +73,6 @@ class Member extends XFCP_Member
             return $this->filter('_xfFilter', [
                 'text'   => 'str',
                 'prefix' => 'bool',
-                'page'   => 'uint'
             ]);
         }
 
