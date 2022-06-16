@@ -12,10 +12,10 @@ class UserAlert extends XFCP_UserAlert
 {
     public function alert(User $receiver, $senderId, $senderName, $contentType, $contentId, $action, array $extra = [], array $options = [])
     {
-        $group = Globals::$userGroupMentionedIds[$receiver->user_id] ?? null;
-        if ($group !== null && $action === 'mention')
+        $groups = Globals::$userGroupMentionedIds[$receiver->user_id] ?? null;
+        if ($groups !== null && $action === 'mention')
         {
-            $extra['sv_group'] = $group;
+            $extra['sv_groups'] = $groups;
         }
 
         return parent::alert($receiver, $senderId, $senderName, $contentType, $contentId, $action, $extra, $options);

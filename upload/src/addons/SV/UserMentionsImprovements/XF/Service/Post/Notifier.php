@@ -158,10 +158,10 @@ class Notifier extends XFCP_Notifier
                 $users = $this->getSvUsers($userIds);
                 foreach ($userIds as $userId)
                 {
-                    $group = Globals::$userGroupMentionedIds[$userId] ?? null;
-                    if ($group !== null)
+                    $groups = Globals::$userGroupMentionedIds[$userId] ?? null;
+                    if ($groups !== null)
                     {
-                        $this->notifyData[$type][$userId]['group'] = $group;
+                        $this->notifyData[$type][$userId]['groups'] = $groups;
                     }
                     $user = $users[$userId] ?? null;
                     if ($user && $user->receivesQuoteEmails())
@@ -174,10 +174,10 @@ class Notifier extends XFCP_Notifier
                 $users = $this->getSvUsers($userIds);
                 foreach ($userIds as $userId)
                 {
-                    $group = Globals::$userGroupMentionedIds[$userId] ?? null;
-                    if ($group !== null)
+                    $groups = Globals::$userGroupMentionedIds[$userId] ?? null;
+                    if ($groups !== null)
                     {
-                        $this->notifyData[$type][$userId]['group'] = $group;
+                        $this->notifyData[$type][$userId]['groups'] = $groups;
                     }
                     $user = $users[$userId] ?? null;
                     if ($user && $user->receivesMentionEmails())
@@ -201,10 +201,18 @@ class Notifier extends XFCP_Notifier
                 {
                     if (empty(Globals::$userGroupMentionedIds[$userId]))
                     {
-                        $groupData = $value['group'] ?? null;
-                        if ($groupData !== null)
+                        $groupsData = $value['groups'] ?? null;
+                        if ($groupsData !== null)
                         {
-                            Globals::$userGroupMentionedIds[$userId] = $groupData;
+                            Globals::$userGroupMentionedIds[$userId] = $groupsData;
+                        }
+                        else
+                        {
+                            $groupData = $value['group'] ?? null;
+                            if ($groupData !== null)
+                            {
+                                Globals::$userGroupMentionedIds[$userId] = [$groupsData];
+                            }
                         }
                     }
                 }

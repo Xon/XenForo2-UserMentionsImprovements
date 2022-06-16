@@ -2,16 +2,32 @@
 		  arg-alert="!"
 		  arg-extra="!"
 		  >
-	<xf:if is="$extra.sv_group">
-		<xf:set var="$group" value="{{ $extra.sv_group }}"/>
+	<xf:if is="$extra.sv_groups">
+		<xf:set var="$groups" value="{{ $extra.sv_groups }}"/>
+	<xf:elseif is="$extra.sv_group" />
+		<xf:set var="$groups" value="{{ [$extra.sv_group] }}"/>
 	<xf:elseif is="$extra.taggedGroupId" />
-		<xf:set var="$group" value="{{ {'id': $extra.taggedGroupId, 'title': $extra.taggedGroup} }}"/>
+		<xf:set var="$groups" value="{{ [{'id': $extra.taggedGroupId, 'title': $extra.taggedGroup}] }}"/>
+	<xf:else />
+		<xf:set var="$groups" value="{{ [] }}"/>
 	</xf:if>
-	<xf:if is="$group">
+	<xf:if is="count($groups) == 1">
+		<xf:set var="$group" value="{{ $groups.0 }}" />
 		<xf:set var="$link" value="{{ link('members/usergroup', {'user_group_id':$group.id}) }}"/>
 		<xf:set var="$attributes">class="ug" data-xf-click='overlay' data-usergroup-id='{$group.id}' data-groupname='{$group.title|for_attr}'</xf:set>
 		{{ phrase('sv_mentioned_as_y_group', {
 			'title': '<a href="' . $link . '" ' . $attributes .'>' . $group.title . '</a>'
+		}) }}
+	<xf:elseif is="count($groups) > 1" />
+		<xf:set var="$titles" value="" />
+		<xf:foreach loop="$groups" value="$group">
+			<xf:set var="$link" value="{{ link('members/usergroup', {'user_group_id':$group.id}) }}"/>
+			<xf:set var="$attributes">class="ug" data-xf-click='overlay' data-usergroup-id='{$group.id}' data-groupname='{$group.title|for_attr}'</xf:set>
+			<xf:set var="$title" value="{{ '<a href="' . $link . '" ' . $attributes .'>' . $group.title . '</a>' }}" />
+			<xf:set var="$titles" value="{{ $titles . ($titles !== '' ? ', ': '') . $title }}" />
+		</xf:foreach>
+		{{ phrase('sv_mentioned_as_y_groups', {
+			'title': $titles|raw
 		}) }}
 	</xf:if>
 </xf:macro>
@@ -19,14 +35,28 @@
 <xf:macro name="push" 
 		  arg-alert="!"
 		  arg-extra="!"
-		  >
-	<xf:if is="$extra.sv_group">
-		{{ phrase('sv_mentioned_as_y_group', {
-			'title': $extra.sv_group.title
-		}) }}
+		  ><xf:trim>
+	<xf:if is="$extra.sv_groups">
+		<xf:set var="$groups" value="{{ $extra.sv_groups }}"/>
+	<xf:elseif is="$extra.sv_group" />
+		<xf:set var="$groups" value="{{ [$extra.sv_group] }}"/>
 	<xf:elseif is="$extra.taggedGroupId" />
+		<xf:set var="$groups" value="{{ [{'id': $extra.taggedGroupId, 'title': $extra.taggedGroup}] }}"/>
+	<xf:else />
+		<xf:set var="$groups" value="{{ [] }}"/>
+	</xf:if>
+	<xf:if is="count($groups) == 1">
+		<xf:set var="$group" value="{{ $groups.0 }}" />
 		{{ phrase('sv_mentioned_as_y_group', {
-			'title': $extra.taggedGroup
+			'title': $group.title
+		}) }}
+	<xf:elseif is="count($groups) > 1" />
+		<xf:set var="$titles" value="" />
+		<xf:foreach loop="$groups" value="$group">
+			<xf:set var="$titles" value="{{ $titles . ($titles !== '' ? ', ': '') . $group.title }}" />
+		</xf:foreach>
+		{{ phrase('sv_mentioned_as_y_groups', {
+			'title': $titles|raw
 		}) }}
 	</xf:if>
-</xf:macro>
+</xf:trim></xf:macro>

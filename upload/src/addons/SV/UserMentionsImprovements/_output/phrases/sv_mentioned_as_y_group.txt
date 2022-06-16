@@ -1,1 +1,1 @@
-As you are a member of the {title} usergroup.
+As you are a member of the group: {title}.

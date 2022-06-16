@@ -4,8 +4,8 @@ namespace SV\UserMentionsImprovements\Repository;
 
 use SV\UserMentionsImprovements\Globals;
 use XF\Entity\UserGroup;
-use XF\Mvc\Entity\AbstractCollection;
 use XF\Mvc\Entity\Repository;
+use function array_key_exists;
 
 class UserMentions extends Repository
 {
@@ -31,14 +31,12 @@ class UserMentions extends Repository
             return $users;
         }
 
-        $additionalUsers = \XF::db()->fetchAllKeyed(
-            '
-			SELECT DISTINCT user.user_id, user.username, relation.user_group_id
-			FROM xf_user AS user
-			LEFT JOIN xf_user_group_relation AS relation ON relation.user_id = user.user_id
-            WHERE relation.user_group_id IN (' . \XF::db()->quote(\array_keys($mentionedUserGroups)) . ')
-		', 'user_id'
-        );
+        $additionalUsers = \XF::db()->fetchAll('
+            SELECT DISTINCT `user`.user_id, `user`.username, `relation`.user_group_id
+            FROM xf_user AS `user`
+            JOIN xf_user_group_relation AS `relation` ON `relation`.user_id = `user`.user_id
+            WHERE `relation`.user_group_id IN (' . \XF::db()->quote(\array_keys($mentionedUserGroups)) . ')
+        ');
 
         if (\count($additionalUsers) === 0)
         {
@@ -46,23 +44,23 @@ class UserMentions extends Repository
         }
 
         $mentionedUgUsers = [];
-
-        foreach ($additionalUsers AS $userId => $additionalUser)
+        foreach ($additionalUsers AS $additionalUser)
         {
-            if (isset($users[$userId]) || empty($mentionedUserGroups[$additionalUser['user_group_id']]))
+            $userId = (int)$additionalUser['user_id'];
+
+            if (!array_key_exists($userId, $users))
             {
-                continue;
+                $users[$userId] = [
+                    'user_id'  => $additionalUser['user_id'],
+                    'username' => $additionalUser['username'],
+                    'lower'    => \strtolower($additionalUser['username']),
+                ];
             }
 
-            $users[$userId] = [
-                'user_id'  => $additionalUser['user_id'],
-                'username' => $additionalUser['username'],
-                'lower'    => \strtolower($additionalUser['username']),
-            ];
+            $group = $mentionedUserGroups[$additionalUser['user_group_id']] ?? null;
+            \assert($group !== null);
 
-            $group = $mentionedUserGroups[$additionalUser['user_group_id']];
-
-            $mentionedUgUsers[$userId] = ['title' => $group['title'], 'id' => $group['user_group_id']];
+            $mentionedUgUsers[$userId][] = ['title' => $group['title'], 'id' => $group['user_group_id']];
         }
 
         Globals::$userGroupMentionedIds = $mentionedUgUsers;
