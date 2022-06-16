@@ -6,7 +6,6 @@
 namespace SV\UserMentionsImprovements\XF\Service\ProfilePostComment;
 
 use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractor;
-use SV\UserMentionsImprovements\XF\Entity\User;
 
 class Preparer extends XFCP_Preparer
 {
