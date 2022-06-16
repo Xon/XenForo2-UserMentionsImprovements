@@ -25,23 +25,8 @@ class Member extends XFCP_Member
             return $this->notFound();
         }
 
-        $filters = [];
-        if ($this->request()->exists('_xfFilter'))
-        {
-            $filters = $this->filter('_xfFilter', [
-                'text'   => 'str',
-                'prefix' => 'bool',
-                'page'   => 'uint'
-            ]);
-
-            $page = $this->filterPage($filters['page']);
-            unset($filters['page']);
-        }
-        else
-        {
-            /** @noinspection PhpUndefinedFieldInspection */
-            $page = $this->filterPage($params->page);
-        }
+        $filters = $this->getUserGroupFilters();
+        $page = $this->filterPage($filters['page'] ?? 0);
         $perPage = (int)(\XF::options()->svUMI_usersPerPage ?? 50);
 
         /** @var \SV\UserMentionsImprovements\Repository\UserMentions $userMentionsRepo */
@@ -79,6 +64,20 @@ class Member extends XFCP_Member
         ];
 
         return $this->view('SV\UserMentionsImprovements:Member\UserGroup', 'sv_members_usergroup', $viewParams);
+    }
+
+    protected function getUserGroupFilters(): array
+    {
+        if ($this->request()->exists('_xfFilter'))
+        {
+            return $this->filter('_xfFilter', [
+                'text'   => 'str',
+                'prefix' => 'bool',
+                'page'   => 'uint'
+            ]);
+        }
+
+        return [];
     }
 
     protected function applyUserGroupFilters(\XF\Finder\User $finder, array &$filters)
