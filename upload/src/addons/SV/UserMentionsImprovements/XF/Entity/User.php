@@ -66,7 +66,7 @@ class User extends XFCP_User
     {
         list($contentType, $contentId) = $this->_getMentionContentTypeAndId($messageEntity);
 
-        if ($contentType && $contentId)
+        if ($contentType !== null && $contentId)
         {
             return $this->hasContentPermission($contentType, $contentId, 'sv_EnableMentions');
         }
