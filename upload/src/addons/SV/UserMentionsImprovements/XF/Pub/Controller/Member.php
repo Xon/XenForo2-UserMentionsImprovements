@@ -4,7 +4,7 @@ namespace SV\UserMentionsImprovements\XF\Pub\Controller;
 
 use XF\Mvc\ParameterBag;
 use XF\Mvc\Reply\View;
-use function count, strlen, ltrim, utf8_strlen;
+use function count, strlen, ltrim;
 
 class Member extends XFCP_Member
 {
@@ -116,7 +116,7 @@ class Member extends XFCP_Member
 
             $q = ltrim($this->filter('q', 'str', ['no-trim']));
 
-            if ($visitor->canMentionUserGroup() && $q !== '' && utf8_strlen($q) >= 2)
+            if ($visitor->canMentionUserGroup() && $q !== '' && \mb_strlen($q) >= 2)
             {
                 /** @var \SV\UserMentionsImprovements\XF\Finder\UserGroup $userGroupFinder */
                 $userGroupFinder = $this->finder('XF:UserGroup');

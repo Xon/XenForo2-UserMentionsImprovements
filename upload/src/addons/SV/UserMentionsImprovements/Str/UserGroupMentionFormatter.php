@@ -8,7 +8,7 @@ namespace SV\UserMentionsImprovements\Str;
 use function preg_match;
 use function strlen;
 use function substr;
-use function utf8_strtolower;
+use function mb_strtolower;
 
 /**
  * This is basically a copy of the \XF\Str\MentionFormatter class, with changes for UserGroups instead.
@@ -185,7 +185,7 @@ class UserGroupMentionFormatter
 
         foreach ($matches AS $key => $match)
         {
-            if (\utf8_strlen($match[1][0]) > 50)
+            if (\mb_strlen($match[1][0]) > 50)
             {
                 // longer than max usergroup title length
                 continue;
@@ -229,7 +229,7 @@ class UserGroupMentionFormatter
             $userGroupInfo = [
                 'user_group_id' => $userGroup['user_group_id'],
                 'title'         => $userGroup['title'],
-                'lower'         => \utf8_strtolower($userGroup['title']),
+                'lower'         => mb_strtolower($userGroup['title']),
             ];
 
             foreach ($matchKeys AS $key)
@@ -262,7 +262,6 @@ class UserGroupMentionFormatter
 
         $newMessage = '';
         $lastOffset = 0;
-        $testString = \utf8_strtolower($message);
         $mentionedUserGroups = [];
         $endMatch = $this->getTagEndPartialRegex(false);
 
@@ -282,7 +281,7 @@ class UserGroupMentionFormatter
             $haveMatch = false;
             if (!empty($userGroupsByMatch[$key]))
             {
-                $testName = utf8_strtolower($match[1][0]);
+                $testName = mb_strtolower($match[1][0]);
                 $testOffset = $match[1][1];
 
                 foreach ($userGroupsByMatch[$key] AS $userGroupId => $userGroup)
@@ -297,13 +296,13 @@ class UserGroupMentionFormatter
                     {
                         $nameLen = $lowerLen;
                     }
-                    else if (utf8_strtolower(substr($message, $testOffset, $lowerLen)) === $userGroup['lower'])
+                    else if (\utf8_strtolower(substr($message, $testOffset, $lowerLen)) === $userGroup['lower'])
                     {
                         $nameLen = $lowerLen;
                     }
                     else if (
                         $lowerLen !== $originalLen
-                        && utf8_strtolower(substr($message, $testOffset, $originalLen)) === $userGroup['lower']
+                        && \utf8_strtolower(substr($message, $testOffset, $originalLen)) === $userGroup['lower']
                     )
                     {
                         $nameLen = $originalLen;
