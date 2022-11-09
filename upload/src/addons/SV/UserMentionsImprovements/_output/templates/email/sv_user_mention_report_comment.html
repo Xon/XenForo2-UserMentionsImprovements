@@ -13,7 +13,10 @@
           arg-user="{$reportComment.User}"
           arg-username="{$reportComment.username}"
           arg-contentType="report_comment"
-          arg-contentLink="{{ link('canonical:reports/comments', $reportComment.Report) }} '#report-comment-' . {{$reportComment.report_comment_id}}"
+          arg-contentLink="{{ is_addon_active('SV/ReportImprovements')
+          ? link('canonical:reports/comment', $reportComment)
+          : link('canonical:reports', $reportComment.Report) . '#report-comment-' . $reportComment.report_comment_id
+          }}"
           arg-contentTitle="{$reportComment.Report.title}"
           />
 
