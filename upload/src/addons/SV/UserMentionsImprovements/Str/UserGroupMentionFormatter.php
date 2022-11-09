@@ -5,6 +5,11 @@
 
 namespace SV\UserMentionsImprovements\Str;
 
+use function preg_match;
+use function strlen;
+use function substr;
+use function utf8_strtolower;
+
 /**
  * This is basically a copy of the \XF\Str\MentionFormatter class, with changes for UserGroups instead.
  *
@@ -12,6 +17,8 @@ namespace SV\UserMentionsImprovements\Str;
  */
 class UserGroupMentionFormatter
 {
+    const STRUCTURED_MENTION_REGEX = '#(?<=^|\s|[\](,/\'"]|--|@)@\[(\d+):(\'|"|&quot;|)(.*)\\2\]#iU';
+
     protected $placeholders        = [];
     protected $mentionedUserGroups = [];
 
@@ -22,10 +29,12 @@ class UserGroupMentionFormatter
      */
     public function getMentionsBbCode(string $message): string
     {
-        // TODO: this regex needs to respect tags that disable parsing or tags that disable autolink
-        $message = $this->setupPlaceholders(
-            $message,
-            '#\[(code|php|html|plain|media|url|img|user|quote|attach|usergroup)([= ][^\]]*)?](.*)\[/\\1]#siU'
+        $disabledTags = array_map(
+            function($v) { return preg_quote($v, '#'); },
+            $this->getMentionDisabledBbCodeTags()
+        );
+        $message = $this->setupPlaceholders($message,
+            '#\[(' . implode('|', $disabledTags) . ')([= ][^\]]*)?](.*)\[/\\1]#siU'
         );
 
         $matches = $this->getPossibleMentionMatches($message);
@@ -47,6 +56,26 @@ class UserGroupMentionFormatter
         return $message;
     }
 
+    protected function getMentionDisabledBbCodeTags(): array
+    {
+        $bbCodeRules = \XF::app()->bbCode()->rules('mentions');
+
+        $disabledTags = [];
+        foreach ($bbCodeRules->getTags() AS $tagName => $tag)
+        {
+            if (!empty($tag['stopAutoLink']) || !empty($tag['plain']))
+            {
+                $disabledTags[] = $tagName;
+            }
+        }
+
+        // technically mentions can be parsed in quotes, but it's likely they already have
+        // and this isn't necessarily text that we want to attribute to the poster
+        $disabledTags[] = 'quote';
+
+        return $disabledTags;
+    }
+
     /**
      * @param string $message
      * @return string
@@ -54,10 +83,7 @@ class UserGroupMentionFormatter
      */
     public function getMentionsStructuredText(string $message): string
     {
-        $message = $this->setupPlaceholders(
-            $message,
-            '#(?<=^|\s|[\](,]|--|@)@\[(\d+):(\'|"|&quot;|)(.*)\\2\]#iU'
-        );
+        $message = $this->setupPlaceholders($message, self::STRUCTURED_MENTION_REGEX);
 
         $matches = $this->getPossibleMentionMatches($message);
         $usersByMatch = $this->getMentionMatchUserGroups($matches);
@@ -106,14 +132,12 @@ class UserGroupMentionFormatter
     {
         $this->placeholders = [];
 
-        return \preg_replace_callback(
-            $regex, function ($match) {
+        return \preg_replace_callback($regex, function ($match) {
             $replace = "\x1A" . \count($this->placeholders) . "\x1A";
             $this->placeholders[$replace] = $match[0];
 
             return $replace;
-        }, $message
-        ) ?? '';
+        }, $message) ?? '';
     }
 
     protected function restorePlaceholders(string $message): string
@@ -133,7 +157,7 @@ class UserGroupMentionFormatter
 
         /** @noinspection RegExpRedundantEscape */
         if (!\preg_match_all(
-            '#(?<=^|\s|[\](,/\'"]|--)@(?!\[|\s)(([^\s@]|(?<![\s\](,-])@| ){' . $min . '}((?>[:,.!?](?=[^\s:,.!?[\]()])|' . $this->getTagEndPartialRegex(true) . '+?))*)#iu',
+             '#(?<=^|\s|[\](,/\'"]|--)@(?!\[|\s)(([^\s@]|(?<![\s\](,-])@| ){' . $min . '}((?>[:,.!?](?=[^\s:,.!?[\]()])|' . $this->getTagEndPartialRegex(true) . '+?))*)#iu',
             $message, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER))
         {
             return [];
@@ -246,35 +270,63 @@ class UserGroupMentionFormatter
         {
             if ($match[0][1] > $lastOffset)
             {
-                $newMessage .= \substr($message, $lastOffset, $match[0][1] - $lastOffset);
+                $newMessage .= substr($message, $lastOffset, $match[0][1] - $lastOffset);
             }
             else if ($lastOffset > $match[0][1])
             {
                 continue;
             }
 
-            $lastOffset = $match[0][1] + \strlen($match[0][0]);
+            $lastOffset = $match[0][1] + strlen($match[0][0]);
 
             $haveMatch = false;
             if (!empty($userGroupsByMatch[$key]))
             {
-                $testTitle = \utf8_strtolower($match[1][0]);
+                $testName = utf8_strtolower($match[1][0]);
                 $testOffset = $match[1][1];
 
                 foreach ($userGroupsByMatch[$key] AS $userGroupId => $userGroup)
                 {
-                    $titleLen = \strlen($userGroup['lower']);
-                    $nextTestOffsetStart = $testOffset + $titleLen;
+                    // It's possible for the byte length to change between the lower and standard versions
+                    // due to conversions like İ -> i (2 byte to 1). Therefore, we try to check whether either
+                    // length matches the name.
+                    $lowerLen = strlen($userGroup['lower']);
+                    $originalLen = strlen($userGroup['title']);
+
+                    if ($testName === $userGroup['lower'])
+                    {
+                        $nameLen = $lowerLen;
+                    }
+                    else if (utf8_strtolower(substr($message, $testOffset, $lowerLen)) === $userGroup['lower'])
+                    {
+                        $nameLen = $lowerLen;
+                    }
+                    else if (
+                        $lowerLen !== $originalLen
+                        && utf8_strtolower(substr($message, $testOffset, $originalLen)) === $userGroup['lower']
+                    )
+                    {
+                        $nameLen = $originalLen;
+                    }
+                    else
+                    {
+                        $nameLen = null;
+                    }
+
+                    $nextTestOffsetStart = $testOffset + ($nameLen ?: 0);
 
                     if (
-                        ($testTitle === $userGroup['lower'] || \substr($testString, $testOffset, $titleLen) === $userGroup['lower'])
-                        && (!isset($testString[$nextTestOffsetStart]) || \preg_match('#' . $endMatch . '#i', $testString[$nextTestOffsetStart]))
+                        $nameLen
+                        && (
+                            !isset($message[$nextTestOffsetStart])
+                            || preg_match('#' . $endMatch . '#i', $message[$nextTestOffsetStart])
+                        )
                     )
                     {
                         $mentionedUserGroups[$userGroupId] = $userGroup;
                         $newMessage .= $tagReplacement($userGroup);
                         $haveMatch = true;
-                        $lastOffset = $testOffset + \strlen($userGroup['title']);
+                        $lastOffset = $testOffset + strlen($userGroup['title']);
                         break;
                     }
                 }
@@ -286,7 +338,7 @@ class UserGroupMentionFormatter
             }
         }
 
-        $newMessage .= \substr($message, $lastOffset);
+        $newMessage .= substr($message, $lastOffset);
 
         $this->mentionedUserGroups = $mentionedUserGroups;
 
