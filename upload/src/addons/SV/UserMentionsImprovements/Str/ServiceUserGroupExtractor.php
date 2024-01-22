@@ -2,7 +2,10 @@
 
 namespace SV\UserMentionsImprovements\Str;
 
+use SV\StandardLib\Helper;
 use SV\UserMentionsImprovements\XF\Entity\User;
+use XF\Mvc\Entity\Entity;
+use XF\Service\Message\Preparer as MsgPreparer;
 
 trait ServiceUserGroupExtractor
 {
@@ -14,10 +17,10 @@ trait ServiceUserGroupExtractor
     protected $mentionedUserGroups = [];
 
     /**
-     * @param \XF\Service\Message\Preparer|ServiceUserGroupExtractorInterface|null $preparer
+     * @param MsgPreparer|ServiceUserGroupExtractorInterface|null $preparer
      * @return void
      */
-    public function svCopyFields(\XF\Service\Message\Preparer $preparer = null)
+    public function svCopyFields(MsgPreparer $preparer = null)
     {
         if ($preparer instanceof ServiceUserGroupExtractorInterface)
         {
@@ -31,14 +34,14 @@ trait ServiceUserGroupExtractor
     }
 
     /**
-     * @param \XF\Mvc\Entity\Entity $content
-     * @param string                $username
+     * @param Entity|null $content
+     * @param string|null $username
      * @return User
      */
-    protected function svGetUserEntity(\XF\Mvc\Entity\Entity $content = null, string $username = null): User
+    protected function svGetUserEntity(Entity $content = null, string $username = null): User
     {
-        /** @var User $user */
-        $user = \SV\StandardLib\Helper::repo()->getUserEntity($content);
+        /** @var User|null $user */
+        $user = Helper::repo()->getUserEntity($content);
 
         if (!$user)
         {

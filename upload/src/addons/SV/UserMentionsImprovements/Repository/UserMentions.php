@@ -4,6 +4,7 @@ namespace SV\UserMentionsImprovements\Repository;
 
 use SV\UserMentionsImprovements\Globals;
 use XF\Entity\UserGroup;
+use XF\Finder\User as UserFinder;
 use XF\Mvc\Entity\Repository;
 use function count, array_keys, array_key_exists;
 
@@ -15,9 +16,9 @@ class UserMentions extends Repository
         return \XF::repository('SV\UserMentionsImprovements:UserMentions');
     }
 
-    public function findUsersByGroup(UserGroup $userGroup): \XF\Finder\User
+    public function findUsersByGroup(UserGroup $userGroup): UserFinder
     {
-        /** @var \XF\Finder\User $finder */
+        /** @var UserFinder $finder */
         $finder = $this->finder('XF:User')
                     ->where('UserGroupRelations.user_group_id', $userGroup->user_group_id)
                     ->order('user_id');

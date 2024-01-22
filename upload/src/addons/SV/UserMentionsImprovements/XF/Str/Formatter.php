@@ -2,6 +2,7 @@
 
 namespace SV\UserMentionsImprovements\XF\Str;
 
+use SV\UserMentionsImprovements\Str\UserGroupMentionFormatter;
 use SV\UserMentionsImprovements\XF\BbCode\ProcessorAction\MentionUsers;
 
 class Formatter extends XFCP_Formatter
@@ -21,9 +22,9 @@ class Formatter extends XFCP_Formatter
         return $mentions;
     }
 
-    public function getUserGroupMentionFormatter(): \SV\UserMentionsImprovements\Str\UserGroupMentionFormatter
+    public function getUserGroupMentionFormatter(): UserGroupMentionFormatter
     {
-        $class = \XF::extendClass(\SV\UserMentionsImprovements\Str\UserGroupMentionFormatter::class);
+        $class = \XF::extendClass(UserGroupMentionFormatter::class);
 
         return new $class();
     }
@@ -32,6 +33,7 @@ class Formatter extends XFCP_Formatter
      * @param $string
      * @return null|string
      * @noinspection PhpUnnecessaryLocalVariableInspection
+     * @noinspection PhpMissingReturnTypeInspection
      */
     public function linkStructuredTextMentions($string)
     {

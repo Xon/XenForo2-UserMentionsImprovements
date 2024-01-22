@@ -6,15 +6,15 @@ use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
 
 /**
- * @property bool   sv_mentionable
- * @property bool   sv_private
- * @property int    sv_avatar_edit_date
- * @property string sv_avatar_s
- * @property string sv_avatar_l
+ * @property bool   $sv_mentionable
+ * @property bool   $sv_private
+ * @property int    $sv_avatar_edit_date
+ * @property string $sv_avatar_s
+ * @property string $sv_avatar_l
  * GETTER
- * @property string sv_avatar_s_url
- * @property string sv_avatar_l_url
- * @property string icon_html
+ * @property-read string $sv_avatar_s_url
+ * @property-read string $sv_avatar_l_url
+ * @property-read string $icon_html
  */
 class UserGroup extends XFCP_UserGroup
 {

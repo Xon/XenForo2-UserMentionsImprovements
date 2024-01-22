@@ -8,6 +8,7 @@ use XF\AddOn\StepRunnerInstallTrait;
 use XF\AddOn\StepRunnerUninstallTrait;
 use XF\AddOn\StepRunnerUpgradeTrait;
 use XF\Db\Schema\Alter;
+use XF\Entity\Option as OptionEntity;
 use XF\Entity\User;
 
 class Setup extends AbstractSetup
@@ -17,7 +18,7 @@ class Setup extends AbstractSetup
     use StepRunnerUpgradeTrait;
     use StepRunnerUninstallTrait;
 
-    public function installStep1()
+    public function installStep1(): void
     {
         $sm = $this->schemaManager();
 
@@ -30,7 +31,7 @@ class Setup extends AbstractSetup
         }
     }
 
-    public function installStep2()
+    public function installStep2(): void
     {
         $this->db()->query('
             UPDATE xf_user_group
@@ -39,7 +40,7 @@ class Setup extends AbstractSetup
         ', [\XF::$time]);
     }
 
-    public function installStep3()
+    public function installStep3(): void
     {
         $this->applyRegistrationDefaults([
             'sv_email_on_mention' => '',
@@ -47,36 +48,36 @@ class Setup extends AbstractSetup
         ]);
     }
 
-    public function installStep4()
+    public function installStep4(): void
     {
         $this->defaultPermission();
     }
 
-    public function upgrade1010000Step1()
+    public function upgrade1010000Step1(): void
     {
         /** @noinspection SqlResolve */
         $this->db()->query(
-            "
+            '
                 UPDATE xf_user_group
                 SET last_edit_date = ?
                 WHERE last_edit_date = 0
-            ", [\XF::$time]
+            ', [\XF::$time]
         );
     }
 
-    public function upgrade104010Step1()
+    public function upgrade104010Step1(): void
     {
         /** @noinspection SqlResolve */
         /** @noinspection SqlWithoutWhere */
         $this->db()->query(
-            "
+            '
                 UPDATE xf_user_option
                 SET sv_email_on_quote = sv_email_on_tag
-            "
+            '
         );
     }
 
-    public function upgrade1000900Step1()
+    public function upgrade1000900Step1(): void
     {
         $db = $this->db();
 
@@ -99,7 +100,7 @@ class Setup extends AbstractSetup
     }
 
     // Upgrade steps add 1 to the installed version - the version should be equal to the version being installed.
-    public function upgrade2000070Step1()
+    public function upgrade2000070Step1(): void
     {
         $this->schemaManager()->alterTable(
             'xf_user_group', function (Alter $table) {
@@ -114,7 +115,7 @@ class Setup extends AbstractSetup
         }
         );
 
-        /** @var \XF\Entity\Option $entity */
+        /** @var OptionEntity $entity */
         $entity = \XF::finder('XF:Option')->where(['option_id', 'registrationDefaults'])->fetchOne();
         $registrationDefaults = $entity->option_value;
         if (isset($registrationDefaults['sv_email_on_tag']))
@@ -126,7 +127,7 @@ class Setup extends AbstractSetup
         $entity->saveIfChanged();
     }
 
-    public function upgrade2000070Step2()
+    public function upgrade2000070Step2(): void
     {
         // rewrite permissions
         $db = $this->db();
@@ -202,9 +203,9 @@ class Setup extends AbstractSetup
     /**
      * Rewrite options
      */
-    public function upgrade2000070Step3()
+    public function upgrade2000070Step3(): void
     {
-        /** @var \XF\Entity\Option[] $options */
+        /** @var OptionEntity[] $options */
         $options = $this->app->finder('XF:Option')->whereIds(['sv_default_group_avatar_s', 'sv_default_group_avatar_l'])->fetch();
         foreach ($options as $option)
         {
@@ -217,22 +218,22 @@ class Setup extends AbstractSetup
         }
     }
 
-    public function upgrade2020000Step1()
+    public function upgrade2020000Step1(): void
     {
         $this->applyGlobalPermissionByGroup('general', 'sv_ViewPublicGroups', [User::GROUP_REG, User::GROUP_GUEST]);
     }
 
-    public function upgrade2030400Step1()
+    public function upgrade2030400Step1(): void
     {
         $this->installStep1();
     }
 
-    public function upgrade2040000Step1()
+    public function upgrade2040000Step1(): void
     {
         $this->app->jobManager()->enqueueUnique('permissionRebuild', 'XF:PermissionRebuild', [], true);
     }
 
-    public function upgrade2070700Step1()
+    public function upgrade2070700Step1(): void
     {
         $db = $this->db();
         $db->query("
@@ -252,12 +253,12 @@ class Setup extends AbstractSetup
         ");
     }
 
-    public function upgrade2080100Step1()
+    public function upgrade2080100Step1(): void
     {
         $this->installStep1();
     }
 
-    public function uninstallStep1()
+    public function uninstallStep1(): void
     {
         $sm = $this->schemaManager();
 
@@ -270,7 +271,7 @@ class Setup extends AbstractSetup
         }
     }
 
-    public function defaultPermission()
+    public function defaultPermission(): void
     {
         $db = $this->db();
 

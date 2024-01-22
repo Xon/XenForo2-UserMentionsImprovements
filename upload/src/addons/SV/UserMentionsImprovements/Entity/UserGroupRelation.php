@@ -7,13 +7,14 @@ use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
 
 /**
- * @property int     user_id
- * @property int     user_group_id
- * @property boolean is_primary
- * @property User    User
+ * @property int  $user_id
+ * @property int  $user_group_id
+ * @property bool $is_primary
+ * @property-read User $User
  */
 class UserGroupRelation extends Entity
 {
+    /** @noinspection PhpMissingParentCallCommonInspection */
     public static function getStructure(Structure $structure): Structure
     {
         $structure->table = 'xf_user_group_relation';

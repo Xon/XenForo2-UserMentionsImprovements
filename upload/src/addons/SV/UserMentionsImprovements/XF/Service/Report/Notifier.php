@@ -5,7 +5,9 @@
 
 namespace SV\UserMentionsImprovements\XF\Service\Report;
 
+use XF\App;
 use XF\Entity\Report;
+use XF\Entity\ReportComment as ReportCommentEntity;
 use XF\Entity\User;
 use XF\Notifier\AbstractNotifier;
 
@@ -18,7 +20,7 @@ class Notifier extends XFCP_Notifier
     /** @var AbstractNotifier */
     protected $svReportMentionNotifier = null;
 
-    public function __construct(\XF\App $app, Report $report, \XF\Entity\ReportComment $comment)
+    public function __construct(App $app, Report $report, ReportCommentEntity $comment)
     {
         parent::__construct($app, $report, $comment);
 

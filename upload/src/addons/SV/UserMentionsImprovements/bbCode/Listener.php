@@ -13,6 +13,7 @@ class Listener
      *
      * @param AbstractRenderer $renderer
      * @param string           $type
+     * @noinspection PhpDocMissingThrowsInspection
      */
     public static function bbCodeRender(AbstractRenderer $renderer, string $type)
     {

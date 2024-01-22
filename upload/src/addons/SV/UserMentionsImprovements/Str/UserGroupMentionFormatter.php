@@ -17,7 +17,7 @@ use function mb_strtolower;
  */
 class UserGroupMentionFormatter
 {
-    const STRUCTURED_MENTION_REGEX = '#(?<=^|\s|[\](,/\'"]|--|@)@\[(\d+):(\'|"|&quot;|)(.*)\\2\]#iU';
+    public const STRUCTURED_MENTION_REGEX = '#(?<=^|\s|[\](,/\'"]|--|@)@\[(\d+):(\'|"|&quot;|)(.*)\\2\]#iU';
 
     protected $placeholders        = [];
     protected $mentionedUserGroups = [];
@@ -174,6 +174,7 @@ class UserGroupMentionFormatter
     /**
      * @param array $matches
      * @return array
+     * @noinspection PhpDocMissingThrowsInspection
      */
     protected function getMentionMatchUserGroups(array $matches): array
     {

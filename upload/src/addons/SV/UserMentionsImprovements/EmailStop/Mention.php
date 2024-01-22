@@ -5,6 +5,7 @@
 
 namespace SV\UserMentionsImprovements\EmailStop;
 
+use SV\UserMentionsImprovements\XF\Entity\UserOption as UserOptionEntity;
 use XF\EmailStop\AbstractHandler;
 use XF\Entity\User;
 
@@ -26,7 +27,7 @@ class Mention extends AbstractHandler
 
     public function stopAll(User $user)
     {
-        /** @var \SV\UserMentionsImprovements\XF\Entity\UserOption $option */
+        /** @var UserOptionEntity $option */
         $option = $user->Option;
         $option->sv_email_on_mention = false;
         $option->saveIfChanged();

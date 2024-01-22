@@ -6,8 +6,8 @@ use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
 
 /**
- * @property bool sv_email_on_mention
- * @property bool sv_email_on_quote
+ * @property bool $sv_email_on_mention
+ * @property bool $sv_email_on_quote
  */
 class UserOption extends XFCP_UserOption
 {

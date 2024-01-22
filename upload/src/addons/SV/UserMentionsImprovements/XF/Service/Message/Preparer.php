@@ -5,6 +5,7 @@ namespace SV\UserMentionsImprovements\XF\Service\Message;
 use SV\UserMentionsImprovements\Repository\UserMentions as UserMentionsRepo;
 use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractor;
 use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractorInterface;
+use SV\UserMentionsImprovements\XF\BbCode\ProcessorAction\MentionUsers;
 
 class Preparer extends XFCP_Preparer implements ServiceUserGroupExtractorInterface
 {
@@ -37,7 +38,7 @@ class Preparer extends XFCP_Preparer implements ServiceUserGroupExtractorInterfa
         }
         $message = parent::prepare($message, $checkValidity);
 
-        /** @var \SV\UserMentionsImprovements\XF\BbCode\ProcessorAction\MentionUsers|null $processor */
+        /** @var MentionUsers|null $processor */
         $processor = $this->bbCodeProcessor->getFilterer('mentions');
         if (!$processor)
         {

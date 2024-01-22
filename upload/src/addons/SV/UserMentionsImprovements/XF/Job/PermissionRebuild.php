@@ -5,6 +5,9 @@
 
 namespace SV\UserMentionsImprovements\XF\Job;
 
+use XF\Entity\PermissionCombination as PermissionCombinationEntity;
+use XF\Repository\PermissionCombination as PermissionCombinationRepo;
+
 /**
  * Extends \XF\Job\PermissionRebuild
  */
@@ -25,13 +28,14 @@ class PermissionRebuild extends XFCP_PermissionRebuild
         return parent::setupData($data);
     }
 
+    /** @noinspection PhpMissingParentCallCommonInspection */
     public function run($maxRunTime)
     {
         $start = \microtime(true);
 
         if (!$this->data['cleaned'])
         {
-            /** @var \XF\Repository\PermissionCombination $combinationRepo */
+            /** @var PermissionCombinationRepo $combinationRepo */
             $combinationRepo = $this->app->repository('XF:PermissionCombination');
             $combinationRepo->deleteUnusedPermissionCombinations();
 
@@ -65,7 +69,7 @@ class PermissionRebuild extends XFCP_PermissionRebuild
 
         foreach ($combinations AS $combination)
         {
-            /** @var \XF\Entity\PermissionCombination $combination */
+            /** @var PermissionCombinationEntity $combination */
             $this->data['combinationId'] = $combination->permission_combination_id;
 
             $permissionBuilder->rebuildCombination($combination);

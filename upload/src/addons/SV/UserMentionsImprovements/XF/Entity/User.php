@@ -8,7 +8,7 @@ use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
 
 /**
- * @property UserGroupRelation UserGroupRelations
+ * @property-read UserGroupRelation $UserGroupRelations
  */
 class User extends XFCP_User
 {

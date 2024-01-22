@@ -3,18 +3,25 @@
 namespace SV\UserMentionsImprovements\Str;
 
 
+use XF\Service\Message\Preparer as MsgPreparer;
+
 interface ServiceUserGroupExtractorInterface
 {
     /**
-     * @param \XF\Service\Message\Preparer|ServiceUserGroupExtractorInterface|null $preparer
+     * @param MsgPreparer|ServiceUserGroupExtractorInterface|null $preparer
      * @return void
      */
-    public function svCopyFields(\XF\Service\Message\Preparer $preparer = null);
+    public function svCopyFields(MsgPreparer $preparer = null);
 
-    function getImplicitMentionedUsers(): array;
-    function getImplicitMentionedUserIds(): array;
-    function getExplicitMentionedUsers(): array;
-    function getExplicitMentionedUserIds(): array;
-    function getMentionedUserGroups(): array;
-    function getMentionedUserGroupIds(): array;
+    public function getImplicitMentionedUsers(): array;
+
+    public function getImplicitMentionedUserIds(): array;
+
+    public function getExplicitMentionedUsers(): array;
+
+    public function getExplicitMentionedUserIds(): array;
+
+    public function getMentionedUserGroups(): array;
+
+    public function getMentionedUserGroupIds(): array;
 }

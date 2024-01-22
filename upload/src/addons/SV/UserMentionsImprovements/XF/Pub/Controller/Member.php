@@ -3,6 +3,10 @@
 namespace SV\UserMentionsImprovements\XF\Pub\Controller;
 
 use SV\UserMentionsImprovements\Repository\UserMentions as UserMentionsRepo;
+use SV\UserMentionsImprovements\XF\Entity\User as UserEntity;
+use SV\UserMentionsImprovements\XF\Entity\UserGroup as UserGroupEntity;
+use SV\UserMentionsImprovements\XF\Finder\UserGroup as UserGroupFinder;
+use XF\Finder\User as UserFinder;
 use XF\Mvc\ParameterBag;
 use XF\Mvc\Reply\View;
 use function count, strlen, ltrim;
@@ -13,7 +17,7 @@ class Member extends XFCP_Member
     {
         $userGroupId = $params['user_group_id'];
 
-        /** @var \SV\UserMentionsImprovements\XF\Entity\UserGroup $userGroup */
+        /** @var UserGroupEntity $userGroup */
         $userGroup = $this->assertRecordExists('XF:UserGroup', $userGroupId);
 
         if (!$userGroup->canView())
@@ -79,7 +83,7 @@ class Member extends XFCP_Member
         return [];
     }
 
-    protected function applyUserGroupFilters(\XF\Finder\User $finder, array &$filters)
+    protected function applyUserGroupFilters(UserFinder $finder, array &$filters)
     {
         if (strlen($filters['text'] ?? '') !== 0)
         {
@@ -111,14 +115,14 @@ class Member extends XFCP_Member
 
         if ($response instanceof View)
         {
-            /** @var \SV\UserMentionsImprovements\XF\Entity\User $visitor */
+            /** @var UserEntity $visitor */
             $visitor = \XF::visitor();
 
             $q = ltrim($this->filter('q', 'str', ['no-trim']));
 
             if ($visitor->canMentionUserGroup() && $q !== '' && \mb_strlen($q) >= 2)
             {
-                /** @var \SV\UserMentionsImprovements\XF\Finder\UserGroup $userGroupFinder */
+                /** @var UserGroupFinder $userGroupFinder */
                 $userGroupFinder = $this->finder('XF:UserGroup');
                 $userGroupFinder->mentionableGroups($q);
                 $userGroups = $userGroupFinder->fetch();

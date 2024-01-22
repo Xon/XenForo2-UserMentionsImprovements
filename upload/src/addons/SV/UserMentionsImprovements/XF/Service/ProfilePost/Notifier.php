@@ -5,6 +5,7 @@
 
 namespace SV\UserMentionsImprovements\XF\Service\ProfilePost;
 
+use SV\UserMentionsImprovements\XF\Notifier\ProfilePost\Mention;
 use XF\Entity\User;
 use XF\Notifier\AbstractNotifier;
 
@@ -35,7 +36,7 @@ class Notifier extends XFCP_Notifier
             {
                 if (!$this->svNotifier)
                 {
-                    $class = \XF::extendClass(\SV\UserMentionsImprovements\XF\Notifier\ProfilePost\Mention::class);
+                    $class = \XF::extendClass(Mention::class);
                     $this->svNotifier = new $class($this->app, $this->profilePost);
                 }
 
