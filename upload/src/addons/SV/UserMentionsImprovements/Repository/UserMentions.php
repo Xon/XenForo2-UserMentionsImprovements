@@ -9,6 +9,12 @@ use function count, array_keys, array_key_exists;
 
 class UserMentions extends Repository
 {
+    public static function get(): self
+    {
+        /** @noinspection PhpIncompatibleReturnTypeInspection */
+        return \XF::repository('SV\UserMentionsImprovements:UserMentions');
+    }
+
     public function findUsersByGroup(UserGroup $userGroup): \XF\Finder\User
     {
         /** @var \XF\Finder\User $finder */

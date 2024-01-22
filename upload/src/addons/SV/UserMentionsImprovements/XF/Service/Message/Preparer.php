@@ -2,6 +2,7 @@
 
 namespace SV\UserMentionsImprovements\XF\Service\Message;
 
+use SV\UserMentionsImprovements\Repository\UserMentions as UserMentionsRepo;
 use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractor;
 use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractorInterface;
 
@@ -50,10 +51,8 @@ class Preparer extends XFCP_Preparer implements ServiceUserGroupExtractorInterfa
 
             if ($user->canMentionUserGroup())
             {
-                /** @var \SV\UserMentionsImprovements\Repository\UserMentions $userMentionsRepo */
-                $userMentionsRepo = \XF::app()->repository('SV\UserMentionsImprovements:UserMentions');
                 $this->mentionedUserGroups = $processor->getMentionedUserGroups();
-                $this->mentionedUsers = $userMentionsRepo->mergeUserGroupMembersIntoUsersArray(
+                $this->mentionedUsers = UserMentionsRepo::get()->mergeUserGroupMembersIntoUsersArray(
                     $this->mentionedUsers,
                     $this->mentionedUserGroups
                 );

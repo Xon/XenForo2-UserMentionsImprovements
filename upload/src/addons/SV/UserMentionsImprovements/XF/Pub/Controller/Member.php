@@ -2,6 +2,7 @@
 
 namespace SV\UserMentionsImprovements\XF\Pub\Controller;
 
+use SV\UserMentionsImprovements\Repository\UserMentions as UserMentionsRepo;
 use XF\Mvc\ParameterBag;
 use XF\Mvc\Reply\View;
 use function count, strlen, ltrim;
@@ -29,10 +30,9 @@ class Member extends XFCP_Member
         $page = $this->filterPage($params['page'] ?? 0);
         $perPage = (int)(\XF::options()->svUMI_usersPerPage ?? 50);
 
-        /** @var \SV\UserMentionsImprovements\Repository\UserMentions $userMentionsRepo */
-        $userMentionsRepo = \XF::app()->repository('SV\UserMentionsImprovements:UserMentions');
-        $finder = $userMentionsRepo->findUsersByGroup($userGroup)
-                                   ->limitByPage($page, $perPage);
+        $finder = UserMentionsRepo::get()
+                                  ->findUsersByGroup($userGroup)
+                                  ->limitByPage($page, $perPage);
         $this->applyUserGroupFilters($finder, $filters);
 
         $total = $finder->total();
