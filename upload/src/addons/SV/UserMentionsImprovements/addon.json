@@ -8,7 +8,10 @@
     "dev_url": "https://atelieraphelion.com/",
     "faq_url": "",
     "support_url": "https://xenforo.com/community/resources/user-mentions-improvements-by-xon.6186/",
-    "extra_urls": [],
+    "extra_urls": {
+        "License": "https://atelieraphelion.com/products/user-mentions-improvements.208/copyright",
+        "Add-on site": "https://atelieraphelion.com/products/user-mentions-improvements.208/"
+    },
     "require": {
         "XF": [2020070, "XenForo 2.2.0+"],
         "php": ["7.0.0", "PHP 7.0.0+"],
