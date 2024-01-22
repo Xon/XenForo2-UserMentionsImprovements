@@ -2,6 +2,7 @@
 
 namespace SV\UserMentionsImprovements\XF\Admin\Controller;
 
+use XF\Job\PermissionRebuild;
 use XF\Mvc\Reply\Redirect;
 
 /**
@@ -16,7 +17,7 @@ class Tools extends XFCP_Tools
         {
             if ($this->filter('sv_rebuild_perms', 'bool'))
             {
-                $this->app->jobManager()->enqueueUnique('permissionRebuild', 'XF:PermissionRebuild');
+                $this->app->jobManager()->enqueueUnique('permissionRebuild', PermissionRebuild::class);
             }
         }
 

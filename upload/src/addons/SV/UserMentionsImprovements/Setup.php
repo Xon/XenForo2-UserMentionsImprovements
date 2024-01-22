@@ -10,6 +10,7 @@ use XF\AddOn\StepRunnerUpgradeTrait;
 use XF\Db\Schema\Alter;
 use XF\Entity\Option as OptionEntity;
 use XF\Entity\User;
+use XF\Job\PermissionRebuild;
 
 class Setup extends AbstractSetup
 {
@@ -194,7 +195,7 @@ class Setup extends AbstractSetup
 
         $this->app->jobManager()->enqueueUnique(
             'permissionRebuild',
-            'XF:PermissionRebuild',
+            PermissionRebuild::class,
             [],
             false
         );
@@ -230,7 +231,7 @@ class Setup extends AbstractSetup
 
     public function upgrade2040000Step1(): void
     {
-        $this->app->jobManager()->enqueueUnique('permissionRebuild', 'XF:PermissionRebuild', [], true);
+        $this->app->jobManager()->enqueueUnique('permissionRebuild', PermissionRebuild::class, [], true);
     }
 
     public function upgrade2070700Step1(): void
