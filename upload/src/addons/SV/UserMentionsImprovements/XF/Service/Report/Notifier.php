@@ -5,6 +5,7 @@
 
 namespace SV\UserMentionsImprovements\XF\Service\Report;
 
+use SV\UserMentionsImprovements\XF\Notifier\Report\Mention;
 use XF\App;
 use XF\Entity\Report;
 use XF\Entity\ReportComment as ReportCommentEntity;
@@ -24,7 +25,7 @@ class Notifier extends XFCP_Notifier
     {
         parent::__construct($app, $report, $comment);
 
-        $class = \XF::extendClass('SV\UserMentionsImprovements\XF\Notifier\Report\Mention');
+        $class = \XF::extendClass(Mention::class);
         $this->svReportMentionNotifier = new $class($this->app, $this->comment);
     }
 
