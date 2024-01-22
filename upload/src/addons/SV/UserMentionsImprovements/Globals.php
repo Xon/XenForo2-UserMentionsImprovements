@@ -5,7 +5,7 @@ namespace SV\UserMentionsImprovements;
 /**
  * Add-on globals.
  */
-class Globals
+abstract class Globals
 {
     /**
      * @var array|null
