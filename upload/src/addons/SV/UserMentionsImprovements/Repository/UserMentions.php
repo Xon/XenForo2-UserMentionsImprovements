@@ -18,11 +18,9 @@ class UserMentions extends Repository
 
     public function findUsersByGroup(UserGroup $userGroup): UserFinder
     {
-        $finder = Helper::finder(UserFinder::class)
-                    ->where('UserGroupRelations.user_group_id', $userGroup->user_group_id)
-                    ->order('user_id');
-
-        return $finder;
+        return Helper::finder(UserFinder::class)
+                     ->where('UserGroupRelations.user_group_id', $userGroup->user_group_id)
+                     ->order('user_id');
     }
 
     /**

@@ -7,6 +7,7 @@
 namespace SV\UserMentionsImprovements\bbCode;
 
 use XF\BbCode\Renderer\Html;
+use function htmlspecialchars;
 
 class tagRenderer
 {
@@ -27,12 +28,14 @@ class tagRenderer
     {
         $this->renderer = $renderer;
         $this->type = $type;
+
+        $visitor = \XF::visitor();
         $this->canViewPublicGroups = (\XF::options()->svUMIPermDeniedOnViewGroup ?? true) ||
-                                     \XF::visitor()->hasPermission('general', 'sv_ViewPrivateGroups') ||
-                                     \XF::visitor()->hasPermission('general', 'sv_ViewPublicGroups');
+                                     $visitor->hasPermission('general', 'sv_ViewPrivateGroups') ||
+                                     $visitor->hasPermission('general', 'sv_ViewPublicGroups');
     }
 
-    public function bindToRenderer()
+    public function bindToRenderer(): void
     {
         $callback = [$this, 'renderTagUserGroup'];
         $callback = \Closure::fromCallable($callback);
@@ -79,15 +82,15 @@ class tagRenderer
             return $content;
         }
 
-        $userGroupId = \intval($option);
+        $userGroupId = (int)$option;
         if ($userGroupId <= 0)
         {
             return $content;
         }
 
         $link = \XF::app()->router('public')->buildLink('full:members/usergroup', ['user_group_id' => $userGroupId]);
-        $link = \htmlspecialchars($link);
-        $content = \htmlspecialchars($content);
+        $link = htmlspecialchars($link);
+        $content = htmlspecialchars($content);
 
         return $this->renderTagUserGroupHtml($userGroupId, 'ug', $link, $content);
     }

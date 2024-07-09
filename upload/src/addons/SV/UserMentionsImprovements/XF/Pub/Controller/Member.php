@@ -6,8 +6,9 @@ use SV\StandardLib\Helper;
 use SV\UserMentionsImprovements\Repository\UserMentions as UserMentionsRepo;
 use SV\UserMentionsImprovements\XF\Entity\User as UserEntity;
 use SV\UserMentionsImprovements\XF\Entity\UserGroup as UserGroupEntity;
-use SV\UserMentionsImprovements\XF\Finder\UserGroup as UserGroupFinder;
+use SV\UserMentionsImprovements\XF\Finder\UserGroup as ExtendedUserGroupFinder;
 use XF\Finder\User as UserFinder;
+use XF\Finder\UserGroup as UserGroupFinder;
 use XF\Mvc\ParameterBag;
 use XF\Mvc\Reply\View;
 use function count, strlen, ltrim;
@@ -123,8 +124,8 @@ class Member extends XFCP_Member
 
             if ($visitor->canMentionUserGroup() && $q !== '' && \mb_strlen($q) >= 2)
             {
-                /** @var UserGroupFinder $userGroupFinder */
-                $userGroupFinder = Helper::finder(\XF\Finder\UserGroup::Class);
+                /** @var ExtendedUserGroupFinder $userGroupFinder */
+                $userGroupFinder = Helper::finder(UserGroupFinder::Class);
                 $userGroupFinder->mentionableGroups($q);
                 $userGroups = $userGroupFinder->fetch();
                 $userGroups = $userGroups->filterViewable();

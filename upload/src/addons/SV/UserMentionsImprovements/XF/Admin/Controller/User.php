@@ -1,7 +1,4 @@
 <?php
-/**
- * @noinspection PhpMissingReturnTypeInspection
- */
 
 namespace SV\UserMentionsImprovements\XF\Admin\Controller;
 
@@ -10,6 +7,7 @@ namespace SV\UserMentionsImprovements\XF\Admin\Controller;
  */
 class User extends XFCP_User
 {
+    /** @noinspection PhpMissingReturnTypeInspection */
     protected function userSaveProcess(\XF\Entity\User $user)
     {
         $form = parent::userSaveProcess($user);

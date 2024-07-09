@@ -13,9 +13,8 @@ class Listener
      *
      * @param AbstractRenderer $renderer
      * @param string           $type
-     * @noinspection PhpDocMissingThrowsInspection
      */
-    public static function bbCodeRender(AbstractRenderer $renderer, string $type)
+    public static function bbCodeRender(AbstractRenderer $renderer, string $type): void
     {
         if ($renderer instanceof EditorHtml)
         {

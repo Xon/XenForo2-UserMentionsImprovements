@@ -7,6 +7,7 @@ namespace SV\UserMentionsImprovements\XF\Job;
 
 use SV\StandardLib\Helper;
 use XF\Entity\PermissionCombination as PermissionCombinationEntity;
+use XF\Finder\PermissionCombination as PermissionCombinationFinder;
 use XF\Repository\PermissionCombination as PermissionCombinationRepo;
 
 /**
@@ -47,7 +48,7 @@ class PermissionRebuild extends XFCP_PermissionRebuild
         $app = \XF::app();
 
         $done = 0;
-        $finder = Helper::finder(\XF\Finder\PermissionCombination::class)
+        $finder = Helper::finder(PermissionCombinationFinder::class)
                      ->where('permission_combination_id', '>', $this->data['combinationId'])
                      ->order('permission_combination_id')
                      ->limit($this->data['batch']);
