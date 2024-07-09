@@ -297,13 +297,13 @@ class UserGroupMentionFormatter
                     {
                         $nameLen = $lowerLen;
                     }
-                    else if (\utf8_strtolower(substr($message, $testOffset, $lowerLen)) === $userGroup['lower'])
+                    else if (mb_strtolower(substr($message, $testOffset, $lowerLen)) === $userGroup['lower'])
                     {
                         $nameLen = $lowerLen;
                     }
                     else if (
                         $lowerLen !== $originalLen
-                        && \utf8_strtolower(substr($message, $testOffset, $originalLen)) === $userGroup['lower']
+                        && mb_strtolower(substr($message, $testOffset, $originalLen)) === $userGroup['lower']
                     )
                     {
                         $nameLen = $originalLen;
