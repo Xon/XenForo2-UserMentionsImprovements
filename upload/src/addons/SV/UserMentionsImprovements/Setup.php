@@ -2,6 +2,7 @@
 
 namespace SV\UserMentionsImprovements;
 
+use SV\StandardLib\Helper;
 use SV\StandardLib\InstallerHelper;
 use XF\AddOn\AbstractSetup;
 use XF\AddOn\StepRunnerInstallTrait;
@@ -116,8 +117,7 @@ class Setup extends AbstractSetup
         }
         );
 
-        /** @var OptionEntity $entity */
-        $entity = \XF::finder('XF:Option')->where(['option_id', 'registrationDefaults'])->fetchOne();
+        $entity = Helper::find(OptionEntity::class, 'registrationDefaults');
         $registrationDefaults = $entity->option_value;
         if (isset($registrationDefaults['sv_email_on_tag']))
         {
@@ -207,7 +207,9 @@ class Setup extends AbstractSetup
     public function upgrade2000070Step3(): void
     {
         /** @var OptionEntity[] $options */
-        $options = $this->app->finder('XF:Option')->whereIds(['sv_default_group_avatar_s', 'sv_default_group_avatar_l'])->fetch();
+        $options = Helper::finder(\XF\Finder\Option::class)
+                         ->whereIds(['sv_default_group_avatar_s', 'sv_default_group_avatar_l'])
+                         ->fetch();
         foreach ($options as $option)
         {
             $value = $option->getOptionValue();

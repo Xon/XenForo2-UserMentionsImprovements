@@ -2,6 +2,7 @@
 
 namespace SV\UserMentionsImprovements\XF\Pub\Controller;
 
+use SV\StandardLib\Helper;
 use SV\UserMentionsImprovements\Repository\UserMentions as UserMentionsRepo;
 use SV\UserMentionsImprovements\XF\Entity\User as UserEntity;
 use SV\UserMentionsImprovements\XF\Entity\UserGroup as UserGroupEntity;
@@ -123,7 +124,7 @@ class Member extends XFCP_Member
             if ($visitor->canMentionUserGroup() && $q !== '' && \mb_strlen($q) >= 2)
             {
                 /** @var UserGroupFinder $userGroupFinder */
-                $userGroupFinder = $this->finder('XF:UserGroup');
+                $userGroupFinder = Helper::finder(\XF\Finder\UserGroup::Class);
                 $userGroupFinder->mentionableGroups($q);
                 $userGroups = $userGroupFinder->fetch();
                 $userGroups = $userGroups->filterViewable();

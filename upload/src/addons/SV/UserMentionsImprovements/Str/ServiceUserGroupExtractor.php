@@ -45,8 +45,7 @@ trait ServiceUserGroupExtractor
 
         if (!$user)
         {
-            /** @var \XF\Repository\User $userRepo */
-            $userRepo = $this->repository('XF:User');
+            $userRepo = Helper::repository(\XF\Repository\User::class);
             $user = $userRepo->getGuestUser($username);
         }
 

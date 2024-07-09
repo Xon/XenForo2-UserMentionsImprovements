@@ -2,6 +2,7 @@
 
 namespace SV\UserMentionsImprovements\Cli\Command\Rebuild;
 
+use SV\StandardLib\Helper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use XF\Cli\Command\Rebuild\AbstractRebuildCommand;
@@ -30,11 +31,8 @@ class RebuildPermissions extends AbstractRebuildCommand
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        /** @var PermissionCombinationRepo $permComboRepo */
-        $permComboRepo = \XF::repository('XF:PermissionCombination');
-
-        /** @var PermissionEntryRepo $permEntryRepo */
-        $permEntryRepo = \XF::repository('XF:PermissionEntry');
+        $permComboRepo = Helper::repository(PermissionCombinationRepo::class);
+        $permEntryRepo = Helper::repository(PermissionEntryRepo::class);
 
         $permEntryRepo->deleteOrphanedGlobalUserPermissionEntries();
         $permEntryRepo->deleteOrphanedContentUserPermissionEntries();

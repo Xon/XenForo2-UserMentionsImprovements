@@ -2,6 +2,7 @@
 
 namespace SV\UserMentionsImprovements\Repository;
 
+use SV\StandardLib\Helper;
 use SV\UserMentionsImprovements\Globals;
 use XF\Entity\UserGroup;
 use XF\Finder\User as UserFinder;
@@ -12,14 +13,12 @@ class UserMentions extends Repository
 {
     public static function get(): self
     {
-        /** @noinspection PhpIncompatibleReturnTypeInspection */
-        return \XF::repository('SV\UserMentionsImprovements:UserMentions');
+        return Helper::repository(self::class);
     }
 
     public function findUsersByGroup(UserGroup $userGroup): UserFinder
     {
-        /** @var UserFinder $finder */
-        $finder = $this->finder('XF:User')
+        $finder = Helper::finder(UserFinder::class)
                     ->where('UserGroupRelations.user_group_id', $userGroup->user_group_id)
                     ->order('user_id');
 

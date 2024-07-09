@@ -5,6 +5,7 @@
 
 namespace SV\UserMentionsImprovements\XF\Job;
 
+use SV\StandardLib\Helper;
 use XF\Entity\PermissionCombination as PermissionCombinationEntity;
 use XF\Repository\PermissionCombination as PermissionCombinationRepo;
 
@@ -35,8 +36,7 @@ class PermissionRebuild extends XFCP_PermissionRebuild
 
         if (!$this->data['cleaned'])
         {
-            /** @var PermissionCombinationRepo $combinationRepo */
-            $combinationRepo = $this->app->repository('XF:PermissionCombination');
+            $combinationRepo = Helper::repository(PermissionCombinationRepo::class);
             $combinationRepo->deleteUnusedPermissionCombinations();
 
             $this->data['cleaned'] = true;
@@ -47,7 +47,7 @@ class PermissionRebuild extends XFCP_PermissionRebuild
         $app = \XF::app();
 
         $done = 0;
-        $finder = \XF::finder('XF:PermissionCombination')
+        $finder = Helper::finder(\XF\Finder\PermissionCombination::class)
                      ->where('permission_combination_id', '>', $this->data['combinationId'])
                      ->order('permission_combination_id')
                      ->limit($this->data['batch']);
