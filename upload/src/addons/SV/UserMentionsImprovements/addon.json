@@ -3,7 +3,7 @@
     "title": "User Mentions Improvements",
     "description": "Improvements to the XenForo Mentions system.",
     "version_id": 1706785415,
-    "version_string": "2.9.0",
+    "version_string": "2.10.0",
     "dev": "Xon",
     "dev_url": "https://atelieraphelion.com/",
     "faq_url": "",
@@ -14,8 +14,8 @@
     },
     "require": {
         "SV/StandardLib": [
-            2001180000,
-            "Standard Library by Xon v1.18.0+"
+            2001210000,
+            "Standard Library by Xon v1.21.0+"
         ],
         "XF": [
             "2.2.0",
