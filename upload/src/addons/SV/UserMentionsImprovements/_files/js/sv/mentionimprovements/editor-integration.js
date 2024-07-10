@@ -1,11 +1,4 @@
-/*
- * This file is part of a XenForo add-on.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
-(function($, window, document, _undefined)
+(function(window, document, _undefined)
 {
     XF.adjustHtmlForRteOld = XF.adjustHtmlForRte;
     XF.adjustHtmlForRte = function(content)
@@ -20,4 +13,4 @@
 
         return content;
     };
-}(jQuery, window, document));
+}(window, document));
