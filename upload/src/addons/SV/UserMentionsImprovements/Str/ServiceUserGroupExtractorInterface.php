@@ -11,7 +11,7 @@ interface ServiceUserGroupExtractorInterface
      * @param MsgPreparer|ServiceUserGroupExtractorInterface|null $preparer
      * @return void
      */
-    public function svCopyFields(MsgPreparer $preparer = null);
+    public function svCopyFields(?MsgPreparer $preparer = null);
 
     public function getImplicitMentionedUsers(): array;
 

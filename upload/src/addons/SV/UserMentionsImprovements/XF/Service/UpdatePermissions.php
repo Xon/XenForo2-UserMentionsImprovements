@@ -20,7 +20,7 @@ class UpdatePermissions extends XFCP_UpdatePermissions
      * @param PermissionEntryEntity|PermissionEntryContentEntity|Entity|null $entry
      * @return PermissionEntryEntity|PermissionEntryContentEntity|Entity|null
      */
-    protected function writeEntry(Permission $permission, $value, Entity $entry = null)
+    protected function writeEntry(Permission $permission, $value, ?Entity $entry = null)
     {
         $oldState = ($this->userGroup && $entry) ? $entry->toArray() : null;
 

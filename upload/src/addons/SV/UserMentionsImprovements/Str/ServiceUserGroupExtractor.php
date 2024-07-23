@@ -20,7 +20,7 @@ trait ServiceUserGroupExtractor
      * @param MsgPreparer|ServiceUserGroupExtractorInterface|null $preparer
      * @return void
      */
-    public function svCopyFields(MsgPreparer $preparer = null)
+    public function svCopyFields(?MsgPreparer $preparer = null)
     {
         if ($preparer instanceof ServiceUserGroupExtractorInterface)
         {
@@ -38,7 +38,7 @@ trait ServiceUserGroupExtractor
      * @param string|null $username
      * @return User
      */
-    protected function svGetUserEntity(Entity $content = null, string $username = null): User
+    protected function svGetUserEntity(?Entity $content = null, ?string $username = null): User
     {
         /** @var User|null $user */
         $user = Helper::repo()->getUserEntity($content);

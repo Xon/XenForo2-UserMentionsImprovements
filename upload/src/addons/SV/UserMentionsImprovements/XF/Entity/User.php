@@ -48,7 +48,7 @@ class User extends XFCP_User
         return $option->sv_email_on_quote;
     }
 
-    protected function _getMentionContentTypeAndId(Entity $messageEntity = null): array
+    protected function _getMentionContentTypeAndId(?Entity $messageEntity = null): array
     {
         if ($messageEntity instanceof Post)
         {
@@ -62,7 +62,7 @@ class User extends XFCP_User
         return [null, null];
     }
 
-    public function canMention(Entity $messageEntity = null): bool
+    public function canMention(?Entity $messageEntity = null): bool
     {
         list($contentType, $contentId) = $this->_getMentionContentTypeAndId($messageEntity);
 
