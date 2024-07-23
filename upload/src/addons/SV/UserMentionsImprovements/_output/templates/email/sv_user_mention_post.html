@@ -1,12 +1,10 @@
 <mail:subject>
-<xf:macro template="sv_mention_macros"
-          name="mention_subject"
+<xf:macro name="sv_mention_macros::mention_subject"
           arg-sender="{$post.username}"
           />
 </mail:subject>
 
-<xf:macro template="sv_mention_macros"
-          name="mention"
+<xf:macro name="sv_mention_macros::mention"
           arg-content="{$post}"
           arg-message="{$post.message}"
           arg-receiver="{$receiver}"
@@ -17,6 +15,5 @@
           arg-contentTitle="{{ prefix('thread', $thread, 'escaped') }}{$thread.title}"
           />
 
-<xf:macro template="sv_mention_macros"
-          name="mention_footer"
+<xf:macro name="sv_mention_macros::mention_footer"
           />

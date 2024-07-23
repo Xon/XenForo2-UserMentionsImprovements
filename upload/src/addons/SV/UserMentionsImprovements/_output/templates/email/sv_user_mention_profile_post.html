@@ -1,12 +1,10 @@
 <mail:subject>
-<xf:macro template="sv_mention_macros" 
-		  name="mention_subject" 
+<xf:macro name="sv_mention_macros::mention_subject"
 		  arg-sender="{$profilePost.username}"
 		  />
 </mail:subject>
 
-<xf:macro template="sv_mention_macros" 
-		  name="mention"
+<xf:macro name="sv_mention_macros::mention"
           arg-content="{$profilePost}"
           arg-message="{$profilePost.message}"
 		  arg-receiver="{$receiver}"
@@ -19,6 +17,5 @@
 }) }}"
 		  />
 
-<xf:macro template="sv_mention_macros" 
-		  name="mention_footer"
+<xf:macro name="sv_mention_macros::mention_footer"
 		  />

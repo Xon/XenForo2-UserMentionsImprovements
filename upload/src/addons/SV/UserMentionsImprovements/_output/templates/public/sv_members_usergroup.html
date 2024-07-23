@@ -16,7 +16,7 @@
 								params="{{ $addParamsToPageNav ? $linkFilters : [] }}" />
 				</div>
 			</div>
-			<xf:macro template="svStandardLib_macros" name="dynamic_quick_filter"
+			<xf:macro name="svStandardLib_macros::dynamic_quick_filter"
 					  arg-key="users"
 					  arg-ajax="{{ link('members/usergroup', $userGroup) }}"
 					  arg-class="block-outer-opposite"
@@ -28,8 +28,7 @@
 			<div class="block-body userList">
 				<xf:foreach loop="$users" key="$userId" value="$user">
 					<li class="block-row block-row--separated userList-row js-filterSearchable">
-						<xf:macro template="member_list_macros"
-								  name="item"
+						<xf:macro name="member_list_macros::item"
 								  arg-user="{$user}"
 								  />
 					</li>
