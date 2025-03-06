@@ -101,6 +101,32 @@ class UserGroup extends XFCP_UserGroup
         return true;
     }
 
+    public function canViewForAutocomplete(): bool
+    {
+        if (!$this->sv_mentionable)
+        {
+            return false;
+        }
+
+        $visitor = \XF::visitor();
+        if ($visitor->hasPermission('general', 'sv_ViewPrivateGroups'))
+        {
+            return true;
+        }
+
+        if ($this->sv_private)
+        {
+            if ($visitor->isMemberOf($this->user_group_id))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        return true;
+    }
+
     protected function _preSave()
     {
         parent::_preSave();

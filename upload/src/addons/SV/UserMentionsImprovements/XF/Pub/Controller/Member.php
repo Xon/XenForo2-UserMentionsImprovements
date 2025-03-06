@@ -4,8 +4,8 @@ namespace SV\UserMentionsImprovements\XF\Pub\Controller;
 
 use SV\StandardLib\Helper;
 use SV\UserMentionsImprovements\Repository\UserMentions as UserMentionsRepo;
-use SV\UserMentionsImprovements\XF\Entity\User as UserEntity;
-use SV\UserMentionsImprovements\XF\Entity\UserGroup as UserGroupEntity;
+use SV\UserMentionsImprovements\XF\Entity\User as ExtendedUserEntity;
+use SV\UserMentionsImprovements\XF\Entity\UserGroup as ExtendedUserGroupEntity;
 use SV\UserMentionsImprovements\XF\Finder\UserGroup as ExtendedUserGroupFinder;
 use XF\Finder\User as UserFinder;
 use XF\Finder\UserGroup as UserGroupFinder;
@@ -22,7 +22,7 @@ class Member extends XFCP_Member
     {
         $userGroupId = $params['user_group_id'];
 
-        /** @var UserGroupEntity $userGroup */
+        /** @var ExtendedUserGroupEntity $userGroup */
         $userGroup = $this->assertRecordExists('XF:UserGroup', $userGroupId);
 
         if (!$userGroup->canView())
@@ -120,7 +120,7 @@ class Member extends XFCP_Member
 
         if ($response instanceof View)
         {
-            /** @var UserEntity $visitor */
+            /** @var ExtendedUserEntity $visitor */
             $visitor = \XF::visitor();
 
             $q = ltrim($this->filter('q', 'str', ['no-trim']));
@@ -131,7 +131,9 @@ class Member extends XFCP_Member
                 $userGroupFinder = Helper::finder(UserGroupFinder::Class);
                 $userGroupFinder->mentionableGroups($q);
                 $userGroups = $userGroupFinder->fetch();
-                $userGroups = $userGroups->filterViewable();
+                $userGroups = $userGroups->filter(function (ExtendedUserGroupEntity $userGroup) {
+                    return $userGroup->canViewForAutocomplete();
+                });
             }
             else
             {
