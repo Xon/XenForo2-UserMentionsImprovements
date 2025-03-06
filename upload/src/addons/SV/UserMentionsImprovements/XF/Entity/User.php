@@ -2,13 +2,14 @@
 
 namespace SV\UserMentionsImprovements\XF\Entity;
 
-use SV\UserMentionsImprovements\Entity\UserGroupRelation;
-use XF\Entity\Post;
+use SV\UserMentionsImprovements\Entity\UserGroupRelation as UserGroupRelationEntity;
+use XF\Entity\Post as PostEntity;
 use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
 
 /**
- * @property-read UserGroupRelation $UserGroupRelations
+ * @extends \XF\Entity\User
+ * @property-read UserGroupRelationEntity|null $UserGroupRelations
  */
 class User extends XFCP_User
 {
@@ -50,7 +51,7 @@ class User extends XFCP_User
 
     protected function _getMentionContentTypeAndId(?Entity $messageEntity = null): array
     {
-        if ($messageEntity instanceof Post)
+        if ($messageEntity instanceof PostEntity)
         {
             $thread = $messageEntity->Thread;
             if ($thread)
@@ -64,7 +65,7 @@ class User extends XFCP_User
 
     public function canMention(?Entity $messageEntity = null): bool
     {
-        list($contentType, $contentId) = $this->_getMentionContentTypeAndId($messageEntity);
+        [$contentType, $contentId] = $this->_getMentionContentTypeAndId($messageEntity);
 
         if ($contentType !== null && $contentId)
         {

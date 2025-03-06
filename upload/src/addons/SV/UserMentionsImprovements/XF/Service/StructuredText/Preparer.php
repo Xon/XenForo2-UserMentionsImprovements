@@ -2,8 +2,11 @@
 
 namespace SV\UserMentionsImprovements\XF\Service\StructuredText;
 
-use SV\UserMentionsImprovements\XF\Str\Formatter;
+use SV\UserMentionsImprovements\XF\Str\Formatter as ExtendedFormatter;
 
+/**
+ * @extends \XF\Service\StructuredText\Preparer
+ */
 class Preparer extends XFCP_Preparer
 {
     protected $mentionedUserGroups = [];
@@ -12,7 +15,7 @@ class Preparer extends XFCP_Preparer
     {
         $string = parent::filterFinalUserMentions($null, $string);
 
-        /** @var Formatter $formatter */
+        /** @var ExtendedFormatter $formatter */
         $formatter = $this->app->stringFormatter();
         if (!\is_callable([$formatter, 'getUserGroupMentionFormatter']))
         {

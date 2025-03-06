@@ -7,12 +7,16 @@ namespace SV\UserMentionsImprovements\XF\Service\ProfilePostComment;
 
 use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractor;
 use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractorInterface;
+use XF\Service\Message\Preparer as PreparerAlias;
 
+/**
+ * @extends \XF\Service\ProfilePostComment\Preparer
+ */
 class Preparer extends XFCP_Preparer implements ServiceUserGroupExtractorInterface
 {
     use ServiceUserGroupExtractor;
 
-    /**@var \XF\Service\Message\Preparer|null */
+    /**@var PreparerAlias|null */
     protected $svPreparer = null;
 
     /**
@@ -31,7 +35,7 @@ class Preparer extends XFCP_Preparer implements ServiceUserGroupExtractorInterfa
 
     /**
      * @param bool $format
-     * @return \XF\Service\Message\Preparer
+     * @return PreparerAlias
      */
     protected function getMessagePreparer($format = true)
     {

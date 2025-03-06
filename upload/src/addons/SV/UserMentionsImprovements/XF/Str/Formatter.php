@@ -5,6 +5,9 @@ namespace SV\UserMentionsImprovements\XF\Str;
 use SV\UserMentionsImprovements\Str\UserGroupMentionFormatter;
 use SV\UserMentionsImprovements\XF\BbCode\ProcessorAction\MentionUsers;
 
+/**
+ * @extends \XF\Str\Formatter
+ */
 class Formatter extends XFCP_Formatter
 {
     /** @var MentionUsers  */

@@ -2,16 +2,18 @@
 
 namespace SV\UserMentionsImprovements\XF\BbCode\ProcessorAction;
 
-use SV\UserMentionsImprovements\XF\Str\Formatter;
+use SV\UserMentionsImprovements\XF\Str\Formatter as ExtendedFormatter;
+use XF\Str\Formatter;
 
 /**
- * @property \XF\Str\Formatter|Formatter formatter
+ * @extends \XF\BbCode\ProcessorAction\MentionUsers
+ * @property Formatter|ExtendedFormatter formatter
  */
 class MentionUsers extends XFCP_MentionUsers
 {
     protected $mentionedUserGroups = [];
 
-    public function __construct(\XF\Str\Formatter $formatter)
+    public function __construct(Formatter $formatter)
     {
         parent::__construct($formatter);
         // When calling getMentionsBbCode(), which transforms `@user => [user=ID]@user[/url]`;
@@ -25,9 +27,9 @@ class MentionUsers extends XFCP_MentionUsers
     }
 
     /**
-     * @return \XF\Str\Formatter|Formatter
+     * @return Formatter|ExtendedFormatter
      */
-    public function getFormatter(): \XF\Str\Formatter
+    public function getFormatter(): Formatter
     {
         return $this->formatter;
     }
@@ -40,7 +42,7 @@ class MentionUsers extends XFCP_MentionUsers
     public function getMentionedUserGroups(): array
     {
         // cleanup
-        /** @var Formatter $formatter */
+        /** @var ExtendedFormatter $formatter */
         $formatter = $this->formatter;
         $formatter->svMentionUserGroup = null;
 

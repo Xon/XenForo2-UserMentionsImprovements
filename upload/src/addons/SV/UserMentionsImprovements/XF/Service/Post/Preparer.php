@@ -7,12 +7,16 @@ namespace SV\UserMentionsImprovements\XF\Service\Post;
 
 use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractor;
 use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractorInterface;
+use XF\Service\Message\Preparer as MessagePreparerService;
 
+/**
+ * @extends \XF\Service\Post\Preparer
+ */
 class Preparer extends XFCP_Preparer implements ServiceUserGroupExtractorInterface
 {
     use ServiceUserGroupExtractor;
 
-    /**@var \XF\Service\Message\Preparer|null */
+    /**@var MessagePreparerService|null */
     protected $svPreparer = null;
 
     /**
@@ -32,7 +36,7 @@ class Preparer extends XFCP_Preparer implements ServiceUserGroupExtractorInterfa
 
     /**
      * @param bool $format
-     * @return \XF\Service\Message\Preparer
+     * @return MessagePreparerService
      */
     protected function getMessagePreparer($format = true)
     {

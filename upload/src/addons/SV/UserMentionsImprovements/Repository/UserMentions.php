@@ -4,7 +4,7 @@ namespace SV\UserMentionsImprovements\Repository;
 
 use SV\StandardLib\Helper;
 use SV\UserMentionsImprovements\Globals;
-use XF\Entity\UserGroup;
+use XF\Entity\UserGroup as UserGroupEntity;
 use XF\Finder\User as UserFinder;
 use XF\Mvc\Entity\Repository;
 use function count, array_keys, array_key_exists;
@@ -16,7 +16,7 @@ class UserMentions extends Repository
         return Helper::repository(self::class);
     }
 
-    public function findUsersByGroup(UserGroup $userGroup): UserFinder
+    public function findUsersByGroup(UserGroupEntity $userGroup): UserFinder
     {
         return Helper::finder(UserFinder::class)
                      ->where('UserGroupRelations.user_group_id', $userGroup->user_group_id)
@@ -24,8 +24,8 @@ class UserMentions extends Repository
     }
 
     /**
-     * @param array       $users
-     * @param UserGroup[] $mentionedUserGroups
+     * @param array             $users
+     * @param UserGroupEntity[] $mentionedUserGroups
      * @return array
      */
     public function mergeUserGroupMembersIntoUsersArray(array $users, array $mentionedUserGroups): array

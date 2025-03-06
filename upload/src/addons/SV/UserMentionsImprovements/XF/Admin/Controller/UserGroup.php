@@ -5,6 +5,9 @@
 
 namespace SV\UserMentionsImprovements\XF\Admin\Controller;
 
+/**
+ * @extends \XF\Admin\Controller\UserGroup
+ */
 class UserGroup extends XFCP_UserGroup
 {
     protected function userGroupSaveProcess(\XF\Entity\UserGroup $userGroup)

@@ -3,7 +3,7 @@
 namespace SV\UserMentionsImprovements\Str;
 
 use SV\StandardLib\Helper;
-use SV\UserMentionsImprovements\XF\Entity\User;
+use SV\UserMentionsImprovements\XF\Entity\User as ExtendedUserEntity;
 use XF\Mvc\Entity\Entity;
 use XF\Service\Message\Preparer as MsgPreparer;
 
@@ -36,11 +36,11 @@ trait ServiceUserGroupExtractor
     /**
      * @param Entity|null $content
      * @param string|null $username
-     * @return User
+     * @return ExtendedUserEntity
      */
-    protected function svGetUserEntity(?Entity $content = null, ?string $username = null): User
+    protected function svGetUserEntity(?Entity $content = null, ?string $username = null): ExtendedUserEntity
     {
-        /** @var User|null $user */
+        /** @var ExtendedUserEntity|null $user */
         $user = Helper::repo()->getUserEntity($content);
 
         if (!$user)

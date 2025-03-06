@@ -7,6 +7,9 @@ namespace SV\UserMentionsImprovements\XF\Pub\View\Member;
 
 use SV\UserMentionsImprovements\XF\Entity\UserGroup as UserGroupEntity;
 
+/**
+ * @extends \XF\Pub\View\Member\Find
+ */
 class Find extends XFCP_Find
 {
     public function renderJson()

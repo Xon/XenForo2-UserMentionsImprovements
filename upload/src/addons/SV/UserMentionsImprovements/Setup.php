@@ -10,8 +10,9 @@ use XF\AddOn\StepRunnerUninstallTrait;
 use XF\AddOn\StepRunnerUpgradeTrait;
 use XF\Db\Schema\Alter;
 use XF\Entity\Option as OptionEntity;
-use XF\Entity\User;
-use XF\Job\PermissionRebuild;
+use XF\Entity\User as UserEntity;
+use XF\Job\PermissionRebuild as PermissionRebuildJob;
+use function is_string;
 
 class Setup extends AbstractSetup
 {
@@ -195,7 +196,7 @@ class Setup extends AbstractSetup
 
         $this->app->jobManager()->enqueueUnique(
             'permissionRebuild',
-            PermissionRebuild::class,
+            PermissionRebuildJob::class,
             [],
             false
         );
@@ -206,14 +207,12 @@ class Setup extends AbstractSetup
      */
     public function upgrade2000070Step3(): void
     {
-        /** @var OptionEntity[] $options */
-        $options = Helper::finder(\XF\Finder\Option::class)
-                         ->whereIds(['sv_default_group_avatar_s', 'sv_default_group_avatar_l'])
-                         ->fetch();
+        $options = Helper::findByIds(OptionEntity::class, ['sv_default_group_avatar_s', 'sv_default_group_avatar_l']);
         foreach ($options as $option)
         {
+            /** @var OptionEntity $value */
             $value = $option->getOptionValue();
-            if (\is_string($value))
+            if (is_string($value))
             {
                 $option->option_value = \str_replace('styles/default/sv/tagging/', 'styles/default/sv/mentionimprovements/', $value);
                 $option->saveIfChanged();
@@ -223,7 +222,7 @@ class Setup extends AbstractSetup
 
     public function upgrade2020000Step1(): void
     {
-        $this->applyGlobalPermissionByGroup('general', 'sv_ViewPublicGroups', [User::GROUP_REG, User::GROUP_GUEST]);
+        $this->applyGlobalPermissionByGroup('general', 'sv_ViewPublicGroups', [UserEntity::GROUP_REG, UserEntity::GROUP_GUEST]);
     }
 
     public function upgrade2030400Step1(): void
@@ -233,7 +232,7 @@ class Setup extends AbstractSetup
 
     public function upgrade2040000Step1(): void
     {
-        $this->app->jobManager()->enqueueUnique('permissionRebuild', PermissionRebuild::class, [], true);
+        $this->app->jobManager()->enqueueUnique('permissionRebuild', PermissionRebuildJob::class, [], true);
     }
 
     public function upgrade2070700Step1(): void
@@ -293,7 +292,7 @@ class Setup extends AbstractSetup
             "
         );
 
-        $this->applyGlobalPermissionByGroup('general', 'sv_ViewPublicGroups', [User::GROUP_REG, User::GROUP_GUEST]);
+        $this->applyGlobalPermissionByGroup('general', 'sv_ViewPublicGroups', [UserEntity::GROUP_REG, UserEntity::GROUP_GUEST]);
     }
 
     protected function getAlterTables(): array

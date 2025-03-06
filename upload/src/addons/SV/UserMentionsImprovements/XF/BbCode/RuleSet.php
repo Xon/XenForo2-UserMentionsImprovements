@@ -2,6 +2,9 @@
 
 namespace SV\UserMentionsImprovements\XF\BbCode;
 
+/**
+ * @extends \XF\BbCode\RuleSet
+ */
 class RuleSet extends XFCP_RuleSet
 {
     public function addDefaultTags()

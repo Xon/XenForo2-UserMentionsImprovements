@@ -13,6 +13,9 @@ use XF\Mvc\ParameterBag;
 use XF\Mvc\Reply\View;
 use function count, strlen, ltrim;
 
+/**
+ * @extends \XF\Pub\Controller\Member
+ */
 class Member extends XFCP_Member
 {
     public function actionUserGroup(ParameterBag $params)
@@ -34,7 +37,7 @@ class Member extends XFCP_Member
 
         $filters = $this->getUserGroupFilters();
         $page = $this->filterPage($params['page'] ?? 0);
-        $perPage = (int)(\XF::options()->svUMI_usersPerPage ?? 50);
+        $perPage = \XF::options()->svUMI_usersPerPage ?? 50;
 
         $finder = UserMentionsRepo::get()
                                   ->findUsersByGroup($userGroup)

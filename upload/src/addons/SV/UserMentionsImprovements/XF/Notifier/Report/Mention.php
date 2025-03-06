@@ -6,25 +6,25 @@
 namespace SV\UserMentionsImprovements\XF\Notifier\Report;
 
 use XF\App;
-use XF\Entity\ReportComment;
-use XF\Entity\User;
+use XF\Entity\ReportComment as ReportCommentEntity;
+use XF\Entity\User as UserEntity;
 use XF\Notifier\AbstractNotifier;
 
 class Mention extends AbstractNotifier
 {
     /**
-     * @var ReportComment
+     * @var ReportCommentEntity
      */
     protected $content;
 
-    public function __construct(App $app, ReportComment $content)
+    public function __construct(App $app, ReportCommentEntity $content)
     {
         parent::__construct($app);
 
         $this->content = $content;
     }
 
-    public function canNotify(User $user)
+    public function canNotify(UserEntity $user)
     {
         $senderId = $this->content->user_id;
         if ($user->user_id === $senderId)
@@ -40,14 +40,14 @@ class Mention extends AbstractNotifier
         return true;
     }
 
-    public function sendAlert(User $user)
+    public function sendAlert(UserEntity $user)
     {
         $content = $this->content;
 
         return $this->basicAlert($user, $content->user_id, $content->username, 'report_comment', $content->report_comment_id, 'mention');
     }
 
-    public function sendEmail(User $user)
+    public function sendEmail(UserEntity $user)
     {
         if (!$user->email || $user->user_state !== 'valid')
         {

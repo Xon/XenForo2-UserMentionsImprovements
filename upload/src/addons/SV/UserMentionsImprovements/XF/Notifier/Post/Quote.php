@@ -5,11 +5,14 @@
 
 namespace SV\UserMentionsImprovements\XF\Notifier\Post;
 
-use XF\Entity\User;
+use XF\Entity\User as UserEntity;
 
+/**
+ * @extends \XF\Notifier\Post\Quote
+ */
 class Quote extends XFCP_Quote
 {
-    public function canNotify(User $user)
+    public function canNotify(UserEntity $user)
     {
         $senderId = $this->post->user_id;
         if ($senderId && $user->isIgnoring($senderId))
@@ -20,7 +23,7 @@ class Quote extends XFCP_Quote
         return parent::canNotify($user);
     }
 
-    public function sendEmail(User $user)
+    public function sendEmail(UserEntity $user)
     {
         if (!$user->email || $user->user_state !== 'valid')
         {

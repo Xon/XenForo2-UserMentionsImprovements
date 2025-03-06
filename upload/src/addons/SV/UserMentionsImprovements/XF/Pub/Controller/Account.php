@@ -5,12 +5,16 @@
 
 namespace SV\UserMentionsImprovements\XF\Pub\Controller;
 
-use XF\Entity\User;
+use SV\UserMentionsImprovements\XF\Entity\User as ExtendedUserEntity;
+use XF\Entity\User as UserEntity;
 use XF\Mvc\FormAction;
 
+/**
+ * @extends \XF\Pub\Controller\Account
+ */
 class Account extends XFCP_Account
 {
-    protected function savePrivacyProcess(User $visitor)
+    protected function savePrivacyProcess(UserEntity $visitor)
     {
         $form = parent::savePrivacyProcess($visitor);
 
@@ -19,7 +23,7 @@ class Account extends XFCP_Account
         return $form;
     }
 
-    protected function accountDetailsSaveProcess(User $visitor)
+    protected function accountDetailsSaveProcess(UserEntity $visitor)
     {
         $form = parent::accountDetailsSaveProcess($visitor);
 
@@ -28,7 +32,7 @@ class Account extends XFCP_Account
         return $form;
     }
 
-    protected function preferencesSaveProcess(User $visitor)
+    protected function preferencesSaveProcess(UserEntity $visitor)
     {
         $form = parent::preferencesSaveProcess($visitor);
 
@@ -37,9 +41,9 @@ class Account extends XFCP_Account
         return $form;
     }
 
-    protected function svEmailSaveProcess(User $visitor, FormAction $form)
+    protected function svEmailSaveProcess(UserEntity $visitor, FormAction $form)
     {
-        /** @var \SV\UserMentionsImprovements\XF\Entity\User $visitor */
+        /** @var ExtendedUserEntity $visitor */
         $options = [];
         if ($visitor->canReceiveMentionEmails())
         {

@@ -7,6 +7,9 @@ use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractor;
 use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractorInterface;
 use SV\UserMentionsImprovements\XF\BbCode\ProcessorAction\MentionUsers;
 
+/**
+ * @extends \XF\Service\Message\Preparer
+ */
 class Preparer extends XFCP_Preparer implements ServiceUserGroupExtractorInterface
 {
     use ServiceUserGroupExtractor;

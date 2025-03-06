@@ -11,7 +11,7 @@ use XF\Finder\PermissionCombination as PermissionCombinationFinder;
 use XF\Repository\PermissionCombination as PermissionCombinationRepo;
 
 /**
- * Extends \XF\Job\PermissionRebuild
+ * @extends \XF\Job\PermissionRebuild
  */
 class PermissionRebuild extends XFCP_PermissionRebuild
 {

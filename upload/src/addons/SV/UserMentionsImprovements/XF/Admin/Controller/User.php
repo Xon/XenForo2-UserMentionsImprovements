@@ -3,7 +3,7 @@
 namespace SV\UserMentionsImprovements\XF\Admin\Controller;
 
 /**
- * Extends \XF\Admin\Controller\User
+ * @extends \XF\Admin\Controller\User
  */
 class User extends XFCP_User
 {

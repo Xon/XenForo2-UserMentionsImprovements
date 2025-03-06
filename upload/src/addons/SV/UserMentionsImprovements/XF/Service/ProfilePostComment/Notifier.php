@@ -5,12 +5,13 @@
 
 namespace SV\UserMentionsImprovements\XF\Service\ProfilePostComment;
 
+use SV\UserMentionsImprovements\XF\Entity\User as ExtendedUserEntity;
 use SV\UserMentionsImprovements\XF\Notifier\ProfilePostComment\Mention;
-use XF\Entity\User;
+use XF\Entity\User as UserEntity;
 use XF\Notifier\AbstractNotifier;
 
 /**
- * Extends \XF\Service\ProfilePostComment\Notifier
+ * @extends \XF\Service\ProfilePostComment\Notifier
  */
 class Notifier extends XFCP_Notifier
 {
@@ -19,10 +20,10 @@ class Notifier extends XFCP_Notifier
     /** @var array|null */
     protected $notifyingMentionLookup = null;
 
-    protected function sendNotification(User $user, $action)
+    protected function sendNotification(UserEntity $user, $action)
     {
         $alerted = parent::sendNotification($user, $action);
-        /** @var \SV\UserMentionsImprovements\XF\Entity\User $user */
+        /** @var ExtendedUserEntity $user */
         if ($alerted && $user->receivesMentionEmails())
         {
             if ($this->notifyingMentionLookup === null)

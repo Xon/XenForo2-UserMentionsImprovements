@@ -2,25 +2,25 @@
 
 namespace SV\UserMentionsImprovements\XF\Service;
 
-use XF\Entity\Permission;
+use XF\Entity\Permission as PermissionEntity;
 use XF\Entity\PermissionEntry as PermissionEntryEntity;
 use XF\Entity\PermissionEntryContent as PermissionEntryContentEntity;
 use XF\Mvc\Entity\Entity;
 
 /**
- * Extends \XF\Service\UpdatePermissions
+ * @extends \XF\Service\UpdatePermissions
  */
 class UpdatePermissions extends XFCP_UpdatePermissions
 {
     protected $hadChanges = false;
 
     /**
-     * @param Permission                                                     $permission
+     * @param PermissionEntity                                               $permission
      * @param string|bool|int                                                $value
      * @param PermissionEntryEntity|PermissionEntryContentEntity|Entity|null $entry
      * @return PermissionEntryEntity|PermissionEntryContentEntity|Entity|null
      */
-    protected function writeEntry(Permission $permission, $value, ?Entity $entry = null)
+    protected function writeEntry(PermissionEntity $permission, $value, ?Entity $entry = null)
     {
         $oldState = ($this->userGroup && $entry) ? $entry->toArray() : null;
 

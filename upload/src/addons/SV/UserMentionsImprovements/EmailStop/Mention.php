@@ -7,25 +7,25 @@ namespace SV\UserMentionsImprovements\EmailStop;
 
 use SV\UserMentionsImprovements\XF\Entity\UserOption as UserOptionEntity;
 use XF\EmailStop\AbstractHandler;
-use XF\Entity\User;
+use XF\Entity\User as UserEntity;
 
 class Mention extends AbstractHandler
 {
-    public function getStopOneText(User $user, $contentId)
+    public function getStopOneText(UserEntity $user, $contentId)
     {
         return null;
     }
 
-    public function getStopAllText(User $user)
+    public function getStopAllText(UserEntity $user)
     {
         return \XF::phrase('sv_stop_notification_emails_for_all_mentions');
     }
 
-    public function stopOne(User $user, $contentId)
+    public function stopOne(UserEntity $user, $contentId)
     {
     }
 
-    public function stopAll(User $user)
+    public function stopAll(UserEntity $user)
     {
         /** @var UserOptionEntity $option */
         $option = $user->Option;

@@ -6,6 +6,7 @@ use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
 
 /**
+ * @extends \XF\Entity\UserGroup
  * @property bool   $sv_mentionable
  * @property bool   $sv_private
  * @property int    $sv_avatar_edit_date

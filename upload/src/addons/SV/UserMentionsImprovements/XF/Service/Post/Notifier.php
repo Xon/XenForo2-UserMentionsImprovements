@@ -3,15 +3,18 @@
 namespace SV\UserMentionsImprovements\XF\Service\Post;
 
 use SV\UserMentionsImprovements\Globals;
-use SV\UserMentionsImprovements\XF\Entity\User;
+use SV\UserMentionsImprovements\XF\Entity\User as ExtendedUserEntity;
 
+/**
+ * @extends \XF\Service\Post\Notifier
+ */
 class Notifier extends XFCP_Notifier
 {
     protected $doCleanup = true;
 
     /**
      * @param int[] $userIds
-     * @return User[]
+     * @return ExtendedUserEntity[]
      */
     public function getSvUsers(array $userIds): array
     {
@@ -20,7 +23,7 @@ class Notifier extends XFCP_Notifier
             return [];
         }
         $em = \XF::em();
-        /** @var User[] $users */
+        /** @var ExtendedUserEntity[] $users */
         $users = [];
         $userIdsToFetch = [];
         foreach ($userIds as $userId)

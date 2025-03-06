@@ -5,15 +5,16 @@
 
 namespace SV\UserMentionsImprovements\XF\Service\Report;
 
+use SV\UserMentionsImprovements\XF\Entity\User as ExtendedUserEntity;
 use SV\UserMentionsImprovements\XF\Notifier\Report\Mention;
 use XF\App;
-use XF\Entity\Report;
+use XF\Entity\Report as ReportEntity;
 use XF\Entity\ReportComment as ReportCommentEntity;
-use XF\Entity\User;
+use XF\Entity\User as UserEntity;
 use XF\Notifier\AbstractNotifier;
 
 /**
- * Extends \XF\Service\Report\Notifier
+ * @extends \XF\Service\Report\Notifier
  */
 class Notifier extends XFCP_Notifier
 {
@@ -21,7 +22,7 @@ class Notifier extends XFCP_Notifier
     /** @var AbstractNotifier */
     protected $svReportMentionNotifier = null;
 
-    public function __construct(App $app, Report $report, ReportCommentEntity $comment)
+    public function __construct(App $app, ReportEntity $report, ReportCommentEntity $comment)
     {
         parent::__construct($app, $report, $comment);
 
@@ -29,12 +30,12 @@ class Notifier extends XFCP_Notifier
         $this->svReportMentionNotifier = new $class($this->app, $this->comment);
     }
 
-    protected function sendMentionNotification(User $user)
+    protected function sendMentionNotification(UserEntity $user)
     {
         $alerted = parent::sendMentionNotification($user);
         $userId = $user->user_id;
 
-        /** @var \SV\UserMentionsImprovements\XF\Entity\User $user */
+        /** @var ExtendedUserEntity $user */
         if (empty($this->userEmailed[$userId]) &&
             $this->svReportMentionNotifier->canNotify($user) &&
             $user->receivesMentionEmails())

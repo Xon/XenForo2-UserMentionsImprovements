@@ -6,7 +6,7 @@ use SV\StandardLib\Helper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use XF\Cli\Command\Rebuild\AbstractRebuildCommand;
-use XF\Job\PermissionRebuild;
+use XF\Job\PermissionRebuild as PermissionRebuildJob;
 use XF\Repository\PermissionCombination as PermissionCombinationRepo;
 use XF\Repository\PermissionEntry as PermissionEntryRepo;
 
@@ -26,7 +26,7 @@ class RebuildPermissions extends AbstractRebuildCommand
     {
         \XF::db()->logQueries(false); // need to limit memory usage
 
-        return PermissionRebuild::class;
+        return PermissionRebuildJob::class;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

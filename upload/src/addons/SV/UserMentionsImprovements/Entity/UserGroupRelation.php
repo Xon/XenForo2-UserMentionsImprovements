@@ -2,15 +2,15 @@
 
 namespace SV\UserMentionsImprovements\Entity;
 
-use SV\UserMentionsImprovements\XF\Entity\User;
+use SV\UserMentionsImprovements\XF\Entity\User as ExtendedUserEntity;
 use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
 
 /**
- * @property int  $user_id
- * @property int  $user_group_id
- * @property bool $is_primary
- * @property-read User $User
+ * @property int                          $user_id
+ * @property int                          $user_group_id
+ * @property bool                         $is_primary
+ * @property-read ExtendedUserEntity|null $User
  */
 class UserGroupRelation extends Entity
 {

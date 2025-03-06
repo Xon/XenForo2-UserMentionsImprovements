@@ -3,7 +3,7 @@
 namespace SV\UserMentionsImprovements\XF\Finder;
 
 /**
- * Extends \XF\Finder\UserGroup
+ * @extends \XF\Finder\UserGroup
  */
 class UserGroup extends XFCP_UserGroup
 {

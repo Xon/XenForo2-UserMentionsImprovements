@@ -6,6 +6,7 @@ use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
 
 /**
+ * @extends \XF\Entity\UserOption
  * @property bool $sv_email_on_mention
  * @property bool $sv_email_on_quote
  */
@@ -15,9 +16,7 @@ class UserOption extends XFCP_UserOption
     {
         parent::_setupDefaults();
 
-        $options = \XF::options();
-
-        $defaults = $options->registrationDefaults;
+        $defaults = \XF::options()->registrationDefaults;
         $this->sv_email_on_mention = (bool)($defaults['sv_email_on_mention'] ?? false);
         $this->sv_email_on_quote = (bool)($defaults['sv_email_on_quote'] ?? false);
     }
