@@ -16,7 +16,7 @@ class Preparer extends XFCP_Preparer
         $string = parent::filterFinalUserMentions($null, $string);
 
         /** @var ExtendedFormatter $formatter */
-        $formatter = $this->app->stringFormatter();
+        $formatter = \XF::app()->stringFormatter();
         if (!\is_callable([$formatter, 'getUserGroupMentionFormatter']))
         {
             \XF::logError('Add-on conflict detected, XF\Str\Formatter is not extended as expected', true);

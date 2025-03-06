@@ -37,7 +37,7 @@ class Quote extends XFCP_Quote
             'receiver' => $user,
         ];
 
-        $this->app->mailer()->newMail()
+        \XF::app()->mailer()->newMail()
                   ->setToUser($user)
                   ->setTemplate('sv_user_quote_post', $params)
                   ->queue();

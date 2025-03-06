@@ -61,7 +61,7 @@ class PermissionRebuild extends XFCP_PermissionRebuild
         if (!$combinations->count())
         {
             // there are situations where we run this job but not with this unique key, so this is unnecessary
-            $this->app->jobManager()->cancelUniqueJob('permissionRebuild');
+            \XF::app()->jobManager()->cancelUniqueJob('permissionRebuild');
 
             return $this->complete();
         }

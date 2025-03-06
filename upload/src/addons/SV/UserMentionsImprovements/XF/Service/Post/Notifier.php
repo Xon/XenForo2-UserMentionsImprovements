@@ -2,8 +2,10 @@
 
 namespace SV\UserMentionsImprovements\XF\Service\Post;
 
+use SV\StandardLib\Helper;
 use SV\UserMentionsImprovements\Globals;
 use SV\UserMentionsImprovements\XF\Entity\User as ExtendedUserEntity;
+use XF\Entity\User as UserEntity;
 
 /**
  * @extends \XF\Service\Post\Notifier
@@ -22,14 +24,14 @@ class Notifier extends XFCP_Notifier
         {
             return [];
         }
-        $em = \XF::em();
+
         /** @var ExtendedUserEntity[] $users */
         $users = [];
         $userIdsToFetch = [];
         foreach ($userIds as $userId)
         {
-            $user = $em->findCached('XF:User', $userId);
-            if ($user)
+            $user = Helper::findCached(UserEntity::class, $userId);
+            if ($user !== null)
             {
                 $users[$userId] = $user;
             }
@@ -41,7 +43,7 @@ class Notifier extends XFCP_Notifier
 
         if ($userIdsToFetch)
         {
-            $users += $em->findByIds('XF:User', $userIdsToFetch)->toArray();
+            $users += Helper::findByIds(UserEntity::class, $userIdsToFetch)->toArray();
         }
 
         return $users;

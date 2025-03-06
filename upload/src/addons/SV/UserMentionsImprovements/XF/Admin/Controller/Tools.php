@@ -17,7 +17,7 @@ class Tools extends XFCP_Tools
         {
             if ($this->filter('sv_rebuild_perms', 'bool'))
             {
-                $this->app->jobManager()->enqueueUnique('permissionRebuild', PermissionRebuildJob::class);
+                \XF::app()->jobManager()->enqueueUnique('permissionRebuild', PermissionRebuildJob::class);
             }
         }
 

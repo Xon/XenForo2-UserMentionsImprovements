@@ -36,7 +36,7 @@ class Setup extends AbstractSetup
 
     public function installStep2(): void
     {
-        $this->db()->query('
+        \XF::db()->query('
             UPDATE xf_user_group
             SET sv_avatar_edit_date = ?
             WHERE sv_avatar_edit_date = 0
@@ -59,7 +59,7 @@ class Setup extends AbstractSetup
     public function upgrade1010000Step1(): void
     {
         /** @noinspection SqlResolve */
-        $this->db()->query(
+        \XF::db()->query(
             '
                 UPDATE xf_user_group
                 SET last_edit_date = ?
@@ -72,7 +72,7 @@ class Setup extends AbstractSetup
     {
         /** @noinspection SqlResolve */
         /** @noinspection SqlWithoutWhere */
-        $this->db()->query(
+        \XF::db()->query(
             '
                 UPDATE xf_user_option
                 SET sv_email_on_quote = sv_email_on_tag
@@ -82,7 +82,7 @@ class Setup extends AbstractSetup
 
     public function upgrade1000900Step1(): void
     {
-        $db = $this->db();
+        $db = \XF::db();
 
         $db->query(
             "
@@ -132,7 +132,7 @@ class Setup extends AbstractSetup
     public function upgrade2000070Step2(): void
     {
         // rewrite permissions
-        $db = $this->db();
+        $db = \XF::db();
 
         $db->query(
             "
@@ -194,7 +194,7 @@ class Setup extends AbstractSetup
             "
         );
 
-        $this->app->jobManager()->enqueueUnique(
+        \XF::app()->jobManager()->enqueueUnique(
             'permissionRebuild',
             PermissionRebuildJob::class,
             [],
@@ -232,12 +232,12 @@ class Setup extends AbstractSetup
 
     public function upgrade2040000Step1(): void
     {
-        $this->app->jobManager()->enqueueUnique('permissionRebuild', PermissionRebuildJob::class, [], true);
+        \XF::app()->jobManager()->enqueueUnique('permissionRebuild', PermissionRebuildJob::class, [], true);
     }
 
     public function upgrade2070700Step1(): void
     {
-        $db = $this->db();
+        $db = \XF::db();
         $db->query("
             DELETE FROM xf_permission_entry
             WHERE permission_group_id = 'forum' AND permission_id IN (
@@ -275,7 +275,7 @@ class Setup extends AbstractSetup
 
     public function defaultPermission(): void
     {
-        $db = $this->db();
+        $db = \XF::db();
 
         $db->query(
             "INSERT IGNORE INTO xf_permission_entry (user_group_id, user_id, permission_group_id, permission_id, permission_value, permission_value_int)

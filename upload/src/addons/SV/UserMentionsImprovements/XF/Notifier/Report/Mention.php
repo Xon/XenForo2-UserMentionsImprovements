@@ -59,7 +59,7 @@ class Mention extends AbstractNotifier
             'receiver'      => $user,
         ];
 
-        $this->app->mailer()->newMail()
+        \XF::app()->mailer()->newMail()
                   ->setToUser($user)
                   ->setTemplate('sv_user_mention_report_comment', $params)
                   ->queue();
