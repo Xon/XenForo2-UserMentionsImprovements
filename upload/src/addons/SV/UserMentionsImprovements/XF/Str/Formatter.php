@@ -46,7 +46,9 @@ class Formatter extends XFCP_Formatter
         $string = parent::linkStructuredTextMentions($string);
         if ($this->canViewPublicGroups())
         {
+            $string = $this->moveHtmlToPlaceholders($string, $restorePlaceholders);
             $string = $this->linkStructuredUserGroupMentions($string);
+            $string = $restorePlaceholders($string);
         }
 
         return $string;
@@ -63,12 +65,9 @@ class Formatter extends XFCP_Formatter
 
     protected function linkStructuredUserGroupMentions($string): string
     {
-        $string = $this->moveHtmlToPlaceholders($string, $restorePlaceholders);
-
         /** @noinspection RegExpRedundantEscape */
-        $string = preg_replace_callback(
-            '#(?<=^|\s|[\](,]|--|@)@UG\[(\d+):(\'|"|&quot;|)(.*)\\2\]#iU',
-            function (array $match) {
+        return preg_replace_callback('#(?<=^|\s|[\](,]|--|@)@UG\[(\d+):(\'|"|&quot;|)(.*)\\2\]#iU',
+            function (array $match): string {
                 $userGroupId = (int)$match[1];
                 $title = $this->removeHtmlPlaceholders($match[3]);
                 $title = htmlspecialchars($title, ENT_QUOTES, 'utf-8', false);
@@ -77,10 +76,6 @@ class Formatter extends XFCP_Formatter
 
                 /** @noinspection HtmlUnknownTarget */
                 return sprintf('<a href="%s" class="usergroup">%s</a>', htmlspecialchars($link), $title);
-            },
-            $string
-        );
-
-        return $restorePlaceholders($string);
+            }, $string);
     }
 }
