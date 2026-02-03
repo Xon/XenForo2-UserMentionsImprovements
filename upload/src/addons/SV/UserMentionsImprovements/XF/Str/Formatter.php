@@ -4,6 +4,9 @@ namespace SV\UserMentionsImprovements\XF\Str;
 
 use SV\UserMentionsImprovements\Str\UserGroupMentionFormatter;
 use SV\UserMentionsImprovements\XF\BbCode\ProcessorAction\MentionUsers;
+use function htmlspecialchars;
+use function preg_replace_callback;
+use function sprintf;
 
 /**
  * @extends \XF\Str\Formatter
@@ -35,35 +38,48 @@ class Formatter extends XFCP_Formatter
     /**
      * @param $string
      * @return null|string
-     * @noinspection PhpUnnecessaryLocalVariableInspection
      * @noinspection PhpMissingReturnTypeInspection
      */
     public function linkStructuredTextMentions($string)
     {
         $string = parent::linkStructuredTextMentions($string);
+        if ($this->canViewPublicGroups())
+        {
+            $string = $this->linkStructuredUserGroupMentions($string);
+        }
+
+        return $string;
+    }
+
+    protected function canViewPublicGroups(): bool
+    {
+        $visitor = \XF::visitor();
+
+        return (\XF::options()->svUMIPermDeniedOnViewGroup ?? true) ||
+               $visitor->hasPermission('general', 'sv_ViewPrivateGroups') ||
+               $visitor->hasPermission('general', 'sv_ViewPublicGroups');
+    }
+
+    protected function linkStructuredUserGroupMentions($string): string
+    {
         $string = $this->moveHtmlToPlaceholders($string, $restorePlaceholders);
 
         /** @noinspection RegExpRedundantEscape */
-        $string = \preg_replace_callback(
+        $string = preg_replace_callback(
             '#(?<=^|\s|[\](,]|--|@)@UG\[(\d+):(\'|"|&quot;|)(.*)\\2\]#iU',
             function (array $match) {
-                $userGroupId = \intval($match[1]);
+                $userGroupId = (int)$match[1];
                 $title = $this->removeHtmlPlaceholders($match[3]);
-                $title = \htmlspecialchars($title, ENT_QUOTES, 'utf-8', false);
+                $title = htmlspecialchars($title, ENT_QUOTES, 'utf-8', false);
 
                 $link = \XF::app()->router()->buildLink('full:members/usergroup', ['user_group_id' => $userGroupId]);
 
                 /** @noinspection HtmlUnknownTarget */
-                return \sprintf(
-                    '<a href="%s" class="usergroup">%s</a>',
-                    \htmlspecialchars($link), $title
-                );
+                return sprintf('<a href="%s" class="usergroup">%s</a>', htmlspecialchars($link), $title);
             },
             $string
         );
 
-        $string = $restorePlaceholders($string);
-
-        return $string;
+        return $restorePlaceholders($string);
     }
 }
