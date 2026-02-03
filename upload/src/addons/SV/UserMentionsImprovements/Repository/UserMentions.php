@@ -10,7 +10,6 @@ use XF\Mvc\Entity\Repository;
 use function array_key_exists;
 use function array_keys;
 use function array_values;
-use function assert;
 use function count;
 use function strtolower;
 
@@ -68,9 +67,10 @@ class UserMentions extends Repository
             }
 
             $group = $mentionedUserGroups[$additionalUser['user_group_id']] ?? null;
-            assert($group !== null);
-
-            $mentionedUgUsers[$userId][$group['user_group_id']] = ['title' => $group['title'], 'id' => $group['user_group_id']];
+            if ($group !== null)
+            {
+                $mentionedUgUsers[$userId][$group['user_group_id']] = ['title' => $group['title'], 'id' => $group['user_group_id']];
+            }
         }
         // preserve original ordering of user-group mentions as $additionalUsers is non-ordered
         foreach ($mentionedUgUsers as &$groups)
