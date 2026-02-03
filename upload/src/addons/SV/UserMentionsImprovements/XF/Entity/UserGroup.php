@@ -4,14 +4,18 @@ namespace SV\UserMentionsImprovements\XF\Entity;
 
 use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
+use function htmlspecialchars;
+use function sprintf;
+use function strlen;
+use function trim;
 
 /**
  * @extends \XF\Entity\UserGroup
- * @property bool   $sv_mentionable
- * @property bool   $sv_private
- * @property int    $sv_avatar_edit_date
- * @property string $sv_avatar_s
- * @property string $sv_avatar_l
+ * @property bool        $sv_mentionable
+ * @property bool        $sv_private
+ * @property int         $sv_avatar_edit_date
+ * @property string      $sv_avatar_s
+ * @property string      $sv_avatar_l
  * GETTER
  * @property-read string $sv_avatar_s_url
  * @property-read string $sv_avatar_l_url
@@ -29,9 +33,9 @@ class UserGroup extends XFCP_UserGroup
         {
             $val = \XF::options()->sv_default_group_avatar_s ?? '';
         }
-        $val = \trim($val);
+        $val = trim($val);
 
-        if (\strlen($val) === 0)
+        if (strlen($val) === 0)
         {
             return false;
         }
@@ -49,9 +53,9 @@ class UserGroup extends XFCP_UserGroup
         {
             $val = \XF::options()->sv_default_group_avatar_l ?? '';
         }
-        $val = \trim($val);
+        $val = trim($val);
 
-        if (\strlen($val) === 0)
+        if (strlen($val) === 0)
         {
             return false;
         }
@@ -63,10 +67,10 @@ class UserGroup extends XFCP_UserGroup
     {
         $link = \XF::app()->router()->buildLink('members/usergroup', $this);
         /** @noinspection HtmlUnknownTarget */
-        $image = \sprintf('<img src="%s" alt="%s" />', $this->sv_avatar_s_url, \htmlspecialchars($this->title));
+        $image = sprintf('<img src="%s" alt="%s" />', $this->sv_avatar_s_url, htmlspecialchars($this->title));
 
         /** @noinspection HtmlUnknownTarget */
-        return \sprintf('<a class="%s" href="%s">%s</a>', 'avatar avatar--xxs', $link, $image);
+        return sprintf('<a class="%s" href="%s">%s</a>', 'avatar avatar--xxs', $link, $image);
     }
 
     /** @noinspection PhpMissingReturnTypeInspection */

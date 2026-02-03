@@ -7,6 +7,7 @@ use SV\UserMentionsImprovements\XF\Entity\User as ExtendedUserEntity;
 use XF\Mvc\Entity\Entity;
 use XF\Repository\User as UserRepo;
 use XF\Service\Message\Preparer as MsgPreparer;
+use function array_keys;
 
 trait ServiceUserGroupExtractor
 {
@@ -60,7 +61,7 @@ trait ServiceUserGroupExtractor
 
     public function getImplicitMentionedUserIds(): array
     {
-        return \array_keys($this->getImplicitMentionedUsers());
+        return array_keys($this->getImplicitMentionedUsers());
     }
 
     public function getExplicitMentionedUsers(): array
@@ -70,7 +71,7 @@ trait ServiceUserGroupExtractor
 
     public function getExplicitMentionedUserIds(): array
     {
-        return \array_keys($this->getExplicitMentionedUsers());
+        return array_keys($this->getExplicitMentionedUsers());
     }
 
     public function getMentionedUserGroups(): array
@@ -80,6 +81,6 @@ trait ServiceUserGroupExtractor
 
     public function getMentionedUserGroupIds(): array
     {
-        return \array_keys($this->getMentionedUserGroups());
+        return array_keys($this->getMentionedUserGroups());
     }
 }

@@ -5,10 +5,21 @@
 
 namespace SV\UserMentionsImprovements\Str;
 
-use function preg_match;
-use function strlen;
-use function substr;
+use function array_filter;
+use function array_keys;
+use function array_map;
+use function array_merge;
+use function count;
+use function implode;
+use function mb_strlen;
 use function mb_strtolower;
+use function preg_match;
+use function preg_match_all;
+use function preg_quote;
+use function preg_replace_callback;
+use function strlen;
+use function strpos;
+use function substr;
 
 /**
  * This is basically a copy of the \XF\Str\MentionFormatter class, with changes for UserGroups instead.
@@ -30,7 +41,7 @@ class UserGroupMentionFormatter
     public function getMentionsBbCode(string $message): string
     {
         $disabledTags = array_map(
-            function($v) { return preg_quote($v, '#'); },
+            function ($v) { return preg_quote($v, '#'); },
             $this->getMentionDisabledBbCodeTags()
         );
         $message = $this->setupPlaceholders($message,
@@ -61,7 +72,7 @@ class UserGroupMentionFormatter
         $bbCodeRules = \XF::app()->bbCode()->rules('mentions');
 
         $disabledTags = [];
-        foreach ($bbCodeRules->getTags() AS $tagName => $tag)
+        foreach ($bbCodeRules->getTags() as $tagName => $tag)
         {
             if (!empty($tag['stopAutoLink']) || !empty($tag['plain']))
             {
@@ -93,9 +104,9 @@ class UserGroupMentionFormatter
         $message = $this->applyMentionUserGroupMatches(
             $message, $matches, $usersByMatch,
             function ($userGroup) use ($prefix) {
-                if (\strpos($userGroup['title'], ']') !== false)
+                if (strpos($userGroup['title'], ']') !== false)
                 {
-                    if (\strpos($userGroup['title'], "'") !== false)
+                    if (strpos($userGroup['title'], "'") !== false)
                     {
                         $title = '"' . $prefix . $userGroup['title'] . '"';
                     }
@@ -132,8 +143,8 @@ class UserGroupMentionFormatter
     {
         $this->placeholders = [];
 
-        return \preg_replace_callback($regex, function ($match) {
-            $replace = "\x1A" . \count($this->placeholders) . "\x1A";
+        return preg_replace_callback($regex, function ($match) {
+            $replace = "\x1A" . count($this->placeholders) . "\x1A";
             $this->placeholders[$replace] = $match[0];
 
             return $replace;
@@ -144,7 +155,7 @@ class UserGroupMentionFormatter
     {
         if ($this->placeholders)
         {
-            $message = \strtr($message, $this->placeholders);
+            $message = strtr($message, $this->placeholders);
             $this->placeholders = [];
         }
 
@@ -156,8 +167,8 @@ class UserGroupMentionFormatter
         $min = 2;
 
         /** @noinspection RegExpRedundantEscape */
-        if (!\preg_match_all(
-             '#(?<=^|\s|[\](,/\'"]|--)@(?!\[|\s)(([^\s@]|(?<![\s\](,-])@| ){' . $min . '}((?>[:,.!?](?=[^\s:,.!?[\]()])|' . $this->getTagEndPartialRegex(true) . '+?))*)#iu',
+        if (!preg_match_all(
+            '#(?<=^|\s|[\](,/\'"]|--)@(?!\[|\s)(([^\s@]|(?<![\s\](,-])@| ){' . $min . '}((?>[:,.!?](?=[^\s:,.!?[\]()])|' . $this->getTagEndPartialRegex(true) . '+?))*)#iu',
             $message, $matches, PREG_OFFSET_CAPTURE | PREG_SET_ORDER))
         {
             return [];
@@ -179,14 +190,14 @@ class UserGroupMentionFormatter
     protected function getMentionMatchUserGroups(array $matches): array
     {
         $db = \XF::db();
-        $matchKeys = \array_keys($matches);
+        $matchKeys = array_keys($matches);
         $whereParts = [];
         $matchParts = [];
         $userGroupsByMatch = [];
 
-        foreach ($matches AS $key => $match)
+        foreach ($matches as $key => $match)
         {
-            if (\mb_strlen($match[1][0]) > 50)
+            if (mb_strlen($match[1][0]) > 50)
             {
                 // longer than max usergroup title length
                 continue;
@@ -209,7 +220,7 @@ class UserGroupMentionFormatter
         if (!$viewAllGroups)
         {
             $sql = ' AND ( usergroup.sv_private = 0 ';
-            $groupMembership = \array_filter(\array_merge([$visitor->user_group_id], \array_map('\intval', $visitor->secondary_group_ids)));
+            $groupMembership = array_filter(array_merge([$visitor->user_group_id], array_map('\intval', $visitor->secondary_group_ids)));
             if ($groupMembership)
             {
                 $sql .= ' or usergroup.user_group_id in ( ' . $db->quote($groupMembership) . ' )';
@@ -219,9 +230,9 @@ class UserGroupMentionFormatter
 
         $userGroupResults = $db->query('
 			SELECT usergroup.user_group_id, usergroup.title, usergroup.sv_private, usergroup.sv_mentionable,
-				' . \implode(', ', $matchParts) . '
+				' . implode(', ', $matchParts) . '
 			FROM xf_user_group AS usergroup
-			WHERE sv_mentionable = 1 AND (' . \implode(' OR ', $whereParts) . ') ' . $sql .'
+			WHERE sv_mentionable = 1 AND (' . implode(' OR ', $whereParts) . ') ' . $sql . '
 			ORDER BY LENGTH(usergroup.title) DESC
 		');
 
@@ -233,7 +244,7 @@ class UserGroupMentionFormatter
                 'lower'         => mb_strtolower($userGroup['title']),
             ];
 
-            foreach ($matchKeys AS $key)
+            foreach ($matchKeys as $key)
             {
                 if (!empty($userGroup["match_$key"]))
                 {
@@ -266,7 +277,7 @@ class UserGroupMentionFormatter
         $mentionedUserGroups = [];
         $endMatch = $this->getTagEndPartialRegex(false);
 
-        foreach ($matches AS $key => $match)
+        foreach ($matches as $key => $match)
         {
             if ($match[0][1] > $lastOffset)
             {
@@ -285,7 +296,7 @@ class UserGroupMentionFormatter
                 $testName = mb_strtolower($match[1][0]);
                 $testOffset = $match[1][1];
 
-                foreach ($userGroupsByMatch[$key] AS $userGroupId => $userGroup)
+                foreach ($userGroupsByMatch[$key] as $userGroupId => $userGroup)
                 {
                     // It's possible for the byte length to change between the lower and standard versions
                     // due to conversions like İ -> i (2 byte to 1). Therefore, we try to check whether either

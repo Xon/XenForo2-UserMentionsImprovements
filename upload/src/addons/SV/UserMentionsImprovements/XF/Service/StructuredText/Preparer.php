@@ -3,6 +3,7 @@
 namespace SV\UserMentionsImprovements\XF\Service\StructuredText;
 
 use SV\UserMentionsImprovements\XF\Str\Formatter as ExtendedFormatter;
+use function is_callable;
 
 /**
  * @extends \XF\Service\StructuredText\Preparer
@@ -17,7 +18,7 @@ class Preparer extends XFCP_Preparer
 
         /** @var ExtendedFormatter $formatter */
         $formatter = \XF::app()->stringFormatter();
-        if (!\is_callable([$formatter, 'getUserGroupMentionFormatter']))
+        if (!is_callable([$formatter, 'getUserGroupMentionFormatter']))
         {
             \XF::logError('Add-on conflict detected, XF\Str\Formatter is not extended as expected', true);
 

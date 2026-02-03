@@ -6,6 +6,7 @@ use SV\UserMentionsImprovements\Repository\UserMentions as UserMentionsRepo;
 use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractor;
 use SV\UserMentionsImprovements\Str\ServiceUserGroupExtractorInterface;
 use SV\UserMentionsImprovements\XF\BbCode\ProcessorAction\MentionUsers;
+use function array_diff_key;
 
 /**
  * @extends \XF\Service\Message\Preparer

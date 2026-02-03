@@ -66,10 +66,10 @@ class tagRenderer
     public function renderTagUserGroup(
         /** @noinspection PhpUnusedParameterInspection */
         array $children,
-        $option,
+              $option,
         array $tag,
         array $options,
-        Html $renderer)
+        Html  $renderer)
     {
         $content = $this->renderer->renderSubTree($children, $options);
         if ($content === '')

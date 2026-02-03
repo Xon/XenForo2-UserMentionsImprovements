@@ -13,6 +13,7 @@ use XF\Entity\Option as OptionEntity;
 use XF\Entity\User as UserEntity;
 use XF\Job\PermissionRebuild as PermissionRebuildJob;
 use function is_string;
+use function str_replace;
 
 class Setup extends AbstractSetup
 {
@@ -214,7 +215,7 @@ class Setup extends AbstractSetup
             $value = $option->getOptionValue();
             if (is_string($value))
             {
-                $option->option_value = \str_replace('styles/default/sv/tagging/', 'styles/default/sv/mentionimprovements/', $value);
+                $option->option_value = str_replace('styles/default/sv/tagging/', 'styles/default/sv/mentionimprovements/', $value);
                 $option->saveIfChanged();
             }
         }

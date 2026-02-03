@@ -6,7 +6,7 @@ use XF\BbCode\Renderer\AbstractRenderer;
 use XF\BbCode\Renderer\EditorHtml;
 use XF\BbCode\Renderer\Html;
 
-class Listener
+abstract class Listener
 {
     /**
      * Extend bbcode rendering to include user group tags and user icons

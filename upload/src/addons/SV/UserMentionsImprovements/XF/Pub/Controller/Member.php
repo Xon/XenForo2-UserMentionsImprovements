@@ -11,7 +11,10 @@ use XF\Finder\User as UserFinder;
 use XF\Finder\UserGroup as UserGroupFinder;
 use XF\Mvc\ParameterBag;
 use XF\Mvc\Reply\View;
-use function count, strlen, ltrim;
+use function count;
+use function ltrim;
+use function mb_strlen;
+use function strlen;
 
 /**
  * @extends \XF\Pub\Controller\Member
@@ -67,9 +70,9 @@ class Member extends XFCP_Member
             'perPage' => $perPage,
 
             'addParamsToPageNav' => $addParamsToPageNav,
-            'linkFilters' => $linkFilters,
-            'filter' => $filters,
-            'finalUrl' => $finalUrl,
+            'linkFilters'        => $linkFilters,
+            'filter'             => $filters,
+            'finalUrl'           => $finalUrl,
         ];
 
         return $this->view('SV\UserMentionsImprovements:Member\UserGroup', 'sv_members_usergroup', $viewParams);
@@ -92,7 +95,7 @@ class Member extends XFCP_Member
     {
         if (strlen($filters['text'] ?? '') !== 0)
         {
-            $hasPrefixSearch = (bool)($filters['prefix']  ?? true);
+            $hasPrefixSearch = (bool)($filters['prefix'] ?? true);
             if (!$hasPrefixSearch)
             {
                 unset($filters['prefix']);
@@ -125,7 +128,7 @@ class Member extends XFCP_Member
 
             $q = ltrim($this->filter('q', 'str', ['no-trim']));
 
-            if ($visitor->canMentionUserGroup() && $q !== '' && \mb_strlen($q) >= 2)
+            if ($visitor->canMentionUserGroup() && $q !== '' && mb_strlen($q) >= 2)
             {
                 /** @var ExtendedUserGroupFinder $userGroupFinder */
                 $userGroupFinder = Helper::finder(UserGroupFinder::Class);

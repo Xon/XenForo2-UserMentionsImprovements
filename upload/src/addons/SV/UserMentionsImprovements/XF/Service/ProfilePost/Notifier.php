@@ -9,6 +9,7 @@ use SV\UserMentionsImprovements\XF\Entity\User as ExtendedUserEntity;
 use SV\UserMentionsImprovements\XF\Notifier\ProfilePost\Mention;
 use XF\Entity\User as UserEntity;
 use XF\Notifier\AbstractNotifier;
+use function array_fill_keys;
 
 /**
  * @extends \XF\Service\ProfilePost\Notifier
@@ -27,7 +28,7 @@ class Notifier extends XFCP_Notifier
         {
             if ($this->notifyingMentionLookup === null)
             {
-                $this->notifyingMentionLookup = \array_fill_keys($this->notifyMentioned, true);
+                $this->notifyingMentionLookup = array_fill_keys($this->notifyMentioned, true);
             }
             if ($action === 'insert' && isset($this->notifyingMentionLookup[$user->user_id]))
             {

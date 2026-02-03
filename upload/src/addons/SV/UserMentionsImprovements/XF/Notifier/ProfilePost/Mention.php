@@ -60,8 +60,8 @@ class Mention extends AbstractNotifier
         ];
 
         \XF::app()->mailer()->newMail()
-                  ->setToUser($user)
-                  ->setTemplate('sv_user_mention_profile_post', $params)
-                  ->queue();
+           ->setToUser($user)
+           ->setTemplate('sv_user_mention_profile_post', $params)
+           ->queue();
     }
 }

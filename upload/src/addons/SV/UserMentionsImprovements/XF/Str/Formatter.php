@@ -13,7 +13,7 @@ use function sprintf;
  */
 class Formatter extends XFCP_Formatter
 {
-    /** @var MentionUsers  */
+    /** @var MentionUsers */
     public $svMentionUserGroup = null;
 
     /** @noinspection PhpMissingReturnTypeInspection */
@@ -25,6 +25,7 @@ class Formatter extends XFCP_Formatter
         {
             $mentions->svMentionUserGroup = $this->svMentionUserGroup;
         }
+
         return $mentions;
     }
 

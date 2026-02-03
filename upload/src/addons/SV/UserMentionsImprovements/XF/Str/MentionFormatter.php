@@ -3,13 +3,16 @@
 namespace SV\UserMentionsImprovements\XF\Str;
 
 use SV\UserMentionsImprovements\XF\BbCode\ProcessorAction\MentionUsers;
+use function count;
+use function is_callable;
+use function preg_replace_callback;
 
 /**
  * @extends \XF\Str\MentionFormatter
  */
 class MentionFormatter extends XFCP_MentionFormatter
 {
-    /** @var MentionUsers  */
+    /** @var MentionUsers */
     public $svMentionUserGroup = null;
     /** string[] */
     protected $svPlaceholders;
@@ -18,21 +21,21 @@ class MentionFormatter extends XFCP_MentionFormatter
     {
         $this->svPlaceholders = [];
 
-        return \preg_replace_callback(
-            $regex, function ($match) {
-            $replace = "\x1B" . \count($this->svPlaceholders) . "\x1B";
-            $this->svPlaceholders[$replace] = $match[0];
+        return preg_replace_callback(
+                   $regex, function ($match) {
+                   $replace = "\x1B" . count($this->svPlaceholders) . "\x1B";
+                   $this->svPlaceholders[$replace] = $match[0];
 
-            return $replace;
-        }, $message
-        ) ?? '';
+                   return $replace;
+               }, $message
+               ) ?? '';
     }
 
     protected function svRestorePlaceholders(string $message): string
     {
         if ($this->svPlaceholders)
         {
-            $message = \strtr($message, $this->svPlaceholders);
+            $message = strtr($message, $this->svPlaceholders);
             $this->svPlaceholders = [];
         }
 
@@ -41,7 +44,7 @@ class MentionFormatter extends XFCP_MentionFormatter
 
     /**
      * @param string $string
-     * @param array $mentionedUserGroups
+     * @param array  $mentionedUserGroups
      * @return string
      */
     protected function extractMentionedUserGroups(string $string, array &$mentionedUserGroups): string
@@ -52,7 +55,7 @@ class MentionFormatter extends XFCP_MentionFormatter
         }
 
         $formatter = $this->svMentionUserGroup->getFormatter();
-        if (!\is_callable([$formatter, 'getUserGroupMentionFormatter']))
+        if (!is_callable([$formatter, 'getUserGroupMentionFormatter']))
         {
             \XF::logError('Add-on conflict detected, XF\Str\Formatter is not extended as expected', true);
 

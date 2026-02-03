@@ -38,8 +38,8 @@ class Mention extends XFCP_Mention
         ];
 
         \XF::app()->mailer()->newMail()
-                  ->setToUser($user)
-                  ->setTemplate('sv_user_mention_post', $params)
-                  ->queue();
+           ->setToUser($user)
+           ->setTemplate('sv_user_mention_post', $params)
+           ->queue();
     }
 }

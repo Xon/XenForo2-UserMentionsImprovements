@@ -9,6 +9,10 @@ use SV\StandardLib\Helper;
 use XF\Entity\PermissionCombination as PermissionCombinationEntity;
 use XF\Finder\PermissionCombination as PermissionCombinationFinder;
 use XF\Repository\PermissionCombination as PermissionCombinationRepo;
+use function array_merge;
+use function microtime;
+use function sprintf;
+use function str_repeat;
 
 /**
  * @extends \XF\Job\PermissionRebuild
@@ -25,7 +29,7 @@ class PermissionRebuild extends XFCP_PermissionRebuild
 
     protected function setupData(array $data)
     {
-        $data = \array_merge($this->extraDefaultData, $data);
+        $data = array_merge($this->extraDefaultData, $data);
 
         return parent::setupData($data);
     }
@@ -33,7 +37,7 @@ class PermissionRebuild extends XFCP_PermissionRebuild
     /** @noinspection PhpMissingParentCallCommonInspection */
     public function run($maxRunTime)
     {
-        $start = \microtime(true);
+        $start = microtime(true);
 
         if (!$this->data['cleaned'])
         {
@@ -49,9 +53,9 @@ class PermissionRebuild extends XFCP_PermissionRebuild
 
         $done = 0;
         $finder = Helper::finder(PermissionCombinationFinder::class)
-                     ->where('permission_combination_id', '>', $this->data['combinationId'])
-                     ->order('permission_combination_id')
-                     ->limit($this->data['batch']);
+                        ->where('permission_combination_id', '>', $this->data['combinationId'])
+                        ->order('permission_combination_id')
+                        ->limit($this->data['batch']);
         if ($this->data['combinationIds'])
         {
             $finder->whereId($this->data['combinationIds']);
@@ -68,7 +72,7 @@ class PermissionRebuild extends XFCP_PermissionRebuild
 
         $permissionBuilder = $app->permissionBuilder();
 
-        foreach ($combinations AS $combination)
+        foreach ($combinations as $combination)
         {
             /** @var PermissionCombinationEntity $combination */
             $this->data['combinationId'] = $combination->permission_combination_id;
@@ -76,7 +80,7 @@ class PermissionRebuild extends XFCP_PermissionRebuild
             $permissionBuilder->rebuildCombination($combination);
             $done++;
 
-            if (\microtime(true) - $start >= $maxRunTime)
+            if (microtime(true) - $start >= $maxRunTime)
             {
                 break;
             }
@@ -92,6 +96,6 @@ class PermissionRebuild extends XFCP_PermissionRebuild
         $actionPhrase = \XF::phrase('rebuilding');
         $typePhrase = \XF::phrase('permissions');
 
-        return \sprintf('%s... %s %s', $actionPhrase, $typePhrase, \str_repeat('. ', $this->data['steps']));
+        return sprintf('%s... %s %s', $actionPhrase, $typePhrase, str_repeat('. ', $this->data['steps']));
     }
 }

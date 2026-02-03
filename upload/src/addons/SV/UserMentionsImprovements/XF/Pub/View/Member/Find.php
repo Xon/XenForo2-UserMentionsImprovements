@@ -6,6 +6,7 @@
 namespace SV\UserMentionsImprovements\XF\Pub\View\Member;
 
 use SV\UserMentionsImprovements\XF\Entity\UserGroup as UserGroupEntity;
+use function array_unshift;
 
 /**
  * @extends \XF\Pub\View\Member\Find
@@ -21,7 +22,7 @@ class Find extends XFCP_Find
             foreach ($this->params['userGroups'] as $usergroup)
             {
                 /** @var UserGroupEntity $usergroup */
-                \array_unshift(
+                array_unshift(
                     $response['results'],
                     [
                         'id'       => $usergroup->user_group_id,

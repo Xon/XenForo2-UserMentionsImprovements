@@ -7,7 +7,12 @@ use SV\UserMentionsImprovements\Globals;
 use XF\Entity\UserGroup as UserGroupEntity;
 use XF\Finder\User as UserFinder;
 use XF\Mvc\Entity\Repository;
-use function count, array_keys, array_key_exists;
+use function array_key_exists;
+use function array_keys;
+use function array_values;
+use function assert;
+use function count;
+use function strtolower;
 
 class UserMentions extends Repository
 {
@@ -49,7 +54,7 @@ class UserMentions extends Repository
         }
 
         $mentionedUgUsers = [];
-        foreach ($additionalUsers AS $additionalUser)
+        foreach ($additionalUsers as $additionalUser)
         {
             $userId = (int)$additionalUser['user_id'];
 
@@ -58,12 +63,12 @@ class UserMentions extends Repository
                 $users[$userId] = [
                     'user_id'  => $additionalUser['user_id'],
                     'username' => $additionalUser['username'],
-                    'lower'    => \strtolower($additionalUser['username']),
+                    'lower'    => strtolower($additionalUser['username']),
                 ];
             }
 
             $group = $mentionedUserGroups[$additionalUser['user_group_id']] ?? null;
-            \assert($group !== null);
+            assert($group !== null);
 
             $mentionedUgUsers[$userId][$group['user_group_id']] = ['title' => $group['title'], 'id' => $group['user_group_id']];
         }
@@ -77,7 +82,7 @@ class UserMentions extends Repository
             }
 
             $orderedGroups = [];
-            foreach ($groupMentionIds AS $groupId)
+            foreach ($groupMentionIds as $groupId)
             {
                 $id = (int)($groups[$groupId]['id'] ?? 0);
                 if ($groupId === $id)

@@ -38,8 +38,8 @@ class Quote extends XFCP_Quote
         ];
 
         \XF::app()->mailer()->newMail()
-                  ->setToUser($user)
-                  ->setTemplate('sv_user_quote_post', $params)
-                  ->queue();
+           ->setToUser($user)
+           ->setTemplate('sv_user_quote_post', $params)
+           ->queue();
     }
 }
