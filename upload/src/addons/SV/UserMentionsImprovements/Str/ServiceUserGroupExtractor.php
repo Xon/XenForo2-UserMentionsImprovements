@@ -5,6 +5,7 @@ namespace SV\UserMentionsImprovements\Str;
 use SV\StandardLib\Helper;
 use SV\UserMentionsImprovements\XF\Entity\User as ExtendedUserEntity;
 use XF\Mvc\Entity\Entity;
+use XF\Repository\User as UserRepo;
 use XF\Service\Message\Preparer as MsgPreparer;
 
 trait ServiceUserGroupExtractor
@@ -45,7 +46,7 @@ trait ServiceUserGroupExtractor
 
         if (!$user)
         {
-            $userRepo = Helper::repository(\XF\Repository\User::class);
+            $userRepo = Helper::repository(UserRepo::class);
             $user = $userRepo->getGuestUser($username);
         }
 
