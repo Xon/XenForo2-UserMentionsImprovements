@@ -3,7 +3,5 @@
     "styles/default/sv/mentionimprovements",
     "js/sv/mentionimprovements"
   ],
-  "minify": [
-    "js/sv/mentionimprovements/editor-integration.js"
-  ]
+  "minify": "*"
 }
