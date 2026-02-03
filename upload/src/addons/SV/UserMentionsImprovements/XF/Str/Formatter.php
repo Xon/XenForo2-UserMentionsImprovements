@@ -5,6 +5,7 @@ namespace SV\UserMentionsImprovements\XF\Str;
 use SV\UserMentionsImprovements\bbCode\tagRenderer as UserGroupTagRenderer;
 use SV\UserMentionsImprovements\Str\UserGroupMentionFormatter;
 use SV\UserMentionsImprovements\XF\BbCode\ProcessorAction\MentionUsers;
+use SV\UserMentionsImprovements\XF\Entity\User as ExtendedUserEntity;
 use function htmlspecialchars;
 use function preg_replace_callback;
 
@@ -44,7 +45,10 @@ class Formatter extends XFCP_Formatter
     public function linkStructuredTextMentions($string)
     {
         $string = parent::linkStructuredTextMentions($string);
-        if ($this->canViewPublicGroups())
+
+        /** @var ExtendedUserEntity $visitor */
+        $visitor = \XF::visitor();
+        if ($visitor->canViewPublicGroupsUMI())
         {
             $string = $this->moveHtmlToPlaceholders($string, $restorePlaceholders);
             $string = $this->linkStructuredUserGroupMentions($string);
@@ -52,15 +56,6 @@ class Formatter extends XFCP_Formatter
         }
 
         return $string;
-    }
-
-    protected function canViewPublicGroups(): bool
-    {
-        $visitor = \XF::visitor();
-
-        return (\XF::options()->svUMIPermDeniedOnViewGroup ?? true) ||
-               $visitor->hasPermission('general', 'sv_ViewPrivateGroups') ||
-               $visitor->hasPermission('general', 'sv_ViewPublicGroups');
     }
 
     /** @noinspection SpellCheckingInspection */

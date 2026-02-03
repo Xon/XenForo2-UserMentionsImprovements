@@ -6,6 +6,7 @@
 
 namespace SV\UserMentionsImprovements\bbCode;
 
+use SV\UserMentionsImprovements\XF\Entity\User as ExtendedUserEntity;
 use XF\BbCode\Renderer\Html;
 use function htmlspecialchars;
 
@@ -29,10 +30,9 @@ class tagRenderer
         $this->renderer = $renderer;
         $this->type = $type;
 
+        /** @var ExtendedUserEntity $visitor */
         $visitor = \XF::visitor();
-        $this->canViewPublicGroups = (\XF::options()->svUMIPermDeniedOnViewGroup ?? true) ||
-                                     $visitor->hasPermission('general', 'sv_ViewPrivateGroups') ||
-                                     $visitor->hasPermission('general', 'sv_ViewPublicGroups');
+        $this->canViewPublicGroups = $visitor->canViewPublicGroupsUMI();
     }
 
     public function bindToRenderer(): void

@@ -80,6 +80,15 @@ class User extends XFCP_User
         return $this->hasPermission('general', 'sv_MentionUserGroup');
     }
 
+    public function canViewPublicGroupsUMI(): bool
+    {
+        $visitor = \XF::visitor();
+
+        return (\XF::options()->svUMIPermDeniedOnViewGroup ?? true) ||
+               $visitor->hasPermission('general', 'sv_ViewPrivateGroups') ||
+               $visitor->hasPermission('general', 'sv_ViewPublicGroups');
+    }
+
     /** @noinspection PhpMissingReturnTypeInspection */
     public static function getStructure(Structure $structure)
     {
