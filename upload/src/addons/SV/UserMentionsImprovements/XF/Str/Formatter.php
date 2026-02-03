@@ -2,11 +2,11 @@
 
 namespace SV\UserMentionsImprovements\XF\Str;
 
+use SV\UserMentionsImprovements\bbCode\tagRenderer as UserGroupTagRenderer;
 use SV\UserMentionsImprovements\Str\UserGroupMentionFormatter;
 use SV\UserMentionsImprovements\XF\BbCode\ProcessorAction\MentionUsers;
 use function htmlspecialchars;
 use function preg_replace_callback;
-use function sprintf;
 
 /**
  * @extends \XF\Str\Formatter
@@ -63,19 +63,24 @@ class Formatter extends XFCP_Formatter
                $visitor->hasPermission('general', 'sv_ViewPublicGroups');
     }
 
+    /** @noinspection SpellCheckingInspection */
     protected function linkStructuredUserGroupMentions($string): string
     {
+        $class = \XF::app()->extendClass(UserGroupTagRenderer::class);
+        /** @var callable(int $groupId,string $css,string $link,string $groupName, string $title):string $userGroupTemplate */
+        $userGroupTemplate = \Closure::fromCallable([$class, 'renderTagUserGroupTemplate']);
+
         /** @noinspection RegExpRedundantEscape */
         return preg_replace_callback('#(?<=^|\s|[\](,]|--|@)@UG\[(\d+):(\'|"|&quot;|)(.*)\\2\]#iU',
-            function (array $match): string {
+            function (array $match) use ($userGroupTemplate): string {
                 $userGroupId = (int)$match[1];
                 $title = $this->removeHtmlPlaceholders($match[3]);
                 $title = htmlspecialchars($title, ENT_QUOTES, 'utf-8', false);
 
                 $link = \XF::app()->router()->buildLink('full:members/usergroup', ['user_group_id' => $userGroupId]);
+                $link = htmlspecialchars($link);
 
-                /** @noinspection HtmlUnknownTarget */
-                return sprintf('<a href="%s" class="usergroup">%s</a>', htmlspecialchars($link), $title);
+                return $userGroupTemplate($userGroupId, 'ug', $link, $title, $title);
             }, $string);
     }
 }

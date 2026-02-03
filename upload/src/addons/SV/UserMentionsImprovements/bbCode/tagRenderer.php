@@ -40,6 +40,7 @@ class tagRenderer
         $callback = [$this, 'renderTagUserGroup'];
         $callback = \Closure::fromCallable($callback);
 
+        /** @noinspection SpellCheckingInspection */
         $this->renderer->addTag(
             'usergroup',
             [
@@ -49,18 +50,24 @@ class tagRenderer
     }
 
     /**
-     * @param int    $userGroupId
+     * @param int    $groupId
      * @param string $css
-     * @param string $link    HTML escaped text
-     * @param string $content HTML escaped text
+     * @param string $link HTML escaped text
+     * @param string $groupName HTML escaped text
+     * @param string $title HTML escaped text
      * @return string
+     */
+    public static function renderTagUserGroupTemplate(int $groupId, string $css, string $link, string $groupName, string $title): string
+    {
+        return "<a href='{$link}' class='{$css}' data-xf-click='overlay' data-usergroup-id='{$groupId}' data-groupname='{$groupName}'>{$title}</a>";
+    }
+
+    /**
+     * @deprecated
      */
     public function renderTagUserGroupHtml($userGroupId, $css, $link, $content)
     {
-        return $this->renderer->wrapHtml(
-            "<a href='$link' class='$css' data-xf-click='overlay' data-usergroup-id='$userGroupId' data-groupname='$content' >",
-            $content,
-            '</a>');
+        return static::renderTagUserGroupTemplate($userGroupId, $css, $link, $content, $content);
     }
 
     public function renderTagUserGroup(
@@ -88,10 +95,13 @@ class tagRenderer
             return $content;
         }
 
+        /** @noinspection SpellCheckingInspection */
         $link = \XF::app()->router('public')->buildLink('full:members/usergroup', ['user_group_id' => $userGroupId]);
         $link = htmlspecialchars($link);
         $content = htmlspecialchars($content);
 
+        // todo next major version; replace with a direct call to `static::renderTagUserGroupTemplate`
+        /** @noinspection PhpDeprecationInspection */
         return $this->renderTagUserGroupHtml($userGroupId, 'ug', $link, $content);
     }
 }
