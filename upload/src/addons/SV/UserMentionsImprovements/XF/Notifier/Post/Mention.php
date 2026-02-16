@@ -15,7 +15,8 @@ class Mention extends XFCP_Mention
     public function canNotify(UserEntity $user)
     {
         $senderId = $this->post->user_id;
-        if ($senderId && $user->isIgnoring($senderId))
+
+        if ($user->is_banned || $senderId !== 0 && $user->isIgnoring($senderId))
         {
             return false;
         }

@@ -27,12 +27,8 @@ class Mention extends AbstractNotifier
     public function canNotify(UserEntity $user)
     {
         $senderId = $this->content->user_id;
-        if ($user->user_id === $senderId)
-        {
-            return false;
-        }
 
-        if ($senderId && $user->isIgnoring($senderId))
+        if ($user->is_banned || $senderId !== 0 && ($user->user_id === $senderId || $user->isIgnoring($senderId)))
         {
             return false;
         }

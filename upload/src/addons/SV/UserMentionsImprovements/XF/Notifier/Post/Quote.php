@@ -15,7 +15,8 @@ class Quote extends XFCP_Quote
     public function canNotify(UserEntity $user)
     {
         $senderId = $this->post->user_id;
-        if ($senderId && $user->isIgnoring($senderId))
+
+        if ($user->is_banned || $senderId !== 0 && ($user->user_id === $senderId || $user->isIgnoring($senderId)))
         {
             return false;
         }
