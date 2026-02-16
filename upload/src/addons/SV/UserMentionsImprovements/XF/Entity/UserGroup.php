@@ -5,7 +5,6 @@ namespace SV\UserMentionsImprovements\XF\Entity;
 use XF\Mvc\Entity\Entity;
 use XF\Mvc\Entity\Structure;
 use function htmlspecialchars;
-use function sprintf;
 use function strlen;
 use function trim;
 
