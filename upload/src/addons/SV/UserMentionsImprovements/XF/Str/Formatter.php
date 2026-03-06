@@ -7,7 +7,9 @@ use SV\UserMentionsImprovements\Str\UserGroupMentionFormatter;
 use SV\UserMentionsImprovements\XF\BbCode\ProcessorAction\MentionUsers;
 use SV\UserMentionsImprovements\XF\Entity\User as ExtendedUserEntity;
 use function htmlspecialchars;
+use function preg_replace;
 use function preg_replace_callback;
+use function str_replace;
 
 /**
  * @extends \XF\Str\Formatter
@@ -77,5 +79,18 @@ class Formatter extends XFCP_Formatter
 
                 return $userGroupTemplate($userGroupId, 'ug', $link, $title, $title);
             }, $string);
+    }
+
+    // backport security fix to XF2.2
+    public function removeHtmlPlaceholders($string)
+    {
+        do
+        {
+            $original = $string;
+            $string = preg_replace("#\x1A\\d+\x1A#", '', $string);
+        }
+        while ($string !== $original);
+
+        return str_replace("\x1A", '', $string);
     }
 }
