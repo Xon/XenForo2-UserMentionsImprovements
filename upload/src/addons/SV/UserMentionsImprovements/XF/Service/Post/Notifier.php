@@ -90,7 +90,12 @@ class Notifier extends XFCP_Notifier
         {
             if (!$this->svShouldFullyDefer())
             {
-                $this->notify($timeLimit === 3 ? 0.5 : $timeLimit);
+                // XF2.2 uses 3 seconds, XF2.3 uses 0.25 seconds
+                if ($timeLimit === 3)
+                {
+                    $timeLimit = 0.25;
+                }
+                $this->notify($timeLimit);
             }
 
             return $this->enqueueJobIfNeeded();
