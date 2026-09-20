@@ -24,11 +24,14 @@ class Mention extends XFCP_Mention
         return parent::canNotify($user);
     }
 
-    public function sendEmail(UserEntity $user)
+    /**
+     * @return bool
+     */
+    public function sendEmail(UserEntity $user)//: bool
     {
         if (!$user->email || $user->user_state !== 'valid')
         {
-            return;
+            return false;
         }
 
         $params = [
@@ -42,5 +45,7 @@ class Mention extends XFCP_Mention
            ->setToUser($user)
            ->setTemplate('sv_user_mention_post', $params)
            ->queue();
+
+        return true;
     }
 }

@@ -43,11 +43,14 @@ class Mention extends AbstractNotifier
         return $this->basicAlert($user, $content->user_id, $content->username, 'profile_post_comment', $content->profile_post_comment_id, 'mention');
     }
 
-    public function sendEmail(UserEntity $user)
+    /**
+     * @return bool
+     */
+    public function sendEmail(UserEntity $user)//: bool
     {
         if (!$user->email || $user->user_state !== 'valid')
         {
-            return;
+            return false;
         }
 
         $params = [

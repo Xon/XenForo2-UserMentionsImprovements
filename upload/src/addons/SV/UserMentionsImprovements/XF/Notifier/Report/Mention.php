@@ -43,11 +43,14 @@ class Mention extends AbstractNotifier
         return $this->basicAlert($user, $content->user_id, $content->username, 'report_comment', $content->report_comment_id, 'mention');
     }
 
-    public function sendEmail(UserEntity $user)
+    /**
+     * @return bool
+     */
+    public function sendEmail(UserEntity $user)//: bool
     {
         if (!$user->email || $user->user_state !== 'valid')
         {
-            return;
+            return false;
         }
 
         $params = [
@@ -59,5 +62,7 @@ class Mention extends AbstractNotifier
            ->setToUser($user)
            ->setTemplate('sv_user_mention_report_comment', $params)
            ->queue();
+
+        return true;
     }
 }

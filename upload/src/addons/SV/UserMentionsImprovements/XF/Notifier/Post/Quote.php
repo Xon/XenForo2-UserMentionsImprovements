@@ -24,11 +24,14 @@ class Quote extends XFCP_Quote
         return parent::canNotify($user);
     }
 
-    public function sendEmail(UserEntity $user)
+    /**
+     * @return bool
+     */
+    public function sendEmail(UserEntity $user)//: bool
     {
         if (!$user->email || $user->user_state !== 'valid')
         {
-            return;
+            return false;
         }
 
         $params = [
@@ -42,5 +45,7 @@ class Quote extends XFCP_Quote
            ->setToUser($user)
            ->setTemplate('sv_user_quote_post', $params)
            ->queue();
+
+        return true;
     }
 }
